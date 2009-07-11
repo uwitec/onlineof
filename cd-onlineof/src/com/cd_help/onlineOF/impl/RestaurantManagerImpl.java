@@ -1,0 +1,53 @@
+/*
+ * 版权声明：
+ * 此文档的版权归常德help信息科技有限公司所有。
+ * 未征得常德help信息科技有限公司的书面批准，不得向第三方借阅、出让、出版该文档。
+ */
+package com.cd_help.onlineOF.impl;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.cd_help.onlineOF.api.RestaurantDataDao;
+import com.cd_help.onlineOF.api.RestaurantManager;
+import com.cd_help.onlineOF.web.vo.RestaurantVo;
+
+/**
+ * <b><code></code></b>
+ * <p/>
+ * 餐厅管理实现类
+ * <p/>
+ * <b>Creation Time:</b> Jul 4, 2009
+ * @author TanDong
+ * @version 0.0.0.1
+ *
+ * @since cd_help-onlineOF 0.0.0.1
+ */
+@Service("restaurantManager")
+@SuppressWarnings("unchecked")
+public class RestaurantManagerImpl implements RestaurantManager{
+
+	@SuppressWarnings("unused")
+	@Autowired
+	@Resource(name = "restaurantDataDao")
+	private RestaurantDataDao restaurantDataDao;
+	
+	/**
+	 * @see com.cd_help.onlineOF.api.RestaurantManager#loadAll()
+	 */
+	public List<RestaurantVo> loadAll(){
+		List<RestaurantVo> restaurantList = restaurantDataDao.findByNamedQuery("loadAllRestaurant");
+		for(RestaurantVo r :restaurantList){
+			System.out.print(r.getName());
+		}
+		return restaurantDataDao.findByNamedQuery("loadAllRestaurant");
+	}
+    
+	public void setRestaurantDataDao(RestaurantDataDao restaurantDataDao) {
+		this.restaurantDataDao = restaurantDataDao;
+	}
+}
