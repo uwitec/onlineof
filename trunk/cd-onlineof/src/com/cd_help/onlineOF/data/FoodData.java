@@ -76,6 +76,14 @@ public class FoodData {
 	@JoinColumn(name = "restaurantId", referencedColumnName = "restaurantId", nullable = false, insertable = false, updatable = false)
 	private RestaurantData restaurantData;
 	
+	/**
+	 * 类别
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "food_kind_Id", referencedColumnName = "food_kind_Id", nullable = false, insertable = false, updatable = false)
+	private Food_kindData food_kindData;
+	
 	public Integer getFoodId() {
 		return foodId;
 	}
@@ -117,5 +125,11 @@ public class FoodData {
 	}
 	public void setRestaurantData(RestaurantData restaurantData) {
 		this.restaurantData = restaurantData;
+	}
+	public Food_kindData getFood_kindData() {
+		return food_kindData;
+	}
+	public void setFood_kindData(Food_kindData food_kindData) {
+		this.food_kindData = food_kindData;
 	}
 }
