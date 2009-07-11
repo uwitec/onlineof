@@ -24,7 +24,7 @@ import javax.persistence.Table;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Entity
-@Table(name = "dishes_kind")
+@Table(name = "food_kind")
 public class Food_kindData {
 
 	/**
