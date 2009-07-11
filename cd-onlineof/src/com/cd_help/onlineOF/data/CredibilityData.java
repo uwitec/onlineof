@@ -15,7 +15,7 @@ import javax.persistence.Table;
 /**
  * <b><code></code></b>
  * <p/>
- * 信誉(餐厅,用户,菜)
+ * 信誉,等级(餐厅,用户,菜)
  * <p/>
  * <b>Creation Time:</b> Jul 2, 2009
  * @author TanDong
