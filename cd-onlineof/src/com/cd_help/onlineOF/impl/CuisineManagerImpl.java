@@ -5,6 +5,8 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import org.springframework.stereotype.Service;
+
 import com.cd_help.onlineOF.api.CuisineManager;
 
 /**
@@ -18,6 +20,7 @@ import com.cd_help.onlineOF.api.CuisineManager;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
+@Service("cuisineManager")
 public class CuisineManagerImpl implements CuisineManager{
 
 }

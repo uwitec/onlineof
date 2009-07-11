@@ -4,7 +4,7 @@
           "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<property name="hbm2ddl.auto">update</property>
+		<property name="hbm2ddl.auto">create</property>
 		<property name="dialect">
 			org.hibernate.dialect.MySQLDialect
 		</property>
@@ -26,6 +26,7 @@
 		<mapping class="com.cd_help.onlineOF.data.Restaurant_kindData"/>
 		<mapping class="com.cd_help.onlineOF.data.CredibilityData"/>
 		<mapping class="com.cd_help.onlineOF.data.UsersData"/>
+		<mapping class="com.cd_help.onlineOF.data.CuisineData"/>
 		
 	</session-factory>
 	
