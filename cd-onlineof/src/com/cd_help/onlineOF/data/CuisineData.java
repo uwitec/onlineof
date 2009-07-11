@@ -5,52 +5,69 @@
  */
 package com.cd_help.onlineOF.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 /**
  * <b><code></code></b>
  * <p/>
- * 饮食类别(主菜,配菜,饮料......)
+ * 菜系(川菜,粤菜,.....)
  * <p/>
- * <b>Creation Time:</b> Jul 2, 2009
+ * <b>Creation Time:</b> Jul 12, 2009
  * @author TanDong
  * @version 0.0.0.1
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Entity
-@Table(name = "food_kind")
-public class Food_kindData {
-
+@Table(name="cuisine")
+public class CuisineData {
+	
 	/**
-	 * 菜类别ID
+	 * 菜系ID
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer food_kind_Id;
+	private Integer cuisineId;
 	/**
-	 * 菜类别名称
+	 * 菜系名称
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Column(name = "name", nullable = false, length = 15)
 	private String name;
 	
-	public Integer getFood_kind_Id() {
-		return food_kind_Id;
+	/**
+	 * 所属餐厅
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@ManyToMany(mappedBy = "cuisineDataList")
+	private List<RestaurantData> restaurantList = new ArrayList<RestaurantData>();
+	
+	public Integer getCuisineId() {
+		return cuisineId;
 	}
-	public void setFood_kind_Id(Integer food_kind_Id) {
-		this.food_kind_Id = food_kind_Id;
+	public void setCuisineId(Integer cuisineId) {
+		this.cuisineId = cuisineId;
 	}
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	public List<RestaurantData> getRestaurantList() {
+		return restaurantList;
+	}
+	public void setRestaurantList(List<RestaurantData> restaurantList) {
+		this.restaurantList = restaurantList;
 	}
 }

@@ -5,6 +5,10 @@
  */
 package com.cd_help.onlineOF.data;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -12,6 +16,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -49,6 +55,14 @@ public class RestaurantData {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "credibilityId", referencedColumnName = "credibilityId", nullable = false, insertable = false, updatable = false)
 	private CredibilityData credibilityData;
+	
+	/**
+	 * 拥有菜系
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
+	@JoinTable(name = "restaurant_cuisine", joinColumns = { @JoinColumn(name = "restaurantId") }, inverseJoinColumns = { @JoinColumn(name = "cuisineId") })
+	private List<CuisineData> cuisineDataList = new ArrayList<CuisineData>();
 	/**
 	 * 餐厅名称
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -261,5 +275,13 @@ public class RestaurantData {
 
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
+	}
+
+	public List<CuisineData> getCuisineDataList() {
+		return cuisineDataList;
+	}
+
+	public void setCuisineDataList(List<CuisineData> cuisineDataList) {
+		this.cuisineDataList = cuisineDataList;
 	}
 }
