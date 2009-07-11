@@ -14,7 +14,6 @@ import com.cd_help.onlineOF.api.FoodManager;
 import com.cd_help.onlineOF.api.OnlineOF;
 import com.cd_help.onlineOF.api.OrdersManager;
 import com.cd_help.onlineOF.api.RestaurantManager;
-import com.cd_help.onlineOF.utils.AppException;
 
 /**
  * <b><code></code></b>
