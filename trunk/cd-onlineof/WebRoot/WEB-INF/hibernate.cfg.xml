@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+          "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<property name="hbm2ddl.auto">update</property>
+		<property name="dialect">
+			org.hibernate.dialect.MySQLDialect
+		</property>
+		<property name="connection.url">
+			jdbc:mysql://localhost:3306/onlineof
+		</property>
+		<property name="connection.username">root</property>
+		<property name="connection.password">admin</property>
+		<property name="connection.driver_class">
+			com.mysql.jdbc.Driver
+		</property>
+		<property name="show_sql">true</property>
+		<property name="current_session_context_class">thread</property>
+		
+		<mapping class="com.cd_help.onlineOF.data.OrdersData"/>
+		<mapping class="com.cd_help.onlineOF.data.Food_kindData"/>
+		<mapping class="com.cd_help.onlineOF.data.FoodData"/>
+		<mapping class="com.cd_help.onlineOF.data.RestaurantData"/>
+		<mapping class="com.cd_help.onlineOF.data.Restaurant_kindData"/>
+		<mapping class="com.cd_help.onlineOF.data.CredibilityData"/>
+		<mapping class="com.cd_help.onlineOF.data.UsersData"/>
+		
+	</session-factory>
+	
+</hibernate-configuration>
