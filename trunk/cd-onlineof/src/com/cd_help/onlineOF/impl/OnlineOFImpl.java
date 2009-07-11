@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cd_help.onlineOF.api.FoodManager;
 import com.cd_help.onlineOF.api.OnlineOF;
 import com.cd_help.onlineOF.api.OrdersManager;
 import com.cd_help.onlineOF.api.RestaurantManager;
@@ -44,6 +45,13 @@ public class OnlineOFImpl implements OnlineOF{
 	@Resource(name = "restaurantManager")
 	private RestaurantManager restaurantManager = null;
 
+	/**
+	 * 饮食管理
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Autowired
+	@Resource(name = "foodManager")
+	private FoodManager foodManager = null;
 	
 	public void setOrdersManager(OrdersManager ordersManager) {
 		this.ordersManager = ordersManager;
@@ -53,18 +61,19 @@ public class OnlineOFImpl implements OnlineOF{
 		this.restaurantManager = restaurantManager;
 	}
 
-	/**
-	 * @see com.cd_help.onlineOF.api.OnlineOF#getOrdersManager()
-	 */
-	public OrdersManager getOrdersManager() throws AppException {
+	public void setFoodManager(FoodManager foodManager) {
+		this.foodManager = foodManager;
+	}
+
+	public OrdersManager getOrdersManager() {
 		return ordersManager;
 	}
 
-	/**
-	 * @see com.cd_help.onlineOF.api.OnlineOF#getRestaurantManager()
-	 */
-	public RestaurantManager getRestaurantManager() throws AppException {
+	public RestaurantManager getRestaurantManager() {
 		return restaurantManager;
 	}
 
+	public FoodManager getFoodManager() {
+		return foodManager;
+	}
 }
