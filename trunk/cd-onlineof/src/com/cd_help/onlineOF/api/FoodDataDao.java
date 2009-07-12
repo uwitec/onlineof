@@ -16,6 +16,6 @@ package com.cd_help.onlineOF.api;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-public interface FoodDataDao {
+public interface FoodDataDao extends BaseDao{
 
 }
