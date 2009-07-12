@@ -18,6 +18,6 @@ import com.cd_help.onlineOF.api.FoodDataDao;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-public class FoodDataDaoImpl implements FoodDataDao{
+public class FoodDataDaoImpl extends BaseDaoSupport implements FoodDataDao{
 
 }

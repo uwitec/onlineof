@@ -8,8 +8,6 @@ package com.cd_help.onlineOF.impl;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.api.OrdersDataDao;
-import com.cd_help.onlineOF.data.OrdersData;
-import com.cd_help.onlineOF.utils.AppException;
 
 /**
  * <b><code></code></b>
@@ -25,21 +23,4 @@ import com.cd_help.onlineOF.utils.AppException;
 @Service("ordersDataDao")
 public class OrdersDataDaoImpl extends BaseDaoSupport implements OrdersDataDao{
 
-	public void create(OrdersData data) throws AppException {
-	}
-
-	public void delete(Integer id) throws AppException {
-	}
-
-	public boolean exist(Integer id) throws AppException {
-		return false;
-	}
-	
-	public OrdersData read(Integer id) throws AppException {
-		return null;
-	}
-
-	public void update(OrdersData data) throws AppException {
-	}
-     
 }
