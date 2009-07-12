@@ -55,7 +55,7 @@ public class OrdersData implements Serializable{
 	 * 订单号
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "orders_code", nullable = false, length = 15)
+	@Column(name = "orders_code", nullable = true, length = 15)
 	private String ordersCode;
 	
 	/**
@@ -75,7 +75,7 @@ public class OrdersData implements Serializable{
 	 * 备注
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "remark", nullable = false, length = 15)
+	@Column(name = "remark", nullable = true, length = 15)
 	private String remark;
 	/**
 	 * 就餐时间
@@ -87,26 +87,26 @@ public class OrdersData implements Serializable{
 	 * 送餐地址
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "requestAddress", nullable = false, length = 15)
+	@Column(name = "requestAddress", nullable = true, length = 15)
 	private String requestAddress;
 	/**
 	 * 联系人
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "contactName", nullable = false, length = 15)
+	@Column(name = "contactName", nullable = true, length = 15)
 	private String contactName;
 	
 	/**
 	 * 联系人性别
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "contactGender", nullable = false, length = 11)
+	@Column(name = "contactGender", nullable = true, length = 11)
 	private Integer contactGender;
 	/**
 	 * 联系电话
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "contactPhone", nullable = false, length = 15)
+	@Column(name = "contactPhone", nullable = true, length = 15)
 	private String contactPhone;
 	/**
 	 * 所订饮食

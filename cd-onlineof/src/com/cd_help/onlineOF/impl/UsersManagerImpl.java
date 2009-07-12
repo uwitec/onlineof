@@ -7,12 +7,12 @@ package com.cd_help.onlineOF.impl;
 
 import org.springframework.stereotype.Service;
 
-import com.cd_help.onlineOF.api.Food_kindManager;
+import com.cd_help.onlineOF.api.UsersManager;
 
 /**
  * <b><code></code></b>
  * <p/>
- * 饮食类别管理实现类
+ * 订餐用户管理实现类
  * <p/>
  * <b>Creation Time:</b> Jul 12, 2009
  * @author TanDong
@@ -20,8 +20,8 @@ import com.cd_help.onlineOF.api.Food_kindManager;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-@Service("food_kindManager")
+@Service("usersManager")
 @SuppressWarnings("unchecked")
-public class Food_kindManagerImpl implements Food_kindManager{
+public class UsersManagerImpl implements UsersManager{
 
 }

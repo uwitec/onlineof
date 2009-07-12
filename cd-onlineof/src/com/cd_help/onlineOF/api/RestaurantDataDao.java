@@ -5,6 +5,11 @@
  */
 package com.cd_help.onlineOF.api;
 
+import java.util.List;
+
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.web.vo.RestaurantVo;
+
 /**
  * <b><code></code></b>
  * <p/>
@@ -17,5 +22,14 @@ package com.cd_help.onlineOF.api;
  * @since cd_help-onlineOF 0.0.0.1
  */
 public interface RestaurantDataDao extends BaseDao{
-
+	
+	public List<RestaurantVo> loadAll() throws AppException;
+	
+	public RestaurantVo get(String id) throws AppException;
+	
+	public RestaurantVo save(RestaurantVo restaurantVo) throws AppException;
+	
+	public boolean exist(String id) throws AppException;
+	
+	public void delete(String id) throws AppException;
 }

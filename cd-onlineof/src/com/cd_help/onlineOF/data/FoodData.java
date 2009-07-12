@@ -39,19 +39,19 @@ public class FoodData {
 	 * 名称
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "name", nullable = false, length = 15)
+	@Column(name = "name", nullable = true, length = 15)
 	private String name;
 	/**
 	 * 价格
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "price", nullable = false, length = 15)
+	@Column(name = "price", nullable = true, length = 15)
 	private float price;
 	/**
 	 * 介绍
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "introduction", nullable = false, length = 50)
+	@Column(name = "introduction", nullable = true, length = 50)
 	private String introduction;
 	/**
 	 * 图片
@@ -63,7 +63,7 @@ public class FoodData {
 	 * 是否是特色
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "isSigns", nullable = false, length = 15)
+	@Column(name = "isSigns", nullable = true, length = 15)
 	private Integer isSigns = 0;
 	
 	/**

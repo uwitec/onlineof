@@ -36,13 +36,13 @@ public class UsersData {
 	 * 订餐用户名
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "name", nullable = false, length = 15)
+	@Column(name = "name", nullable = true, length = 15)
 	private String name;
 	/**
 	 * 密码
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "password", nullable = false, length = 15)
+	@Column(name = "password", nullable = true, length = 15)
 	private String password;
 	
 	public String getUsersId() {

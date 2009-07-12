@@ -1,0 +1,35 @@
+.pagination,.pagination2 {
+	float: right;
+	clear: both;
+}
+
+.pagination span {
+	display: block;
+	float: left;
+	display: inline;
+}
+
+.pagination .number {
+	margin-left: 7px;
+	border: 1px solid #acacac;
+}
+
+.pagination2 .number {
+	margin-left: 7px;
+}
+
+.pagination .number a,.pagination2 .number a {
+	display: block;
+	padding: 0 5px;
+	float: left;
+}
+
+.pagination .number.current a,.pagination .number.current a:visited {
+	padding: 0 5px;
+	color: #d20000;
+}
+
+.pagination2 .number.current a,.pagination2 .number.current a:visited {
+	padding: 0 5px;
+	color: #0086e4;
+}

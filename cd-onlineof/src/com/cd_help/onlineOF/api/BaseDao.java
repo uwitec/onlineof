@@ -50,6 +50,8 @@ public interface BaseDao {
 	public void flush();
 
 	public void clear();
+	
+	public boolean exist(Class entityClass, Serializable id);
 
 	public Object get(Class entityClass, Serializable id);
 

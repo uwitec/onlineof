@@ -24,7 +24,13 @@ public class AppException extends Exception{
 	 * 错误编号
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private Integer error_code;
+	private String error_code;
+	
+	/**
+	 * Constructs a <code>AppException</code>
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public AppException(){}
 
 	/**
 	 * Constructs a <code>AppException</code>
@@ -32,7 +38,7 @@ public class AppException extends Exception{
 	 * @param message
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public AppException(Integer error_code, String message) {
+	public AppException(String error_code, String message) {
 		this(error_code, message, null);
 	}
 
@@ -43,16 +49,16 @@ public class AppException extends Exception{
 	 * @param e
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public AppException(Integer error_code, String message, Throwable e) {
+	public AppException(String error_code, String message, Throwable e) {
 		super(message, e);
 		this.error_code = error_code;
 	}
 
-	public Integer getError_code() {
+	public String getError_code() {
 		return error_code;
 	}
 
-	public void setError_code(Integer error_code) {
+	public void setError_code(String error_code) {
 		this.error_code = error_code;
 	}
 }

@@ -21,6 +21,7 @@ import com.cd_help.onlineOF.api.FoodManager;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("foodManager")
+@SuppressWarnings("unchecked")
 public class FoodManagerImpl implements FoodManager{
 
 }

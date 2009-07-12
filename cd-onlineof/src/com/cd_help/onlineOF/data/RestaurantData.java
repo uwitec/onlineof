@@ -51,7 +51,7 @@ public class RestaurantData {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "credibilityId", referencedColumnName = "credibilityId", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "credibilityId", referencedColumnName = "credibilityId", nullable = true, insertable = false, updatable = false)
 	private CredibilityData credibilityData;
 	
 	/**
@@ -65,80 +65,80 @@ public class RestaurantData {
 	 * 餐厅名称
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "name", nullable = false, length = 15)
+	@Column(name = "name", nullable = true, length = 15)
 	private String name;
 	/**
 	 * 餐厅地址
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "address", nullable = false, length = 15)
+	@Column(name = "address", nullable = true, length = 15)
 	private String address;
 	/**
 	 * 联系电话
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "contactPhone", nullable = false, length = 15)
+	@Column(name = "contactPhone", nullable = true, length = 15)
 	private String contactPhone;
 	/**
 	 * QQ
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "QQ", nullable = false, length = 15)
+	@Column(name = "QQ", nullable = true, length = 15)
 	private String QQ;
 	/**
 	 * 联系手机
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "mobilePhone", nullable = false, length = 15)
+	@Column(name = "mobilePhone", nullable = true, length = 15)
 	private String mobilePhone;
 	/**
 	 * 联系人性别
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "contactGender", nullable = false, length = 11)
+	@Column(name = "contactGender", nullable = true, length = 11)
 	private Integer contactGender;
 	/**
 	 * 创建人
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "createName", nullable = false, length = 15)
+	@Column(name = "createName", nullable = true, length = 15)
 	private String createName;
 	/**
 	 * 状态
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "status", nullable = false, length = 15)
+	@Column(name = "status", nullable = true, length = 15)
 	private Integer status;
 	/**
 	 * 开门时间
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "openTime", nullable = false, length = 15)
+	@Column(name = "openTime", nullable = true, length = 15)
 	private String openTime;
 	/**
 	 * 关门时间
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "closeTime", nullable = false, length = 15)
+	@Column(name = "closeTime", nullable = true, length = 15)
 	private String closeTime;
 	/**
 	 * 餐厅简介
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "introduction", nullable = false, length = 500)
+	@Column(name = "introduction", nullable = true, length = 500)
 	private String introduction;
 	/**
 	 * 电子邮箱
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "email", nullable = false, length = 50)
+	@Column(name = "email", nullable = true, length = 50)
 	private String email;
 	
 	/**
 	 * 联系人
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "contactName", nullable = false, length = 15)
+	@Column(name = "contactName", nullable = true, length = 15)
 	private String contactName;
 	/**
 	 * 图片

@@ -5,6 +5,9 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.cd_help.onlineOF.api.FoodDataDao;
 
 /**
@@ -18,6 +21,9 @@ import com.cd_help.onlineOF.api.FoodDataDao;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
+@Service("foodDataDao")
+@Transactional
+@SuppressWarnings("unchecked")
 public class FoodDataDaoImpl extends BaseDaoSupport implements FoodDataDao{
 
 }

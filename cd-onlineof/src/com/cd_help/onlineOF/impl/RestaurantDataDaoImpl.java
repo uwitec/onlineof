@@ -5,9 +5,17 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.RestaurantDataDao;
+import com.cd_help.onlineOF.data.RestaurantData;
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.BeanUtilsHelp;
+import com.cd_help.onlineOF.utils.StringUtil;
+import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
 /**
  * <b><code></code></b>
@@ -21,6 +29,50 @@ import com.cd_help.onlineOF.api.RestaurantDataDao;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("restaurantDataDao")
+@Transactional
+@SuppressWarnings("unchecked")
 public class RestaurantDataDaoImpl extends BaseDaoSupport implements RestaurantDataDao{
 
+	public List<RestaurantVo> loadAll() throws AppException {
+		List<RestaurantVo> restaurantVoList =  this.findByNamedQuery("loadAllRestaurant");
+		System.out.println(restaurantVoList.size());
+		for(RestaurantVo rv : restaurantVoList){
+			System.out.println(rv.getName());
+		}
+		return restaurantVoList;
+	}
+
+	public RestaurantVo get(String id) throws AppException {
+		RestaurantData restaurantData = (RestaurantData)this.get(RestaurantData.class,id);
+		RestaurantVo restaurantVo = new RestaurantVo();
+		BeanUtilsHelp.copyProperties(restaurantVo,restaurantData);
+		return restaurantVo;
+	}
+
+	public boolean exist(String id) throws AppException {
+		try {
+			RestaurantData restaurantData = (RestaurantData) getHibernateTemplate().get(
+					RestaurantData.class, id);
+			return restaurantData == null ? false : true;
+		} catch (Exception e) {
+			throw new AppException();
+		}
+	}
+
+	public RestaurantVo save(RestaurantVo restaurantVo) throws AppException {
+		restaurantVo.setRestaurantId(StringUtil.getUUID());
+		RestaurantData restaurantData = new RestaurantData();
+		BeanUtilsHelp.copyProperties(restaurantData,restaurantVo);
+		this.save(restaurantData);
+		restaurantVo.setRestaurantId(restaurantData.getRestaurantId());
+		return restaurantVo;
+	}
+
+	public void delete(String id) throws AppException {
+		if(!this.exist(id)){
+			throw new AppException();
+		}else{
+			this.delete(this.get(RestaurantData.class, id));
+		}
+	}
 }
