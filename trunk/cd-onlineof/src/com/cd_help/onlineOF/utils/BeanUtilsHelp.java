@@ -9,6 +9,17 @@ import java.lang.reflect.InvocationTargetException;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+/**
+ * <b><code></code></b>
+ * <p/>
+ * 类型转化辅助类
+ * <p/>
+ * <b>Creation Time:</b> Jul 12, 2009
+ * @author TanDong
+ * @version 0.0.0.1
+ *
+ * @since cd_help-onlineOF 0.0.0.1
+ */
 public class BeanUtilsHelp {
 
 	public static void copyProperties(Object src,Object target) throws AppException {
