@@ -44,7 +44,7 @@ public class OrdersVo {
 	 * @param requestAddress
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public OrdersVo(Integer ordersId, String ordersCode, Integer number,
+	public OrdersVo(String ordersId, String ordersCode, Integer number,
 			String remark, String contactPhone, String contactName,
 			Integer contactGender, Date requestTime, String requestAddress,
 			Date ordersDate) {
@@ -64,7 +64,7 @@ public class OrdersVo {
 	 * 订单ID
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private Integer ordersId;
+	private String ordersId;
 	/**
 	 * 订单号
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -111,11 +111,11 @@ public class OrdersVo {
 	 */
 	private String requestAddress;
 
-	public Integer getOrdersId() {
+	public String getOrdersId() {
 		return ordersId;
 	}
 
-	public void setOrdersId(Integer ordersId) {
+	public void setOrdersId(String ordersId) {
 		this.ordersId = ordersId;
 	}
 

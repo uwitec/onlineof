@@ -34,7 +34,7 @@ public class BanquetVo {
 	 * @param img
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public BanquetVo(Integer banquetId,String name,float price,float discount,Integer restaurantId,byte[] img){
+	public BanquetVo(String banquetId,String name,float price,float discount,Integer restaurantId,byte[] img){
 		this.banquetId = banquetId;
 		this.name = name;
 		this.price = price;
@@ -47,7 +47,7 @@ public class BanquetVo {
 	 * 酒席ID
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private Integer banquetId;
+	private String banquetId;
 	/**
 	 * 名称
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -74,10 +74,10 @@ public class BanquetVo {
 	 */
 	private byte[] img;
 	
-	public Integer getBanquetId() {
+	public String getBanquetId() {
 		return banquetId;
 	}
-	public void setBanquetId(Integer banquetId) {
+	public void setBanquetId(String banquetId) {
 		this.banquetId = banquetId;
 	}
 	public String getName() {

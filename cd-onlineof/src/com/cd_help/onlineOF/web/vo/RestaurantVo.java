@@ -37,7 +37,7 @@ public class RestaurantVo {
 	 * @param img
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public RestaurantVo(Integer restaurantId, String name, String address,
+	public RestaurantVo(String restaurantId, String name, String address,
 			String openTime, String closeTime, String createName,
 			String contactName, String contactPhone, String QQ,
 			String mobilePhone, Integer contactGender,
@@ -62,7 +62,7 @@ public class RestaurantVo {
 	 * 餐厅ID
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private Integer restaurantId;
+	private String restaurantId;
 	/**
 	 * 名称
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -134,11 +134,11 @@ public class RestaurantVo {
 	 */
 	private byte[] img;
 	
-	public Integer getRestaurantId() {
+	public String getRestaurantId() {
 		return restaurantId;
 	}
 
-	public void setRestaurantId(Integer restaurantId) {
+	public void setRestaurantId(String restaurantId) {
 		this.restaurantId = restaurantId;
 	}
 
