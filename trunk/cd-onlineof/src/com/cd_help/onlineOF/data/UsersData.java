@@ -7,8 +7,6 @@ package com.cd_help.onlineOF.data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -32,8 +30,8 @@ public class UsersData {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer usersId;
+	@Column(length=32)
+	private String usersId;
 	/**
 	 * 订餐用户名
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -47,10 +45,10 @@ public class UsersData {
 	@Column(name = "password", nullable = false, length = 15)
 	private String password;
 	
-	public Integer getUsersId() {
+	public String getUsersId() {
 		return usersId;
 	}
-	public void setUsersId(Integer usersId) {
+	public void setUsersId(String usersId) {
 		this.usersId = usersId;
 	}
 	public String getName() {

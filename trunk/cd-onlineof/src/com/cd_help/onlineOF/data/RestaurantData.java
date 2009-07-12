@@ -12,8 +12,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -46,8 +44,8 @@ public class RestaurantData {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer restaurantId;
+	@Column(length=32)
+	private String restaurantId;
 	/**
 	 * 信誉ID
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -149,11 +147,11 @@ public class RestaurantData {
 	@Column(name = "img", columnDefinition = "BLOB", nullable = true)
 	private byte[] img;
 
-	public Integer getRestaurantId() {
+	public String getRestaurantId() {
 		return restaurantId;
 	}
 
-	public void setRestaurantId(Integer restaurantId) {
+	public void setRestaurantId(String restaurantId) {
 		this.restaurantId = restaurantId;
 	}
     

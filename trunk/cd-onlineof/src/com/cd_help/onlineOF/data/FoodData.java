@@ -8,8 +8,6 @@ package com.cd_help.onlineOF.data;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
@@ -35,8 +33,8 @@ public class FoodData {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer foodId;
+	@Column(length=32)
+	private String foodId;
 	/**
 	 * 名称
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -84,10 +82,10 @@ public class FoodData {
 	@JoinColumn(name = "food_kind_Id", referencedColumnName = "food_kind_Id", nullable = false, insertable = false, updatable = false)
 	private Food_kindData food_kindData;
 	
-	public Integer getFoodId() {
+	public String getFoodId() {
 		return foodId;
 	}
-	public void setFoodId(Integer foodId) {
+	public void setFoodId(String foodId) {
 		this.foodId = foodId;
 	}
 	public String getName() {

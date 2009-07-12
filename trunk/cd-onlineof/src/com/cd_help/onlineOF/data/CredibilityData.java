@@ -7,8 +7,6 @@ package com.cd_help.onlineOF.data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -32,8 +30,7 @@ public class CredibilityData {
      * @since cd_help-onlineOF 0.0.0.1
      */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer credibilityId;
+    private String credibilityId;
     /**
      * 信誉称号
      * @since cd_help-onlineOF 0.0.0.1
@@ -41,10 +38,10 @@ public class CredibilityData {
 	@Column(name = "name", nullable = false, length = 15)
     private String name;
     
-	public Integer getCredibilityId() {
+	public String getCredibilityId() {
 		return credibilityId;
 	}
-	public void setCredibilityId(Integer credibilityId) {
+	public void setCredibilityId(String credibilityId) {
 		this.credibilityId = credibilityId;
 	}
 	public String getName() {

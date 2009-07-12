@@ -11,8 +11,6 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.NamedQueries;
@@ -51,8 +49,8 @@ public class OrdersData implements Serializable{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer ordersId;
+	@Column(length=32)
+	private String ordersId;
 	/**
 	 * 订单号
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -126,10 +124,10 @@ public class OrdersData implements Serializable{
 	@JoinColumn(name = "restaurantId", referencedColumnName = "restaurantId", nullable = false, insertable = false, updatable = false)
 	private RestaurantData restaurantData;
 	
-	public Integer getOrdersId() {
+	public String getOrdersId() {
 		return ordersId;
 	}
-	public void setOrdersId(Integer ordersId) {
+	public void setOrdersId(String ordersId) {
 		this.ordersId = ordersId;
 	}
 	public String getOrdersCode() {

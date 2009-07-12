@@ -10,8 +10,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -36,8 +34,7 @@ public class CuisineData {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer cuisineId;
+	private String cuisineId;
 	/**
 	 * 菜系名称
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -52,10 +49,10 @@ public class CuisineData {
 	@ManyToMany(mappedBy = "cuisineDataList")
 	private List<RestaurantData> restaurantList = new ArrayList<RestaurantData>();
 	
-	public Integer getCuisineId() {
+	public String getCuisineId() {
 		return cuisineId;
 	}
-	public void setCuisineId(Integer cuisineId) {
+	public void setCuisineId(String cuisineId) {
 		this.cuisineId = cuisineId;
 	}
 	public String getName() {
