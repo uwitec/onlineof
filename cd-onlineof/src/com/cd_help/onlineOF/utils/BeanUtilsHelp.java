@@ -22,6 +22,13 @@ import org.apache.commons.beanutils.BeanUtils;
  */
 public class BeanUtilsHelp {
 
+	/**
+	 * 转换
+	 * @param src
+	 * @param target
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
 	public static void copyProperties(Object src,Object target) throws AppException {
 		   try {
 			BeanUtils.copyProperties(src, target);
