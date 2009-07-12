@@ -35,7 +35,7 @@ public class FoodData {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer foodId;
 	/**
 	 * 名称

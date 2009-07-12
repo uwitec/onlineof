@@ -32,7 +32,7 @@ public class Restaurant_kindData {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer restaurant_kind_Id;
 	/**
 	 * 餐厅类别名称

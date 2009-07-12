@@ -32,7 +32,7 @@ public class UsersData {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer usersId;
 	/**
 	 * 订餐用户名
