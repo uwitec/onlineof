@@ -17,6 +17,14 @@ package com.cd_help.onlineOF.web.vo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 public class RestaurantVo {
+	
+	/**
+	 * Constructs a <code>RestaurantVo</code>
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public RestaurantVo(){
+		
+	}
 
 	/**
 	 * Constructs a <code>RestaurantVo</code>

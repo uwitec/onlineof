@@ -29,6 +29,7 @@ import com.cd_help.onlineOF.web.vo.OrdersVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("ordersManager")
+@SuppressWarnings("unchecked")
 public class OrdersManagerImpl implements OrdersManager{
 
 	@Autowired

@@ -5,6 +5,8 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import org.springframework.stereotype.Service;
+
 import com.cd_help.onlineOF.api.Restaurant_kindManager;
 
 /**
@@ -18,6 +20,8 @@ import com.cd_help.onlineOF.api.Restaurant_kindManager;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
+@Service("restaurant_kindManager")
+@SuppressWarnings("unchecked")
 public class Restaurant_kindManagerImpl implements Restaurant_kindManager{
 
 }

@@ -36,7 +36,7 @@ public class Food_kindData {
 	 * 菜类别名称
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "name", nullable = false, length = 15)
+	@Column(name = "name", nullable = true, length = 15)
 	private String name;
 	
 	public String getFood_kind_Id() {

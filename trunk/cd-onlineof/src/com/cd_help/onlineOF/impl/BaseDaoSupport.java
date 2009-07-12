@@ -124,11 +124,15 @@ public class BaseDaoSupport implements BaseDao{
 	public Object get(Class entityClass, Serializable id) {
 		return getHibernateTemplate().get(entityClass, (Serializable) id);
 	}
+	
+	public boolean exist(Class entityClass,Serializable id){
+		return getHibernateTemplate().get(entityClass, (Serializable) id) == null?false:true;
+	}
 
 	public void save(Object entity) {
 		getHibernateTemplate().save(entity);
 	}
-
+	
 	public void update(Object entity) {
 		getHibernateTemplate().update(entity);
 	}
@@ -140,7 +144,6 @@ public class BaseDaoSupport implements BaseDao{
 	public List loadAll(final Class entityClass) {
 		return getHibernateTemplate().loadAll(entityClass);
 	}
-
 	public long countByNamedQuery(final String queryName) {
 		return (Long) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)

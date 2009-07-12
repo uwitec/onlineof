@@ -21,6 +21,7 @@ import com.cd_help.onlineOF.api.CuisineManager;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("cuisineManager")
+@SuppressWarnings("unchecked")
 public class CuisineManagerImpl implements CuisineManager{
 
 }

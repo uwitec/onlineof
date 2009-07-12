@@ -31,4 +31,21 @@ public interface RestaurantManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public List<RestaurantVo> loadAll() throws AppException;
+	
+	/**
+	 * 保存
+	 * @param restaurantVo
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public RestaurantVo save(RestaurantVo restaurantVo) throws AppException;
+	
+	/**
+	 * 删除
+	 * @param id
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void delete(String id) throws AppException;
 }
