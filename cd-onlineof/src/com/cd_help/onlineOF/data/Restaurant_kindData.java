@@ -7,8 +7,6 @@ package com.cd_help.onlineOF.data;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -32,8 +30,8 @@ public class Restaurant_kindData {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer restaurant_kind_Id;
+	@Column(length=32)
+	private String restaurant_kind_Id;
 	/**
 	 * 餐厅类别名称
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -41,10 +39,10 @@ public class Restaurant_kindData {
 	@Column(name = "name", nullable = false, length = 15)
 	private String name;
 	
-	public Integer getRestaurant_kind_Id() {
+	public String getRestaurant_kind_Id() {
 		return restaurant_kind_Id;
 	}
-	public void setRestaurant_kind_Id(Integer restaurant_kind_Id) {
+	public void setRestaurant_kind_Id(String restaurant_kind_Id) {
 		this.restaurant_kind_Id = restaurant_kind_Id;
 	}
 	public String getName() {
