@@ -8,7 +8,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aspectjrt.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/aspectjweaver.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/cglib-nodep-2.1_3.jar"/>
-	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-beanutils-1.6.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-collections-3.2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-dbcp-1.2.2.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/commons-discovery.jar"/>
@@ -39,5 +38,6 @@
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2-core-2.0.14.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/struts2-spring-plugin-2.0.11.1.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/xwork-2.0.7.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/zzBeanUtils.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
