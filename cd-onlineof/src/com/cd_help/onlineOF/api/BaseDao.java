@@ -22,6 +22,7 @@ import java.util.List;
 @SuppressWarnings("unchecked")
 public interface BaseDao {
 	
+	
 	public List find(String queryString);
 
 	public List find(String queryString, Object value);
