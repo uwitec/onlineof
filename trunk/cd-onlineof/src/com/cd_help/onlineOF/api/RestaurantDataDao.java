@@ -32,4 +32,6 @@ public interface RestaurantDataDao extends BaseDao{
 	public boolean exist(String id) throws AppException;
 	
 	public void delete(String id) throws AppException;
+	
+	public void update(RestaurantVo restaurantVo) throws AppException;
 }
