@@ -75,4 +75,10 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements RestaurantD
 			this.delete(this.get(RestaurantData.class, id));
 		}
 	}
+
+	public void update(RestaurantVo restaurantVo) throws AppException {
+		RestaurantData restaurantData = (RestaurantData)this.get(RestaurantData.class,restaurantVo.getRestaurantId());
+        BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
+		this.update(restaurantData);  		
+	}
 }
