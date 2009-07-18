@@ -5,7 +5,12 @@
  */
 package com.cd_help.onlineOF.web.struts;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.stereotype.Service;
+
+import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.web.WebConstants;
 
 /**
  * <b><code></code></b>
@@ -26,7 +31,7 @@ public class LoginAction extends BaseAction{
 	 * 登陆名
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private String loginName;
+	private String usersname;
 	/**
 	 * 密码
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -39,15 +44,24 @@ public class LoginAction extends BaseAction{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public String doLogin(){
+		log.debug("--->> begin doLogin");
+		Session session = null;
+		try {
+			session = this.getOnlineOF().login(usersname, password);
+			System.out.println("用户名： "+usersname + "密码: "+password);
+			this.getRequest().getSession().setAttribute(WebConstants.ATTRIBUTE_SESSION,session);
+		} catch (AppException e) {
+			e.printStackTrace();
+		}
 		return SUCCESS;
 	}
 
-	public String getLoginName() {
-		return loginName;
+	public String getUsersname() {
+		return usersname;
 	}
 
-	public void setLoginName(String loginName) {
-		this.loginName = loginName;
+	public void setUsersname(String usersname) {
+		this.usersname = usersname;
 	}
 
 	public String getPassword() {
