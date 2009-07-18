@@ -22,8 +22,7 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-public interface RestaurantManager {
-
+public interface RestaurantManager{
 	/**
 	 * 获取所有餐厅信息
 	 * @return
