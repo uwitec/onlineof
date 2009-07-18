@@ -5,6 +5,11 @@
  */
 package com.cd_help.onlineOF.api;
 
+import java.util.List;
+
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.web.vo.CuisineVo;
+
 /**
  * <b><code></code></b>
  * <p/>
@@ -17,5 +22,16 @@ package com.cd_help.onlineOF.api;
  * @since cd_help-onlineOF 0.0.0.1
  */
 public interface CuisineDataDao extends BaseDao{
-
+	
+    public List<CuisineVo> loadAll() throws AppException;
+	
+	public CuisineVo get(String id) throws AppException;
+	
+	public CuisineVo save(CuisineVo cuisineDataVo) throws AppException;
+	
+	public boolean exist(String id) throws AppException;
+	
+	public void delete(String id) throws AppException;
+	
+	public void update(CuisineVo cuisineDataVo) throws AppException;
 }
