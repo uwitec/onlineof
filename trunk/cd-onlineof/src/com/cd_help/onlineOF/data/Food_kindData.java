@@ -23,6 +23,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "food_kind")
+
 public class Food_kindData {
 
 	/**

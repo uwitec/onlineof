@@ -10,6 +10,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -26,6 +28,14 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="food")
+@NamedQueries( { 
+	/*获取所有饮食信息*/
+	@NamedQuery(name = "loadAllFood", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.introduction,f.img,f.isSigns) from FoodData f"), 
+	/*根据餐厅获取饮食信息*/
+	@NamedQuery(name = "getFoodByRestaurantId", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.introduction,f.img,f.isSigns) from FoodData f join f.restaurantData r where r.restaurantId = :restaurantId"),
+	/*根据餐厅和类别获取饮食信息*/
+	@NamedQuery(name = "getFoodByKind", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.introduction,f.img,f.isSigns) from FoodData f join f.food_kindData k where k.food_kind_Id = :food_kind_Id"),
+})
 public class FoodData {
 	
 	/**
