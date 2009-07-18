@@ -8,31 +8,28 @@ package com.cd_help.onlineOF.api;
 import java.util.List;
 
 import com.cd_help.onlineOF.utils.AppException;
-import com.cd_help.onlineOF.web.vo.Food_kindVo;
+import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
  * <b><code></code></b>
  * <p/>
- * 菜类别数据处理接口
+ * 用户数据处理接口
  * <p/>
- * <b>Creation Time:</b> Jul 4, 2009
+ * <b>Creation Time:</b> Jul 15, 2009
  * @author TanDong
  * @version 0.0.0.1
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-public interface Food_kindDataDao extends BaseDao{
+public interface UsersDataDao extends BaseDao{
 	
-    public List<Food_kindVo> loadAll() throws AppException;
+	public UsersVo get(String id) throws AppException;
 	
-	public Food_kindVo get(String id) throws AppException;
-	
-	public Food_kindVo save(Food_kindVo food_kindVo) throws AppException;
-	
-	public boolean exist(String id) throws AppException;
+	public List<UsersVo> loadAll() throws AppException;
+
+	public void update(String id) throws AppException;
 	
 	public void delete(String id) throws AppException;
-	
-	public void update(Food_kindVo food_kindVo) throws AppException;
-
+    
+	public UsersVo login(String username, String password) throws AppException;
 }

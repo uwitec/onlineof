@@ -5,6 +5,11 @@
  */
 package com.cd_help.onlineOF.api;
 
+import java.util.List;
+
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.web.vo.FoodVo;
+
 /**
  * <b><code></code></b>
  * <p/>
@@ -18,4 +23,54 @@ package com.cd_help.onlineOF.api;
  */
 public interface FoodManager {
 
+    /**
+     * 加载所有
+     * @return
+     * @throws AppException
+     * @since cd_help-onlineOF 0.0.0.1
+     */
+    public List<FoodVo> loadAll() throws AppException;
+	
+	/**
+	 * 根据ID获取
+	 * @param id
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public FoodVo get(String id) throws AppException;
+	
+	/**
+	 * 保存
+	 * @param foodVo
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public FoodVo save(FoodVo foodVo) throws AppException;
+	
+	/**
+	 * 判断是否存在
+	 * @param id
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public boolean exist(String id) throws AppException;
+	
+	/**
+	 * 删除
+	 * @param id
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void delete(String id) throws AppException;
+	
+	/**
+	 * 修改
+	 * @param foodVo
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void update(FoodVo foodVo) throws AppException;
 }

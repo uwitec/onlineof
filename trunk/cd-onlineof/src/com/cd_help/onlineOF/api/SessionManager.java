@@ -5,8 +5,6 @@
  */
 package com.cd_help.onlineOF.api;
 
-import java.util.List;
-
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.vo.UsersVo;
@@ -14,23 +12,23 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 /**
  * <b><code></code></b>
  * <p/>
- * 订餐用户管理接口
+ * Comment here
  * <p/>
- * <b>Creation Time:</b> Jul 12, 2009
+ * <b>Creation Time:</b> Jul 14, 2009
  * @author TanDong
  * @version 0.0.0.1
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-public interface UsersManager {
+public interface SessionManager {
 	
-    public UsersVo get(Session session,String id) throws AppException;
-	
-	public List<UsersVo> loadAll(Session session) throws AppException;
+	/**
+	 * 创建登陆用户Session
+	 * @param usersVo
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public Session createSession(UsersVo usersVo) throws AppException;
 
-	public void update(Session session,String id) throws AppException;
-	
-	public void delete(Session session,String id) throws AppException;
-    
-	public UsersVo login(String username, String password) throws AppException;
 }

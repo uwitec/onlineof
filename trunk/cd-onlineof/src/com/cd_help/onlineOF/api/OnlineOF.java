@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.api;
 
+import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
 
 /**
@@ -83,5 +84,23 @@ public interface OnlineOF {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public CredibilityManager getCredibilityManager() throws AppException;
+	
+	/**
+	 * 用户session管理
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public SessionManager getSessionManager() throws AppException;
+	
+	/**
+	 * 用户登录
+	 * @param username
+	 * @param password
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public Session login(String username,String password) throws AppException;
 	
 }
