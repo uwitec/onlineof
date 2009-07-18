@@ -6,8 +6,10 @@
 package com.cd_help.onlineOF.web.struts;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -15,7 +17,6 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cd_help.onlineOF.api.OnlineOF;
-import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -32,8 +33,6 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class BaseAction extends ActionSupport{
     
-	private ActionContext actionContext = ActionContext.getContext(); 
-	
 	/**
 	 * comment here
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -52,25 +51,30 @@ public class BaseAction extends ActionSupport{
 		return onlineOF;
 	}
 	
+	/**
+	 * 返回Request
+	 */
 	public HttpServletRequest getRequest(){
-		HttpServletRequest request = (HttpServletRequest)this.getActionContext().get(ServletActionContext.HTTP_REQUEST);
-		return request;
+		return ServletActionContext.getRequest();
 	}
-	
+	/**
+	 * 返回response
+	 */
 	public HttpServletResponse getResponse(){
-		HttpServletResponse response = (HttpServletResponse)this.getActionContext().get(ServletActionContext.HTTP_RESPONSE);
-		return response;
+		return ServletActionContext.getResponse();
 	}
-	
-	public void setOnlineOF(OnlineOF onlineOF) {
-		this.onlineOF = onlineOF;
+	/**
+	 * 返回Session
+	 */
+	public HttpSession getSession(){
+		return getRequest().getSession();
 	}
-
-	public ActionContext getActionContext() {
-		return actionContext;
-	}
-
-	public void setActionContext(ActionContext actionContext) {
-		this.actionContext = actionContext;
+	/**
+	 * 获得servlet上下文
+	 * 
+	 * @return
+	 */
+	public ServletContext getServletContext() {
+		return ServletActionContext.getServletContext();
 	}
 }
