@@ -18,7 +18,11 @@ import com.cd_help.onlineOF.api.OnlineOF;
 import com.cd_help.onlineOF.api.OrdersManager;
 import com.cd_help.onlineOF.api.RestaurantManager;
 import com.cd_help.onlineOF.api.Restaurant_kindManager;
+import com.cd_help.onlineOF.api.SessionManager;
 import com.cd_help.onlineOF.api.UsersManager;
+import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
  * <b><code></code></b>
@@ -97,6 +101,15 @@ public class OnlineOFImpl implements OnlineOF{
 	@Resource(name = "credibilityManager")
 	private CredibilityManager credibilityManager = null;
 
+	
+	/**
+	 * 用户session管理
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Autowired
+	@Resource(name = "sessionManager")
+	private SessionManager sessionManager = null;
+	
 	public UsersManager getUsersManager() {
 		return usersManager;
 	}
@@ -160,5 +173,22 @@ public class OnlineOFImpl implements OnlineOF{
 
 	public void setCredibilityManager(CredibilityManager credibilityManager) {
 		this.credibilityManager = credibilityManager;
+	}
+
+	public SessionManager getSessionManager() {
+		return sessionManager;
+	}
+
+	public void setSessionManager(SessionManager sessionManager) {
+		this.sessionManager = sessionManager;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.OnlineOF#login(java.lang.String, java.lang.String)
+	 */
+	public Session login(String username, String password) throws AppException {
+		UsersVo usersVo = usersManager.login(username, password);
+		Session session = sessionManager.createSession(usersVo);
+		return session;
 	}
 }

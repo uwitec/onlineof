@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.cd_help.onlineOF.api.RestaurantDataDao;
 import com.cd_help.onlineOF.api.RestaurantManager;
 import com.cd_help.onlineOF.data.RestaurantData;
+import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
@@ -59,6 +60,17 @@ public class RestaurantManagerImpl implements RestaurantManager{
 	 */
 	public void delete(String id) throws AppException {
 		restaurantDataDao.delete(restaurantDataDao.get(RestaurantData.class, id));
+	}
+	
+	/**
+	 * 检查权限
+	 * @param session
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private boolean checkPrivilege(Session session) throws AppException{
+		return true;
 	}
 	
 	public void setRestaurantDataDao(RestaurantDataDao restaurantDataDao) {
