@@ -5,10 +5,14 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.CuisineDataDao;
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.web.vo.CuisineVo;
 
 /**
  * <b><code></code></b>
@@ -25,5 +29,29 @@ import com.cd_help.onlineOF.api.CuisineDataDao;
 @Transactional
 @SuppressWarnings("unchecked")
 public class CuisineDataDaoImpl extends BaseDaoSupport implements CuisineDataDao{
+
+	public void delete(String id) throws AppException {
+		
+	}
+
+	public boolean exist(String id) throws AppException {
+		return false;
+	}
+
+	public CuisineVo get(String id) throws AppException {
+		return null;
+	}
+
+	public List<CuisineVo> loadAll() throws AppException {
+		return null;
+	}
+
+	public CuisineVo save(CuisineVo cuisineDataVo) throws AppException {
+		return null;
+	}
+
+	public void update(CuisineVo cuisineDataVo) throws AppException {
+		
+	}
 
 }

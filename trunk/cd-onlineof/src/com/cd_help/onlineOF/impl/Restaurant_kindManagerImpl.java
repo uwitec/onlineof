@@ -8,6 +8,8 @@ package com.cd_help.onlineOF.impl;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.api.Restaurant_kindManager;
+import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.utils.AppException;
 
 /**
  * <b><code></code></b>
@@ -24,4 +26,14 @@ import com.cd_help.onlineOF.api.Restaurant_kindManager;
 @SuppressWarnings("unchecked")
 public class Restaurant_kindManagerImpl implements Restaurant_kindManager{
 
+	/**
+	 * 检查权限
+	 * @param session
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private boolean checkPrivilege(Session session) throws AppException{
+		return true;
+	}
 }
