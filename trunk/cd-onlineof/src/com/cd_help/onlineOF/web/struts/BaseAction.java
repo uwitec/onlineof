@@ -6,12 +6,16 @@
 package com.cd_help.onlineOF.web.struts;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cd_help.onlineOF.api.OnlineOF;
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -28,6 +32,8 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class BaseAction extends ActionSupport{
     
+	private ActionContext actionContext = ActionContext.getContext(); 
+	
 	/**
 	 * comment here
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -45,8 +51,26 @@ public class BaseAction extends ActionSupport{
 	public OnlineOF getOnlineOF() {
 		return onlineOF;
 	}
-
+	
+	public HttpServletRequest getRequest(){
+		HttpServletRequest request = (HttpServletRequest)this.getActionContext().get(ServletActionContext.HTTP_REQUEST);
+		return request;
+	}
+	
+	public HttpServletResponse getResponse(){
+		HttpServletResponse response = (HttpServletResponse)this.getActionContext().get(ServletActionContext.HTTP_RESPONSE);
+		return response;
+	}
+	
 	public void setOnlineOF(OnlineOF onlineOF) {
 		this.onlineOF = onlineOF;
+	}
+
+	public ActionContext getActionContext() {
+		return actionContext;
+	}
+
+	public void setActionContext(ActionContext actionContext) {
+		this.actionContext = actionContext;
 	}
 }
