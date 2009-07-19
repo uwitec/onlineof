@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +33,7 @@ import javax.persistence.Table;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name="privilege")
 @NamedQueries( {
@@ -42,7 +44,7 @@ import javax.persistence.Table;
 	/*获取用户模块子权限*/
 	@NamedQuery(name="getChildModelPrivilegeByUsersId",query="select DISTINCT p from PrivilegeData p join p.roleList r join r.userList u where p.kind = 'Model' and p.parent.privilegeId = :parentId and u.usersId = :usersId"),
 })
-public class PrivilegeData {
+public class PrivilegeData implements Serializable{
 	
 	/**
 	 * 权限ID

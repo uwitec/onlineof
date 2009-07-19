@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,9 +26,10 @@ import javax.persistence.Table;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name="cuisine")
-public class CuisineData {
+public class CuisineData implements Serializable{
 	
 	/**
 	 * 菜系ID

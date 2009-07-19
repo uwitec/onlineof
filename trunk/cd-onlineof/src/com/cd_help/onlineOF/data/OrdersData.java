@@ -117,7 +117,7 @@ public class OrdersData implements Serializable{
 	private FoodData foodData;
 	
 	/**
-	 * 餐厅ID
+	 * 餐厅
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
