@@ -16,6 +16,7 @@ import com.cd_help.onlineOF.api.FoodManager;
 import com.cd_help.onlineOF.api.Food_kindManager;
 import com.cd_help.onlineOF.api.OnlineOF;
 import com.cd_help.onlineOF.api.OrdersManager;
+import com.cd_help.onlineOF.api.PrivilegeManager;
 import com.cd_help.onlineOF.api.RestaurantManager;
 import com.cd_help.onlineOF.api.Restaurant_kindManager;
 import com.cd_help.onlineOF.api.SessionManager;
@@ -110,6 +111,14 @@ public class OnlineOFImpl implements OnlineOF{
 	@Resource(name = "sessionManager")
 	private SessionManager sessionManager = null;
 	
+	/**
+	 * 信誉管理
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Autowired
+	@Resource(name = "privilegeManager")
+	private PrivilegeManager privilegeManager = null;
+	
 	public UsersManager getUsersManager() {
 		return usersManager;
 	}
@@ -181,6 +190,14 @@ public class OnlineOFImpl implements OnlineOF{
 
 	public void setSessionManager(SessionManager sessionManager) {
 		this.sessionManager = sessionManager;
+	}
+    
+	public PrivilegeManager getPrivilegeManager() {
+		return privilegeManager;
+	}
+
+	public void setPrivilegeManager(PrivilegeManager privilegeManager) {
+		this.privilegeManager = privilegeManager;
 	}
 
 	/**

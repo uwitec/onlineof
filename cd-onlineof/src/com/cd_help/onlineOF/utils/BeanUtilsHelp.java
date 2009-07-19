@@ -33,9 +33,9 @@ public class BeanUtilsHelp {
 		   try {
 			BeanUtils.copyProperties(src, target);
 		} catch (IllegalAccessException e) {
-			throw new AppException("00000","转换异常",e);
+			throw new AppException("00000","转换异常");
 		} catch (InvocationTargetException e) {
-			throw new AppException("00000","转换异常",e);
+			throw new AppException("00000","转换异常");
 		}
 	 }
 }

@@ -9,7 +9,6 @@ import javax.annotation.Resource;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -17,6 +16,8 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cd_help.onlineOF.api.OnlineOF;
+import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.web.WebConstants;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -38,6 +39,12 @@ public class BaseAction extends ActionSupport{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	protected static Log log = LogFactory.getLog(BaseAction.class);
+	
+	/**
+	 * 用户Session
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private Session session;
 	
 	/**
 	 * 在线订餐系统
@@ -64,11 +71,17 @@ public class BaseAction extends ActionSupport{
 		return ServletActionContext.getResponse();
 	}
 	/**
-	 * 返回Session
+	 * 返回用户Session
 	 */
-	public HttpSession getSession(){
-		return getRequest().getSession();
+	public Session getSession(){
+		session = (Session)getRequest().getSession().getAttribute(WebConstants.ATTRIBUTE_SESSION);
+		return session;
 	}
+	
+	public void setSession(Session session) {
+		this.session = session;
+	}
+
 	/**
 	 * 获得servlet上下文
 	 * 
