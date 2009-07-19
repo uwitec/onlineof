@@ -20,7 +20,7 @@
         }
     </script>
   </head>  
-<body style="background-color:#F5F5F5;"> 
+<body style="background-color:#F5F5F5;border-bottom:0px; border-top:0px; border-left:0px; border-right:0px;"> 
     <form action="login.do" id="loginForm" name="loginForm" method="post">
        <table>
           <tr>
