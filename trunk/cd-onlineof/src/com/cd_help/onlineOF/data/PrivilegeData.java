@@ -36,7 +36,9 @@ import javax.persistence.Table;
 @Table(name="privilege")
 @NamedQueries( {
 	/*获取用户所有权限*/
-	@NamedQuery(name="getPrivilegeByUsersId",query="select new com.cd_help.onlineOF.web.vo.PrivilegeVo(p.privilegeId,p.privilegeName,p.parent.privilegeId,p.parent.privilegeName) from PrivilegeData p join p.roleList r join r.userList u where u.usersId = :usersId"),
+	@NamedQuery(name="getPrivilegeByUsersId",query="select new com.cd_help.onlineOF.web.vo.PrivilegeVo(p.privilegeId,p.privilegeName,p.parent.privilegeId,p.parent.privilegeName,p.kind,p.url,p.methodName,p.hasChild) from PrivilegeData p join p.roleList r join r.userList u where u.usersId = :usersId"),
+	@NamedQuery(name="getTopModelPrivilegeByUsersId",query="select new com.cd_help.onlineOF.web.vo.PrivilegeVo(p.privilegeId,p.privilegeName,p.parent.privilegeId,p.parent.privilegeName,p.kind,p.url,p.methodName,p.hasChild) from PrivilegeData p join p.roleList r join r.userList u where p.kind = 'Model' and p.parent is null and u.usersId = :usersId"),
+	@NamedQuery(name="getChildModelPrivilegeByUsersId",query="select new com.cd_help.onlineOF.web.vo.PrivilegeVo(p.privilegeId,p.privilegeName,p.parent.privilegeId,p.parent.privilegeName,p.kind,p.url,p.methodName,p.hasChild) from PrivilegeData p join p.roleList r join r.userList u where p.kind = 'Model' and p.parent.privilegeId = :parentId and u.usersId = :usersId"),
 })
 public class PrivilegeData {
 	
@@ -53,6 +55,30 @@ public class PrivilegeData {
 	 */
 	@Column(name = "privilegeName", nullable = true, length = 15)
 	private String privilegeName;
+	/**
+	 * 对应的方法名
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "methodName", nullable = true, length = 15)
+	private String methodName;
+	/**
+	 * 类别标识(模块/操作)
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "kind", nullable = true, length = 15)
+	private String kind;
+	/**
+	 * 请求路径
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "url", nullable = true, length = 15)
+	private String url;
+	/**
+	 * 是否有子
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "hasChild", nullable = true, length = 15)
+	private Integer hasChild;
 	
 	/**
 	 * 父权限
@@ -114,5 +140,37 @@ public class PrivilegeData {
 
 	public void setChildPrivileges(List<PrivilegeData> childPrivileges) {
 		this.childPrivileges = childPrivileges;
+	}
+
+	public String getMethodName() {
+		return methodName;
+	}
+
+	public void setMethodName(String methodName) {
+		this.methodName = methodName;
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public Integer getHasChild() {
+		return hasChild;
+	}
+
+	public void setHasChild(Integer hasChild) {
+		this.hasChild = hasChild;
 	}
 }

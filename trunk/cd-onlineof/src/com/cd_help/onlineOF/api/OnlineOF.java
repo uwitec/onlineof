@@ -94,6 +94,13 @@ public interface OnlineOF {
 	public SessionManager getSessionManager() throws AppException;
 	
 	/**
+	 * 权限管理
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public PrivilegeManager getPrivilegeManager() throws AppException;
+	/**
 	 * 用户登录
 	 * @param username
 	 * @param password

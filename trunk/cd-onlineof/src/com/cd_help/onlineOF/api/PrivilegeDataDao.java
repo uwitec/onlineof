@@ -5,6 +5,11 @@
  */
 package com.cd_help.onlineOF.api;
 
+import java.util.List;
+
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.web.vo.PrivilegeVo;
+
 /**
  * <b><code></code></b>
  * <p/>
@@ -17,5 +22,16 @@ package com.cd_help.onlineOF.api;
  * @since cd_help-onlineOF 0.0.0.1
  */
 public interface PrivilegeDataDao extends BaseDao{
+	
+    public PrivilegeVo get(String id) throws AppException;
+	
+	public List<PrivilegeVo> loadAll() throws AppException;
 
+	public void update(String id) throws AppException;
+	
+	public void delete(String id) throws AppException;
+	
+	public List<PrivilegeVo> loadTopModelPrivilege(String usersId) throws AppException;
+    
+	public List<PrivilegeVo> loadChildModelPrivilegeByParent(String parentId,String usersId) throws AppException;
 }

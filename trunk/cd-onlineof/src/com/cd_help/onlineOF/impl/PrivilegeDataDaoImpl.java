@@ -5,10 +5,15 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.PrivilegeDataDao;
+import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 
 /**
  * <b><code></code></b>
@@ -25,5 +30,35 @@ import com.cd_help.onlineOF.api.PrivilegeDataDao;
 @Transactional
 @SuppressWarnings("unchecked")
 public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDataDao{
+
+	public void delete(String id) throws AppException {
+	}
+
+	public PrivilegeVo get(String id) throws AppException {
+		return null;
+	}
+
+	public List<PrivilegeVo> loadAll() throws AppException {
+		return null;
+	}
+
+	public void update(Session session,String id) throws AppException {
+		
+	}
+
+	public List<PrivilegeVo> loadChildModelPrivilegeByParent(String parentId,String usersId) throws AppException {
+		String parameNames[] = {"parentId","usersId"};
+		String values[] = {parentId,usersId};
+		return this.findByNamedQueryAndNamedParam("getChildModelPrivilegeByUsersId", parameNames, values);
+	}
+
+	public List<PrivilegeVo> loadTopModelPrivilege(String usersId)
+			throws AppException {
+		return this.findByNamedQueryAndNamedParam("getTopModelPrivilegeByUsersId", "usersId", usersId);
+	}
+
+	public void update(String id) throws AppException {
+		
+	}
 
 }

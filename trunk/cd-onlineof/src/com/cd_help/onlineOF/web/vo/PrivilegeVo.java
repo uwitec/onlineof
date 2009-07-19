@@ -33,30 +33,58 @@ public class PrivilegeVo {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String parentId;
-	
+
 	/**
 	 * 上级名称
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String parentName;
-	
+
+	/**
+	 * 权限类别(模块/操作)
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String kind;
+	/**
+	 * 请求路径
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String url;
+	/**
+	 * 对应的方法名
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String methodName;
+	/**
+	 * 是否有子
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private Integer hasChild;
+
 	/**
 	 * Constructs a <code>PrivilegeVo</code>
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public PrivilegeVo(){}
-	
+	public PrivilegeVo() {
+	}
+
 	/**
 	 * Constructs a <code>PrivilegeVo</code>
 	 * @param privilegeId
 	 * @param privilegeName
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public PrivilegeVo(String privilegeId,String privilegeName,String parentId,String parentName){
+	public PrivilegeVo(String privilegeId, String privilegeName,
+			String parentId, String parentName, String kind, String url,
+			String methodName, Integer hasChild) {
 		this.privilegeId = privilegeId;
 		this.privilegeName = privilegeName;
 		this.parentId = parentId;
 		this.parentName = parentName;
+		this.kind = kind;
+		this.url = url;
+		this.methodName = methodName;
+		this.hasChild = hasChild;
 	}
 
 	public String getPrivilegeId() {
@@ -89,5 +117,37 @@ public class PrivilegeVo {
 
 	public void setParentName(String parentName) {
 		this.parentName = parentName;
+	}
+
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getMethodName() {
+		return methodName;
+	}
+
+	public void setMethodName(String methodName) {
+		this.methodName = methodName;
+	}
+
+	public Integer getHasChild() {
+		return hasChild;
+	}
+
+	public void setHasChild(Integer hasChild) {
+		this.hasChild = hasChild;
 	}
 }
