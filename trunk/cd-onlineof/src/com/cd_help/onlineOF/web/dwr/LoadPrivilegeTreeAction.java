@@ -5,7 +5,6 @@
  */
 package com.cd_help.onlineOF.web.dwr;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -34,15 +33,15 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 @Service("loadPrivilegeTreeAction")
 public class LoadPrivilegeTreeAction extends BaseAction{
 	
-	private List<PrivilegeVo> privileges = new ArrayList<PrivilegeVo>();
-	
 	 /**
-	 * 根据当前用户加载权限树
+	 * 根据当前用户加载权限树(初始化加载顶级模块)
 	 * @return
+	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public List<PrivilegeVo> loadPrivilegeTree() {
+	public List<PrivilegeVo> loadPrivilegeTree() throws AppException {
 		 log.debug("--->> being loadPrivilegeTree");
+		 List<PrivilegeVo> privileges = null;
 		 try{
 			 // Session session = this.getSession();
 			 HttpSession httpSession = WebContextFactory.get().getSession();
@@ -53,16 +52,31 @@ public class LoadPrivilegeTreeAction extends BaseAction{
 				 System.out.print("模块权限: "+pv.getPrivilegeName());
 			 }
 		 }catch(AppException e){
-			 e.printStackTrace();
+			 throw new AppException(e.getError_code(),e.getMessage());
 		 }
 		 return privileges;
 	 }
-
-	public List<PrivilegeVo> getPrivileges() {
-		return privileges;
+	
+	/**
+	 * 加载子权限(模块)
+	 * @param parentId
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<PrivilegeVo> loadChildModelPrivilegeTree(String parentId) throws AppException {
+		 List<PrivilegeVo> childPrivileges = null;
+		 try{
+			 HttpSession httpSession = WebContextFactory.get().getSession();
+			 Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			 childPrivileges = this.getOnlineOF().getPrivilegeManager().loadChildModelPrivilegeByParent(session, parentId);
+			 for(PrivilegeVo pv : childPrivileges){
+				 System.out.print("模块权限: "+pv.getPrivilegeName());
+			 }
+		 }catch(AppException e){
+			 throw new AppException(e.getError_code(),e.getMessage());
+		 }
+		 return childPrivileges;
 	}
 
-	public void setPrivileges(List<PrivilegeVo> privileges) {
-		this.privileges = privileges;
-	}
 }
