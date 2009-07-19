@@ -29,9 +29,6 @@
 	<!-- Spring注解配置 -->
 	<context:annotation-config/>
 	
-	<!-- 注意这里新增加的dwr tag, 为使其生效，文件头中要声明namespace -->  
-    <dwr:configuration />  
-    
     <!-- 切面配置 --> 	
 	<aop:aspectj-autoproxy />
 		
