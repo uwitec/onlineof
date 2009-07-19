@@ -40,7 +40,7 @@
 	</package>
 	<!-- 系统用户管理 -->
 	<package name="usersManager" extends="struts-default">
-		<action name="usersManager" class="usersAction" method="loadAllSysUsers">
+		<action name="usersManager" class="usersAction" method="loadAllUsers">
 		     <result name="success">
                 /administrator/security/usersManager.jsp
              </result>
