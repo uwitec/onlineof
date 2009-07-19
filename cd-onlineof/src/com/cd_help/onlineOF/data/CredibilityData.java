@@ -5,6 +5,8 @@
  */
 package com.cd_help.onlineOF.data;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -21,9 +23,10 @@ import javax.persistence.Table;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "credibility")
-public class CredibilityData {
+public class CredibilityData implements Serializable{
 	
     /**
      * 信誉ID

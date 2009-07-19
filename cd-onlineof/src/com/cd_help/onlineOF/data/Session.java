@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.data;
 
+import java.io.Serializable;
 import java.util.List;
 
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
@@ -22,7 +23,8 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-public class Session {
+@SuppressWarnings("serial")
+public class Session implements Serializable{
 	
     private UsersVo usersVo;	
     private List<RoleVo> roles;

@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -31,13 +32,14 @@ import javax.persistence.Table;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name="role")
 @NamedQueries( {
 	/*获取用户所有角色*/
 	@NamedQuery(name="getRoleByUsersId",query="select new com.cd_help.onlineOF.web.vo.RoleVo(r.roleId,r.roleName) from RoleData r join r.userList u where u.usersId=:usersId"),
 })
-public class RoleData {
+public class RoleData implements Serializable{
 	/**
 	 * 角色ID
 	 * @since cd_help-onlineOF 0.0.0.1

@@ -5,7 +5,9 @@
  */
 package com.cd_help.onlineOF.data;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -19,6 +21,8 @@ import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * <b><code></code></b>
@@ -31,12 +35,14 @@ import javax.persistence.Table;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "users")
 @NamedQueries( { 
-	@NamedQuery(name = "login", query = "select new com.cd_help.onlineOF.web.vo.UsersVo(u.usersId,u.usersname,u.password) from UsersData u where u.usersname = :usersname"), 
+	@NamedQuery(name = "login", query = "select new com.cd_help.onlineOF.web.vo.UsersVo(u.usersId,u.usersname,u.password,u.birthday,u.gender) from UsersData u where u.usersname = :usersname"), 
+	@NamedQuery(name = "loadAllUsers", query = "select new com.cd_help.onlineOF.web.vo.UsersVo(u.usersId,u.usersname,u.password,u.birthday,u.gender) from UsersData u where u.isSuper=0"), 
 })
-public class UsersData {
+public class UsersData implements Serializable{
 	
 	/**
 	 * 用户ID
@@ -51,12 +57,34 @@ public class UsersData {
 	 */
 	@Column(name = "usersname", nullable = true, length = 15)
 	private String usersname;
+	
 	/**
 	 * 密码
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Column(name = "password", nullable = true, length = 15)
 	private String password;
+	
+	/**
+     * 出生日期
+     * @since cd_help-onlineOF 0.0.0.1
+     */
+    @Temporal(TemporalType.DATE)
+    private Date birthday;
+    
+    /**
+     * 性别(1:男 0:女)
+     * @since cd_help-onlineOF 0.0.0.1
+     */
+    @Column(name = "gender", nullable = true, length = 11)
+    private Integer gender;
+    
+    /**
+     * 是否是超级用户(1:是 0:否)
+     * @since cd_help-onlineOF 0.0.0.1
+     */
+    @Column(name = "isSuper", nullable = true, length = 11)
+    private Integer isSuper = 0;
 	
 	/**
 	 * 拥有角色
@@ -89,5 +117,23 @@ public class UsersData {
 	}
 	public void setRoleList(List<RoleData> roleList) {
 		this.roleList = roleList;
+	}
+	public Date getBirthday() {
+		return birthday;
+	}
+	public void setBirthday(Date birthday) {
+		this.birthday = birthday;
+	}
+	public Integer getGender() {
+		return gender;
+	}
+	public void setGender(Integer gender) {
+		this.gender = gender;
+	}
+	public Integer getIsSuper() {
+		return isSuper;
+	}
+	public void setIsSuper(Integer isSuper) {
+		this.isSuper = isSuper;
 	}
 }
