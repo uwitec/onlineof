@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,8 +17,10 @@ import com.cd_help.onlineOF.api.PrivilegeDataDao;
 import com.cd_help.onlineOF.api.RoleDataDao;
 import com.cd_help.onlineOF.api.SessionManager;
 import com.cd_help.onlineOF.api.UsersDataDao;
+import com.cd_help.onlineOF.data.PrivilegeData;
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 import com.cd_help.onlineOF.web.vo.RoleVo;
 import com.cd_help.onlineOF.web.vo.UsersVo;
@@ -57,8 +60,15 @@ public class SessionManagerImpl implements SessionManager{
 	 */
 	public Session createSession(UsersVo usersVo) throws AppException {
 		List<RoleVo> roles = roleDataDao.findByNamedQueryAndNamedParam("getRoleByUsersId", "usersId", usersVo.getUsersId());
-		List<PrivilegeVo> privileges = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByUsersId", "usersId", usersVo.getUsersId());
-		Session session = new Session(usersVo,roles,privileges);
+		List<PrivilegeData> privileges = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByUsersId", "usersId", usersVo.getUsersId());
+		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
+		for(PrivilegeData p : privileges){
+			PrivilegeVo pv = new PrivilegeVo();
+			BeanUtilsHelp.copyProperties(pv,p);
+			pv.setParentId(p.getParent().getPrivilegeId());
+			privilegeVos.add(pv);
+		}
+		Session session = new Session(usersVo,roles,privilegeVos);
 		return session;
 	}
 

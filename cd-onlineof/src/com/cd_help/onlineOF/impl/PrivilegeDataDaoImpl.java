@@ -5,14 +5,17 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.PrivilegeDataDao;
+import com.cd_help.onlineOF.data.PrivilegeData;
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 
 /**
@@ -49,12 +52,26 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 	public List<PrivilegeVo> loadChildModelPrivilegeByParent(String parentId,String usersId) throws AppException {
 		String parameNames[] = {"parentId","usersId"};
 		String values[] = {parentId,usersId};
-		return this.findByNamedQueryAndNamedParam("getChildModelPrivilegeByUsersId", parameNames, values);
+		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getChildModelPrivilegeByUsersId", parameNames, values);
+		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
+		for(PrivilegeData p : privileges){
+			PrivilegeVo pv = new PrivilegeVo();
+			BeanUtilsHelp.copyProperties(pv,p);
+			privilegeVos.add(pv);
+		}
+		return privilegeVos;
 	}
 
 	public List<PrivilegeVo> loadTopModelPrivilege(String usersId)
 			throws AppException {
-		return this.findByNamedQueryAndNamedParam("getTopModelPrivilegeByUsersId", "usersId", usersId);
+		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getTopModelPrivilegeByUsersId", "usersId", usersId);
+		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
+		for(PrivilegeData p : privileges){
+			PrivilegeVo pv = new PrivilegeVo();
+			BeanUtilsHelp.copyProperties(pv,p);
+			privilegeVos.add(pv);
+		}
+		return privilegeVos;
 	}
 
 	public void update(String id) throws AppException {
