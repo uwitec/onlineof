@@ -25,12 +25,36 @@
      function load(){
      	LoadPrivilegeTreeAction.loadPrivilegeTree({callback:loadTree,errorHandler:function(msg,exception){alert(exception.message);}});
      }
+     // 初始化模块权限树(加载顶级模块)
      function loadTree(topPrvileges){
         for(var i=0; i<topPrvileges.length; i++){
            TreeDemo.AddNode({
               Id:topPrvileges[i]["privilegeId"],
               Text:topPrvileges[i]["privilegeName"],
-              ParentId:-1
+              ParentId:-1,
+              Asyn:topPrvileges[i]["hasChild"]==0?false:true,
+              Icon:topPrvileges[i]["hasChild"]==0?2:0,
+              IconOpen:topPrvileges[i]["hasChild"]==0?3:1,
+              Expand:function(Node){ 
+			     LoadPrivilegeTreeAction.loadChildModelPrivilegeTree(Node.Id,{callback:loadChild,errorHandler:function(msg,exception){alert(exception.message);}});
+			  }
+           });
+        }
+     }
+     // 回调函数加载子模块权限
+     function loadChild(childPrivileges){
+        alert(childPrivileges.length);
+        for(var i=0; i<childPrivileges.length; i++){
+           TreeDemo.AddNode({
+              Id:childPrivileges[i]["privilegeId"],
+              Text:childPrivileges[i]["privilegeName"],
+              ParentId:childPrivileges[i]["parentId"],
+              Asyn:childPrivileges[i]["hasChild"]==0?false:true,
+              Icon:childPrivileges[i]["hasChild"]==0?2:0,
+              IconOpen:childPrivileges[i]["hasChild"]==0?3:1,
+              Expand:function(Node){ 
+			     LoadPrivilegeTreeAction.loadChildModelPrivilegeTree(Node.Id,{callback:loadChild,errorHandler:function(msg,exception){alert(exception.message);}});
+			  }
            });
         }
      }
