@@ -1,26 +1,22 @@
-#infoTable
-{
-	width:100%;
-	font-size:10pt;
+.table {
 	border-collapse: collapse;
 	padding: 5px;
 	border-color: gray;
 	border-style: solid;
 	border-width: 1px 1px 1px 1px;
 }
-#infoTable th
-{
-    background-color: #E4E4E4;
+
+.table th {
+	background-color: #E4E4E4;
 	text-align: center;
 	padding: 5px;
 	font-size: 12px;
-	font-weight: bold;
 	border-color: gray;
 	border-style: solid;
 	border-width: 1px 0px 0px 1px;
 }
-#infoTable td
-{
+
+.table td {
 	text-align: center;
 	padding: 5px;
 	font-family: "arial";
