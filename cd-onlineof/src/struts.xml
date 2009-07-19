@@ -38,6 +38,14 @@
              </result>
 	     </action>
 	</package>
+	<!-- 系统用户管理 -->
+	<package name="usersManager" extends="struts-default">
+		<action name="usersManager" class="usersAction" method="loadAllSysUsers">
+		     <result name="success">
+                /administrator/security/usersManager.jsp
+             </result>
+	     </action>
+	</package>
 	
 	<!-- 餐厅 -->
 	<package name="restaurant" extends="struts-default">
