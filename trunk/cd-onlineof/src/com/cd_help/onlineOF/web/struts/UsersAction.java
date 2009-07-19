@@ -24,7 +24,8 @@ public class UsersAction extends BaseAction{
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String loadAllSysUsers(){
+	public String loadAllUsers(){
+		log.debug("--->> begin loadAllUsers");
 	    try {
 	    	usersVoList = this.getOnlineOF().getUsersManager().loadAll(this.getSession());
 		} catch (AppException e) {
