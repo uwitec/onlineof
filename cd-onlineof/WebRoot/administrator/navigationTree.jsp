@@ -6,7 +6,7 @@
 <html>
 <head><title></title></head>
 <body onload="load()">
-<div style="width:100%;float:left; text-align:left;overflow:auto; height: 420px;"
+<div style="width:100%;float:left;font-size:10pt;text-align:left;overflow:auto; height: 420px;"
 	id="navigationTreeDiv" name="navigationTreeDiv">
 </div>
 </body>
@@ -25,7 +25,6 @@
      function load(){
      	LoadPrivilegeTreeAction.loadPrivilegeTree({callback:loadTree,errorHandler:function(msg,exception){alert(exception.message);}});
      }
-     // 初始化模块权限树(加载顶级模块)
      function loadTree(topPrvileges){
         for(var i=0; i<topPrvileges.length; i++){
            TreeDemo.AddNode({
@@ -41,10 +40,9 @@
            });
         }
      }
-     // 回调函数加载子模块权限
      function loadChild(childPrivileges){
-        alert(childPrivileges.length);
         for(var i=0; i<childPrivileges.length; i++){
+        alert(childPrivileges[i]["parentId"]);
            TreeDemo.AddNode({
               Id:childPrivileges[i]["privilegeId"],
               Text:childPrivileges[i]["privilegeName"],
@@ -52,10 +50,18 @@
               Asyn:childPrivileges[i]["hasChild"]==0?false:true,
               Icon:childPrivileges[i]["hasChild"]==0?2:0,
               IconOpen:childPrivileges[i]["hasChild"]==0?3:1,
+              Statu:childPrivileges[i]["url"],
               Expand:function(Node){ 
 			     LoadPrivilegeTreeAction.loadChildModelPrivilegeTree(Node.Id,{callback:loadChild,errorHandler:function(msg,exception){alert(exception.message);}});
+			  },
+			  Click:function(Node){
+			     doAjaxSend(Node.Statu);
 			  }
            });
+        }
+        function doAjaxSend(url){
+           alert("url: " + url);
+           document.getElementById("contentFrame").contentWindow.location=url;
         }
      }
 </script>
