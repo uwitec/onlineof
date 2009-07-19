@@ -65,7 +65,9 @@ public class SessionManagerImpl implements SessionManager{
 		for(PrivilegeData p : privileges){
 			PrivilegeVo pv = new PrivilegeVo();
 			BeanUtilsHelp.copyProperties(pv,p);
-			pv.setParentId(p.getParent().getPrivilegeId());
+			if(null != p.getParent()){
+				pv.setParentId(p.getParent().getPrivilegeId());
+			}
 			privilegeVos.add(pv);
 		}
 		Session session = new Session(usersVo,roles,privilegeVos);
