@@ -5,11 +5,14 @@
 	xmlns:aop="http://www.springframework.org/schema/aop"
 	xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
 	xsi:schemaLocation="
 			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
 			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
 			http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
-			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+			http://www.directwebremoting.org/schema/spring-dwr    
+            http://www.directwebremoting.org/schema/spring-dwr-3.0.xsd" default-autowire="byName">
 			
 	<!-- 使用Hibernate Annotation以后，要使用org.hibernate.cfg.AnnotationConfiguration类。该类在hibernate-annotation.jar，而不是hibernate3.jar中 --> 
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
@@ -19,8 +22,17 @@
 	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager"
 			p:sessionFactory-ref="sessionFactory"/>    	
 	<tx:annotation-driven transaction-manager="transactionManager"/>
+	
+	<!-- 多个包名用逗号隔开, 但不能有空格 -->  
 	<context:component-scan base-package="com.cd_help.onlineOF"/>
-	<context:annotation-config/>	
+	
+	<!-- Spring注解配置 -->
+	<context:annotation-config/>
+	
+	<!-- 注意这里新增加的dwr tag, 为使其生效，文件头中要声明namespace -->  
+    <dwr:configuration />  
+    
+    <!-- 切面配置 --> 	
 	<aop:aspectj-autoproxy />
 		
 </beans>
