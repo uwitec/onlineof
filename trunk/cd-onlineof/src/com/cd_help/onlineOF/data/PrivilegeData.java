@@ -36,8 +36,10 @@ import javax.persistence.Table;
 @Table(name="privilege")
 @NamedQueries( {
 	/*获取用户所有权限*/
-	@NamedQuery(name="getPrivilegeByUsersId",query="select new com.cd_help.onlineOF.web.vo.PrivilegeVo(p.privilegeId,p.privilegeName,p.parent.privilegeId,p.parent.privilegeName,p.kind,p.url,p.methodName,p.hasChild) from PrivilegeData p join p.roleList r join r.userList u where u.usersId = :usersId"),
-	@NamedQuery(name="getTopModelPrivilegeByUsersId",query="select new com.cd_help.onlineOF.web.vo.PrivilegeVo(p.privilegeId,p.privilegeName,p.parent.privilegeId,p.parent.privilegeName,p.kind,p.url,p.methodName,p.hasChild) from PrivilegeData p join p.roleList r join r.userList u where p.kind = 'Model' and p.parent is null and u.usersId = :usersId"),
+	@NamedQuery(name="getPrivilegeByUsersId",query="select DISTINCT p from PrivilegeData p join p.roleList r join r.userList u where u.usersId = :usersId"),
+	/*获取用户顶级模块权限*/
+	@NamedQuery(name="getTopModelPrivilegeByUsersId",query="select DISTINCT p from PrivilegeData p join p.roleList r join r.userList u where p.kind = 'Model' and p.parent is null and u.usersId = :usersId"),
+	/*获取用户模块子权限*/
 	@NamedQuery(name="getChildModelPrivilegeByUsersId",query="select new com.cd_help.onlineOF.web.vo.PrivilegeVo(p.privilegeId,p.privilegeName,p.parent.privilegeId,p.parent.privilegeName,p.kind,p.url,p.methodName,p.hasChild) from PrivilegeData p join p.roleList r join r.userList u where p.kind = 'Model' and p.parent.privilegeId = :parentId and u.usersId = :usersId"),
 })
 public class PrivilegeData {
