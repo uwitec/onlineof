@@ -36,7 +36,8 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 	}
 
 	public List<UsersVo> loadAll() throws AppException {
-		return null;
+		List<UsersVo> usersVos = this.findByNamedQuery("loadAllUsers");
+		return usersVos;
 	}
 
 	public void update(String id) throws AppException {
