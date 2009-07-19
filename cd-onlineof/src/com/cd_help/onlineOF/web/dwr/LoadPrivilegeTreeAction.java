@@ -52,6 +52,7 @@ public class LoadPrivilegeTreeAction extends BaseAction{
 				 System.out.print("模块权限: "+pv.getPrivilegeName());
 			 }
 		 }catch(AppException e){
+			 log.error(null,e);
 			 throw new AppException(e.getError_code(),e.getMessage());
 		 }
 		 return privileges;
@@ -74,6 +75,7 @@ public class LoadPrivilegeTreeAction extends BaseAction{
 				 System.out.print("模块权限: "+pv.getPrivilegeName());
 			 }
 		 }catch(AppException e){
+			 log.error(null,e);
 			 throw new AppException(e.getError_code(),e.getMessage());
 		 }
 		 return childPrivileges;
