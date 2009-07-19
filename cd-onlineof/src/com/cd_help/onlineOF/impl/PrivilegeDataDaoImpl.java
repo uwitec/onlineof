@@ -6,6 +6,7 @@
 package com.cd_help.onlineOF.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
@@ -54,9 +55,13 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 		String values[] = {parentId,usersId};
 		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getChildModelPrivilegeByUsersId", parameNames, values);
 		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
-		for(PrivilegeData p : privileges){
+		for(Iterator iterator = privileges.iterator();iterator.hasNext();){
+			PrivilegeData p = (PrivilegeData)iterator.next();
 			PrivilegeVo pv = new PrivilegeVo();
 			BeanUtilsHelp.copyProperties(pv,p);
+			if(null != p.getParent()){
+				pv.setParentId(p.getParent().getPrivilegeId());
+			}
 			privilegeVos.add(pv);
 		}
 		return privilegeVos;
@@ -66,7 +71,8 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 			throws AppException {
 		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getTopModelPrivilegeByUsersId", "usersId", usersId);
 		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
-		for(PrivilegeData p : privileges){
+		for(Iterator iterator = privileges.iterator();iterator.hasNext();){
+			PrivilegeData p = (PrivilegeData)iterator.next();
 			PrivilegeVo pv = new PrivilegeVo();
 			BeanUtilsHelp.copyProperties(pv,p);
 			privilegeVos.add(pv);

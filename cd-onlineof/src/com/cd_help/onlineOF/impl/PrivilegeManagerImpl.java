@@ -57,27 +57,32 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 
 	public List<PrivilegeVo> loadChildModelPrivilegeByParent(Session session,
 			String parentId) throws AppException {
+		List<PrivilegeVo> privilegeVos = null;
 		try{
 			if(this.checkPrivilege(session)){
-				return privilegeDataDao.loadChildModelPrivilegeByParent(parentId,session.getUsersVo().getUsersId());
+				privilegeVos = privilegeDataDao.loadChildModelPrivilegeByParent(parentId,session.getUsersVo().getUsersId());
 			}else{
 				throw new AppException("0000000","权限不够!");
 			}
 		}catch(AppException e){
 			throw new AppException("0000015","获取模块子权限出错!");
 		}
+		return privilegeVos;
 	}
 
 	public List<PrivilegeVo> loadTopModelPrivilege(Session session) throws AppException {
+		List<PrivilegeVo> privilegeVos = null;
 		try{
 			if(this.checkPrivilege(session)){
-				return privilegeDataDao.loadTopModelPrivilege(session.getUsersVo().getUsersId());
+				privilegeVos = privilegeDataDao.loadTopModelPrivilege(session.getUsersVo().getUsersId());
 			}else{
 				throw new AppException("0000000","权限不够!");
 			}
 		}catch(AppException e){
+			e.printStackTrace();
 			throw new AppException("0000015","获取顶级模块权限出错!");
 		}
+		return privilegeVos;
 	}
 
 	public void update(Session session, String id) throws AppException {
