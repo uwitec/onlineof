@@ -31,7 +31,7 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
  */
 @SuppressWarnings("serial")
 @Service("loadPrivilegeTreeAction")
-public class LoadPrivilegeTreeAction extends BaseAction{
+public class LoadPrivilegeTreeAction extends BaseAction {
 	
 	 /**
 	 * 根据当前用户加载权限树(初始化加载顶级模块)
@@ -72,7 +72,7 @@ public class LoadPrivilegeTreeAction extends BaseAction{
 			 Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			 childPrivileges = this.getOnlineOF().getPrivilegeManager().loadChildModelPrivilegeByParent(session, parentId);
 			 for(PrivilegeVo pv : childPrivileges){
-				 System.out.print("模块权限: "+pv.getPrivilegeName());
+				 System.out.println("模块权限: "+pv.getPrivilegeName());
 			 }
 		 }catch(AppException e){
 			 log.error(null,e);
