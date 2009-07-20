@@ -5,7 +5,7 @@
 <script language="javascript" src="js/tdTree.js"></script>
 <html>
 <head><title></title></head>
-<body onload="load()">
+<body>
 <div style="width:100%;float:left;font-size:10pt;text-align:left;overflow:auto; height: 420px;"
 	id="navigationTreeDiv" name="navigationTreeDiv">
 </div>
@@ -42,7 +42,6 @@
      }
      function loadChild(childPrivileges){
         for(var i=0; i<childPrivileges.length; i++){
-        alert(childPrivileges[i]["parentId"]);
            TreeDemo.AddNode({
               Id:childPrivileges[i]["privilegeId"],
               Text:childPrivileges[i]["privilegeName"],
@@ -64,4 +63,5 @@
            document.getElementById("contentFrame").contentWindow.location=url;
         }
      }
+     load();
 </script>
