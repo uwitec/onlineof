@@ -7,6 +7,9 @@ package com.cd_help.onlineOF.web.vo;
 
 import java.util.Date;
 
+import com.cd_help.onlineOF.utils.ConvertUtils;
+import com.cd_help.onlineOF.utils.StringUtil;
+
 /**
  * <b><code></code></b>
  * <p/>
@@ -42,11 +45,10 @@ public class UsersVo {
 
 	/**
 	 * 出生日期
-	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private Date birthday;
-
+	private String birthday;
+	
 	/**
 	 * 性别(1:男 0:女)
 	 * 
@@ -74,8 +76,9 @@ public class UsersVo {
 			Date birthday, Integer gender) {
 		this.usersId = usersId;
 		this.usersname = usersname;
-		this.password = password;
-		this.birthday = birthday;
+		this.password = StringUtil.encodePassword(password, "MD5");
+		this.birthday = ConvertUtils.toString1(birthday);
+		this.gender = gender;
 		this.gender = gender;
 	}
 
@@ -103,11 +106,11 @@ public class UsersVo {
 		this.password = password;
 	}
 
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 
