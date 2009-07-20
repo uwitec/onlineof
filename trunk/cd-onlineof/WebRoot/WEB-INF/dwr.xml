@@ -7,7 +7,7 @@
             <param name="beanName" value="loadPrivilegeTreeAction" />
         </create>
         <convert converter="bean" match="com.cd_help.onlineOF.web.vo.PrivilegeVo">
-			<param name="privilegeVo" value="privilegeId,privilegeName,parentId"></param>
+			<param name="privilegeVo" value="privilegeId,privilegeName,parentId,parentName,hasChild,url,methodName"></param>
 		</convert>
 		
 		<!-- 异常处理 -->
