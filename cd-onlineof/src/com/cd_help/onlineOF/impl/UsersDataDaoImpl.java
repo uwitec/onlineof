@@ -8,6 +8,7 @@ package com.cd_help.onlineOF.impl;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.utils.AppException;
@@ -25,6 +26,7 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("usersDataDao")
+@Transactional
 @SuppressWarnings("unchecked")
 public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 

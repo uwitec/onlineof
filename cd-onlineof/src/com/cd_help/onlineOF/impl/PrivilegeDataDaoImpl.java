@@ -30,9 +30,9 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-@Service("privilegeDataDao")
-@Transactional
 @SuppressWarnings("unchecked")
+@Transactional
+@Service("privilegeDataDao")
 public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDataDao{
 
 	public void delete(String id) throws AppException {
@@ -50,6 +50,9 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 		
 	}
 
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#loadChildModelPrivilegeByParent(java.lang.String, java.lang.String)
+	 */
 	public List<PrivilegeVo> loadChildModelPrivilegeByParent(String parentId,String usersId) throws AppException {
 		String parameNames[] = {"parentId","usersId"};
 		String values[] = {parentId,usersId};
@@ -80,6 +83,9 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 		return privilegeVos;
 	}
 
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#loadTopModelPrivilege(java.lang.String)
+	 */
 	public List<PrivilegeVo> loadTopModelPrivilege(String usersId)
 			throws AppException {
 		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getTopModelPrivilegeByUsersId", "usersId", usersId);
