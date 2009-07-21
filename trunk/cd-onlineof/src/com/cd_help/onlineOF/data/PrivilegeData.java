@@ -90,7 +90,7 @@ public class PrivilegeData implements Serializable{
 	 * 父权限
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@ManyToOne(cascade = CascadeType.REFRESH, optional = true, fetch = FetchType.LAZY,targetEntity=PrivilegeData.class)
+	@ManyToOne(cascade = CascadeType.REFRESH, optional = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "parentId",referencedColumnName="privilegeId")
 	private PrivilegeData parent;
 	
@@ -105,7 +105,7 @@ public class PrivilegeData implements Serializable{
 	 * 所属角色
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@ManyToMany(mappedBy = "privilegeList")
+	@ManyToMany(mappedBy = "privilegeList",fetch=FetchType.LAZY)
 	private List<RoleData> roleList = new ArrayList<RoleData>();
 
 	public String getPrivilegeId() {
