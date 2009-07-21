@@ -58,28 +58,17 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 		String values[] = {parentId,usersId};
 		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getChildModelPrivilegeByUsersId", parameNames, values);
 		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
+		try{
 		for(Iterator iterator = privileges.iterator();iterator.hasNext();){
 			PrivilegeData p = (PrivilegeData)iterator.next();
 			PrivilegeVo pv = new PrivilegeVo();
 			BeanUtilsHelp.copyProperties(pv,p);
 			pv.setParentId(parentId);
-			if(null != p.getParent()){
-				pv.setParentId(p.getParent().getPrivilegeId());
-			}
 			privilegeVos.add(pv);
 		}
-//		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getChildModelPrivilegeByUsersId", parameNames, values);
-//		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
-//		for(Iterator iterator = privileges.iterator();iterator.hasNext();){
-//			PrivilegeData p = (PrivilegeData)iterator.next();
-//			PrivilegeVo pv = new PrivilegeVo();
-//			BeanUtilsHelp.copyProperties(pv,p);
-//			if(null != p.getParent()){
-//				pv.setParentId(p.getParent().getPrivilegeId());
-//			}
-//			privilegeVos.add(pv);
-//		}
-		//List<PrivilegeVo> privilegeVos = this.findByNamedQueryAndNamedParam("getChildModelPrivilegeByUsersId", parameNames, values);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return privilegeVos;
 	}
 
