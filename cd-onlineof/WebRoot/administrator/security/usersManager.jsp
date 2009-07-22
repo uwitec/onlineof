@@ -1,10 +1,11 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="page" uri="http://www.d7line.com/pages.tld"%>
+<%@ taglib prefix="page" uri="onlineOF/pages.tld"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     <title>系统用户管理</title>
+    <link ref="stylesheet" type="text/css" href="css/common.css"></link> 
     <style type="text/css">
        .table {
 			border-collapse: collapse;
@@ -34,12 +35,12 @@
 			border-width: 1px 0px 1px 1px;
 		}
 		/*分页样式*/
-		.pagination { padding: 5px 0; clear: both; float: right; overflow: hidden;}
-  .pagination span { display: block; float: left;}
-  .pagination .number { margin-left: 7px; border: 1px solid #dcdcdc; display: inline;}
-  .pagination .number a { display: block; padding: 0 5px; color: #28558c;}
-  .pagination .number.current { border: 1px solid #ff7200; background: #ff9c00;}
-  .pagination .number.current a { color: #fff;}
+		.pagination { padding: 5px 0; clear: both; float: right; overflow: hidden;font-size:10pt;}
+   		.pagination span { display: block; float: left;}
+  		.pagination .number { margin-left: 7px; display: inline;}
+  		.pagination .number a { display: block; padding: 0 5px; color: #28558c;}
+  		.pagination .number.current { border: 1px solid #ff7200; background: #ff9c00;}
+  		.pagination .number.current a { color: #fff;}
     </style>
   </head>
   <body style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;">
@@ -62,6 +63,7 @@
 	           <th>密码</th>
 	           <th>性别</th>
 	           <th>出生日期</th>
+	           <th>所属餐厅/酒店</th>
 	           <th>操作</th>
            </tr>
          </thead>
@@ -76,6 +78,7 @@
 			        <s:elseif test="#genderStr == 0">女</s:elseif>
 	             </td>
 	             <td><s:property value="birthday"/></td>
+	             <td><s:property value="restaurantName"/></td>
 	             <td>
 	                <s:a href="#">删除</s:a>
 	                <s:a href="#">修改</s:a>
