@@ -129,6 +129,9 @@ public class UsersManagerImpl implements UsersManager {
 		this.restaurantDataDao = restaurantDataDao;
 	}
 
+	/**
+	 * @see com.cd_help.onlineOF.api.UsersManager#loadAll(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean)
+	 */
 	public PageBean loadAll(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean) throws AppException {
 		return this.usersDataDao.getPageBean(hqlName, paramName, condition,
