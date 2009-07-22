@@ -17,6 +17,7 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 @Service("usersAction")
 public class UsersAction extends BaseAction{
 	
+	private String usersId;
 	private UsersVo usersVo;
 	private List<UsersVo> usersVoList;
 	private PageBean pb = new PageBean();
@@ -41,6 +42,37 @@ public class UsersAction extends BaseAction{
 	    return SUCCESS;	
 	}
 	
+	/**
+	 * 删除用户
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String deleteUsers(){
+		log.debug("--->> begin deleteUsers");
+		try {
+			this.getOnlineOF().getUsersManager().delete(this.getSession(), usersId);
+			usersVoList = this.getOnlineOF().getUsersManager().loadAll(this.getSession());
+		} catch (AppException e) {
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 根据ID获取信息
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String getUsersById(){
+		log.debug("--->> begin getUsersById");
+		try{
+			usersVo = this.getOnlineOF().getUsersManager().get(this.getSession(), usersId);
+		}catch(AppException e){
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
+	
 	public UsersVo getUsersVo() {
 		return usersVo;
 	}
@@ -53,7 +85,13 @@ public class UsersAction extends BaseAction{
 	public void setUsersVoList(List<UsersVo> usersVoList) {
 		this.usersVoList = usersVoList;
 	}
+	public String getUsersId() {
+		return usersId;
+	}
 
+	public void setUsersId(String usersId) {
+		this.usersId = usersId;
+	}
 	public PageBean getPb() {
 		return pb;
 	}
