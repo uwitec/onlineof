@@ -5,13 +5,17 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.UsersDataDao;
+import com.cd_help.onlineOF.data.RestaurantData;
+import com.cd_help.onlineOF.data.UsersData;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -31,14 +35,27 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 
 	public void delete(String id) throws AppException {
+	    this.delete((UsersData)this.get(UsersData.class, id));
 	}
 
 	public UsersVo get(String id) throws AppException {
-		return null;
+		UsersData usersData = (UsersData)this.get(UsersData.class, id);
+		UsersVo usersVo = new UsersVo();
+		BeanUtilsHelp.copyProperties(usersVo, usersData);
+		return usersVo;
 	}
 
 	public List<UsersVo> loadAll() throws AppException {
-		List<UsersVo> usersVos = this.findByNamedQuery("loadAllUsers");
+		List<UsersData> usersList = this.findByNamedQuery("loadAllUsers");
+		List<UsersVo> usersVos = new ArrayList<UsersVo>();
+		for(UsersData users : usersList){
+			UsersVo usersVo = new UsersVo();
+			BeanUtilsHelp.copyProperties(usersVo, users);
+			if(null != users.getRestaurantId() && users.getRestaurantId().length()>0){
+				usersVo.setRestaurantName(((RestaurantData)this.get(RestaurantData.class, users.getRestaurantId())).getName());
+			}
+			usersVos.add(usersVo);
+		}
 		return usersVos;
 	}
 
@@ -48,10 +65,11 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 
 	public UsersVo login(String usersname, String password)
 			throws AppException {
-		UsersVo usersVo = null;
-		List<UsersVo> usersVoList = this.findByNamedQueryAndNamedParam("login", "usersname",usersname);
-		if(usersVoList.size() > 0){
-			usersVo = usersVoList.get(0);
+		List<UsersData> usersList = this.findByNamedQueryAndNamedParam("login", "usersname",usersname);
+		if(usersList.size() > 0){
+			UsersData users = usersList.get(0);
+			UsersVo usersVo = new UsersVo();
+			BeanUtilsHelp.copyProperties(usersVo,users);
 			return usersVo;
 		}else{
            return null;			

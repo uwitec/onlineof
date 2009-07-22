@@ -59,6 +59,8 @@ public class SessionManagerImpl implements SessionManager{
 	 * @see com.cd_help.onlineOF.api.SessionManager#createSession(com.cd_help.onlineOF.web.vo.UsersVo)
 	 */
 	public Session createSession(UsersVo usersVo) throws AppException {
+		@SuppressWarnings("unused")
+		UsersVo vo = usersVo;
 		List<RoleVo> roles = roleDataDao.findByNamedQueryAndNamedParam("getRoleByUsersId", "usersId", usersVo.getUsersId());
 		List<PrivilegeData> privileges = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByUsersId", "usersId", usersVo.getUsersId());
 		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
