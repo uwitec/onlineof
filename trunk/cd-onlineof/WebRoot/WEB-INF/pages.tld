@@ -4,11 +4,11 @@
 	<tlib-version>2.2.3</tlib-version>
 	<jsp-version>1.2</jsp-version>
 	<short-name>pages</short-name>
-	<uri>/pages</uri>
+	<uri>http://www.d7line.com/pages.tld</uri>
 	<display-name>"Pages Tags"</display-name>
 	<tag>
 		<name>pages1</name>
-		<tag-class>utils.page.PageTag1</tag-class>
+		<tag-class>com.cd_help.onlineOF.utils.PageTag1</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>pagesize</name>
@@ -49,7 +49,7 @@
 	
 	<tag>
 		<name>pages2</name>
-		<tag-class>utils.page.PageTag2</tag-class>
+		<tag-class>com.cd_help.onlineOF.utils.PageTag2</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>pagesize</name>
@@ -90,7 +90,7 @@
 		
 	<tag>
 		<name>pages3</name>
-		<tag-class>utils.page.PageTag3</tag-class>
+		<tag-class>com.cd_help.onlineOF.utils.PageTag3</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>pagesize</name>
@@ -121,7 +121,7 @@
 	
 	<tag>
 		<name>pages4</name>
-		<tag-class>utils.page.PageTag4</tag-class>
+		<tag-class>com.cd_help.onlineOF.utils.PageTag4</tag-class>
 		<body-content>empty</body-content>
 		<attribute>
 			<name>pagesize</name>

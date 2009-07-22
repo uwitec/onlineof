@@ -40,7 +40,8 @@ import javax.persistence.TemporalType;
 @Table(name = "users")
 @NamedQueries( { 
 	@NamedQuery(name = "login", query = "select new com.cd_help.onlineOF.web.vo.UsersVo(u.usersId,u.usersname,u.password,u.birthday,u.gender) from UsersData u where u.usersname = :usersname"), 
-	@NamedQuery(name = "loadAllUsers", query = "select new com.cd_help.onlineOF.web.vo.UsersVo(u.usersId,u.usersname,u.password,u.birthday,u.gender) from UsersData u where u.isSuper=0"), 
+	@NamedQuery(name = "loadAllUsers", query = "select new com.cd_help.onlineOF.web.vo.UsersVo(u.usersId,u.usersname,u.password,u.birthday,u.gender) from UsersData u where u.isSuper=0"),
+	@NamedQuery(name = "loadAllByPage", query = "from UsersData u where u.isSuper=0"),
 })
 public class UsersData implements Serializable{
 	

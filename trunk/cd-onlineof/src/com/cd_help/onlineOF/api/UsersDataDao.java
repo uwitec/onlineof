@@ -16,20 +16,21 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
  * 用户数据处理接口
  * <p/>
  * <b>Creation Time:</b> Jul 15, 2009
+ * 
  * @author TanDong
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
-public interface UsersDataDao extends BaseDao{
-	
+public interface UsersDataDao extends BaseDao {
+
 	public UsersVo get(String id) throws AppException;
-	
+
 	public List<UsersVo> loadAll() throws AppException;
 
 	public void update(String id) throws AppException;
-	
+
 	public void delete(String id) throws AppException;
-    
+
 	public UsersVo login(String username, String password) throws AppException;
 }

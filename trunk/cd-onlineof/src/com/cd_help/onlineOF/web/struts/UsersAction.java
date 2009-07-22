@@ -10,6 +10,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 @SuppressWarnings("serial")
@@ -18,6 +19,8 @@ public class UsersAction extends BaseAction{
 	
 	private UsersVo usersVo;
 	private List<UsersVo> usersVoList;
+	private PageBean pb = new PageBean();
+	private int page = 1;
 	
 	/**
 	 * 加载所有用户
@@ -27,7 +30,11 @@ public class UsersAction extends BaseAction{
 	public String loadAllUsers(){
 		log.debug("--->> begin loadAllUsers");
 	    try {
-	    	usersVoList = this.getOnlineOF().getUsersManager().loadAll(this.getSession());
+	    	//usersVoList = this.getOnlineOF().getUsersManager().loadAll(this.getSession());
+	    	pb.setCurrentPage(page);
+	    	System.out.println(page);
+	    	pb.setPagesize(2);
+	    	pb = this.getOnlineOF().getUsersManager().loadAll("loadAllByPage", null, null, pb);
 		} catch (AppException e) {
 			e.printStackTrace();
 		}	
@@ -45,5 +52,21 @@ public class UsersAction extends BaseAction{
 	}
 	public void setUsersVoList(List<UsersVo> usersVoList) {
 		this.usersVoList = usersVoList;
+	}
+
+	public PageBean getPb() {
+		return pb;
+	}
+
+	public void setPb(PageBean pb) {
+		this.pb = pb;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
 	}
 }
