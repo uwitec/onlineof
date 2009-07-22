@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -17,20 +18,24 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
  * 订餐用户管理接口
  * <p/>
  * <b>Creation Time:</b> Jul 12, 2009
+ * 
  * @author TanDong
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
 public interface UsersManager {
-	
-    public UsersVo get(Session session,String id) throws AppException;
-	
+
+	public UsersVo get(Session session, String id) throws AppException;
+
 	public List<UsersVo> loadAll(Session session) throws AppException;
 
-	public void update(Session session,String id) throws AppException;
-	
-	public void delete(Session session,String id) throws AppException;
-    
+	public PageBean loadAll(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws AppException;
+
+	public void update(Session session, String id) throws AppException;
+
+	public void delete(Session session, String id) throws AppException;
+
 	public UsersVo login(String username, String password) throws AppException;
 }

@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="page" uri="/pages"%>
+<%@ taglib prefix="page" uri="http://www.d7line.com/pages.tld"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
@@ -33,6 +33,13 @@
 			border-style: solid;
 			border-width: 1px 0px 1px 1px;
 		}
+		/*分页样式*/
+		.pagination { padding: 5px 0; clear: both; float: right; overflow: hidden;}
+  .pagination span { display: block; float: left;}
+  .pagination .number { margin-left: 7px; border: 1px solid #dcdcdc; display: inline;}
+  .pagination .number a { display: block; padding: 0 5px; color: #28558c;}
+  .pagination .number.current { border: 1px solid #ff7200; background: #ff9c00;}
+  .pagination .number.current a { color: #fff;}
     </style>
   </head>
   <body style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;">
@@ -59,7 +66,7 @@
            </tr>
          </thead>
          <tbody>
-            <s:iterator value="usersVoList">
+            <s:iterator value="pb.array">
 	           <tr>
 	           	 <td><s:property value="usersname"/></td>
 	             <td><s:property value="password"/></td>
@@ -77,5 +84,13 @@
 	        </s:iterator>
          </tbody>
       </table>
+      <!-- 分页start -->
+	<div class="pagination">
+		<page:pages1 pagesize="${pb.pagesize}"
+			currentPage="${pb.currentPage}" totalPage="${pb.totalPage}"
+			totalRow="${pb.totalRow}" liststep="10" dispalytext="个用户"
+			url="usersManager.do" />
+	</div>
+	<!-- 分页end -->
   </body>
 </html>

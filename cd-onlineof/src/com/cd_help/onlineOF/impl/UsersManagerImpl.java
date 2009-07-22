@@ -16,6 +16,7 @@ import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.api.UsersManager;
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -24,56 +25,55 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
  * 用户管理实现类
  * <p/>
  * <b>Creation Time:</b> Jul 12, 2009
+ * 
  * @author TanDong
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("usersManager")
-@SuppressWarnings("unchecked")
-public class UsersManagerImpl implements UsersManager{
+public class UsersManagerImpl implements UsersManager {
 
-	@SuppressWarnings("unused")
 	@Autowired
 	@Resource(name = "usersDataDao")
 	private UsersDataDao usersDataDao;
-	
+
 	public void delete(Session session, String id) throws AppException {
-		try{
-			if(this.checkPrivilege(session)){
+		try {
+			if (this.checkPrivilege(session)) {
 				usersDataDao.delete(id);
-			}else{
-				throw new AppException("0000000","权限不够!");
+			} else {
+				throw new AppException("0000000", "权限不够!");
 			}
-		}catch(AppException e){
-			throw new AppException("0000012","删除用户出错!");
+		} catch (AppException e) {
+			throw new AppException("0000012", "删除用户出错!");
 		}
 	}
 
 	public UsersVo get(Session session, String id) throws AppException {
 		UsersVo usersVo = null;
-		try{
-			if(this.checkPrivilege(session)){
+		try {
+			if (this.checkPrivilege(session)) {
 				usersVo = usersDataDao.get(id);
-			}else{
-				throw new AppException("0000000","权限不够!");
+			} else {
+				throw new AppException("0000000", "权限不够!");
 			}
-		}catch(AppException e){
-			throw new AppException("0000013","获取用户信息出错!");
+		} catch (AppException e) {
+			throw new AppException("0000013", "获取用户信息出错!");
 		}
 		return usersVo;
 	}
 
 	public List<UsersVo> loadAll(Session session) throws AppException {
 		List<UsersVo> usersVoList = null;
-		try{
-			if(this.checkPrivilege(session)){
+		try {
+			if (this.checkPrivilege(session)) {
 				usersVoList = usersDataDao.loadAll();
-			}else{
-				throw new AppException("0000000","权限不够!");
+			} else {
+				throw new AppException("0000000", "权限不够!");
 			}
-		}catch(AppException e){
-			throw new AppException("0000014","加载用户信息出错!");
+		} catch (AppException e) {
+			throw new AppException("0000014", "加载用户信息出错!");
 		}
 		return usersVoList;
 	}
@@ -83,35 +83,42 @@ public class UsersManagerImpl implements UsersManager{
 		try {
 			usersVo = usersDataDao.login(username, password);
 		} catch (AppException e) {
-			throw new AppException("0000011","登陆出错,请检查用户名和密码!");
+			throw new AppException("0000011", "登陆出错,请检查用户名和密码!");
 		}
 		return usersVo;
 	}
-	
+
 	public void update(Session session, String id) throws AppException {
-		try{
-			if(this.checkPrivilege(session)){
+		try {
+			if (this.checkPrivilege(session)) {
 				usersDataDao.update(id);
-			}else{
-				throw new AppException("0000000","权限不够!");
+			} else {
+				throw new AppException("0000000", "权限不够!");
 			}
-		}catch(AppException e){
-			throw new AppException("0000011","修改用户信息出错!");
+		} catch (AppException e) {
+			throw new AppException("0000011", "修改用户信息出错!");
 		}
 	}
 
 	/**
 	 * 检查权限
+	 * 
 	 * @param session
 	 * @return
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private boolean checkPrivilege(Session session) throws AppException{
+	private boolean checkPrivilege(Session session) throws AppException {
 		return true;
 	}
-	
+
 	public void setUsersDataDao(UsersDataDao usersDataDao) {
 		this.usersDataDao = usersDataDao;
+	}
+
+	public PageBean loadAll(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws AppException {
+		return this.usersDataDao.getPageBean(hqlName, paramName, condition,
+				pageBean);
 	}
 }

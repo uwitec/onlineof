@@ -8,21 +8,23 @@ package com.cd_help.onlineOF.api;
 import java.io.Serializable;
 import java.util.List;
 
+import com.cd_help.onlineOF.utils.PageBean;
+
 /**
  * <b><code></code></b>
  * <p/>
  * 数据库处理基类接口
  * <p/>
  * <b>Creation Time:</b> Jul 4, 2009
+ * 
  * @author TanDong
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
 @SuppressWarnings("unchecked")
 public interface BaseDao {
-	
-	
+
 	public List find(String queryString);
 
 	public List find(String queryString, Object value);
@@ -51,7 +53,7 @@ public interface BaseDao {
 	public void flush();
 
 	public void clear();
-	
+
 	public boolean exist(Class entityClass, Serializable id);
 
 	public Object get(Class entityClass, Serializable id);
@@ -64,4 +66,9 @@ public interface BaseDao {
 
 	public List loadAll(final Class entityClass);
 
+	public int queryCountByHql(String hqlName, String[] paramName,
+			Object[] condition);
+
+	public PageBean getPageBean(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean);
 }
