@@ -38,6 +38,7 @@ import javax.persistence.Table;
 @Table(name = "restaurant")
 @NamedQueries( { 
 	@NamedQuery(name = "loadAllRestaurant", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img) from RestaurantData r"), 
+	@NamedQuery(name = "getRestaurantById", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img) from RestaurantData r where r.restaurantId = :restaurantId"), 
 })
 public class RestaurantData implements Serializable{
 
@@ -63,6 +64,7 @@ public class RestaurantData implements Serializable{
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	@JoinTable(name = "restaurant_cuisine", joinColumns = { @JoinColumn(name = "restaurantId") }, inverseJoinColumns = { @JoinColumn(name = "cuisineId") })
 	private List<CuisineData> cuisineDataList = new ArrayList<CuisineData>();
+	
 	/**
 	 * 餐厅名称
 	 * @since cd_help-onlineOF 0.0.0.1

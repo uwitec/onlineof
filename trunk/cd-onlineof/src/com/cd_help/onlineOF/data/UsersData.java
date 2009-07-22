@@ -39,8 +39,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "users")
 @NamedQueries( { 
-	@NamedQuery(name = "login", query = "select new com.cd_help.onlineOF.web.vo.UsersVo(u.usersId,u.usersname,u.password,u.birthday,u.gender) from UsersData u where u.usersname = :usersname"), 
-	@NamedQuery(name = "loadAllUsers", query = "select new com.cd_help.onlineOF.web.vo.UsersVo(u.usersId,u.usersname,u.password,u.birthday,u.gender) from UsersData u where u.isSuper=0"),
+	@NamedQuery(name = "login", query = "select DISTINCT u from UsersData u where u.usersname = :usersname"), 
+	@NamedQuery(name = "loadAllUsers", query = "select DISTINCT u from UsersData u where u.isSuper=0"), 
 	@NamedQuery(name = "loadAllByPage", query = "from UsersData u where u.isSuper=0"),
 })
 public class UsersData implements Serializable{
@@ -94,6 +94,12 @@ public class UsersData implements Serializable{
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "usersId") }, inverseJoinColumns = { @JoinColumn(name = "roleId") })
 	private List<RoleData> roleList = new ArrayList<RoleData>();
+	
+	/**
+	 * 所属餐厅ID
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String restaurantId;
 
 	public String getUsersId() {
 		return usersId;
@@ -136,5 +142,11 @@ public class UsersData implements Serializable{
 	}
 	public void setIsSuper(Integer isSuper) {
 		this.isSuper = isSuper;
+	}
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
 	}
 }
