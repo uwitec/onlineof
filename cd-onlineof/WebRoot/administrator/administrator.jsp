@@ -2,7 +2,6 @@
 <html>
 <head>
 	<title>在线订餐后台管理系统</title>
-	<link rel="stylesheet" type="text/css" href="css/table.css"/>
 	<style type="text/css">
        .table {
 			border-collapse: collapse;

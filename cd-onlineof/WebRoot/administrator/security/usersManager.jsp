@@ -5,7 +5,6 @@
 <html>
   <head>
     <title>系统用户管理</title>
-    <link ref="stylesheet" type="text/css" href="css/common.css"></link> 
     <style type="text/css">
        .table {
 			border-collapse: collapse;
