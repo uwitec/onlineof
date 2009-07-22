@@ -59,7 +59,6 @@
            });
         }
         function doAjaxSend(url){
-           alert("url: " + url);
            document.getElementById("contentFrame").contentWindow.location=url;
         }
      }
