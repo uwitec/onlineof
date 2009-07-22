@@ -45,13 +45,14 @@
   <body style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;">
       <table style="width:100%;font-size:10pt;">
       	<tr>
-      	   <td style="width:60%;font-size:13px;color:#4f89ad; display:inline;">
-      	      <strong><img src="image/point.jpg"/>系统用户列表</strong>
-      	   </td>
-      	   <td style="width:40%;">
-      	      用户名<input type="text" id="usersname" name="usersname">
-      	     <input type="button" value="查询"/>
-      	     <input type="button" value="添加新用户"/>
+      	   <td style="width:100%;">
+      	     <span style="white-space: nowrap;">
+      	      <span style="white-space: nowrap;">用户名</span><input type="text" id="usersname" name="usersname">
+      	      <span style="white-space: nowrap;">所属餐厅/酒店</span>
+      	      <span style="white-space: nowrap;"><select><option>常德市一点味餐厅</option></select></span>
+      	      <span style="white-space: nowrap;"><input type="button" value="查询"/></span>
+      	      <span style="white-space: nowrap;"><input type="button" value="添加新用户"/></span>
+      	     </span>
       	   </td>
       	</tr>
       </table>
