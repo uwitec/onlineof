@@ -55,6 +55,18 @@ public class UsersVo {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private Integer gender;
+	
+	/**
+	 * 所属餐厅ID
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String restaurantId;
+	
+	/**
+	 * 所属餐厅名称
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String restaurantName;
 
 	/**
 	 * Constructs a <code>UsersVo</code>
@@ -73,13 +85,15 @@ public class UsersVo {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public UsersVo(String usersId, String usersname, String password,
-			Date birthday, Integer gender) {
+			Date birthday, Integer gender,String restaurantId,String restaurantName) {
 		this.usersId = usersId;
 		this.usersname = usersname;
 		this.password = StringUtil.encodePassword(password, "MD5");
 		this.birthday = ConvertUtils.toString1(birthday);
 		this.gender = gender;
 		this.gender = gender;
+		this.restaurantId = restaurantId;
+		this.restaurantName = restaurantName;
 	}
 
 	public String getUsersId() {
@@ -99,7 +113,7 @@ public class UsersVo {
 	}
 
 	public String getPassword() {
-		return password;
+		return StringUtil.encodePassword(password,"MD5");
 	}
 
 	public void setPassword(String password) {
@@ -120,5 +134,21 @@ public class UsersVo {
 
 	public void setGender(Integer gender) {
 		this.gender = gender;
+	}
+
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
+	}
+
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
 	}
 }
