@@ -4,7 +4,7 @@
 	<tlib-version>2.2.3</tlib-version>
 	<jsp-version>1.2</jsp-version>
 	<short-name>pages</short-name>
-	<uri>http://www.d7line.com/pages.tld</uri>
+	<uri>onlineOF/pages.tld</uri>
 	<display-name>"Pages Tags"</display-name>
 	<tag>
 		<name>pages1</name>
