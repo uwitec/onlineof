@@ -45,6 +45,11 @@
                 /administrator/security/usersManager.jsp
              </result>
 	     </action>
+	     <action name="deleteUsers" class="usersAction" method="deleteUsers">
+		     <result name="success">
+                /administrator/security/usersManager.jsp
+             </result>
+	     </action>
 	</package>
 	
 	<!-- 餐厅 -->
