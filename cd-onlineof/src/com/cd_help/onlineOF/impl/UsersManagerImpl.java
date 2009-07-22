@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cd_help.onlineOF.api.RestaurantDataDao;
 import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.api.UsersManager;
 import com.cd_help.onlineOF.data.Session;
@@ -38,6 +39,11 @@ public class UsersManagerImpl implements UsersManager {
 	@Resource(name = "usersDataDao")
 	private UsersDataDao usersDataDao;
 
+	@SuppressWarnings("unused")
+	@Autowired
+	@Resource(name = "restaurantDataDao")
+	private RestaurantDataDao restaurantDataDao;
+	
 	public void delete(Session session, String id) throws AppException {
 		try {
 			if (this.checkPrivilege(session)) {
@@ -82,6 +88,9 @@ public class UsersManagerImpl implements UsersManager {
 		UsersVo usersVo = null;
 		try {
 			usersVo = usersDataDao.login(username, password);
+			if(null != usersVo.getRestaurantId() && usersVo.getRestaurantId().length() > 0){
+				usersVo.setRestaurantName(restaurantDataDao.get(usersVo.getRestaurantId()).getName());
+			}
 		} catch (AppException e) {
 			throw new AppException("0000011", "登陆出错,请检查用户名和密码!");
 		}
@@ -114,6 +123,10 @@ public class UsersManagerImpl implements UsersManager {
 
 	public void setUsersDataDao(UsersDataDao usersDataDao) {
 		this.usersDataDao = usersDataDao;
+	}
+
+	public void setRestaurantDataDao(RestaurantDataDao restaurantDataDao) {
+		this.restaurantDataDao = restaurantDataDao;
 	}
 
 	public PageBean loadAll(String hqlName, String[] paramName,
