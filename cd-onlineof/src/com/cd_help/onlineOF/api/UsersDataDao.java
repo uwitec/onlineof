@@ -33,4 +33,5 @@ public interface UsersDataDao extends BaseDao {
 	public void delete(String id) throws AppException;
 
 	public UsersVo login(String username, String password) throws AppException;
+	
 }
