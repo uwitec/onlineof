@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+    <!-- 系统用户管理 -->
+	<package name="usersManager" extends="common-default">
+		<action name="searchUsersByPage" class="usersAction" method="searchUsersByPage">
+		     <result name="success">
+                /administrator/security/usersManager.jsp
+             </result>
+	     </action>
+	     <action name="deleteUsers" class="usersAction" method="deleteUsers">
+		     <result name="success">
+                /administrator/security/usersManager.jsp
+             </result>
+	     </action>
+	</package>
+</struts>

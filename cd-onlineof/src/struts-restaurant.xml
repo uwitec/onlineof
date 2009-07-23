@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<struts>
+    <!-- 餐厅/酒店 -->
+	<package name="restaurantManager" extends="common-default">
+		<action name="loadAllRestaurant" class="usersAction" method="loadAllRestaurant">
+		     <result name="success">
+                /bookRestaurant.jsp
+             </result>
+	     </action>
+	</package>
+</struts>
