@@ -29,7 +29,18 @@ public class PageBean {
 	private int currentPage = 1; // 当前页号
 	private int totalPage; // 总页数
 	private int totalRow; // 总记录数
-	private List array; // 查询出来的数据�����
+	private List array; // 查询出来的数据
+	
+	public PageBean(){}
+	
+	public PageBean(int totalRow){
+		this.totalPage = totalRow / pagesize;
+	}
+	
+	public PageBean(int currentPage,int pagesize){
+		this.currentPage = currentPage;
+		this.pagesize = pagesize;
+	}
 
 	public List getArray() {
 		return this.array;
