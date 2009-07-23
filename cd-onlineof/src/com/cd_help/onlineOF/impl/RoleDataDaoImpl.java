@@ -23,7 +23,6 @@ import com.cd_help.onlineOF.api.RoleDataDao;
  */
 @Service("roleDataDao")
 @Transactional
-@SuppressWarnings("unchecked")
 public class RoleDataDaoImpl extends BaseDaoSupport implements RoleDataDao{
 
 }

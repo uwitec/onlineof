@@ -31,10 +31,8 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("restaurantManager")
-@SuppressWarnings("unchecked")
 public class RestaurantManagerImpl implements RestaurantManager{
 
-	@SuppressWarnings("unused")
 	@Autowired
 	@Resource(name = "restaurantDataDao")
 	private RestaurantDataDao restaurantDataDao;

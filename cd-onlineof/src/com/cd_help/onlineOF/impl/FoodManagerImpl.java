@@ -30,10 +30,8 @@ import com.cd_help.onlineOF.web.vo.FoodVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("foodManager")
-@SuppressWarnings("unchecked")
 public class FoodManagerImpl implements FoodManager{
 
-	@SuppressWarnings("unused")
 	@Autowired
 	@Resource(name = "foodDataDao")
 	private FoodDataDao foodDataDao;

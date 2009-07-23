@@ -45,12 +45,10 @@ public class SessionManagerImpl implements SessionManager{
 	@Resource(name = "usersDataDao")
 	private UsersDataDao usersDataDao;
 	
-	@SuppressWarnings("unused")
 	@Autowired
 	@Resource(name = "roleDataDao")
 	private RoleDataDao roleDataDao;
 	
-	@SuppressWarnings("unused")
 	@Autowired
 	@Resource(name = "privilegeDataDao")
 	private PrivilegeDataDao privilegeDataDao;

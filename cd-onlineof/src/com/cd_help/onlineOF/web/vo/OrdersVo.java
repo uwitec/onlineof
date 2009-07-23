@@ -20,7 +20,6 @@ import com.cd_help.onlineOF.utils.ConvertUtils;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-@SuppressWarnings("unused")
 public class OrdersVo {
 
 	/**

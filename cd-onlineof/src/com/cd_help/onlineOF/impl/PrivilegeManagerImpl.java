@@ -30,10 +30,8 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("privilegeManager")
-@SuppressWarnings("unchecked")
 public class PrivilegeManagerImpl implements PrivilegeManager{
 
-	@SuppressWarnings("unused")
 	@Autowired
 	@Resource(name = "privilegeDataDao")
 	private PrivilegeDataDao privilegeDataDao;

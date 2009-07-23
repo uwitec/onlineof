@@ -196,11 +196,13 @@ public class OrdersData implements Serializable{
 	public void setContactGender(Integer contactGender) {
 		this.contactGender = contactGender;
 	}
+	@Override
 	public int hashCode() {
 		int hash = 0;
 		hash += (this.ordersId != null ? this.ordersId.hashCode() : super.hashCode());
 		return hash;
 	}
+	@Override
 	public boolean equals(Object object) {
 		if (!(object instanceof OrdersData)) {
 			return false;

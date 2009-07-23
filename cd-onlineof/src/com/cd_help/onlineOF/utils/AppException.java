@@ -58,6 +58,7 @@ public class AppException extends Exception{
 		this.error_code = error_code;
 	}
 
+	@Override
 	public String getMessage() {
 		return message;
 	}

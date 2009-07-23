@@ -7,18 +7,22 @@ package com.cd_help.onlineOF.utils;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 /**
  * <b><code></code></b>
  * <p/>
  * 分页实体
  * <p/>
  * <b>Creation Time:</b> Jul 12, 2009
+ * 
  * @author TanDong
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
-@SuppressWarnings( { "serial", "unchecked", "static-access" })
+@Service("pageBean")
+@SuppressWarnings("unchecked")
 public class PageBean {
 
 	private int pagesize = 10; // 每页数据的条数

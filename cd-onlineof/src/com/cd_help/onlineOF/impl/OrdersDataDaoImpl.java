@@ -23,7 +23,6 @@ import com.cd_help.onlineOF.api.OrdersDataDao;
  */
 @Service("ordersDataDao")
 @Transactional
-@SuppressWarnings("unchecked")
 public class OrdersDataDaoImpl extends BaseDaoSupport implements OrdersDataDao{
 
 }

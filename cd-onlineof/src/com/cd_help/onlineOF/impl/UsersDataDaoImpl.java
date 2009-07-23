@@ -35,7 +35,7 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 
 	public void delete(String id) throws AppException {
-	    this.delete((UsersData)this.get(UsersData.class, id));
+	    this.delete(this.get(UsersData.class, id));
 	}
 
 	public UsersVo get(String id) throws AppException {
