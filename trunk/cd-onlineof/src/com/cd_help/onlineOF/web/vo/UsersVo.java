@@ -67,6 +67,12 @@ public class UsersVo {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String restaurantName;
+	
+	/**
+	 * 是否是超级用户
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private Integer isSuper;
 
 	/**
 	 * Constructs a <code>UsersVo</code>
@@ -85,7 +91,7 @@ public class UsersVo {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public UsersVo(String usersId, String usersname, String password,
-			Date birthday, Integer gender,String restaurantId,String restaurantName) {
+			Date birthday, Integer gender,String restaurantId,String restaurantName,Integer isSuper) {
 		this.usersId = usersId;
 		this.usersname = usersname;
 		this.password = StringUtil.encodePassword(password, "MD5");
@@ -94,6 +100,7 @@ public class UsersVo {
 		this.gender = gender;
 		this.restaurantId = restaurantId;
 		this.restaurantName = restaurantName;
+		this.isSuper = isSuper;
 	}
 
 	public String getUsersId() {
@@ -150,5 +157,13 @@ public class UsersVo {
 
 	public void setRestaurantName(String restaurantName) {
 		this.restaurantName = restaurantName;
+	}
+
+	public Integer getIsSuper() {
+		return isSuper;
+	}
+
+	public void setIsSuper(Integer isSuper) {
+		this.isSuper = isSuper;
 	}
 }
