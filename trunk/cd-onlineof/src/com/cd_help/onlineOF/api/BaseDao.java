@@ -9,8 +9,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.cd_help.onlineOF.utils.AppException;
-import org.hibernate.HibernateException;
-
 import com.cd_help.onlineOF.utils.PageBean;
 
 /**
@@ -41,7 +39,7 @@ public interface BaseDao {
 
 	public List findByNamedQuery(String queryName, Object value);
 
-	public long countByNamedQuery(String queryName);
+	public int countByNamedQuery(String queryName);
 
 	public List findByNamedQuery(String queryName, int start, int limit);
 
@@ -69,9 +67,7 @@ public interface BaseDao {
 
 	public List loadAll(final Class entityClass);
 	
-	public int count(String hql) throws AppException;
+	public PageBean searchByPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws AppException;
 	
-	public PageBean getPageBean(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws HibernateException,
-			Exception;
 }
