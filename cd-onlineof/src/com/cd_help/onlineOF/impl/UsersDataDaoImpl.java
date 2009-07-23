@@ -77,7 +77,7 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 		}
 	}
 
-	public PageBean searchByPage(String hqlName, String[] paramName,
+	public PageBean searchByPageBean(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean) throws AppException {
 		pageBean = this.searchByPage(hqlName, paramName,
 				condition, pageBean);
