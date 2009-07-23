@@ -15,12 +15,11 @@ import org.hibernate.HibernateException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import org.hibernate.cfg.AnnotationConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.SessionFactoryUtils;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.BaseDao;
 import com.cd_help.onlineOF.utils.AppException;
@@ -163,22 +162,19 @@ public class BaseDaoSupport implements BaseDao {
 		return getHibernateTemplate().loadAll(entityClass);
 	}
 
-	public long countByNamedQuery(final String queryName) {
-		return (Long) getHibernateTemplate().execute(new HibernateCallback() {
+	public int countByNamedQuery(final String queryName) {
+		return ((Long) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
 				return session.getNamedQuery(queryName).uniqueResult();
 			}
-		});
+		})).intValue();
 	}
-
-	@Transactional
+	
 	public int queryCountByHql(String hqlName, String[] paramName,
 			Object[] condition) {
-		Session session = this.getHibernateTemplate().getSessionFactory()
-				.getCurrentSession();
-		Transaction transaction = session.beginTransaction();
-		transaction.begin();
+		SessionFactory factory = new AnnotationConfiguration().buildSessionFactory();
+		Session session = factory.openSession();
 		String hqlString = session.getNamedQuery(hqlName).getQueryString();
 		Query query = session.createQuery("select count(*) " + hqlString);
 		if (paramName != null && condition != null) {
@@ -189,54 +185,13 @@ public class BaseDaoSupport implements BaseDao {
 		}
 		query.setCacheable(true);
 		int total = Integer.valueOf(query.list().get(0).toString());
-		transaction.commit();
 		return total;
 	}
 	
-	/**
-	 * 获取分页
-	 * 
-	 * @param hqlName
-	 * @param paramName
-	 * @param condition
-	 * @param types
-	 * @param pageBean
-	 * @param session
-	 * @return
-	 * @throws Exception
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	@Transactional
-	public PageBean getPageBean(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws HibernateException,
-			Exception {
+	public PageBean searchByPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws AppException{
 		return this.pageService.getPageBean(hqlName, paramName, condition,
 				pageBean, this.getHibernateTemplate().getSessionFactory()
 						.getCurrentSession());
-	}
-
-	public int count(String hql) throws AppException {
-		String str = hql.toLowerCase();
-		str = hql.substring(str.indexOf("from"));
-		str = "select count(*) " + str;
-		final String hql2 = str;
-
-		int count = -1;
-		try {
-			List list = getHibernateTemplate().executeFind(
-					new HibernateCallback() {
-						public Object doInHibernate(Session session)
-								throws HibernateException, SQLException {
-
-							Query query = session.createQuery(hql2);
-							return query.list();
-						}
-					});
-			count = ((Long) list.get(0)).intValue();
-		} catch (Exception e) {
-			throw new AppException("",e.getMessage());
-		}
-
-		return count;
 	}
 }

@@ -16,6 +16,7 @@ import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.data.UsersData;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -74,5 +75,28 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 		}else{
            return null;			
 		}
+	}
+
+	public PageBean searchByPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws AppException {
+		pageBean = this.searchByPage(hqlName, paramName,
+				condition, pageBean);
+		
+		List<UsersVo> list = new ArrayList<UsersVo>();
+		UsersData user = null;
+		UsersVo uservo = null;
+		for (Object obj : pageBean.getArray()) {
+			user = (UsersData) obj;
+			uservo = new UsersVo();
+			BeanUtilsHelp.copyProperties(uservo, user);
+			if (null != user.getRestaurantId()
+					&& user.getRestaurantId().length() > 0) {
+				uservo.setRestaurantName(((RestaurantData)this.get(RestaurantData.class,
+						user.getRestaurantId())).getName());
+			}
+			list.add(uservo);
+		}
+		pageBean.setArray(list);
+		return pageBean;
 	}
 }
