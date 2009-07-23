@@ -27,7 +27,6 @@ import com.cd_help.onlineOF.web.vo.CuisineVo;
  */
 @Service("cuisineDataDao")
 @Transactional
-@SuppressWarnings("unchecked")
 public class CuisineDataDaoImpl extends BaseDaoSupport implements CuisineDataDao{
 
 	public void delete(String id) throws AppException {

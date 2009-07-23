@@ -31,6 +31,7 @@ public class PageTag4 extends TagSupport {
 	private String dispalytext; // 页面显示的文字
 	private String url; // 一个包含参数的url
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			int listbegin = this.currentPage - this.liststep / 2;
@@ -50,6 +51,7 @@ public class PageTag4 extends TagSupport {
 		return Tag.EVAL_PAGE;
 	}
 
+	@Override
 	public int doStartTag() throws JspException {
 		return Tag.EVAL_BODY_INCLUDE;
 	}

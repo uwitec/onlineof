@@ -31,7 +31,8 @@ public interface UsersManager {
 	public List<UsersVo> loadAll(Session session) throws AppException;
 
 	public PageBean loadAll(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws AppException;
+			Object[] condition, PageBean pageBean, Session session)
+			throws AppException;
 
 	public void update(Session session, String id) throws AppException;
 

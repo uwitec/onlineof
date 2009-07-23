@@ -8,6 +8,8 @@ package com.cd_help.onlineOF.api;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.HibernateException;
+
 import com.cd_help.onlineOF.utils.PageBean;
 
 /**
@@ -66,9 +68,7 @@ public interface BaseDao {
 
 	public List loadAll(final Class entityClass);
 
-	public int queryCountByHql(String hqlName, String[] paramName,
-			Object[] condition);
-
 	public PageBean getPageBean(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean);
+			Object[] condition, PageBean pageBean) throws HibernateException,
+			Exception;
 }

@@ -5,10 +5,13 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.beanutils.BeanUtils;
+import org.hibernate.HibernateException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +19,7 @@ import com.cd_help.onlineOF.api.RestaurantDataDao;
 import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.api.UsersManager;
 import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersData;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.UsersVo;
@@ -39,11 +43,10 @@ public class UsersManagerImpl implements UsersManager {
 	@Resource(name = "usersDataDao")
 	private UsersDataDao usersDataDao;
 
-	@SuppressWarnings("unused")
 	@Autowired
 	@Resource(name = "restaurantDataDao")
 	private RestaurantDataDao restaurantDataDao;
-	
+
 	public void delete(Session session, String id) throws AppException {
 		try {
 			if (this.checkPrivilege(session)) {
@@ -88,8 +91,10 @@ public class UsersManagerImpl implements UsersManager {
 		UsersVo usersVo = null;
 		try {
 			usersVo = usersDataDao.login(username, password);
-			if(null != usersVo.getRestaurantId() && usersVo.getRestaurantId().length() > 0){
-				usersVo.setRestaurantName(restaurantDataDao.get(usersVo.getRestaurantId()).getName());
+			if (null != usersVo.getRestaurantId()
+					&& usersVo.getRestaurantId().length() > 0) {
+				usersVo.setRestaurantName(restaurantDataDao.get(
+						usersVo.getRestaurantId()).getName());
 			}
 		} catch (AppException e) {
 			throw new AppException("0000011", "登陆出错,请检查用户名和密码!");
@@ -130,11 +135,42 @@ public class UsersManagerImpl implements UsersManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.UsersManager#loadAll(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean)
+	 * @see com.cd_help.onlineOF.api.UsersManager#loadAll(java.lang.String,
+	 *      java.lang.String[], java.lang.Object[],
+	 *      com.cd_help.onlineOF.utils.PageBean)
 	 */
 	public PageBean loadAll(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws AppException {
-		return this.usersDataDao.getPageBean(hqlName, paramName, condition,
-				pageBean);
+			Object[] condition, PageBean pageBean, Session session)
+			throws AppException {
+		try {
+			if (this.checkPrivilege(session)) {
+				pageBean = this.usersDataDao.getPageBean(hqlName, paramName,
+						condition, pageBean);
+				List<UsersVo> list = new ArrayList<UsersVo>();
+				UsersData user = null;
+				UsersVo uservo = null;
+				for (Object obj : pageBean.getArray()) {
+					user = (UsersData) obj;
+					uservo = new UsersVo();
+					BeanUtils.copyProperties(uservo, user);
+					if (null != user.getRestaurantId()
+							&& user.getRestaurantId().length() > 0) {
+						uservo.setRestaurantName(this.restaurantDataDao.get(
+								user.getRestaurantId()).getName());
+					}
+					list.add(uservo);
+				}
+				pageBean.setArray(list);
+				return pageBean;
+			} else {
+				throw new AppException("0000000", "权限不够!");
+			}
+		} catch (HibernateException e) {
+			e.printStackTrace();
+			//throw new AppException("0000014", "加载用户信息出错!");
+			return null;
+		} catch (Exception e) {
+			throw new AppException("0000014", "加载用户信息出错!");
+		}
 	}
 }

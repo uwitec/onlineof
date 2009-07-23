@@ -7,7 +7,8 @@ package com.cd_help.onlineOF.utils;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.type.Type;
+import org.hibernate.Transaction;
+import org.springframework.stereotype.Service;
 
 /**
  * <b><code></code></b>
@@ -15,16 +16,18 @@ import org.hibernate.type.Type;
  * 数据分页处理
  * <p/>
  * <b>Creation Time:</b> Jul 12, 2009
+ * 
  * @author TanDong
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
-@SuppressWarnings( { "serial", "unchecked", "static-access" })
+@Service("pageService")
 public class PageService {
 
 	/**
 	 * 获取总数
+	 * 
 	 * @param hqlName
 	 * @param paramName
 	 * @param condition
@@ -35,14 +38,14 @@ public class PageService {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private int getCount(String hqlName, String[] paramName,
-			Object[] condition, Type[] types, Session session) throws Exception {
+			Object[] condition, Session session) throws Exception {
 		try {
 			String hqlString = session.getNamedQuery(hqlName).getQueryString();
 			Query query = session.createQuery("select count(*) " + hqlString);
-			if (paramName != null && condition != null && types != null) {
+			if (paramName != null && condition != null) {
 
 				for (int i = 0; i < paramName.length; i++) {
-					query.setParameter(paramName[i], condition[i], types[i]);
+					query.setParameter(paramName[i], condition[i]);
 				}
 			}
 			query.setCacheable(true);
@@ -55,6 +58,7 @@ public class PageService {
 
 	/**
 	 * 获取分页
+	 * 
 	 * @param hqlName
 	 * @param paramName
 	 * @param condition
@@ -66,12 +70,13 @@ public class PageService {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public PageBean getPageBean(String hqlName, String[] paramName,
-			Object[] condition, Type[] types, PageBean pageBean, Session session)
+			Object[] condition, PageBean pageBean, Session session)
 			throws Exception {
 		try {
-
+			Transaction transaction = session.beginTransaction();
+			transaction.begin();
 			pageBean.setTotalRow(this.getCount(hqlName, paramName, condition,
-					types, session)); // 设置总记录数
+					session)); // 设置总记录数
 
 			// 以下是根据总记录数和每页大小计算总页数
 			if (pageBean.getTotalRow() % pageBean.getPagesize() == 0) {
@@ -94,10 +99,10 @@ public class PageService {
 
 			Query query = session.getNamedQuery(hqlName);
 
-			if (paramName != null && condition != null && types != null) {
+			if (paramName != null && condition != null) {
 
 				for (int i = 0; i < paramName.length; i++) {
-					query.setParameter(paramName[i], condition[i], types[i]);
+					query.setParameter(paramName[i], condition[i]);
 				}
 			}
 			query.setCacheable(true);
@@ -107,11 +112,10 @@ public class PageService {
 			query.setMaxResults(pageBean.getPagesize());
 
 			pageBean.setArray(query.list());
-
+			transaction.commit();
 			return pageBean;
 		} catch (Exception e) {
 			throw (e);
 		}
 	}
-
 }

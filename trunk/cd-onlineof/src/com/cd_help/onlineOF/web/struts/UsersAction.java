@@ -7,6 +7,9 @@ package com.cd_help.onlineOF.web.struts;
 
 import java.util.List;
 
+import javax.annotation.Resource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
@@ -15,76 +18,87 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 
 @SuppressWarnings("serial")
 @Service("usersAction")
-public class UsersAction extends BaseAction{
-	
+public class UsersAction extends BaseAction {
+
 	private String usersId;
 	private UsersVo usersVo;
 	private List<UsersVo> usersVoList;
-	private PageBean pb = new PageBean();
+	private PageBean pb;
 	private int page = 1;
-	
+
 	/**
 	 * 加载所有用户
+	 * 
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String loadAllUsers(){
+	public String loadAllUsers() {
 		log.debug("--->> begin loadAllUsers");
-	    try {
-	    	//usersVoList = this.getOnlineOF().getUsersManager().loadAll(this.getSession());
-	    	pb.setCurrentPage(page);
-	    	System.out.println(page);
-	    	pb.setPagesize(2);
-	    	pb = this.getOnlineOF().getUsersManager().loadAll("loadAllByPage", null, null, pb);
+		try {
+			// usersVoList =
+			// this.getOnlineOF().getUsersManager().loadAll(this.getSession());
+			this.pb.setCurrentPage(page);
+			this.pb.setPagesize(2);
+			this.pb = this.getOnlineOF().getUsersManager().loadAll("loadAllByPage",
+					null, null, this.pb, this.getSession());
 		} catch (AppException e) {
 			e.printStackTrace();
-		}	
-	    return SUCCESS;	
+		}
+		return SUCCESS;
 	}
-	
+
 	/**
 	 * 删除用户
+	 * 
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String deleteUsers(){
+	public String deleteUsers() {
 		log.debug("--->> begin deleteUsers");
 		try {
-			this.getOnlineOF().getUsersManager().delete(this.getSession(), usersId);
-			usersVoList = this.getOnlineOF().getUsersManager().loadAll(this.getSession());
+			this.getOnlineOF().getUsersManager().delete(this.getSession(),
+					usersId);
+			usersVoList = this.getOnlineOF().getUsersManager().loadAll(
+					this.getSession());
 		} catch (AppException e) {
 			e.printStackTrace();
 		}
 		return SUCCESS;
 	}
-	
+
 	/**
 	 * 根据ID获取信息
+	 * 
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String getUsersById(){
+	public String getUsersById() {
 		log.debug("--->> begin getUsersById");
-		try{
-			usersVo = this.getOnlineOF().getUsersManager().get(this.getSession(), usersId);
-		}catch(AppException e){
+		try {
+			usersVo = this.getOnlineOF().getUsersManager().get(
+					this.getSession(), usersId);
+		} catch (AppException e) {
 			e.printStackTrace();
 		}
 		return SUCCESS;
 	}
-	
+
 	public UsersVo getUsersVo() {
 		return usersVo;
 	}
+
 	public void setUsersVo(UsersVo usersVo) {
 		this.usersVo = usersVo;
 	}
+
 	public List<UsersVo> getUsersVoList() {
 		return usersVoList;
 	}
+
 	public void setUsersVoList(List<UsersVo> usersVoList) {
 		this.usersVoList = usersVoList;
 	}
+
 	public String getUsersId() {
 		return usersId;
 	}
@@ -92,10 +106,13 @@ public class UsersAction extends BaseAction{
 	public void setUsersId(String usersId) {
 		this.usersId = usersId;
 	}
+
 	public PageBean getPb() {
 		return pb;
 	}
 
+	@Autowired
+	@Resource(name = "pageBean")
 	public void setPb(PageBean pb) {
 		this.pb = pb;
 	}

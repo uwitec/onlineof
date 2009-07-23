@@ -23,7 +23,6 @@ import com.cd_help.onlineOF.utils.AppException;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("restaurant_kindManager")
-@SuppressWarnings("unchecked")
 public class Restaurant_kindManagerImpl implements Restaurant_kindManager{
 
 	/**

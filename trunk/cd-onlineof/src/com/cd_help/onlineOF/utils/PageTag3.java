@@ -29,6 +29,7 @@ public class PageTag3 extends TagSupport {
 	private int totalRow; // 总记录数
 	private String url; // 一个包含参数的url
 
+	@Override
 	public int doEndTag() throws JspException {
 		try {
 			StringBuffer text = new StringBuffer();
@@ -71,6 +72,7 @@ public class PageTag3 extends TagSupport {
 		return Tag.EVAL_PAGE;
 	}
 
+	@Override
 	public int doStartTag() throws JspException {
 		return Tag.EVAL_BODY_INCLUDE;
 	}
