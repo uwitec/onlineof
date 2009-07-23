@@ -8,6 +8,7 @@ package com.cd_help.onlineOF.api;
 import java.util.List;
 
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -33,5 +34,8 @@ public interface UsersDataDao extends BaseDao {
 	public void delete(String id) throws AppException;
 
 	public UsersVo login(String username, String password) throws AppException;
+	
+	public PageBean searchByPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws AppException;
 	
 }

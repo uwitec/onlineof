@@ -30,13 +30,14 @@ public interface UsersManager {
 
 	public List<UsersVo> loadAll(Session session) throws AppException;
 
-	public PageBean loadAll(String hqlName, String[] paramName,
+	public PageBean searchByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, Session session)
 			throws AppException;
-
+	
 	public void update(Session session, String id) throws AppException;
 
 	public void delete(Session session, String id) throws AppException;
 
 	public UsersVo login(String username, String password) throws AppException;
+	
 }
