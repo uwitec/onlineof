@@ -35,7 +35,7 @@ public interface UsersDataDao extends BaseDao {
 
 	public UsersVo login(String username, String password) throws AppException;
 	
-	public PageBean searchByPage(String hqlName, String[] paramName,
+	public PageBean searchByPageBean(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean) throws AppException;
 	
 }
