@@ -30,35 +30,20 @@
 	<package name="common-json" extends="json-default">
 	</package>
 	
+	<!-- 公共包 -->
+	<package name="common-default" extends="struts-default">
+	</package>
+	
 	<!-- 登陆 -->
-	<package name="login" extends="struts-default">
+	<package name="login" extends="common-default">
 		<action name="login" class="loginAction" method="doLogin">
 		     <result name="success">
                 /administrator/administrator.jsp
              </result>
 	     </action>
 	</package>
-	<!-- 系统用户管理 -->
-	<package name="usersManager" extends="struts-default">
-		<action name="usersManager" class="usersAction" method="searchUsersByPage">
-		     <result name="success">
-                /administrator/security/usersManager.jsp
-             </result>
-	     </action>
-	     <action name="deleteUsers" class="usersAction" method="deleteUsers">
-		     <result name="success">
-                /administrator/security/usersManager.jsp
-             </result>
-	     </action>
-	</package>
 	
-	<!-- 餐厅 -->
-	<package name="restaurant" extends="struts-default">
-		<action name="loadAllRestaurant" class="restaurantAction" method="loadAllRestaurant">
-		     <result name="success">
-                /bookRestaurant.jsp
-             </result>
-	     </action>
-	</package>
+	<!-- 导入 -->
+	<include file="struts-security.xml"/>
 	
 </struts>
