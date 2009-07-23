@@ -136,7 +136,7 @@ public class UsersManagerImpl implements UsersManager {
 		if(this.checkPrivilege(session)){
 			PageBean page = null;
 			try{
-				page = usersDataDao.searchByPage(hqlName, paramName, condition, pageBean);
+				page = usersDataDao.searchByPageBean(hqlName, paramName, condition, pageBean);
 			}catch(AppException e){
 				throw new AppException("0000014", "加载用户信息出错!");
 			}

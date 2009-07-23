@@ -187,11 +187,9 @@ public class BaseDaoSupport implements BaseDao {
 		int total = Integer.valueOf(query.list().get(0).toString());
 		return total;
 	}
-	
 	public PageBean searchByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean) throws AppException{
 		return this.pageService.getPageBean(hqlName, paramName, condition,
-				pageBean, this.getHibernateTemplate().getSessionFactory()
-						.getCurrentSession());
+				pageBean, this.getHibernateTemplate().getSessionFactory().getCurrentSession());
 	}
 }
