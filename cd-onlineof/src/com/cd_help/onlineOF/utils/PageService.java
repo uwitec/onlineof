@@ -9,6 +9,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * <b><code></code></b>
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("pageService")
+@Transactional
 public class PageService {
 
 	/**
