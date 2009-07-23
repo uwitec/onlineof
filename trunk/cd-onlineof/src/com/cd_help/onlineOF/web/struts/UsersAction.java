@@ -58,8 +58,7 @@ public class UsersAction extends BaseAction {
 		try {
 			this.getOnlineOF().getUsersManager().delete(this.getSession(),
 					usersId);
-			usersVoList = this.getOnlineOF().getUsersManager().loadAll(
-					this.getSession());
+			this.loadAllUsers();
 		} catch (AppException e) {
 			e.printStackTrace();
 		}
