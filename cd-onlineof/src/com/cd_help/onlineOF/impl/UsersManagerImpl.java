@@ -166,9 +166,7 @@ public class UsersManagerImpl implements UsersManager {
 				throw new AppException("0000000", "权限不够!");
 			}
 		} catch (HibernateException e) {
-			e.printStackTrace();
-			//throw new AppException("0000014", "加载用户信息出错!");
-			return null;
+			throw new AppException("0000014", "加载用户信息出错!");
 		} catch (Exception e) {
 			throw new AppException("0000014", "加载用户信息出错!");
 		}
