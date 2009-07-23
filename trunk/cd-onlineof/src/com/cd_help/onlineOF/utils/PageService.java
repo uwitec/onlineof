@@ -38,8 +38,7 @@ public class PageService {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private int getCount(String hqlName, String[] paramName,
-			Object[] condition, Session session) throws Exception {
-		try {
+			Object[] condition, Session session) throws AppException {
 			String hqlString = session.getNamedQuery(hqlName).getQueryString();
 			Query query = session.createQuery("select count(*) " + hqlString);
 			if (paramName != null && condition != null) {
@@ -51,9 +50,6 @@ public class PageService {
 			query.setCacheable(true);
 			int total = Integer.valueOf(query.list().get(0).toString());
 			return total;
-		} catch (Exception e1) {
-			throw (e1);
-		}
 	}
 
 	/**
@@ -71,8 +67,7 @@ public class PageService {
 	 */
 	public PageBean getPageBean(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, Session session)
-			throws Exception {
-		try {
+			throws AppException {
 			Transaction transaction = session.beginTransaction();
 			transaction.begin();
 			pageBean.setTotalRow(this.getCount(hqlName, paramName, condition,
@@ -114,8 +109,5 @@ public class PageService {
 			pageBean.setArray(query.list());
 			transaction.commit();
 			return pageBean;
-		} catch (Exception e) {
-			throw (e);
-		}
 	}
 }
