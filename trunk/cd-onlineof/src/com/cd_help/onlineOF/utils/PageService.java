@@ -39,6 +39,7 @@ public class PageService {
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
+	@Transactional
 	private int getCount(String hqlName, String[] paramName,
 			Object[] condition, Session session) throws AppException {
 			String hqlString = session.getNamedQuery(hqlName).getQueryString();
