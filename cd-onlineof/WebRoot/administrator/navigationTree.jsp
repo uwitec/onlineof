@@ -26,6 +26,7 @@
      	LoadPrivilegeTreeAction.loadPrivilegeTree({callback:loadTree,errorHandler:function(msg,exception){alert(exception.message);}});
      }
      function loadTree(topPrvileges){
+      if(topPrvileges.length > 0){
         for(var i=0; i<topPrvileges.length; i++){
            TreeDemo.AddNode({
               Id:topPrvileges[i]["privilegeId"],
@@ -39,6 +40,16 @@
 			  }
            });
         }
+       }else{
+          TreeDemo.AddNode({
+              Id:'null',
+              Text:'暂无数据',
+              ParentId:-1,
+              Asyn:false,
+              Icon:2,
+              IconOpen:3
+           });
+       }
      }
      function loadChild(childPrivileges){
         for(var i=0; i<childPrivileges.length; i++){

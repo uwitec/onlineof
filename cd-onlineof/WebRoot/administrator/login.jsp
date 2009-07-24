@@ -25,11 +25,11 @@
        <table>
           <tr>
             <td align="right">用户名:</td>
-            <td><input type="text" id="usersname" name="usersname"/></td>
+            <td><input type="text" id="usersname" name="usersname" value="superAdmin"/></td>
           </tr>
           <tr>
             <td align="right">密码:</td>
-            <td><input type="password" id="password" name="password"/></td>
+            <td><input type="password" id="password" name="password" value="654321"/></td>
           </tr>
           <tr>
             <td colspan="2">
