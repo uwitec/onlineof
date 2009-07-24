@@ -43,7 +43,10 @@
             <div style="height:25%;width:99%;background-color:#A9A9A9;font-size:10pt;text-align:center;">技术支持:<br/>耗子,振哥,咚咚<br/>QQ:935760092</div>
           </td>
           <td style="width:85%;height:90%;">
-            <div style="width:100%;height:100%;">
+            <table style="width:100%;font-size:10pt;border:1px solid #A9A9A9;height:5%;">
+               <tr><td><span style="white-space: nowrap;"><b>您的位置:</b><span id="position"></span></span></td></tr>
+            </table>
+            <div style="width:100%;height:95%;">
                <iframe id="contentFrame" name="contentFrame" style="width:100%;height:100%;" frameborder="0" src="welcom.jsp"></iframe>
             </div> 
           </td>
