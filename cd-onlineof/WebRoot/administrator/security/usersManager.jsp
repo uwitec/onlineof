@@ -73,7 +73,7 @@
       	      <select id="restaurantId" name="restaurantId">
       	        <s:set name="restaurantData" value="restaurantVos"/>
       	        <s:if test="#restaurantData == null">
-      	           <option>暂无数据</option>
+      	           <option value="">暂无数据</option>
       	        </s:if>
       	        <s:else>
       	            <option value="">--请选择--</option>

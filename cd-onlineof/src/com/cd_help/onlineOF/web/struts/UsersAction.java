@@ -26,9 +26,9 @@ public class UsersAction extends BaseAction {
 	private UsersVo usersVo;
 	private List<UsersVo> usersVoList;
 	private PageBean pb;
-	private int currentPage = 1;
+	private int page = 1;
 	private String usersname;
-	private int restaurantId;
+	private String restaurantId;
 	private List<RestaurantVo> restaurantVos = new ArrayList<RestaurantVo>();
 
 	/**
@@ -43,17 +43,20 @@ public class UsersAction extends BaseAction {
 		Object conditions[] = null;
 		String hql = "searchUsersByPage";
 		try {
-			this.pb.setCurrentPage(currentPage);
+			this.pb.setCurrentPage(page);
 			this.pb.setPagesize(2);
-			if(null != usersname && usersname.length() > 0){
-				log.debug("--->> search by usersname"+"  usersname: "+usersname);
-				params = new String[]{"usersname"};
-				conditions = new Object[]{"%"+this.usersname+"%"};
-				hql = "searchByUsersname";
-			}
-			// 只有超级用户采用   根据餐厅去查用户
-			if(this.getSession().getUsersVo().getIsSuper() == 1){
-			   log.debug("--->> 超级用户");	
+			log
+					.debug("--->> search by usersname" + "  usersname: "
+							+ usersname);
+			params = new String[] { "usersname", "restaurantId" };
+			conditions = new Object[] {
+					null == this.usersname ? "%" : "%" + this.usersname + "%",
+					null == restaurantId || "".equals(restaurantId) ? "%" : "%"
+							+ this.restaurantId + "%" };
+			// 只有超级用户采用 根据餐厅去查用户
+			if (null != this.getSession()
+					&& this.getSession().getUsersVo().getIsSuper() == 1) {
+				log.debug("--->> 超级用户");
 			}
 			// 加载所有餐厅
 			restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
@@ -64,7 +67,7 @@ public class UsersAction extends BaseAction {
 		}
 		return SUCCESS;
 	}
-	
+
 	/**
 	 * 删除用户
 	 * 
@@ -136,11 +139,11 @@ public class UsersAction extends BaseAction {
 		this.usersname = usersname;
 	}
 
-	public int getRestaurantId() {
+	public String getRestaurantId() {
 		return restaurantId;
 	}
 
-	public void setRestaurantId(int restaurantId) {
+	public void setRestaurantId(String restaurantId) {
 		this.restaurantId = restaurantId;
 	}
 
@@ -150,12 +153,12 @@ public class UsersAction extends BaseAction {
 		this.pb = pb;
 	}
 
-	public int getCurrentPage() {
-		return currentPage;
+	public int getPage() {
+		return page;
 	}
 
-	public void setCurrentPage(int currentPage) {
-		this.currentPage = currentPage;
+	public void setPage(int page) {
+		this.page = page;
 	}
 
 	public List<RestaurantVo> getRestaurantVos() {
