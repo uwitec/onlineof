@@ -66,11 +66,21 @@
 			  },
 			  Click:function(Node){
 			     doAjaxSend(Node.Statu);
+			     setPosition(Node.Id);
 			  }
            });
         }
         function doAjaxSend(url){
            document.getElementById("contentFrame").contentWindow.location=url;
+        }
+     }
+     // 设置导航位置
+     function setPosition(id){
+        var position = document.getElementById("position");
+        var clickNode = TreeDemo.FindNode(id);
+        if(clickNode.ParentId != -1){
+           var parentNode = TreeDemo.FindNode(clickNode.ParentId);
+           position.innerHTML=parentNode.Text + " >> " +clickNode.Text;
         }
      }
      load();
