@@ -40,7 +40,7 @@
                <!-- 导入用户权限树页面 -->
                <jsp:include page="navigationTree.jsp"></jsp:include>
             </div>
-            <div style="height:25%;width:99%;background-color:#A9A9A9;font-size:10pt;text-align:center;">技术支持:谈冬、张振<br/>QQ:935760092</div>
+            <div style="height:25%;width:99%;background-color:#A9A9A9;font-size:10pt;text-align:center;">技术支持:<br/>耗子,振哥,咚咚<br/>QQ:935760092</div>
           </td>
           <td style="width:85%;height:90%;">
             <div style="width:100%;height:100%;">
