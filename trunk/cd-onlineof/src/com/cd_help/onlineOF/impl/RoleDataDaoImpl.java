@@ -30,9 +30,20 @@ import com.cd_help.onlineOF.web.vo.RoleVo;
 @SuppressWarnings("unchecked")
 public class RoleDataDaoImpl extends BaseDaoSupport implements RoleDataDao{
 	
+	/**
+	 * @see com.cd_help.onlineOF.api.RoleDataDao#loadAll()
+	 */
 	public List<RoleVo> loadAll() throws AppException{
 		List<RoleVo> roleVos =  this.findByNamedQuery("loadAllRole");
 		return roleVos;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.RoleDataDao#getRoleByUsersId(java.lang.String)
+	 */
+	public List<RoleVo> getRoleByUsersId(String usersId) throws AppException {
+		List<RoleVo> ownerRoles = this.findByNamedQueryAndNamedParam("getRoleByUsersId", "usersId", usersId);
+		return ownerRoles;
 	}
 
 }

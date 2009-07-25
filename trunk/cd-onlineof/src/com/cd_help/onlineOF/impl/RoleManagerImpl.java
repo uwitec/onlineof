@@ -32,12 +32,28 @@ public class RoleManagerImpl implements RoleManager{
 	public List<RoleVo> loadAll(Session session) throws AppException {
 		List<RoleVo> roleVos = null;
 		if(this.checkPrivilege(session)){
-			roleVos = roleDataDao.loadAll();
-			if(null != roleVos && roleVos.size() > 0 ){
-				return roleVos;
-			}else{
-				throw new AppException("000000","没有角色数据!");
+			try{
+				roleVos = roleDataDao.loadAll();
+			}catch(AppException e){
+				throw new AppException("000000","系统出错!请联系系统管理员.");
 			}
+			return roleVos;
+		}else{
+			throw new AppException("000000","没有权限!");
+		}
+	}
+	/**
+	 * @see com.cd_help.onlineOF.api.RoleManager#getRoleByUsersId(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 */
+	public List<RoleVo> getRoleByUsersId(Session session,String usersId) throws AppException {
+		if(this.checkPrivilege(session)){
+			List<RoleVo> ownerRoles = null;
+			try{
+			    ownerRoles = roleDataDao.getRoleByUsersId(usersId);
+			}catch(AppException e){
+				throw new AppException("000000","系统出错!请联系系统管理员.");
+			}
+			return ownerRoles;
 		}else{
 			throw new AppException("000000","没有权限!");
 		}
