@@ -24,11 +24,16 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
  * 
  * @since cd_help-onlineOF 0.0.0.1
  */
+@SuppressWarnings("unchecked")
 public interface UsersManager {
 
 	public UsersVo get(Session session, String id) throws AppException;
-
-	public List<UsersVo> loadAll(Session session) throws AppException;
+	
+	public boolean checkUsersByName(String usersname) throws AppException;
+	
+	public void addUsers(Session session,UsersVo usersVo,List<String> roleIds) throws AppException;
+	
+    public List<UsersVo> loadAll(Session session) throws AppException;
 
 	public PageBean searchByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, Session session)
