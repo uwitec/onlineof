@@ -16,8 +16,20 @@ import com.cd_help.onlineOF.api.RoleDataDao;
 import com.cd_help.onlineOF.api.RoleManager;
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RoleVo;
 
+/**
+ * <b><code></code></b>
+ * <p/>
+ * 角色管理实现类
+ * <p/>
+ * <b>Creation Time:</b> Jul 26, 2009
+ * @author TanDong
+ * @version 0.0.0.1
+ *
+ * @since cd_help-onlineOF 0.0.0.1
+ */
 @Service("roleManager")
 public class RoleManagerImpl implements RoleManager{
 
@@ -42,22 +54,6 @@ public class RoleManagerImpl implements RoleManager{
 			throw new AppException("000000","没有权限!");
 		}
 	}
-	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#getRoleByUsersId(com.cd_help.onlineOF.data.Session, java.lang.String)
-	 */
-	public List<RoleVo> getRoleByUsersId(Session session,String usersId) throws AppException {
-		if(this.checkPrivilege(session)){
-			List<RoleVo> ownerRoles = null;
-			try{
-			    ownerRoles = roleDataDao.getRoleByUsersId(usersId);
-			}catch(AppException e){
-				throw new AppException("000000","系统出错!请联系系统管理员.");
-			}
-			return ownerRoles;
-		}else{
-			throw new AppException("000000","没有权限!");
-		}
-	}
 	
 	/**
 	 * 检查权限
@@ -73,5 +69,87 @@ public class RoleManagerImpl implements RoleManager{
 
 	public void setRoleDataDao(RoleDataDao roleDataDao) {
 		this.roleDataDao = roleDataDao;
+	}
+	
+	/**
+	 * @see com.cd_help.onlineOF.api.RoleManager#searchByPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.data.Session)
+	 */
+	public PageBean searchByPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean, Session session)
+			throws AppException {
+		if(this.checkPrivilege(session)){
+			PageBean page = null;
+			try{
+				page = roleDataDao.searchByPageBean(hqlName, paramName, condition, pageBean);
+			}catch(AppException e){
+				throw new AppException("0000014", "加载用户信息出错!");
+			}
+			return page;
+		}else{
+			throw new AppException("0000000", "权限不够!");
+		}
+	}
+	
+	/**
+	 * @see com.cd_help.onlineOF.api.RoleManager#delete(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 */
+	public void delete(Session session, String id) throws AppException {
+		if(this.checkPrivilege(session)){
+			try{
+				roleDataDao.delete(id);
+			}catch(AppException e){
+				throw new AppException("0000014", "删除失败!");
+			}
+		}else{
+			throw new AppException("0000000", "权限不够!");
+		}
+	}
+	
+	/**
+	 * @see com.cd_help.onlineOF.api.RoleManager#addRole(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.web.vo.RoleVo)
+	 */
+	public void addRole(Session session, RoleVo roleVo) throws AppException{
+		if(this.checkPrivilege(session)){
+			try{
+				roleDataDao.add(roleVo);
+			}catch(AppException e){
+				throw new AppException("0000014", "新建失败!");
+			}
+		}else{
+			throw new AppException("0000000", "权限不够!");
+		}
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.RoleManager#getRoleById(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 */
+	public RoleVo getRoleById(Session session, String roleId)
+			throws AppException {
+		RoleVo roleVo = null;
+		if(this.checkPrivilege(session)){
+			try{
+				roleVo = roleDataDao.getRoleById(roleId);
+			}catch(AppException e){
+				throw new AppException("0000014", "系统错误!");
+			}
+		}else{
+			throw new AppException("0000000", "权限不够!");
+		}
+		return roleVo;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.RoleManager#updateRole(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.web.vo.RoleVo)
+	 */
+	public void updateRole(Session session, RoleVo roleVo) throws AppException {
+		if(this.checkPrivilege(session)){
+			try{
+				roleDataDao.updateRole(roleVo);
+			}catch(AppException e){
+				throw new AppException("0000014", "修改失败!");
+			}
+		}else{
+			throw new AppException("0000000", "权限不够!");
+		}
 	}
 }
