@@ -6,9 +6,7 @@
 package com.cd_help.onlineOF.web.struts;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -23,6 +21,17 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
 import com.cd_help.onlineOF.web.vo.RoleVo;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
+/**
+ * <b><code></code></b>
+ * <p/>
+ * 用户处理Action
+ * <p/>
+ * <b>Creation Time:</b> Jul 25, 2009
+ * @author TanDong
+ * @version 0.0.0.1
+ *
+ * @since cd_help-onlineOF 0.0.0.1
+ */
 @SuppressWarnings("serial")
 @Service("usersAction")
 public class UsersAction extends BaseAction {
@@ -36,7 +45,6 @@ public class UsersAction extends BaseAction {
 	private String restaurantId;
 	private List<RestaurantVo> restaurantVos = new ArrayList<RestaurantVo>();
 	private String checksItem[] = {};
-	private String ownerRoles[] = new String[10];
 	private List<RoleVo> roleVos = new ArrayList<RoleVo>();
 
 	/**
@@ -102,17 +110,9 @@ public class UsersAction extends BaseAction {
 	 */
 	public String addUsers() throws AppException{
 		try{
-			String[] roles = this.checksItem;
-			List<String> roleIds = null;
-			if (null != roles) {
-				roleIds = new ArrayList<String>();
-				for(int i=0; i<roles.length; i++){
-					roleIds.add(roles[i]);
-				}
-			}
 			usersVo.setBirthday(ConvertUtils.toDate2(usersVo.getBirthdayStr()));
 			usersVo.setPassword(StringUtil.encodePassword(usersVo.getPassword(), "MD5"));
-			this.getOnlineOF().getUsersManager().addUsers(this.getSession(), usersVo, roleIds);
+			this.getOnlineOF().getUsersManager().addUsers(this.getSession(), usersVo);
 			this.searchUsersByPage();
 		}catch(AppException e){
 			log.error(e);
@@ -125,9 +125,10 @@ public class UsersAction extends BaseAction {
 	 * 删除用户
 	 * 
 	 * @return
+	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String deleteUsers() {
+	public String deleteUsers() throws AppException {
 		log.debug("--->> begin deleteUsers");
 		try {
 			if(null != this.checksItem){
@@ -139,7 +140,8 @@ public class UsersAction extends BaseAction {
 			}
 			this.searchUsersByPage();
 		} catch (AppException e) {
-			e.printStackTrace();
+			log.error(e);
+			throw new AppException(e.getError_code(),e.getMessage());
 		}
 		return SUCCESS;
 	}
@@ -152,9 +154,10 @@ public class UsersAction extends BaseAction {
 	/**
 	 * 跳转到编辑页面
 	 * @return
+	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String editUsres() {
+	public String editUsres() throws AppException {
 		log.debug("--->> begin getUsersById : "+this.getRequest().getParameter("usersId"));
 		try {
 			usersVo = this.getOnlineOF().getUsersManager().get(
@@ -163,13 +166,27 @@ public class UsersAction extends BaseAction {
 			loadAllRestaurant(); 
 			// 加载所有角色
 			roleVos = this.getOnlineOF().getRoleManager().loadAll(this.getSession());
-			// 加载拥有角色
-			List<RoleVo> rvs = this.getOnlineOF().getRoleManager().getRoleByUsersId(this.getSession(), usersId);
-			for(int i=0; i<rvs.size(); i++){
-				ownerRoles[i] = rvs.get(i).getRoleId();
-			}
 		} catch (AppException e) {
-			e.printStackTrace();
+			log.error(e);
+			throw new AppException(e.getError_code(),e.getMessage());
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 更新用户
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String updateUsers() throws AppException{
+		log.debug("--->> begin updateUsers");
+		try{
+			this.getOnlineOF().getUsersManager().update(this.getSession(), usersVo);
+			this.searchUsersByPage();
+		}catch(AppException e){
+			log.error(e);
+			throw new AppException(e.getError_code(),e.getMessage());
 		}
 		return SUCCESS;
 	}
@@ -255,13 +272,4 @@ public class UsersAction extends BaseAction {
 	public void setRoleVos(List<RoleVo> roleVos) {
 		this.roleVos = roleVos;
 	}
-
-	public String[] getOwnerRoles() {
-		return ownerRoles;
-	}
-
-	public void setOwnerRoles(String[] ownerRoles) {
-		this.ownerRoles = ownerRoles;
-	}
-	
 }
