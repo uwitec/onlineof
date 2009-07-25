@@ -23,6 +23,21 @@ import com.cd_help.onlineOF.web.vo.RoleVo;
  */
 public interface RoleDataDao extends BaseDao{
 	
+	/**
+	 * 加载所有角色
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
 	public List<RoleVo> loadAll() throws AppException;
+	
+	/**
+	 * 获取用户拥有角色
+	 * @param usersId
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<RoleVo> getRoleByUsersId(String usersId) throws AppException;
 
 }

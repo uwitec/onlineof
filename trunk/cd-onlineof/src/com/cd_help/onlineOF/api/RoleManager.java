@@ -32,5 +32,14 @@ public interface RoleManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public List<RoleVo> loadAll(Session session) throws AppException;
+	
+	/**
+	 * 获取用户拥有角色
+	 * @param usersId
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<RoleVo> getRoleByUsersId(Session session,String usersId) throws AppException;
 
 }
