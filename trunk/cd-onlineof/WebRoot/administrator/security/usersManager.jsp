@@ -5,42 +5,7 @@
 <html>
   <head>
     <title>系统用户管理</title>
-    <style type="text/css">
-       .table {
-			border-collapse: collapse;
-			padding: 5px;
-			border-color: gray;
-			border-style: solid;
-			border-width: 1px 1px 1px 1px;
-		}
-		
-		.table th {
-			background-color: #E4E4E4;
-			text-align: center;
-			padding: 5px;
-			font-size: 12px;
-			border-color: gray;
-			border-style: solid;
-			border-width: 1px 0px 0px 1px;
-		}
-		
-		.table td {
-			text-align: center;
-			padding: 5px;
-			font-family: "arial";
-			font-size: 12px;
-			border-color: gray;
-			border-style: solid;
-			border-width: 1px 0px 1px 1px;
-		}
-		/*分页样式*/
-		.pagination { padding: 5px 0; clear: both; float: right; overflow: hidden;font-size:10pt;}
-   		.pagination span { display: block; float: left;}
-  		.pagination .number { margin-left: 7px; display: inline;}
-  		.pagination .number a { display: block; padding: 0 5px; color: #28558c;}
-  		.pagination .number.current { border: 1px solid #ff7200; background: #ff9c00;}
-  		.pagination .number.current a { color: #fff;}
-    </style>
+    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/common/css/common.css"/>
     <script language="javascript">
         // 根据名称(模糊查询)和所属餐厅查询用户
         function search(){
@@ -51,7 +16,7 @@
         }
         // 添加新用户
         function forwardAddNewUsers(){
-        
+            window.location.href="forwardAddUsers.do";
         }
         function getSelectRestaurant(){
         
@@ -133,7 +98,7 @@
          </tbody>
       </table>
       <!-- 分页start -->
-	<div class="pagination">
+	<div class="pagination" style="font-size:10pt;">
 		<page:pages1 pagesize="${pb.pagesize}"
 			currentPage="${pb.currentPage}" totalPage="${pb.totalPage}"
 			totalRow="${pb.totalRow}" liststep="10" dispalytext="个用户"
