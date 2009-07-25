@@ -5,14 +5,14 @@
   <head>
     <title>编辑用户</title>
     <style rel="stylesheet" type="text/css">
-       .infoTable{
+       .table{
        		border-collapse: collapse;
 			padding: 5px;
 			border-color: gray;
 			border-style: solid;
 			border-width: 1px 1px 1px 1px;
        	}
-       .infoTable thead th{
+       .table thead th{
        		background-color:#E4E4E4;
        		text-align: center;
 			padding: 5px;
@@ -21,11 +21,19 @@
 			border-style: solid;
 			border-width: 1px 0px 0px 1px;
        	}
-       .infoTable tbody td{
+       .table tbody td{
 			padding: 5px;
 			font-family: "arial";
 			font-size: 12px;
        }
+       .table tfoot td{
+       		text-align: center;
+			padding: 5px;
+			font-size: 12px;
+			border-color: gray;
+			border-style: solid;
+			border-width: 1px 0px 0px 1px;
+       	}
     </style>
     <script src="${pageContext.request.contextPath}/dwr/interface/usersManagerDwrAction.js"></script>
     <script src="${pageContext.request.contextPath}/dwr/engine.js"></script>
@@ -81,7 +89,7 @@
   </head>
   <body style="margin-top:1px;margin-bottom:0px;margin-left:0px;margin-right:0px;">
     <form id="addUsersForm" name="addUsersForm" action="addUsers.do" method="post">
-    <table class="infoTable" style="width:100%;">
+    <table class="table" style="width:100%;">
       <thead>
          <th colspan="2"><span style="white-space: nowrap;">添加系统用户</span></th>
       </thead>
@@ -90,7 +98,7 @@
            <td align="right"><span style="white-space: nowrap;">用户名</span></td>
            <td>
               <span style="white-space: nowrap;">
-           		<input type="text" id="usersVo.usersname" name="usersVo.usersname" size=30/>'>
+           		<input type="text" id="usersVo.usersname" name="usersVo.usersname" size=30/>
            		<input type="button" value="检测用户" onclick="checkUsers()">
            		<span id="checkUsers"></span>
            	  </span>
@@ -121,8 +129,7 @@
            <td align="right"><span style="white-space: nowrap;">所属餐厅</span></td>
            <td>
              <select id="usersVo.restaurantId" name="usersVo.restaurantId">
-      	        <s:set name="restaurantData" value="restaurantVos"/>
-      	        <s:if test="#restaurantData == null">
+      	        <s:if test="restaurantVos.size == 0">
       	           <option>暂无数据</option>
       	        </s:if>
       	        <s:else>
@@ -138,8 +145,7 @@
            <td align="right"><span style="white-space: nowrap;">角色分配</span></td>
            <td>
               <s:iterator value="roleVos">
-                 <s:set name="roleData" value="roleVos"/>
-      	         <s:if test="#roleData == null">
+      	         <s:if test="roleVos.size == 0">
       	           <span style="white-space: nowrap;">暂无数据</span>
       	         </s:if>
       	         <s:else>
