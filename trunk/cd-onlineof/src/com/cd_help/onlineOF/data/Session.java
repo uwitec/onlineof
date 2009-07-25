@@ -9,7 +9,6 @@ import java.io.Serializable;
 import java.util.List;
 
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
-import com.cd_help.onlineOF.web.vo.RoleVo;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -27,7 +26,6 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 public class Session implements Serializable{
 	
     private UsersVo usersVo;	
-    private List<RoleVo> roles;
     private List<PrivilegeVo> privileges;
     
     /**
@@ -43,9 +41,8 @@ public class Session implements Serializable{
      * @param privileges
      * @since cd_help-onlineOF 0.0.0.1
      */
-    public Session(UsersVo usersVo,List<RoleVo> roles,List<PrivilegeVo> privileges){
+    public Session(UsersVo usersVo,List<PrivilegeVo> privileges){
     	this.usersVo = usersVo;
-    	this.roles = roles;
     	this.privileges = privileges;
     }
 
@@ -55,14 +52,6 @@ public class Session implements Serializable{
 
 	public void setUsersVo(UsersVo usersVo) {
 		this.usersVo = usersVo;
-	}
-
-	public List<RoleVo> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<RoleVo> roles) {
-		this.roles = roles;
 	}
 
 	public List<PrivilegeVo> getPrivileges() {

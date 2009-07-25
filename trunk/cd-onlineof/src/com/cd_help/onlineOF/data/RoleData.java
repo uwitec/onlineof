@@ -36,10 +36,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name="role")
 @NamedQueries( {
-	/*获取用户所有角色*/
-	@NamedQuery(name="getRoleByUsersId",query="select new com.cd_help.onlineOF.web.vo.RoleVo(r.roleId,r.roleName,r.description) from RoleData r join r.userList u where u.usersId=:usersId"),
 	/*获取所有角色*/
 	@NamedQuery(name="loadAllRole",query="select new com.cd_help.onlineOF.web.vo.RoleVo(r.roleId,r.roleName,r.description) from RoleData r"),
+	/**/
+	@NamedQuery(name="searchRolesByPage",query="from RoleData r where r.roleName like :roleName"),
 })
 public class RoleData implements Serializable{
 	/**
@@ -71,13 +71,6 @@ public class RoleData implements Serializable{
 	@JoinTable(name = "privileges_role", joinColumns = { @JoinColumn(name = "roleId") }, inverseJoinColumns = { @JoinColumn(name = "privilegeId") })
 	private List<PrivilegeData> privilegeList = new ArrayList<PrivilegeData>();
 
-	/**
-	 * 拥有用户
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	@ManyToMany(mappedBy = "roleList")
-	private List<UsersData> userList = new ArrayList<UsersData>();
-	
 	public String getRoleId() {
 		return roleId;
 	}
@@ -100,14 +93,6 @@ public class RoleData implements Serializable{
 
 	public void setPrivilegeList(List<PrivilegeData> privilegeList) {
 		this.privilegeList = privilegeList;
-	}
-
-	public List<UsersData> getUserList() {
-		return userList;
-	}
-
-	public void setUserList(List<UsersData> userList) {
-		this.userList = userList;
 	}
 
 	public String getDescription() {

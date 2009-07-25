@@ -38,13 +38,13 @@ import javax.persistence.Table;
 @Table(name="privilege")
 @NamedQueries( {
 	/*获取用户所有权限*/
-	@NamedQuery(name="getPrivilegeByUsersId",query="select DISTINCT p from PrivilegeData p join p.roleList r join r.userList u where u.usersId = :usersId"),
+	@NamedQuery(name="getPrivilegeByRoleId",query="select DISTINCT p from PrivilegeData p join p.roleList r where r.roleId = :roleId"),
 	/*获取用户顶级模块权限*/
-	@NamedQuery(name="getTopModelPrivilegeByUsersId",query="select DISTINCT p from PrivilegeData p join p.roleList r join r.userList u where p.kind = 'Model' and p.parent is null and u.usersId = :usersId"),
+	@NamedQuery(name="getTopModelPrivilegeByRoleId",query="select DISTINCT p from PrivilegeData p join p.roleList r where p.kind = 'Model' and p.parent is null and r.roleId = :roleId"),
 	/*获取用户模块子权限*/
 	// @NamedQuery(name="getChildModelPrivilegeByUsersId",query="select new com.cd_help.onlineOF.web.vo.PrivilegeVo(p.privilegeId,p.privilegeName,p.parent.privilegeId,p.parent.privilegeName,p.kind,p.url,p.methodName,p.hasChild) from PrivilegeData p join p.roleList r join r.userList u where p.kind = 'Model' and p.parent.privilegeId = :parentId and u.usersId = :usersId"),
 	
-	@NamedQuery(name="getChildModelPrivilegeByUsersId",query="select DISTINCT p from PrivilegeData p join p.roleList r join r.userList u where p.kind = 'Model' and p.parent.privilegeId = :parentId and u.usersId = :usersId"),
+	@NamedQuery(name="getChildModelPrivilegeByRoleId",query="select DISTINCT p from PrivilegeData p join p.roleList r where p.kind = 'Model' and p.parent.privilegeId = :parentId and r.roleId = :roleId"),
 })
 public class PrivilegeData implements Serializable{
 	
@@ -98,7 +98,7 @@ public class PrivilegeData implements Serializable{
 	 * 子权限
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@OneToMany(mappedBy = "parent", cascade=CascadeType.REFRESH, fetch=FetchType.LAZY)  
+	@OneToMany(mappedBy = "parent", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)  
 	private List<PrivilegeData> childPrivileges = new ArrayList<PrivilegeData>();
 	
 	/**
