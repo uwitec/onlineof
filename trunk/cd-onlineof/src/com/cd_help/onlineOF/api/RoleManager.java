@@ -7,22 +7,30 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
+import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.vo.RoleVo;
 
 /**
  * <b><code></code></b>
  * <p/>
- * 角色数据接口
+ * 角色管理接口
  * <p/>
- * <b>Creation Time:</b> Jul 18, 2009
+ * <b>Creation Time:</b> Jul 24, 2009
  * @author TanDong
  * @version 0.0.0.1
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-public interface RoleDataDao extends BaseDao{
+public interface RoleManager {
 	
-	public List<RoleVo> loadAll() throws AppException;
+	/**
+	 * 获取所有角色信息
+	 * @param session
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<RoleVo> loadAll(Session session) throws AppException;
 
 }

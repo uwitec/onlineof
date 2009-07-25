@@ -26,6 +26,17 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 public interface UsersDataDao extends BaseDao {
 
 	public UsersVo get(String id) throws AppException;
+	
+	/**
+	 * 检测用户
+	 * @param usersname
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public boolean checkUsersByName(String usersname) throws AppException;
+	
+	public void addUsers(UsersVo usersVo, List<String> roleIds) throws AppException;
 
 	public List<UsersVo> loadAll() throws AppException;
 
