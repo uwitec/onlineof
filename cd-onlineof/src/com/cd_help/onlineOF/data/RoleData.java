@@ -37,8 +37,9 @@ import javax.persistence.Table;
 @Table(name="role")
 @NamedQueries( {
 	/*获取用户所有角色*/
-	@NamedQuery(name="getRoleByUsersId",query="select new com.cd_help.onlineOF.web.vo.RoleVo(r.roleId,r.roleName) from RoleData r join r.userList u where u.usersId=:usersId"),
-	@NamedQuery(name="loadAllRole",query="select new com.cd_help.onlineOF.web.vo.RoleVo(r.roleId,r.roleName) from RoleData r"),
+	@NamedQuery(name="getRoleByUsersId",query="select new com.cd_help.onlineOF.web.vo.RoleVo(r.roleId,r.roleName,r.description) from RoleData r join r.userList u where u.usersId=:usersId"),
+	/*获取所有角色*/
+	@NamedQuery(name="loadAllRole",query="select new com.cd_help.onlineOF.web.vo.RoleVo(r.roleId,r.roleName,r.description) from RoleData r"),
 })
 public class RoleData implements Serializable{
 	/**
@@ -54,6 +55,13 @@ public class RoleData implements Serializable{
 	 */
 	@Column(name = "roleName", nullable = true, length = 15)
 	private String roleName;
+	
+	/**
+	 * 描述
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "description", nullable = true, length = 20)
+	private String description;
 	
 	/**
 	 * 拥有权限
@@ -101,4 +109,13 @@ public class RoleData implements Serializable{
 	public void setUserList(List<UsersData> userList) {
 		this.userList = userList;
 	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
 }
