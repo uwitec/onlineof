@@ -19,6 +19,7 @@ import com.cd_help.onlineOF.api.OrdersManager;
 import com.cd_help.onlineOF.api.PrivilegeManager;
 import com.cd_help.onlineOF.api.RestaurantManager;
 import com.cd_help.onlineOF.api.Restaurant_kindManager;
+import com.cd_help.onlineOF.api.RoleManager;
 import com.cd_help.onlineOF.api.SessionManager;
 import com.cd_help.onlineOF.api.UsersManager;
 import com.cd_help.onlineOF.data.Session;
@@ -40,7 +41,7 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 public class OnlineOFImpl implements OnlineOF{
 	
 	/**
-	 * 订餐用户管理
+	 * 系统用户管理
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Autowired
@@ -118,6 +119,14 @@ public class OnlineOFImpl implements OnlineOF{
 	@Autowired
 	@Resource(name = "privilegeManager")
 	private PrivilegeManager privilegeManager = null;
+	
+	/**
+	 * 角色管理
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Autowired
+	@Resource(name = "roleManager")
+	private RoleManager roleManager = null;
 	
 	public UsersManager getUsersManager() {
 		return usersManager;
@@ -198,6 +207,14 @@ public class OnlineOFImpl implements OnlineOF{
 
 	public void setPrivilegeManager(PrivilegeManager privilegeManager) {
 		this.privilegeManager = privilegeManager;
+	}
+
+	public RoleManager getRoleManager() {
+		return roleManager;
+	}
+
+	public void setRoleManager(RoleManager roleManager) {
+		this.roleManager = roleManager;
 	}
 
 	/**
