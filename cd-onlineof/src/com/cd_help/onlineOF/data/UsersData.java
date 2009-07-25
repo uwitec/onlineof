@@ -6,18 +6,11 @@
 package com.cd_help.onlineOF.data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -90,18 +83,18 @@ public class UsersData implements Serializable{
     private Integer isSuper = 0;
 	
 	/**
-	 * 拥有角色
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
-	@JoinTable(name = "user_role", joinColumns = { @JoinColumn(name = "usersId") }, inverseJoinColumns = { @JoinColumn(name = "roleId") })
-	private List<RoleData> roleList = new ArrayList<RoleData>();
-	
-	/**
 	 * 所属餐厅ID
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
+    @Column(name = "restaurantId", nullable = true, length = 32)
 	private String restaurantId;
+    
+    /**
+	 * 所属角色ID
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+    @Column(name = "roleId", nullable = true, length = 32)
+	private String roleId;
 
 	public String getUsersId() {
 		return usersId;
@@ -120,12 +113,6 @@ public class UsersData implements Serializable{
 	}
 	public void setPassword(String password) {
 		this.password = password;
-	}
-	public List<RoleData> getRoleList() {
-		return roleList;
-	}
-	public void setRoleList(List<RoleData> roleList) {
-		this.roleList = roleList;
 	}
 	public Date getBirthday() {
 		return birthday;
@@ -150,5 +137,11 @@ public class UsersData implements Serializable{
 	}
 	public void setRestaurantId(String restaurantId) {
 		this.restaurantId = restaurantId;
+	}
+	public String getRoleId() {
+		return roleId;
+	}
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 }
