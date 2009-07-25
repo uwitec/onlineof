@@ -47,33 +47,45 @@ public class UsersVo {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String birthdayStr;
-	
+
 	private Date birthday;
-	
+
 	/**
 	 * 性别(1:男 0:女)
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private Integer gender;
-	
+
 	/**
 	 * 所属餐厅ID
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String restaurantId;
-	
+
 	/**
 	 * 所属餐厅名称
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String restaurantName;
-	
+
 	/**
 	 * 是否是超级用户
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private Integer isSuper = 0;
+
+	/**
+	 * 所属角色ID
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String roleId;
+
+	/**
+	 * 所属角色名称
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String roleName;
 
 	/**
 	 * Constructs a <code>UsersVo</code>
@@ -92,7 +104,9 @@ public class UsersVo {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public UsersVo(String usersId, String usersname, String password,
-			Date birthday, Integer gender,String restaurantId,String restaurantName,Integer isSuper) {
+			Date birthday, Integer gender, String restaurantId,
+			String restaurantName, Integer isSuper, String roleId,
+			String roleName) {
 		this.usersId = usersId;
 		this.usersname = usersname;
 		this.password = password;
@@ -102,6 +116,8 @@ public class UsersVo {
 		this.restaurantId = restaurantId;
 		this.restaurantName = restaurantName;
 		this.isSuper = isSuper;
+		this.roleId = roleId;
+		this.roleName = roleName;
 	}
 
 	public String getUsersId() {
@@ -121,13 +137,13 @@ public class UsersVo {
 	}
 
 	public String getPassword() {
-		return StringUtil.encodePassword(password,"MD5");
+		return StringUtil.encodePassword(password, "MD5");
 	}
 
 	public void setPassword(String password) {
 		this.password = password;
 	}
-    
+
 	public String getBirthdayStr() {
 		return birthdayStr;
 	}
@@ -174,5 +190,21 @@ public class UsersVo {
 
 	public void setIsSuper(Integer isSuper) {
 		this.isSuper = isSuper;
+	}
+
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
+	}
+
+	public String getRoleName() {
+		return roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		this.roleName = roleName;
 	}
 }
