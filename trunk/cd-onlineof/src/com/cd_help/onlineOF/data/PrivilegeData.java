@@ -98,7 +98,7 @@ public class PrivilegeData implements Serializable{
 	 * 子权限
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@OneToMany(mappedBy = "parent", cascade=CascadeType.REMOVE, fetch=FetchType.LAZY)  
+	@OneToMany(mappedBy = "parent", cascade=CascadeType.REFRESH, fetch=FetchType.LAZY)  
 	private List<PrivilegeData> childPrivileges = new ArrayList<PrivilegeData>();
 	
 	/**
