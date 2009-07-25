@@ -39,7 +39,7 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "users")
 @NamedQueries( { 
-	@NamedQuery(name = "login", query = "select DISTINCT u from UsersData u where u.usersname = :usersname"), 
+	@NamedQuery(name = "getUsersByName", query = "select DISTINCT u from UsersData u where u.usersname = :usersname"), 
 	@NamedQuery(name = "loadAllUsers", query = "select DISTINCT u from UsersData u where u.isSuper=0"), 
 	@NamedQuery(name = "searchUsersByPage", query = "from UsersData u where u.isSuper=0 and u.usersname like :usersname and u.restaurantId like :restaurantId"),
 	@NamedQuery(name = "countByUsersname", query = "select count(*) from UsersData u where u.usersname=:usersname"),
@@ -65,7 +65,7 @@ public class UsersData implements Serializable{
 	 * 密码
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "password", nullable = true, length = 15)
+	@Column(name = "password", nullable = true, length = 32)
 	private String password;
 	
 	/**
