@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RoleVo;
 
 /**
@@ -34,12 +35,55 @@ public interface RoleManager {
 	public List<RoleVo> loadAll(Session session) throws AppException;
 	
 	/**
-	 * 获取用户拥有角色
-	 * @param usersId
+	 * 根据条件分页查询
+	 * @param hqlName
+	 * @param paramName
+	 * @param condition
+	 * @param pageBean
+	 * @param session
 	 * @return
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public List<RoleVo> getRoleByUsersId(Session session,String usersId) throws AppException;
+	public PageBean searchByPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean, Session session)
+			throws AppException;
+	
+	/**
+	 * 删除角色
+	 * @param session
+	 * @param id
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void delete(Session session, String id) throws AppException;
+	
+	/**
+	 * 新建角色
+	 * @param session
+	 * @param roleVo
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void addRole(Session session,RoleVo roleVo) throws AppException;
+	
+	/**
+	 * 根据ID获取角色信息
+	 * @param session
+	 * @param roleId
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public RoleVo getRoleById(Session session, String roleId) throws AppException;
+	
+	/**
+	 * 修改角色
+	 * @param session
+	 * @param roleVo
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void updateRole(Session session, RoleVo roleVo) throws AppException;
 
 }

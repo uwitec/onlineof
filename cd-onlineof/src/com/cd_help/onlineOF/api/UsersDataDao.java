@@ -36,11 +36,11 @@ public interface UsersDataDao extends BaseDao {
 	 */
 	public boolean checkUsersByName(String usersname) throws AppException;
 	
-	public void addUsers(UsersVo usersVo, List<String> roleIds) throws AppException;
+	public void addUsers(UsersVo usersVo) throws AppException;
 
 	public List<UsersVo> loadAll() throws AppException;
 
-	public void update(String id) throws AppException;
+	public void update(UsersVo usersVo) throws AppException;
 
 	public void delete(String id) throws AppException;
 
