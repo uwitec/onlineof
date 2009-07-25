@@ -14,7 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.api.PrivilegeDataDao;
-import com.cd_help.onlineOF.api.RoleDataDao;
 import com.cd_help.onlineOF.api.SessionManager;
 import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.data.PrivilegeData;
@@ -22,7 +21,6 @@ import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
-import com.cd_help.onlineOF.web.vo.RoleVo;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -46,10 +44,6 @@ public class SessionManagerImpl implements SessionManager{
 	private UsersDataDao usersDataDao;
 	
 	@Autowired
-	@Resource(name = "roleDataDao")
-	private RoleDataDao roleDataDao;
-	
-	@Autowired
 	@Resource(name = "privilegeDataDao")
 	private PrivilegeDataDao privilegeDataDao;
 
@@ -59,8 +53,7 @@ public class SessionManagerImpl implements SessionManager{
 	public Session createSession(UsersVo usersVo) throws AppException {
 		@SuppressWarnings("unused")
 		UsersVo vo = usersVo;
-		List<RoleVo> roles = roleDataDao.findByNamedQueryAndNamedParam("getRoleByUsersId", "usersId", usersVo.getUsersId());
-		List<PrivilegeData> privileges = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByUsersId", "usersId", usersVo.getUsersId());
+		List<PrivilegeData> privileges = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByRoleId", "roleId", usersVo.getRoleId());
 		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
 		for(PrivilegeData p : privileges){
 			PrivilegeVo pv = new PrivilegeVo();
@@ -70,16 +63,12 @@ public class SessionManagerImpl implements SessionManager{
 			}
 			privilegeVos.add(pv);
 		}
-		Session session = new Session(usersVo,roles,privilegeVos);
+		Session session = new Session(usersVo,privilegeVos);
 		return session;
 	}
 
 	public void setUsersDataDao(UsersDataDao usersDataDao) {
 		this.usersDataDao = usersDataDao;
-	}
-
-	public void setRoleDataDao(RoleDataDao roleDataDao) {
-		this.roleDataDao = roleDataDao;
 	}
 
 	public void setPrivilegeDataDao(PrivilegeDataDao privilegeDataDao) {

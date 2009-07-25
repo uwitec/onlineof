@@ -13,8 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.api.RestaurantDataDao;
+import com.cd_help.onlineOF.api.RoleDataDao;
 import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.api.UsersManager;
+import com.cd_help.onlineOF.data.RoleData;
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
@@ -42,6 +44,9 @@ public class UsersManagerImpl implements UsersManager {
 	@Autowired
 	@Resource(name = "restaurantDataDao")
 	private RestaurantDataDao restaurantDataDao;
+	@Autowired
+	@Resource(name = "roleDataDao")
+	private RoleDataDao roleDataDao;
 
 	public void delete(Session session, String id) throws AppException {
 		try {
@@ -51,7 +56,7 @@ public class UsersManagerImpl implements UsersManager {
 				throw new AppException("0000000", "权限不够!");
 			}
 		} catch (AppException e) {
-			throw new AppException("0000012", "删除用户出错!");
+			throw new AppException("0000012", "删除失败");
 		}
 	}
 
@@ -93,6 +98,10 @@ public class UsersManagerImpl implements UsersManager {
 					usersVo.setRestaurantName(restaurantDataDao.get(
 							usersVo.getRestaurantId()).getName());
 				}
+				if (null != usersVo.getRoleId()
+						&& usersVo.getRoleId().length() > 0) {
+					usersVo.setRoleName(((RoleData)roleDataDao.get(RoleData.class, usersVo.getRoleId())).getRoleName());
+				}
 				return usersVo;
 			}else{
 				throw new AppException("0000011", "登陆出错,请检查用户名和密码!");
@@ -102,10 +111,10 @@ public class UsersManagerImpl implements UsersManager {
 		}
 	}
 
-	public void update(Session session, String id) throws AppException {
+	public void update(Session session, UsersVo usersVo) throws AppException {
 		try {
 			if (this.checkPrivilege(session)) {
-				usersDataDao.update(id);
+				usersDataDao.update(usersVo);
 			} else {
 				throw new AppException("0000000", "权限不够!");
 			}
@@ -166,11 +175,11 @@ public class UsersManagerImpl implements UsersManager {
 	/**
 	 * @see com.cd_help.onlineOF.api.UsersManager#addUsers(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.data.UsersData)
 	 */
-	public void addUsers(Session session, UsersVo usersVo, List<String> roleIds)
+	public void addUsers(Session session, UsersVo usersVo)
 			throws AppException {
 		try{
 			if(this.checkPrivilege(session)){
-				usersDataDao.addUsers(usersVo,roleIds);
+				usersDataDao.addUsers(usersVo);
 			}else{
 				throw new AppException("0000000", "权限不够!");
 			}

@@ -62,8 +62,10 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 		return usersVos;
 	}
 
-	public void update(String id) throws AppException {
-
+	public void update(UsersVo usersVo) throws AppException {
+         UsersData usersData = new UsersData();
+         BeanUtilsHelp.copyProperties(usersData, usersVo);
+         this.update(usersData);
 	}
 
 	public UsersVo login(String usersname, String password)
@@ -74,6 +76,7 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 			if(users.getPassword().equals(password.trim())){
 				UsersVo usersVo = new UsersVo();
 				BeanUtilsHelp.copyProperties(usersVo,users);
+				usersVo.setRoleName(((RoleData)this.get(RoleData.class, users.getRoleId())).getRoleName());
 				return usersVo;
 			}else{
 				return null;	
@@ -89,16 +92,20 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 				condition, pageBean);
 		
 		List<UsersVo> list = new ArrayList<UsersVo>();
-		UsersData user = null;
+		UsersData users = null;
 		UsersVo uservo = null;
 		for (Object obj : pageBean.getArray()) {
-			user = (UsersData) obj;
+			users = (UsersData) obj;
 			uservo = new UsersVo();
-			BeanUtilsHelp.copyProperties(uservo, user);
-			if (null != user.getRestaurantId()
-					&& user.getRestaurantId().length() > 0) {
+			BeanUtilsHelp.copyProperties(uservo, users);
+			if (null != users.getRestaurantId()
+					&& users.getRestaurantId().length() > 0) {
 				uservo.setRestaurantName(((RestaurantData)this.get(RestaurantData.class,
-						user.getRestaurantId())).getName());
+						users.getRestaurantId())).getName());
+			}
+			if (null != users.getRoleId()
+					&& users.getRoleId().length() > 0) {
+				uservo.setRoleName(((RoleData)this.get(RoleData.class, users.getRoleId())).getRoleName());
 			}
 			list.add(uservo);
 		}
@@ -121,20 +128,11 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 	/**
 	 * @see com.cd_help.onlineOF.api.UsersDataDao#addUsers(com.cd_help.onlineOF.web.vo.UsersVo, java.util.List)
 	 */
-	public void addUsers(UsersVo usersVo, List<String> roleIds)
+	public void addUsers(UsersVo usersVo)
 			throws AppException {
           UsersData usersData = new UsersData();
           BeanUtilsHelp.copyProperties(usersData, usersVo);
           usersData.setUsersId(StringUtil.getUUID());
-          if(null != roleIds && roleIds.size() > 0){
-        	  List<RoleData> roles = new ArrayList<RoleData>();
-        	  RoleData roleData = null;
-        	  for(String id : roleIds){
-        		  roleData = (RoleData)this.get(RoleData.class, id);
-        		  roles.add(roleData);
-        	  }
-        	  usersData.setRoleList(roles);
-          }
           this.save(usersData);
 	}
 }

@@ -58,7 +58,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 		List<PrivilegeVo> privilegeVos = null;
 		try{
 			if(this.checkPrivilege(session)){
-				privilegeVos = privilegeDataDao.loadChildModelPrivilegeByParent(parentId,session.getUsersVo().getUsersId());
+				privilegeVos = privilegeDataDao.loadChildModelPrivilegeByParent(parentId,session.getUsersVo().getRoleId());
 			}else{
 				throw new AppException("0000000","权限不够!");
 			}
@@ -72,7 +72,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 		List<PrivilegeVo> privilegeVos = null;
 		try{
 			if(this.checkPrivilege(session)){
-				privilegeVos = privilegeDataDao.loadTopModelPrivilege(session.getUsersVo().getUsersId());
+				privilegeVos = privilegeDataDao.loadTopModelPrivilege(session.getUsersVo().getRoleId());
 			}else{
 				throw new AppException("0000000","权限不够!");
 			}

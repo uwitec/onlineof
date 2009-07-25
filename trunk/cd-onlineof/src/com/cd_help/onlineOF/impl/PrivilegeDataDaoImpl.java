@@ -53,10 +53,10 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 	/**
 	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#loadChildModelPrivilegeByParent(java.lang.String, java.lang.String)
 	 */
-	public List<PrivilegeVo> loadChildModelPrivilegeByParent(String parentId,String usersId) throws AppException {
-		String parameNames[] = {"parentId","usersId"};
-		String values[] = {parentId,usersId};
-		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getChildModelPrivilegeByUsersId", parameNames, values);
+	public List<PrivilegeVo> loadChildModelPrivilegeByParent(String parentId,String roleId) throws AppException {
+		String parameNames[] = {"parentId","roleId"};
+		String values[] = {parentId,roleId};
+		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getChildModelPrivilegeByRoleId", parameNames, values);
 		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
 		try{
 		for(Iterator iterator = privileges.iterator();iterator.hasNext();){
@@ -75,9 +75,9 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 	/**
 	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#loadTopModelPrivilege(java.lang.String)
 	 */
-	public List<PrivilegeVo> loadTopModelPrivilege(String usersId)
+	public List<PrivilegeVo> loadTopModelPrivilege(String roleId)
 			throws AppException {
-		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getTopModelPrivilegeByUsersId", "usersId", usersId);
+		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getTopModelPrivilegeByRoleId", "roleId", roleId);
 		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
 		for(Iterator iterator = privileges.iterator();iterator.hasNext();){
 			PrivilegeData p = (PrivilegeData)iterator.next();
