@@ -13,10 +13,12 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.data.RestaurantData;
+import com.cd_help.onlineOF.data.RoleData;
 import com.cd_help.onlineOF.data.UsersData;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.utils.StringUtil;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -66,12 +68,16 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 
 	public UsersVo login(String usersname, String password)
 			throws AppException {
-		List<UsersData> usersList = this.findByNamedQueryAndNamedParam("login", "usersname",usersname);
+		List<UsersData> usersList = this.findByNamedQueryAndNamedParam("getUsersByName", "usersname",usersname);
 		if(usersList.size() > 0){
 			UsersData users = usersList.get(0);
-			UsersVo usersVo = new UsersVo();
-			BeanUtilsHelp.copyProperties(usersVo,users);
-			return usersVo;
+			if(users.getPassword().equals(password.trim())){
+				UsersVo usersVo = new UsersVo();
+				BeanUtilsHelp.copyProperties(usersVo,users);
+				return usersVo;
+			}else{
+				return null;	
+			}
 		}else{
            return null;			
 		}
@@ -98,5 +104,37 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 		}
 		pageBean.setArray(list);
 		return pageBean;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.UsersDataDao#checkUsersByName(java.lang.String)
+	 */
+	public boolean checkUsersByName(String usersname) throws AppException {
+		List<UsersData> users = this.findByNamedQueryAndNamedParam("getUsersByName", "usersname", usersname);
+		if(users.size() > 0){
+			return false;
+		}else{
+			return true;
+		}
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.UsersDataDao#addUsers(com.cd_help.onlineOF.web.vo.UsersVo, java.util.List)
+	 */
+	public void addUsers(UsersVo usersVo, List<String> roleIds)
+			throws AppException {
+          UsersData usersData = new UsersData();
+          BeanUtilsHelp.copyProperties(usersData, usersVo);
+          usersData.setUsersId(StringUtil.getUUID());
+          if(null != roleIds && roleIds.size() > 0){
+        	  List<RoleData> roles = new ArrayList<RoleData>();
+        	  RoleData roleData = null;
+        	  for(String id : roleIds){
+        		  roleData = (RoleData)this.get(RoleData.class, id);
+        		  roles.add(roleData);
+        	  }
+        	  usersData.setRoleList(roles);
+          }
+          this.save(usersData);
 	}
 }

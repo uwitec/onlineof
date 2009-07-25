@@ -5,10 +5,14 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.RoleDataDao;
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.web.vo.RoleVo;
 
 /**
  * <b><code></code></b>
@@ -23,6 +27,12 @@ import com.cd_help.onlineOF.api.RoleDataDao;
  */
 @Service("roleDataDao")
 @Transactional
+@SuppressWarnings("unchecked")
 public class RoleDataDaoImpl extends BaseDaoSupport implements RoleDataDao{
+	
+	public List<RoleVo> loadAll() throws AppException{
+		List<RoleVo> roleVos =  this.findByNamedQuery("loadAllRole");
+		return roleVos;
+	}
 
 }

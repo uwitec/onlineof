@@ -87,15 +87,19 @@ public class UsersManagerImpl implements UsersManager {
 		UsersVo usersVo = null;
 		try {
 			usersVo = usersDataDao.login(username, password);
-			if (null != usersVo.getRestaurantId()
-					&& usersVo.getRestaurantId().length() > 0) {
-				usersVo.setRestaurantName(restaurantDataDao.get(
-						usersVo.getRestaurantId()).getName());
+			if(null != usersVo){
+				if (null != usersVo.getRestaurantId()
+						&& usersVo.getRestaurantId().length() > 0) {
+					usersVo.setRestaurantName(restaurantDataDao.get(
+							usersVo.getRestaurantId()).getName());
+				}
+				return usersVo;
+			}else{
+				throw new AppException("0000011", "登陆出错,请检查用户名和密码!");
 			}
 		} catch (AppException e) {
 			throw new AppException("0000011", "登陆出错,请检查用户名和密码!");
 		}
-		return usersVo;
 	}
 
 	public void update(Session session, String id) throws AppException {
@@ -143,6 +147,35 @@ public class UsersManagerImpl implements UsersManager {
 			return page;
 		}else{
 			throw new AppException("0000000", "权限不够!");
+		}
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.UsersManager#checkUsersByName(java.lang.String)
+	 */
+	public boolean checkUsersByName(String usersname) throws AppException {
+		boolean isExits;
+		try{
+			isExits = usersDataDao.checkUsersByName(usersname);
+		}catch(AppException e){
+			throw new AppException("","系统错误!请联系系统管理员.");
+		}
+		return isExits;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.UsersManager#addUsers(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.data.UsersData)
+	 */
+	public void addUsers(Session session, UsersVo usersVo, List<String> roleIds)
+			throws AppException {
+		try{
+			if(this.checkPrivilege(session)){
+				usersDataDao.addUsers(usersVo,roleIds);
+			}else{
+				throw new AppException("0000000", "权限不够!");
+			}
+		}catch(AppException e){
+			throw new AppException("0000000","添加用户失败!");
 		}
 	}
 }
