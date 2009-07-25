@@ -10,6 +10,16 @@
                 /administrator/security/usersManager.jsp
              </result>
 	     </action>
+	     <action name="forwardAddUsers" class="usersAction" method="forwardAddUsers">
+		     <result name="success">
+                /administrator/security/usersEdit.jsp
+             </result>
+	     </action>
+	     <action name="addUsers" class="usersAction" method="addUsers">
+		     <result name="success">
+                /administrator/security/usersManager.jsp
+             </result>
+	     </action>
 	     <action name="deleteUsers" class="usersAction" method="deleteUsers">
 		     <result name="success">
                 /administrator/security/usersManager.jsp
