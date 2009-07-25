@@ -3,7 +3,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>编辑用户</title>
+    <title>新建用户</title>
     <style rel="stylesheet" type="text/css">
        .table{
        		border-collapse: collapse;
@@ -142,16 +142,19 @@
            </td>
          </tr>
          <tr>
-           <td align="right"><span style="white-space: nowrap;">角色分配</span></td>
+           <td align="right"><span style="white-space: nowrap;">所属角色</span></td>
            <td>
-              <s:iterator value="roleVos">
-      	         <s:if test="roleVos.size == 0">
-      	           <span style="white-space: nowrap;">暂无数据</span>
-      	         </s:if>
-      	         <s:else>
-                   <input type="checkbox" id="checksItem" name="checksItem" value="<s:property value='roleId'/>"/><s:property value="roleName"/>
-                 </s:else>
-              </s:iterator>
+              <select id="usersVo.roleId" name="usersVo.roleId">
+      	        <s:if test="roleVos.size > 0">
+      	            <option value="">--请选择--</option>
+	      	        <s:iterator value="roleVos">
+	      	      	   <option value="<s:property value='roleId'/>"><s:property value="roleName"/></option>
+	      	      	</s:iterator>
+      	        </s:if>
+      	        <s:else>
+      	           <option>暂无数据</option>
+      	      	</s:else>
+      	      </select>
            </td>
          </tr>
       </tbody>
