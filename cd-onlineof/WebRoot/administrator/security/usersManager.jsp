@@ -6,20 +6,28 @@
   <head>
     <title>系统用户管理</title>
     <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/common/css/common.css"/>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
     <script language="javascript">
         // 根据名称(模糊查询)和所属餐厅查询用户
         function search(){
             var usersname = document.getElementById("usersname").value;
             var restaurantId = document.getElementById("restaurantId").value;
-            alert("用户名: " + usersname + "餐厅: "+restaurantId);
             window.location.href="searchUsersByPage.do?usersname="+usersname+"&restaurantId="+restaurantId;
         }
         // 添加新用户
         function forwardAddNewUsers(){
             window.location.href="forwardAddUsers.do";
         }
-        function getSelectRestaurant(){
-        
+        // 删除用户
+        function deleteUsers(){
+            var len = getAllCheckedValue();
+            if(len > 0){
+                var usersForm = document.getElementById("usersForm");
+	            usersForm.action="deleteUsers.do";
+	            usersForm.submit();
+            }else{
+                alert("请选择!");
+            }
         }
     </script>
   </head>
@@ -32,9 +40,6 @@
       	      <input type="text" id="usersname" name="usersname">
       	      <span style="white-space: nowrap;">所属餐厅/酒店</span>
       	      <span style="white-space: nowrap;">
-      	      <!--  两种方式任选一种
-      	      <s:select list="restaurantVos" name="restaurant" listKey="restaurantId" listValue="name" headerKey="" headerValue="--请选择--" theme="simple" onchange="javascript:getSelectRestaurant();" /> 
-      	      -->
       	      <select id="restaurantId" name="restaurantId">
       	        <s:set name="restaurantData" value="restaurantVos"/>
       	        <s:if test="#restaurantData == null">
@@ -49,14 +54,17 @@
       	      </select>
       	      </span>
       	      <span style="white-space: nowrap;"><input type="button" value="查询" onclick="search()"/></span>
+      	      <span style="white-space: nowrap;"><input type="button" value="删除" onclick="deleteUsers()"/></span>
       	      <span style="white-space: nowrap;"><input type="button" value="添加新用户" onclick="forwardAddNewUsers()"/></span>
       	     </span>
       	   </td>
       	</tr>
       </table>
+      <form id="usersForm" name="usersForm" action="#" mthod="post">
       <table class="table" style="width:100%;">
          <thead>
            <tr>
+               <th><input type="checkbox" id="checkAll" name="checkAll" onclick="checkedAll()"/></th>
 	           <th><span style="white-space: nowrap;">用户名</span></th>
 	           <th><span style="white-space: nowrap;">密码</span></th>
 	           <th><span style="white-space: nowrap;">性别</span></th>
@@ -66,10 +74,10 @@
            </tr>
          </thead>
          <tbody>
-           <s:set name="data" value="pb.array"/>
-           <s:if test="#data != null">
+           <s:if test="pb.array.size != 0">
             <s:iterator value="pb.array">
 	           <tr>
+	             <td><input type="checkbox" id="checksItem" name="checksItem" value="<s:property value='usersId'/>"/></td>
 	           	 <td><span style="white-space: nowrap;"><s:property value="usersname"/></span></td>
 	             <td><span style="white-space: nowrap;"><s:property value="password"/></span></td>
 	             <td>
@@ -81,22 +89,18 @@
 	             </td>
 	             <td><span style="white-space: nowrap;"><s:property value="birthday"/></span></td>
 	             <td><span style="white-space: nowrap;"><s:property value="restaurantName"/></span></td>
-	             <td>
-	                <span style="white-space: nowrap;">
-		                <s:a href="#">删除</s:a>
-		                <s:a href="#">编辑</s:a>
-	                </span>
-	             </td>
+	             <td><a href="editUsres.do?usersId=<s:property value='usersId'/>">编辑</a>/<a href="setPassword.do?usersId=<s:property value='usersId'/>">密码设置</a></td>
 	           </tr>
 	        </s:iterator>
 	       </s:if>
 	       <s:else>
 	          <tr>
-	            <td colspan="6"><span style="white-space: nowrap;"><font style="color:red;">暂无数据</font></span></td> 
+	            <td colspan="7"><span style="white-space: nowrap;"><font style="color:red;">暂无数据</font></span></td> 
 	          </tr>
 	       </s:else> 
          </tbody>
       </table>
+      </form>
       <!-- 分页start -->
 	<div class="pagination" style="font-size:10pt;">
 		<page:pages1 pagesize="${pb.pagesize}"
