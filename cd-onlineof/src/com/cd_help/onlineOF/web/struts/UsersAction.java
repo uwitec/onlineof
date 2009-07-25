@@ -14,8 +14,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.ConvertUtils;
 import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.utils.StringUtil;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
+import com.cd_help.onlineOF.web.vo.RoleVo;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 @SuppressWarnings("serial")
@@ -23,21 +26,24 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 public class UsersAction extends BaseAction {
 
 	private String usersId;
-	private UsersVo usersVo;
+	private UsersVo usersVo = new UsersVo(); // 用户
 	private List<UsersVo> usersVoList;
-	private PageBean pb;
+	private PageBean pb; // 分页
 	private int page = 1;
 	private String usersname;
 	private String restaurantId;
 	private List<RestaurantVo> restaurantVos = new ArrayList<RestaurantVo>();
+	private List<RoleVo> roleVos = new ArrayList<RoleVo>();
+	private String checkRoles[] = {};
 
 	/**
 	 * 加载所有用户
 	 * 
 	 * @return
+	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String searchUsersByPage() {
+	public String searchUsersByPage() throws AppException {
 		log.debug("--->> begin loadAllUsers");
 		String params[] = null;
 		Object conditions[] = null;
@@ -59,11 +65,58 @@ public class UsersAction extends BaseAction {
 				log.debug("--->> 超级用户");
 			}
 			// 加载所有餐厅
-			restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
+			loadAllRestaurant();
 			this.pb = this.getOnlineOF().getUsersManager().searchByPage(hql,
 					params, conditions, this.pb, this.getSession());
 		} catch (AppException e) {
-			e.printStackTrace();
+			log.error(null,e);
+			throw new AppException(e.getError_code(),e.getMessage());
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 跳转到添加用户页面
+	 * @return
+	 * @throws AppException 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String forwardAddUsers() throws AppException{
+		try{
+			// 加载所有餐厅
+			loadAllRestaurant(); 
+			// 加载所有角色
+			roleVos = this.getOnlineOF().getRoleManager().loadAll(this.getSession());
+		}catch(AppException e){
+			log.error(e);
+			throw new AppException(e.getError_code(),e.getMessage());
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 添加用户
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String addUsers() throws AppException{
+		try{
+			String[] roles = this.checkRoles;
+			List<String> roleIds = null;
+			if (null != roles) {
+				roleIds = new ArrayList<String>();
+				for(int i=0; i<roles.length; i++){
+					roleIds.add(roles[i]);
+				}
+			}
+			usersVo.setBirthday(ConvertUtils.toDate2(usersVo.getBirthdayStr()));
+			usersVo.setPassword(StringUtil.encodePassword(usersVo.getPassword(), "MD5"));
+			this.getOnlineOF().getUsersManager().addUsers(this.getSession(), usersVo, roleIds);
+			this.searchUsersByPage();
+		}catch(AppException e){
+			log.error(e);
+			throw new AppException(e.getError_code(),e.getMessage());
 		}
 		return SUCCESS;
 	}
@@ -85,6 +138,11 @@ public class UsersAction extends BaseAction {
 		}
 		return SUCCESS;
 	}
+	
+	private void loadAllRestaurant() throws AppException{
+		// 加载所有餐厅
+		restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
+	}
 
 	/**
 	 * 根据ID获取信息
@@ -101,6 +159,12 @@ public class UsersAction extends BaseAction {
 			e.printStackTrace();
 		}
 		return SUCCESS;
+	}
+	
+	@Autowired
+	@Resource(name = "pageBean")
+	public void setPb(PageBean pb) {
+		this.pb = pb;
 	}
 
 	public UsersVo getUsersVo() {
@@ -146,11 +210,13 @@ public class UsersAction extends BaseAction {
 	public void setRestaurantId(String restaurantId) {
 		this.restaurantId = restaurantId;
 	}
+    
+	public String[] getCheckRoles() {
+		return checkRoles;
+	}
 
-	@Autowired
-	@Resource(name = "pageBean")
-	public void setPb(PageBean pb) {
-		this.pb = pb;
+	public void setCheckRoles(String[] checkRoles) {
+		this.checkRoles = checkRoles;
 	}
 
 	public int getPage() {
@@ -167,5 +233,13 @@ public class UsersAction extends BaseAction {
 
 	public void setRestaurantVos(List<RestaurantVo> restaurantVos) {
 		this.restaurantVos = restaurantVos;
+	}
+
+	public List<RoleVo> getRoleVos() {
+		return roleVos;
+	}
+
+	public void setRoleVos(List<RoleVo> roleVos) {
+		this.roleVos = roleVos;
 	}
 }

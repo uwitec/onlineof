@@ -47,7 +47,9 @@ public class UsersVo {
 	 * 出生日期
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private String birthday;
+	private String birthdayStr;
+	
+	private Date birthday;
 	
 	/**
 	 * 性别(1:男 0:女)
@@ -72,7 +74,7 @@ public class UsersVo {
 	 * 是否是超级用户
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private Integer isSuper;
+	private Integer isSuper = 0;
 
 	/**
 	 * Constructs a <code>UsersVo</code>
@@ -95,7 +97,7 @@ public class UsersVo {
 		this.usersId = usersId;
 		this.usersname = usersname;
 		this.password = StringUtil.encodePassword(password, "MD5");
-		this.birthday = ConvertUtils.toString1(birthday);
+		this.birthday = birthday;
 		this.gender = gender;
 		this.gender = gender;
 		this.restaurantId = restaurantId;
@@ -126,12 +128,20 @@ public class UsersVo {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+    
+	public String getBirthdayStr() {
+		return birthdayStr;
+	}
 
-	public String getBirthday() {
+	public void setBirthdayStr(String birthdayStr) {
+		this.birthdayStr = birthdayStr;
+	}
+
+	public Date getBirthday() {
 		return birthday;
 	}
 
-	public void setBirthday(String birthday) {
+	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
 	}
 
