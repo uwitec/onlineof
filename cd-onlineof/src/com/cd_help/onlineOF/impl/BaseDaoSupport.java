@@ -73,34 +73,34 @@ public class BaseDaoSupport implements BaseDao {
 		return this.hibernateTemplate;
 	}
 
-	protected final void releaseSession(Session session) {
+	protected final void releaseSession(Session session) throws AppException {
 		SessionFactoryUtils.releaseSession(session, getSessionFactory());
-	}
+	} 
 
-	public List find(String queryString) {
+	public List find(String queryString) throws AppException{
 		return find(queryString, (Object[]) null);
 	}
 
-	public List find(String queryString, Object value) {
+	public List find(String queryString, Object value) throws AppException{
 		return find(queryString, new Object[] { value });
 	}
 
-	public List find(final String queryString, final Object[] values) {
+	public List find(final String queryString, final Object[] values) throws AppException{
 		return getHibernateTemplate().find(queryString, values);
 	}
 
 	public List findByNamedParam(String queryString, String paramName,
-			Object value) {
+			Object value) throws AppException{
 		return getHibernateTemplate().findByNamedParam(queryString, paramName,
 				value);
 	}
 
-	public List findByNamedQuery(String queryName) {
+	public List findByNamedQuery(String queryName) throws AppException{
 		return findByNamedQuery(queryName, (Object[]) null);
 	}
 
 	public List findByNamedQuery(final String queryName, final int start,
-			final int limit) {
+			final int limit) throws AppException{
 		return (List) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
@@ -110,60 +110,60 @@ public class BaseDaoSupport implements BaseDao {
 		});
 	}
 
-	public List findByNamedQuery(String queryName, Object value) {
+	public List findByNamedQuery(String queryName, Object value) throws AppException{
 		return findByNamedQuery(queryName, new Object[] { value });
 	}
 
-	public List findByNamedQuery(final String queryName, final Object[] values) {
+	public List findByNamedQuery(final String queryName, final Object[] values) throws AppException{
 		return getHibernateTemplate().findByNamedQuery(queryName, values);
 	}
 
 	public List findByNamedQueryAndNamedParam(String queryName,
-			String paramName, Object value) {
+			String paramName, Object value) throws AppException{
 		return findByNamedQueryAndNamedParam(queryName,
 				new String[] { paramName }, new Object[] { value });
 	}
 
 	public List findByNamedQueryAndNamedParam(final String queryName,
-			final String[] paramNames, final Object[] values) {
+			final String[] paramNames, final Object[] values) throws AppException{
 		return getHibernateTemplate().findByNamedQueryAndNamedParam(queryName,
 				paramNames, values);
 	}
 
-	public void flush() {
+	public void flush() throws AppException{
 		getHibernateTemplate().flush();
 	}
 
-	public void clear() {
+	public void clear() throws AppException{
 		getHibernateTemplate().clear();
 	}
 
-	public Object get(Class entityClass, Serializable id) {
+	public Object get(Class entityClass, Serializable id) throws AppException{
 		return getHibernateTemplate().get(entityClass, id);
 	}
 
-	public boolean exist(Class entityClass, Serializable id) {
+	public boolean exist(Class entityClass, Serializable id) throws AppException{
 		return getHibernateTemplate().get(entityClass, id) == null ? false
 				: true;
 	}
 
-	public void save(Object entity) {
+	public void save(Object entity) throws AppException{
 		getHibernateTemplate().save(entity);
 	}
 
-	public void update(Object entity) {
+	public void update(Object entity) throws AppException{
 		getHibernateTemplate().update(entity);
 	}
 
-	public void delete(Object entity) {
+	public void delete(Object entity) throws AppException{
 		getHibernateTemplate().delete(entity);
 	}
 
-	public List loadAll(final Class entityClass) {
+	public List loadAll(final Class entityClass) throws AppException{
 		return getHibernateTemplate().loadAll(entityClass);
 	}
 
-	public int countByNamedQuery(final String queryName) {
+	public int countByNamedQuery(final String queryName) throws AppException{
 		return ((Long) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
@@ -173,7 +173,7 @@ public class BaseDaoSupport implements BaseDao {
 	}
 	
 	public int queryCountByHql(String hqlName, String[] paramName,
-			Object[] condition) {
+			Object[] condition) throws AppException{
 		SessionFactory factory = new AnnotationConfiguration().buildSessionFactory();
 		Session session = factory.openSession();
 		String hqlString = session.getNamedQuery(hqlName).getQueryString();
