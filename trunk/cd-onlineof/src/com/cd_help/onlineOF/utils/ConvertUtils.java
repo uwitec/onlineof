@@ -32,6 +32,11 @@ public class ConvertUtils {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public static SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMdd");
+	/**
+	 * 转换二
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public static SimpleDateFormat format3 = new SimpleDateFormat("yyyy-MM-dd");
 
 	/**
 	 * 将Date转换为String yyyy-MM-dd hh:mm
@@ -52,6 +57,16 @@ public class ConvertUtils {
 	public static String toString2(Date date) {
 		if(date == null) return "";
 		return format2.format(date);
+	}
+	/**
+	 * 将Date转换为String yyyyMMdd
+	 * @param date
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public static String toString3(Date date) {
+		if(date == null) return "";
+		return format3.format(date);
 	}
 
 	/**
@@ -83,6 +98,23 @@ public class ConvertUtils {
 		} else {
 			try {
 				return format2.parse(strDate);
+			} catch (ParseException e) {
+				return null;
+			}
+		}
+	}
+	/**
+	 * 将String转换为Date yyyyMMdd
+	 * @param strDate
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public static Date toDate3(String strDate) {
+		if (strDate == null || "".equals(strDate)) {
+			return null;
+		} else {
+			try {
+				return format3.parse(strDate);
 			} catch (ParseException e) {
 				return null;
 			}
