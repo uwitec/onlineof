@@ -6,7 +6,9 @@
 package com.cd_help.onlineOF.web.struts;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -33,8 +35,9 @@ public class UsersAction extends BaseAction {
 	private String usersname;
 	private String restaurantId;
 	private List<RestaurantVo> restaurantVos = new ArrayList<RestaurantVo>();
+	private String checksItem[] = {};
+	private String ownerRoles[] = new String[10];
 	private List<RoleVo> roleVos = new ArrayList<RoleVo>();
-	private String checkRoles[] = {};
 
 	/**
 	 * 加载所有用户
@@ -50,16 +53,13 @@ public class UsersAction extends BaseAction {
 		String hql = "searchUsersByPage";
 		try {
 			this.pb.setCurrentPage(page);
-			this.pb.setPagesize(2);
-			log
-					.debug("--->> search by usersname" + "  usersname: "
-							+ usersname);
+			this.pb.setPagesize(10);
+			log.debug("--->> search by usersname");
 			params = new String[] { "usersname", "restaurantId" };
 			conditions = new Object[] {
 					null == this.usersname ? "%" : "%" + this.usersname + "%",
 					null == restaurantId || "".equals(restaurantId) ? "%" : "%"
 							+ this.restaurantId + "%" };
-			// 只有超级用户采用 根据餐厅去查用户
 			if (null != this.getSession()
 					&& this.getSession().getUsersVo().getIsSuper() == 1) {
 				log.debug("--->> 超级用户");
@@ -102,7 +102,7 @@ public class UsersAction extends BaseAction {
 	 */
 	public String addUsers() throws AppException{
 		try{
-			String[] roles = this.checkRoles;
+			String[] roles = this.checksItem;
 			List<String> roleIds = null;
 			if (null != roles) {
 				roleIds = new ArrayList<String>();
@@ -130,8 +130,13 @@ public class UsersAction extends BaseAction {
 	public String deleteUsers() {
 		log.debug("--->> begin deleteUsers");
 		try {
-			this.getOnlineOF().getUsersManager().delete(this.getSession(),
-					usersId);
+			if(null != this.checksItem){
+				for(int i=0; i<this.checksItem.length; i++){
+					log.debug(this.checksItem[i]);
+					this.getOnlineOF().getUsersManager().delete(this.getSession(),
+							this.checksItem[i]);
+				}
+			}
 			this.searchUsersByPage();
 		} catch (AppException e) {
 			e.printStackTrace();
@@ -145,16 +150,24 @@ public class UsersAction extends BaseAction {
 	}
 
 	/**
-	 * 根据ID获取信息
-	 * 
+	 * 跳转到编辑页面
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String getUsersById() {
-		log.debug("--->> begin getUsersById");
+	public String editUsres() {
+		log.debug("--->> begin getUsersById : "+this.getRequest().getParameter("usersId"));
 		try {
 			usersVo = this.getOnlineOF().getUsersManager().get(
 					this.getSession(), usersId);
+			// 加载所有餐厅
+			loadAllRestaurant(); 
+			// 加载所有角色
+			roleVos = this.getOnlineOF().getRoleManager().loadAll(this.getSession());
+			// 加载拥有角色
+			List<RoleVo> rvs = this.getOnlineOF().getRoleManager().getRoleByUsersId(this.getSession(), usersId);
+			for(int i=0; i<rvs.size(); i++){
+				ownerRoles[i] = rvs.get(i).getRoleId();
+			}
 		} catch (AppException e) {
 			e.printStackTrace();
 		}
@@ -211,12 +224,12 @@ public class UsersAction extends BaseAction {
 		this.restaurantId = restaurantId;
 	}
     
-	public String[] getCheckRoles() {
-		return checkRoles;
+	public String[] getChecksItem() {
+		return checksItem;
 	}
 
-	public void setCheckRoles(String[] checkRoles) {
-		this.checkRoles = checkRoles;
+	public void setChecksItem(String[] checksItem) {
+		this.checksItem = checksItem;
 	}
 
 	public int getPage() {
@@ -242,4 +255,13 @@ public class UsersAction extends BaseAction {
 	public void setRoleVos(List<RoleVo> roleVos) {
 		this.roleVos = roleVos;
 	}
+
+	public String[] getOwnerRoles() {
+		return ownerRoles;
+	}
+
+	public void setOwnerRoles(String[] ownerRoles) {
+		this.ownerRoles = ownerRoles;
+	}
+	
 }
