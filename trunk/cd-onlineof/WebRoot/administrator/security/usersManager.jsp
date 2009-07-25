@@ -32,12 +32,11 @@
     </script>
   </head>
   <body style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;">
-      <table style="width:100%;font-size:10pt;">
-      	<tr>
-      	   <td style="width:100%;">
+    <form id="usersForm" name="usersForm" action="#" mthod="post">
+      <div style="width:100%;font-size:10pt;">
       	     <span style="white-space: nowrap;">
       	      <span style="white-space: nowrap;">用户名</span>
-      	      <input type="text" id="usersname" name="usersname">
+      	      <input type="text" id="usersname" name="usersname"/>
       	      <span style="white-space: nowrap;">所属餐厅/酒店</span>
       	      <span style="white-space: nowrap;">
       	      <select id="restaurantId" name="restaurantId">
@@ -57,10 +56,7 @@
       	      <span style="white-space: nowrap;"><input type="button" value="删除" onclick="deleteUsers()"/></span>
       	      <span style="white-space: nowrap;"><input type="button" value="添加新用户" onclick="forwardAddNewUsers()"/></span>
       	     </span>
-      	   </td>
-      	</tr>
-      </table>
-      <form id="usersForm" name="usersForm" action="#" mthod="post">
+      	   </div>
       <table class="table" style="width:100%;">
          <thead>
            <tr>
@@ -70,6 +66,7 @@
 	           <th><span style="white-space: nowrap;">性别</span></th>
 	           <th><span style="white-space: nowrap;">出生日期</span></th>
 	           <th><span style="white-space: nowrap;">所属餐厅/酒店</span></th>
+	           <th><span style="white-space: nowrap;">所属角色</span></th>
 	           <th><span style="white-space: nowrap;">操作</span></th>
            </tr>
          </thead>
@@ -89,6 +86,7 @@
 	             </td>
 	             <td><span style="white-space: nowrap;"><s:property value="birthday"/></span></td>
 	             <td><span style="white-space: nowrap;"><s:property value="restaurantName"/></span></td>
+	             <td><span style="white-space: nowrap;"><s:property value="roleName"/></span></td>
 	             <td><a href="editUsres.do?usersId=<s:property value='usersId'/>">编辑</a>/<a href="setPassword.do?usersId=<s:property value='usersId'/>">密码设置</a></td>
 	           </tr>
 	        </s:iterator>

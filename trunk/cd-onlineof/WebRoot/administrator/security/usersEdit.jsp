@@ -43,7 +43,7 @@
     </script>
   </head>
   <body style="margin-top:1px;margin-bottom:0px;margin-left:0px;margin-right:0px;">
-    <form id="editForm" name="editForm" action="editUsers.do" method="post">
+    <form id="editForm" name="editForm" action="updateUsers.do" method="post">
        <table class="table" style="width:100%;">
           <thead>
              <th colspan="2">编辑用户信息</th>
@@ -100,21 +100,31 @@
 	           </td>
 	         </tr>
 	         <tr>
-	           <td align="right"><span style="white-space: nowrap;">角色分配</span></td>
+	           <td align="right"><span style="white-space: nowrap;">所属角色</span></td>
 	           <td>
-      	         <s:if test="roleVos.size == 0">
-      	           <span style="white-space: nowrap;">暂无数据</span>
-      	         </s:if>
-      	         <s:else>
-      	           <s:checkboxlist theme="simple" list="roleVos" listKey="roleName" listValue="roleId" name="ownerRoles"/>
-                 </s:else>
+      	         <select id="usersVo.roleId" name="usersVo.roleId">
+	      	        <s:if test="roleVos.size == 0">
+	      	           <option>暂无数据</option>
+	      	        </s:if>
+	      	        <s:else>
+	      	            <option value="">--请选择--</option>
+		      	        <s:iterator value="roleVos">
+		      	           <s:if test="roleId == usersVo.roleId">
+		      	              <option value="<s:property value='roleId'/>" selected><s:property value="roleName"/></option>
+		      	           </s:if>
+		      	           <s:else>
+		      	              <option value="<s:property value='roleId'/>"><s:property value="roleName"/></option>
+		      	           </s:else>
+		      	      	</s:iterator>
+	      	      	</s:else>
+	      	      </select>
 	           </td>
 	         </tr>
           </tbody>
           <tfoot>
              <tr>
 	           <td align="center" colspan="2">
-	              <input type="button" value="保存" onclick="updateUsers()">
+	              <input type="submit" value="保存">
 	              <input type="reset" value="重置">
 	              <input type="button" value="返回" onclick="back()">
 	           </td>
