@@ -18,8 +18,21 @@ package com.cd_help.onlineOF.web.vo;
  */
 public class RoleVo {
 	
+	/**
+	 * 角色ID
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
 	private String roleId;
+	/**
+	 * 角色名称
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
 	private String roleName;
+	/**
+	 * 描述
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String description;
 	
 	/**
 	 * Constructs a <code>RoleVo</code>
@@ -33,9 +46,10 @@ public class RoleVo {
 	 * @param roleName
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public RoleVo(String roleId,String roleName){
+	public RoleVo(String roleId,String roleName,String description){
 		this.roleId = roleId;
 		this.roleName = roleName;
+		this.description = description;
 	}
 
 	public String getRoleId() {
@@ -52,5 +66,13 @@ public class RoleVo {
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 }

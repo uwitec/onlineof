@@ -7,7 +7,6 @@ package com.cd_help.onlineOF.web.vo;
 
 import java.util.Date;
 
-import com.cd_help.onlineOF.utils.ConvertUtils;
 import com.cd_help.onlineOF.utils.StringUtil;
 
 /**
@@ -96,7 +95,7 @@ public class UsersVo {
 			Date birthday, Integer gender,String restaurantId,String restaurantName,Integer isSuper) {
 		this.usersId = usersId;
 		this.usersname = usersname;
-		this.password = StringUtil.encodePassword(password, "MD5");
+		this.password = password;
 		this.birthday = birthday;
 		this.gender = gender;
 		this.gender = gender;
