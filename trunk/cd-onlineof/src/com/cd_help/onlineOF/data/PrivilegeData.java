@@ -77,7 +77,7 @@ public class PrivilegeData implements Serializable{
 	 * 请求路径
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "url", nullable = true, length = 15)
+	@Column(name = "url", nullable = true, length = 200)
 	private String url;
 	/**
 	 * 是否有子
