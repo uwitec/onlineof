@@ -2,13 +2,21 @@
 <!DOCTYPE dwr PUBLIC "-//GetAhead Limited//DTD Direct Web Remoting 2.0//EN" "http://getahead.org/dwr/dwr20.dtd">
 <dwr>
 	<allow>
-	    <!-- 用户权限树处理 -->
+	    <!-- 权限树处理 -->
 		<create creator="spring" javascript="LoadPrivilegeTreeAction"> 
             <param name="beanName" value="loadPrivilegeTreeAction" />
+            <include method="loadPrivilegeTree" />
+            <include method="loadChildModelPrivilegeTree" />
         </create>
         <convert converter="bean" match="com.cd_help.onlineOF.web.vo.PrivilegeVo">
 			<param name="privilegeVo" value="privilegeId,privilegeName,parentId,parentName,hasChild,url,methodName"></param>
 		</convert>
+		
+		<!-- 用户管理 -->
+		<create creator="spring" javascript="usersManagerDwrAction"> 
+            <param name="beanName" value="usersManagerDwrAction" />
+            <include method="checkUsers" />
+        </create>
 		
 		<!-- 异常处理 -->
 		<convert match="com.cd_help.onlineOF.utils.AppException" converter="exception"> 
