@@ -31,7 +31,7 @@ public interface UsersManager {
 	
 	public boolean checkUsersByName(String usersname) throws AppException;
 	
-	public void addUsers(Session session,UsersVo usersVo,List<String> roleIds) throws AppException;
+	public void addUsers(Session session,UsersVo usersVo) throws AppException;
 	
     public List<UsersVo> loadAll(Session session) throws AppException;
 
@@ -39,7 +39,7 @@ public interface UsersManager {
 			Object[] condition, PageBean pageBean, Session session)
 			throws AppException;
 	
-	public void update(Session session, String id) throws AppException;
+	public void update(Session session, UsersVo usersVo) throws AppException;
 
 	public void delete(Session session, String id) throws AppException;
 

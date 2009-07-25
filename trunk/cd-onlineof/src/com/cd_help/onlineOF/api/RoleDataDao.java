@@ -8,6 +8,7 @@ package com.cd_help.onlineOF.api;
 import java.util.List;
 
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RoleVo;
 
 /**
@@ -32,12 +33,49 @@ public interface RoleDataDao extends BaseDao{
 	public List<RoleVo> loadAll() throws AppException;
 	
 	/**
-	 * 获取用户拥有角色
-	 * @param usersId
+	 * 删除角色
+	 * @param id
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void delete(String id) throws AppException;
+	
+	/**
+	 * 分页查询
+	 * @param hqlName
+	 * @param paramName
+	 * @param condition
+	 * @param pageBean
 	 * @return
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public List<RoleVo> getRoleByUsersId(String usersId) throws AppException;
+	public PageBean searchByPageBean(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws AppException;
+	
+	/**
+	 * 新建角色
+	 * @param roleVo
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void add(RoleVo roleVo) throws AppException;
+	
+	/**
+	 * 根据ID获取角色信息
+	 * @param roleId
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public RoleVo getRoleById(String roleId) throws AppException; 
+	
+	/**
+	 * 修改角色
+	 * @param roleVo
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void updateRole(RoleVo roleVo) throws AppException;
 
 }

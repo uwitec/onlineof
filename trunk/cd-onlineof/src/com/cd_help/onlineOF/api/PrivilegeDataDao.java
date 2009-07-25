@@ -31,7 +31,7 @@ public interface PrivilegeDataDao extends BaseDao{
 	
 	public void delete(String id) throws AppException;
 	
-	public List<PrivilegeVo> loadTopModelPrivilege(String usersId) throws AppException;
+	public List<PrivilegeVo> loadTopModelPrivilege(String roleId) throws AppException;
     
-	public List<PrivilegeVo> loadChildModelPrivilegeByParent(String parentId,String usersId) throws AppException;
+	public List<PrivilegeVo> loadChildModelPrivilegeByParent(String parentId,String roleId) throws AppException;
 }
