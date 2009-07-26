@@ -19,6 +19,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -70,6 +71,21 @@ public class RoleData implements Serializable{
 	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
 	@JoinTable(name = "privileges_role", joinColumns = { @JoinColumn(name = "roleId") }, inverseJoinColumns = { @JoinColumn(name = "privilegeId") })
 	private List<PrivilegeData> privilegeList = new ArrayList<PrivilegeData>();
+
+	/**
+	 * 拥有用户
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@ManyToMany(mappedBy = "roleList",fetch=FetchType.LAZY)
+	private List<UsersData> userList = new ArrayList<UsersData>();
+	
+	public List<UsersData> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<UsersData> userList) {
+		this.userList = userList;
+	}
 
 	public String getRoleId() {
 		return roleId;

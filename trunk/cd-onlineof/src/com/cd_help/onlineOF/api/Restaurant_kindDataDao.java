@@ -5,6 +5,9 @@
  */
 package com.cd_help.onlineOF.api;
 
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
+
 /**
  * <b><code></code></b>
  * <p/>
@@ -17,5 +20,6 @@ package com.cd_help.onlineOF.api;
  * @since cd_help-onlineOF 0.0.0.1
  */
 public interface Restaurant_kindDataDao extends BaseDao{
-
+	public PageBean getRestaurantKindPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws AppException ;
 }

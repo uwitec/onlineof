@@ -36,7 +36,9 @@ public class RestaurantManagerImpl implements RestaurantManager{
 	@Autowired
 	@Resource(name = "restaurantDataDao")
 	private RestaurantDataDao restaurantDataDao;
-	
+	public void setRestaurantDataDao(RestaurantDataDao restaurantDataDao) {
+		this.restaurantDataDao = restaurantDataDao;
+	}
 	/**
 	 * @throws AppException 
 	 * @see com.cd_help.onlineOF.api.RestaurantManager#loadAll()
@@ -71,7 +73,4 @@ public class RestaurantManagerImpl implements RestaurantManager{
 		return true;
 	}
 	
-	public void setRestaurantDataDao(RestaurantDataDao restaurantDataDao) {
-		this.restaurantDataDao = restaurantDataDao;
-	}
 }

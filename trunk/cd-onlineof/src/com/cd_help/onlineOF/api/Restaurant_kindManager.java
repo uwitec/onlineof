@@ -5,6 +5,13 @@
  */
 package com.cd_help.onlineOF.api;
 
+import java.util.List;
+
+import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
+
 /**
  * <b><code></code></b>
  * <p/>
@@ -17,5 +24,17 @@ package com.cd_help.onlineOF.api;
  * @since cd_help-onlineOF 0.0.0.1
  */
 public interface Restaurant_kindManager {
-
+	/*添加餐厅分类信息*/
+	public void addRestaurantType(Restaurant_kindVo restaurantTypeVo)throws AppException;
+	/*删除餐厅分类信息*/
+	public void delRestaurantType(String id)throws AppException;
+	/*修改餐厅分类信息*/
+	public void updRestaurantType(Restaurant_kindVo restaurantTypeVo)throws AppException;
+	/*根据ID返回餐厅分类信息*/
+	public Restaurant_kindVo getRestaurantTypeById(String id)throws AppException;
+	/*返回集合餐厅分类信息的集合*/
+	public List<Restaurant_kindVo> getRestaurantTypeAll()throws AppException;
+	/*查询分页信息*/
+	public PageBean getRestaurantKindPage(String qhl,String[] params,Object[] objs,PageBean pageBean,Session session)throws AppException;
+	
 }

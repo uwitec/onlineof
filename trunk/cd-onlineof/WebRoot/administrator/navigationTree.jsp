@@ -25,6 +25,7 @@
      function load(){
      	LoadPrivilegeTreeAction.loadPrivilegeTree({callback:loadTree,errorHandler:function(msg,exception){alert(exception.message);}});
      }
+     /*加载树*/
      function loadTree(topPrvileges){
       if(topPrvileges.length > 0){
         for(var i=0; i<topPrvileges.length; i++){
@@ -51,8 +52,13 @@
            });
        }
      }
+     /*加载子节点*/
      function loadChild(childPrivileges){
         for(var i=0; i<childPrivileges.length; i++){
+<<<<<<< .mine
+        // alert(childPrivileges[i]["parentId"]);
+=======
+>>>>>>> .r67
            TreeDemo.AddNode({
               Id:childPrivileges[i]["privilegeId"],
               Text:childPrivileges[i]["privilegeName"],
@@ -71,6 +77,10 @@
            });
         }
         function doAjaxSend(url){
+<<<<<<< .mine
+          // alert("url: " + url);
+=======
+>>>>>>> .r86
            document.getElementById("contentFrame").contentWindow.location=url;
         }
      }
