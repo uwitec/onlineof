@@ -47,7 +47,7 @@
                <tr><td><span style="white-space: nowrap;"><b>您的位置:</b><span id="position"></span></span></td></tr>
             </table>
             <div style="width:100%;height:95%;">
-               <iframe id="contentFrame" name="contentFrame" style="width:100%;height:100%;" frameborder="0" src="welcom.jsp"></iframe>
+               <iframe id="contentFrame" name="contentFrame" style="width:100%;height:100%;" frameborder="0" src="${pageContext.request.contextPath}/administrator/welcom.jsp"></iframe>
             </div> 
           </td>
         </tr>
