@@ -17,6 +17,7 @@
 		<create creator="spring" javascript="usersManagerDwrAction"> 
             <param name="beanName" value="usersManagerDwrAction" />
             <include method="checkUsers" />
+            <include method="login" />
         </create>
 		
 		<!-- 异常处理 -->
