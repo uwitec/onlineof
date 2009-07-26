@@ -69,5 +69,10 @@
                 /administrator/security/roleManager.jsp
              </result>
 	     </action>
+	     <action name="setRolePrivilege" class="roleAction" method="setRolePrivilege">
+		     <result name="success">
+                /administrator/security/rolePrivilegeSet.jsp
+             </result>
+	     </action>
 	</package>
 </struts>
