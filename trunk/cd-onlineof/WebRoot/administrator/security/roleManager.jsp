@@ -1,12 +1,17 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="page" uri="onlineOF/pages.tld"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+    <base href="<%=basePath%>">
     <title>角色管理</title>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/common/css/common.css"/>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
+    <link type="text/css" rel="stylesheet" href="common/css/common.css"/>
+    <script type="text/javascript" src="common/js/common.js"></script>
     <script language="javascript">
        // 删除角色
         function deleteRole(){
@@ -22,6 +27,10 @@
         // 跳转到添加新角色页面
         function forwardAddNewRole(){
             window.location.href="forwardAddNewRole.do";
+        }
+        // 设置角色权限
+        function forwardRolePrivilege(){
+           winOpen("权限设置","setRolePrivilege.do",400,500,"yes",true);
         }
     </script>
   </head>
@@ -52,7 +61,7 @@
 	             <td><input type="checkbox" id="checksItem" name="checksItem" value="<s:property value='roleId'/>"/></td>
 	           	 <td><span style="white-space: nowrap;"><s:property value="roleName"/></span></td>
 	             <td><span style="white-space: nowrap;"><s:property value="description"/></span></td>
-	             <td><a href="editRole.do?roleId=<s:property value='roleId'/>">编辑</a>/<a href="#">权限设置</a></td>
+	             <td><a href="editRole.do?roleId=<s:property value='roleId'/>">编辑</a>/<a href="javascript:forwardRolePrivilege();">权限设置</a></td>
 	           </tr>
 	        </s:iterator>
 	       </s:if>
