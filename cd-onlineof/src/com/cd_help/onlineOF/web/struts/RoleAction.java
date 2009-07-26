@@ -137,6 +137,15 @@ public class RoleAction extends BaseAction{
 	}
 	
 	/**
+	 * 设置角色权限
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String setRolePrivilege(){
+		return SUCCESS;
+	}
+	
+	/**
 	 * 修改角色信息
 	 * @return
 	 * @throws AppException
