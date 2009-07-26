@@ -7,6 +7,7 @@
             <param name="beanName" value="loadPrivilegeTreeAction" />
             <include method="loadPrivilegeTree" />
             <include method="loadChildModelPrivilegeTree" />
+            <include method="loadAllPrivilege" />
         </create>
         <convert converter="bean" match="com.cd_help.onlineOF.web.vo.PrivilegeVo">
 			<param name="privilegeVo" value="privilegeId,privilegeName,parentId,parentName,hasChild,url,methodName"></param>
