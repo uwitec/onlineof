@@ -100,13 +100,15 @@ public class UsersManagerImpl implements UsersManager {
 				if (null != usersVo.getRoleId()
 						&& usersVo.getRoleId().length() > 0) {
 					usersVo.setRoleName(((RoleData)roleDataDao.get(RoleData.class, usersVo.getRoleId())).getRoleName());
+				}else{
+					throw new AppException("0000011", "对不起,您没有足够权限!");
 				}
 				return usersVo;
 			}else{
-				throw new AppException("0000011", "登陆出错,请检查用户名和密码!");
+				throw new AppException("0000011", "用户名或密码错误!");
 			}
 		} catch (AppException e) {
-			throw new AppException("0000011", "登陆出错,请检查用户名和密码!");
+			throw new AppException("0000011", "系统错误!");
 		}
 	}
 
