@@ -5,11 +5,15 @@
  */
 package com.cd_help.onlineOF.data;
 
+import java.sql.Timestamp;
+
 import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -26,6 +30,10 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "restaurant_kind")
+@NamedQueries({
+	@NamedQuery(name="getResKindAllPage",query="select r from Restaurant_kindData r"),
+	@NamedQuery(name="getResKindByNamePage",query="select r from Restaurant_kindData r where r.name = :kindName")
+})
 public class Restaurant_kindData implements Serializable{
 	
 	/**
@@ -41,7 +49,24 @@ public class Restaurant_kindData implements Serializable{
 	 */
 	@Column(name = "name", nullable = true, length = 15)
 	private String name;
+	/*餐厅分类描述*/
+	@Column(nullable=true,columnDefinition="TEXT")
+	private String description;
+	/*餐厅分类创建时间*/
+	private Timestamp createTime;
 	
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
 	public String getRestaurant_kind_Id() {
 		return restaurant_kind_Id;
 	}

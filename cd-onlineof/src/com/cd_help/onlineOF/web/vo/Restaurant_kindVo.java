@@ -1,67 +1,52 @@
-/*
- * 版权声明：
- * 此文档的版权归常德help信息科技有限公司所有。
- * 未征得常德help信息科技有限公司的书面批准，不得向第三方借阅、出让、出版该文档。
- */
 package com.cd_help.onlineOF.web.vo;
+
+import java.sql.Timestamp;
 
 /**
  * <b><code></code></b>
  * <p/>
- * 餐厅类别VO
+ * Comment here
  * <p/>
  * <b>Creation Time:</b> Jul 18, 2009
- * @author TanDong
+ * @author ZhangZhen
  * @version 0.0.0.1
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
 public class Restaurant_kindVo {
-	
-	/**
-	 * ID
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
+	/*餐厅分类ID*/
 	private String restaurant_kind_Id;
-	
-	/**
-	 * 类别名称
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	private String name;
-	
-	/**
-	 * Constructs a <code>Restaurant_kindVo</code>
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	public Restaurant_kindVo(){
-		
-	}
-	
-	/**
-	 * Constructs a <code>Restaurant_kindVo</code>
-	 * @param restaurant_kind_Id
-	 * @param name
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	public Restaurant_kindVo(String restaurant_kind_Id,String name){
-		this.restaurant_kind_Id = restaurant_kind_Id;
-		this.name = name;
-	}
+	/*餐厅分类名称*/
+	private String restaurantTypeName;
+	/*餐厅分类描述*/
+	private String description;
+	/*餐厅分类创建时间*/
+	private Timestamp createTime;
 
+	
 	public String getRestaurant_kind_Id() {
 		return restaurant_kind_Id;
 	}
-
 	public void setRestaurant_kind_Id(String restaurant_kind_Id) {
 		this.restaurant_kind_Id = restaurant_kind_Id;
 	}
-
-	public String getName() {
-		return name;
+	public String getRestaurantTypeName() {
+		return restaurantTypeName;
 	}
-
-	public void setName(String name) {
-		this.name = name;
+	public void setRestaurantTypeName(String restaurantTypeName) {
+		this.restaurantTypeName = restaurantTypeName;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	public Timestamp getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Timestamp createTime) {
+		this.createTime = createTime;
+	}
+	
 }

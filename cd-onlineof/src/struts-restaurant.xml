@@ -7,5 +7,8 @@
                 /bookRestaurant.jsp
              </result>
 	     </action>
+	     <action name="getRestaurantKindPage" class="restaurant_kindAction" method="getRestaurantKindPage">
+	     	<result name="restaurantKindPage">/administrator/restaurant/restaurant_kindList.jsp</result>
+	     </action>
 	</package>
 </struts>

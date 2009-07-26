@@ -96,7 +96,6 @@
 					</td>
 				</tr>
 			</table>
-		</div>
 		<div style="border: 1px solid #A9A9A9; width: 95%; height: 30px;">
 			<table
 				style="width: 100%; height: 100%; font-size: 10pt; background-color: #FDF5E6;">
