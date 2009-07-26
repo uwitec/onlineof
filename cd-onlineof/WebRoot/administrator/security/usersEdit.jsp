@@ -4,14 +4,14 @@
   <head>
     <title>编辑用户信息</title>
     <style rel="stylesheet" type="text/css">
-       .table{
+       .edittable{
        		border-collapse: collapse;
 			padding: 5px;
 			border-color: gray;
 			border-style: solid;
 			border-width: 1px 1px 1px 1px;
        	}
-       .table thead th{
+       .edittable thead th{
        		background-color:#E4E4E4;
        		text-align: center;
 			padding: 5px;
@@ -20,12 +20,12 @@
 			border-style: solid;
 			border-width: 1px 0px 0px 1px;
        	}
-       .table tbody td{
+       .edittable tbody td{
 			padding: 5px;
 			font-family: "arial";
 			font-size: 12px;
        }
-       .table tfoot td{
+       .edittable tfoot td{
        		text-align: center;
 			padding: 5px;
 			font-size: 12px;
@@ -44,7 +44,7 @@
   </head>
   <body style="margin-top:1px;margin-bottom:0px;margin-left:0px;margin-right:0px;">
     <form id="editForm" name="editForm" action="updateUsers.do" method="post">
-       <table class="table" style="width:100%;">
+       <table class="edittable" style="width:100%;">
           <thead>
              <th colspan="2">编辑用户信息</th>
           </thead>
@@ -120,16 +120,14 @@
 	      	      </select>
 	           </td>
 	         </tr>
-          </tbody>
-          <tfoot>
-             <tr>
+	         <tr>
 	           <td align="center" colspan="2">
 	              <input type="submit" value="保存">
 	              <input type="reset" value="重置">
 	              <input type="button" value="返回" onclick="back()">
 	           </td>
 	         </tr> 
-          </tfoot>
+          </tbody>
        </table>
     </form>
   </body>

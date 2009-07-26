@@ -53,15 +53,15 @@
               <td align="right">角色名称</td>
               <td>
                 <!-- 隐藏域 roleId -->
-                <input type="hidden" value="<s:property value='roleVo.roleId'/>"/>
-              	<input type="text" id="roleName" name="roleName" size=30 value="<s:property value='roleVo.roleName'/>">
+                <input type="hidden" id="roleVo.roleId" name="roleVo.roleId" value="<s:property value='roleVo.roleId'/>"/>
+              	<input type="text" id="roleVo.roleName" name="roleVo.roleName" size=30 value="<s:property value='roleVo.roleName'/>">
               </td>
            </tr>
            <tr>
               <td align="right">描述</td>
               <td>
-                 <textarea rows="4" cols="24" id="description" name="description" value="<s:property value='roleVo.description'/>">
-                    <s:property value="roleVo.description"/>
+                 <textarea rows="4" cols="24" id="roleVo.description" name="roleVo.description" value="<s:property value='roleVo.description'/>">
+                    ${roleVo.description}
                  </textarea>
               </td>
            </tr>

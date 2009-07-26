@@ -157,8 +157,6 @@
       	      </select>
            </td>
          </tr>
-      </tbody>
-      <tfoot>
          <tr>
            <td align="center" colspan="2">
               <input type="button" value="保存" onclick="saveUsers()">
@@ -166,7 +164,7 @@
               <input type="button" value="返回" onclick="back()">
            </td>
          </tr>
-      </tfoot>
+      </tbody>
     </table>
    </form>
   </body>
