@@ -1,0 +1,276 @@
+form
+{
+	margin:0;
+}
+body
+{
+	margin:0;
+	scrollbar-face-color:#ffffff;
+	scrollbar-highlight-color:#000;
+	scrollbar-shadow-color:#000;
+	scrollbar-3dlight-color:#ffffff;
+	scrollbar-arrow-color:#000;
+	scrollbar-track-color:#ffffff;
+	scrollbar-darkshadow-color:#ffffff;
+	background-color: FFFFFF;
+	color: #000000;
+	background-position: center top;
+	text-align: center;
+}
+
+
+tr {font-size:9pt;}
+td,table{
+	font-size: 9pt;
+	text-decoration: none;
+    }
+.czyz{
+    font-size:14px;
+   }
+
+.center_info_list{
+    padding:2px 2px 2px 5px;
+  }
+.wsbs_info_list{
+    padding:2px 2px 2px 15px;
+  }
+.right_info_list{
+    padding:2px 2px 2px 20px;
+  }
+  .left_info_list{
+    padding:2px 2px 2px 2px;
+  }
+.tAb {
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #EACEA7;
+	border-right-color: #EACEA7;
+	border-bottom-color: #EACEA7;
+	border-left-color: #EACEA7;
+}
+
+
+/*版通类产品样式*/
+.title{font-size:21px;color:#000000;font-weight:bold;}	/*文章标题样式*/
+.bt_white{font-size: 9pt; text-decoration:none; color:#ffffff}	
+.tAl {
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #EACEA7;
+	border-right-color: #EACEA7;
+	border-bottom-color: #EACEA7;
+	border-left-color: #EACEA7;
+}
+.lAr {
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-top-color: #EACEA7;
+	border-right-color: #EACEA7;
+	border-bottom-color: #EACEA7;
+	border-left-color: #EACEA7;
+}
+
+.bAl {
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: #EACEA7;
+	border-right-color: #EACEA7;
+	border-bottom-color: #EACEA7;
+	border-left-color: #EACEA7;
+}
+.bAr {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-top-color: #EACEA7;
+	border-right-color: #EACEA7;
+	border-bottom-color: #EACEA7;
+	border-left-color: #EACEA7;
+}
+
+.tAr {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-top-color: #EACEA7;
+	border-right-color: #EACEA7;
+	border-bottom-color: #EACEA7;
+	border-left-color: #EACEA7;
+}
+
+
+.bt_link{font-size: 9pt; text-decoration:none; color:#000000 ;line-height:20px;}	/*首页、频道页栏目默认标题链接样式 小字体*/
+.bt_content{font-size: 14px; text-decoration:none;line-height:26px;}		/*更多、底层栏目页标题及文章正文样式 大字体*/
+.bt_time {  font-size: 7pt; color: #999999;FONT-FAMILY: Verdana}	/*时间显示样式*/
+.bt_date {  font-size: 7pt; color: #999999;FONT-FAMILY: Verdana}	/*时间显示样式*/
+.bt_more {  font-size: 9pt; color: #000000; text-decoration: none}	/*更多显示样式*/
+.bt_more_red {  font-size: 9pt; color: #ff0000; text-decoration: none}
+.bt_more_blue {  font-size: 9pt; color: #0066FF; text-decoration: none}	
+.bt_report_title{  font-size: 10.5pt; color: #000000}
+
+a.white { text-decoration: none; color:#ffffff;}
+.all {
+}
+
+a.white:hover { color:#ffffff;text-decoration:none;}
+
+a.bt_more { text-decoration: none; color:#000000;}
+a.bt_more:hover { text-decoration: none; color:#000000;}
+
+a { text-decoration: none; color:#000000;}
+a:hover { color:#ff0000;text-decoration:none;}
+/*********************start*****/
+.bt_link_jrzb{font-size: 14pt; text-decoration:none; color:#000000 ;line-height:20px;}	/*首页、频道页栏目默认标题链接样式 小字体*/
+.bottom {
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #EACEA7;
+}
+
+.ka {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #C8A851;
+	border-bottom-color:#C8A851;
+	border-left-color: #C8A851;
+}
+.kal {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-right-color: #C4C4C4;
+	border-bottom-color:#C4C4C4;
+	border-left-color: #C4C4C4;
+}
+.bt_col {
+	font-size: 10.5pt;
+	line-height: 24px;
+	color: #000000;
+	text-decoration: none;
+}
+.top {
+	border-top-width: 1px;
+	border-top-style: solid;
+	border-top-color: EACEA7;
+}
+.qbottom {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-left-style: solid;
+	border-top-color: EACEA7;
+	border-right-color: EACEA7;
+	border-bottom-color: EACEA7;
+	border-left-color: EACEA7;
+}
+.right {
+	border-right-width: 1px;
+	border-right-style: solid;
+	border-right-color: #EACEA7;
+}
+
+.qright {
+	border-top-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: EACEA7;
+	border-right-color: EACEA7;
+	border-bottom-color: EACEA7;
+	border-left-color: EACEA7;
+}
+.qtop {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-top-color: EACEA7;
+	border-right-color: EACEA7;
+	border-bottom-color: EACEA7;
+	border-left-color: EACEA7;
+}
+
+
+
+.qleft {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-top-color: EACEA7;
+	border-right-color: EACEA7;
+	border-bottom-color: EACEA7;
+	border-left-color: EACEA7;
+}
+.left {
+	border-left-width: 1px;
+	border-left-style: solid;
+	border-left-color: #EACEA7;
+}
+
+.qtl {
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-right-color: EACEA7;
+	border-bottom-color: EACEA7;
+}
+.qtr {
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	border-bottom-color: EACEA7;
+	border-left-color: EACEA7;
+}
+
+
+.qrb {
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #EACEA7;
+	border-right-color: #EACEA7;
+	border-bottom-color: #EACEA7;
+	border-left-color: #EACEA7;
+}
+.qlb {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-top-color: #EACEA7;
+	border-right-color: #EACEA7;
+	border-bottom-color: #EACEA7;
+	border-left-color: #EACEA7;
+}
+.all {
+	border: 1px solid EACEA7;
+}
