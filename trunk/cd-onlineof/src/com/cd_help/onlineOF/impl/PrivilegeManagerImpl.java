@@ -49,10 +49,30 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 	}
 
 
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadAll(com.cd_help.onlineOF.data.Session)
+	 */
 	public List<PrivilegeVo> loadAll(Session session) throws AppException {
-		return null;
+		List<PrivilegeVo> privilegeVos = null;
+		try{
+			if(this.checkPrivilege(session)){
+		        privilegeVos = privilegeDataDao.loadAll();
+		        if(privilegeVos.size() > 0){
+		        	return privilegeVos;
+		        }else{
+		        	return null;
+		        }
+			}else{
+				throw new AppException("0000000","权限不够!");
+			}
+		}catch(AppException e){
+			throw new AppException("0000015","获取所有权限出错!");
+		}
 	}
 
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadChildModelPrivilegeByParent(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 */
 	public List<PrivilegeVo> loadChildModelPrivilegeByParent(Session session,
 			String parentId) throws AppException {
 		List<PrivilegeVo> privilegeVos = null;
@@ -68,6 +88,9 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 		return privilegeVos;
 	}
 
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadTopModelPrivilege(com.cd_help.onlineOF.data.Session)
+	 */
 	public List<PrivilegeVo> loadTopModelPrivilege(Session session) throws AppException {
 		List<PrivilegeVo> privilegeVos = null;
 		try{

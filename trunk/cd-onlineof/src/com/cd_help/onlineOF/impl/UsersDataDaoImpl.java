@@ -73,7 +73,7 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 		List<UsersData> usersList = this.findByNamedQueryAndNamedParam("getUsersByName", "usersname",usersname);
 		if(usersList.size() > 0){
 			UsersData users = usersList.get(0);
-			if(users.getPassword().equals(password.trim())){
+			if(users.getPassword().equals(StringUtil.encodePassword(password, "MD5"))){
 				UsersVo usersVo = new UsersVo();
 				BeanUtilsHelp.copyProperties(usersVo,users);
 				usersVo.setRoleName(((RoleData)this.get(RoleData.class, users.getRoleId())).getRoleName());
