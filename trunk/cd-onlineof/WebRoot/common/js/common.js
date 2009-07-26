@@ -30,3 +30,24 @@ function checkedAll()
 	    }
 	} 
 }
+
+function winOpen(sTitle, sUrl, iWidth, iHeight, iScroll, bCentre){
+    var sFeatures;
+    var iTop, iLeft;
+    iWidth = iWidth + 20;
+    if (bCentre != true) {
+        iTop = 0;
+        iLeft = 0;
+    }
+    else {
+        iTop = (screen.availHeight - iHeight) / 2;
+        iLeft = (screen.availWidth - iWidth) / 2;
+        //iTop=(screen.height-iHeight)/2;
+        //iLeft=(screen.width-iWidth)/2;
+    }
+    sFeatures = "height=" + iHeight + ",width=" + iWidth + ",top=" + iTop + ",left=" + iLeft + ",status=no, toolbar=no, menubar=no, location=no, resizable=no, scrollbars=" + iScroll + "";
+    var objWin;
+    objWin = window.open(sUrl, sTitle, sFeatures, "true");
+    objWin.focus();
+    return objWin;
+}
