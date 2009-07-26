@@ -2,7 +2,7 @@
 <script src="${pageContext.request.contextPath}/dwr/interface/LoadPrivilegeTreeAction.js"></script>
 <script src="${pageContext.request.contextPath}/dwr/engine.js"></script>
 <script src="${pageContext.request.contextPath}/dwr/util.js"></script>
-<script language="javascript" src="js/tdTree.js"></script>
+<script language="javascript" src="${pageContext.request.contextPath}/administrator/js/tdTree.js"></script>
 <html>
 <head><title></title></head>
 <body>
@@ -16,10 +16,10 @@
 	function Config(Render,ShowRoot,Icons,DefaultIcon,DefaultOpenIcon,SplitIconPath){
 	    this.Render = "navigationTreeDiv";
 		this.ShowRoot = false;
-		this.Icons = ["image/tree/Column.png", "image/tree/ColumnOpen.png", "image/tree/File.png", "image/tree/FileOpen.png"];
+		this.Icons = ["${pageContext.request.contextPath}/administrator/image/tree/Column.png", "${pageContext.request.contextPath}/administrator/image/tree/ColumnOpen.png", "${pageContext.request.contextPath}/administrator/image/tree/File.png", "${pageContext.request.contextPath}/administrator/image/tree/FileOpen.png"];
 		this.DefaultIcon = 0;
 		this.DefaultOpenIcon = 1;
-		this.SplitIconPath = "image/tree";
+		this.SplitIconPath = "${pageContext.request.contextPath}/administrator/image/tree";
 	 }
      TreeDemo = new Tree(new Config());
      function load(){
