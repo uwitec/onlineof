@@ -42,8 +42,27 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 		return null;
 	}
 
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#loadAll()
+	 */
 	public List<PrivilegeVo> loadAll() throws AppException {
-		return null;
+		List<PrivilegeData> privileges = this.findByNamedQuery("loadAllPrivilege");
+		List<PrivilegeVo> privilegeVos = null;
+		if(privileges.size() > 0){
+		    privilegeVos = new ArrayList<PrivilegeVo>();
+	    	for(Iterator iterator = privileges.iterator();iterator.hasNext();){
+	    		PrivilegeData p = (PrivilegeData)iterator.next();
+				PrivilegeVo pv = new PrivilegeVo();
+				BeanUtilsHelp.copyProperties(pv,p);
+				if(null != p.getParent()){
+					pv.setParentId(p.getParent().getPrivilegeId());
+				}else{
+					pv.setParentId("-1");
+				}
+				privilegeVos.add(pv);
+			}
+		}
+		return privilegeVos;
 	}
 
 	public void update(Session session,String id) throws AppException {
