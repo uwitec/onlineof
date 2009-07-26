@@ -80,5 +80,27 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 		 }
 		 return childPrivileges;
 	}
+	
+	/**
+	 * 加载所有权限
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<PrivilegeVo> loadAllPrivilege() throws AppException{
+		List<PrivilegeVo> privilegeVos = null;
+		try{
+			 HttpSession httpSession = WebContextFactory.get().getSession();
+			 Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			 privilegeVos = this.getOnlineOF().getPrivilegeManager().loadAll(session);
+			 for(PrivilegeVo pv : privilegeVos){
+				 log.debug("权限: "+pv.getPrivilegeName());
+			 }
+		}catch(AppException e){
+			 log.error(null,e);
+			 throw new AppException(e.getError_code(),e.getMessage());
+		}
+		return privilegeVos;
+	}
 
 }
