@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.struts.BaseAction;
+import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
  * <b><code></code></b>
@@ -36,8 +37,28 @@ public class UsersManagerDwrAction extends BaseAction{
 			boolean bool = this.getOnlineOF().getUsersManager().checkUsersByName(usersname);
 			return bool;
 		} catch (AppException e) {
+			log.error(e);
 			throw new AppException(e.getError_code(),e.getMessage());
 		}
 	}
-
+	
+	/**
+	 * 用户登录
+	 * @param usersname
+	 * @param password
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public UsersVo login(String params[]) throws AppException{
+		log.debug("usersname: "+params[0]+"/password: "+params[1]);
+		UsersVo usersVo = null; 
+		try {
+		    usersVo = this.getOnlineOF().getUsersManager().login(params[0], params[1]);
+		} catch (AppException e) {
+			log.error(e);
+			throw new AppException(e.getError_code(),e.getMessage());
+		}
+		return usersVo;
+	}
 }
