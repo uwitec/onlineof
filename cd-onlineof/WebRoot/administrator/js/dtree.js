@@ -674,7 +674,7 @@ if (!Array.prototype.pop) {
     if(obj.isSetChildParent=='false')
     	return; 
 	//alert(obj.nodeId);  
-	var childs = document.all('d'+ obj.treeName + obj.nodeId); 
+	var childs = document.getElementById('d'+ obj.treeName + obj.nodeId); 
 	if(childs != null)
 	{
 	    var  items = childs.getElementsByTagName("INPUT");	  
