@@ -21,7 +21,7 @@
 
 
 // Node object	
- //ÉêÃ÷Ê÷µÄÒ»¸ö½Úµã
+ //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Úµï¿½
 function Node(id, pid, name, url, title, target, icon, iconOpen, open,inputName,inputValue,inputType,myOnClick) {
 
 	this.id = id; 
@@ -49,7 +49,7 @@ function Node(id, pid, name, url, title, target, icon, iconOpen, open,inputName,
 
  
 // Tree object
-//¶¨ÒåÒ»¿ÃÊ÷
+//ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
 function dTree(objName,pathImgCss,inputType,pathImgCssDir) {
 
 	this.config = { 
@@ -67,10 +67,10 @@ function dTree(objName,pathImgCss,inputType,pathImgCssDir) {
 
 	    
 	if(pathImgCss==null || pathImgCss.length<1)
-		pathImgCss="skins/default";
+		pathImgCss="administrator";
 		
 	if(pathImgCssDir==null || pathImgCssDir.length<1)
-		pathImgCssDir="/img/tree";
+		pathImgCssDir="/image/dtree";
 		
 	this.icon = { 
 		root				: pathImgCss + pathImgCssDir +'/base.gif',
@@ -111,7 +111,7 @@ function dTree(objName,pathImgCss,inputType,pathImgCssDir) {
 
  } 
 // Adds a new node to the node array
-//¶¨ÒåÊ÷Ìí¼Ó½ÚµãµÄ·½·¨
+//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ó½Úµï¿½Ä·ï¿½ï¿½ï¿½
 dTree.prototype.add = function(id, pid, name, url, title, target, icon, iconOpen, open) { 
 	this.aNodes[this.aNodes.length] = new Node(id, pid, name, url, title, target, icon, iconOpen, open,this.inputName,this.inputValue,this.inputType,this.myOnClick);
 
@@ -120,7 +120,7 @@ dTree.prototype.add = function(id, pid, name, url, title, target, icon, iconOpen
 
 
 // Open/close all nodes
-//¶¨ÒåÈ«²¿½ÚµãÕ¹¿ªµÄ·½·¨
+//ï¿½ï¿½ï¿½ï¿½È«ï¿½ï¿½ï¿½Úµï¿½Õ¹ï¿½ï¿½ï¿½Ä·ï¿½ï¿½ï¿½
 dTree.prototype.openAll = function() {
 
 	this.oAll(true);
@@ -136,7 +136,7 @@ dTree.prototype.closeAll = function() {
 
 
 // Outputs the tree to the page
-// ½«Ê÷Êä³ö
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 dTree.prototype.toString = function() {
 
 	var str = '<div id="div_dtree" class="dtree">\n';
@@ -164,7 +164,7 @@ dTree.prototype.toString = function() {
 
 
 // Creates the tree structure
-//Ôö¼Ó½Úµã(¸ø½Úµã¶ÔÏó)
+//ï¿½ï¿½Ó½Úµï¿½(ï¿½ï¿½Úµï¿½ï¿½ï¿½ï¿½)
 dTree.prototype.addNode = function(pNode) {
 
 	var str = ''; 
@@ -199,7 +199,7 @@ dTree.prototype.addNode = function(pNode) {
 
 
 // Creates the node icon, url and text
-//´´½¨½ÚµãÍ¼Æ¬¡¢URL¡¢ºÍÎÄ±¾
+//ï¿½ï¿½ï¿½ï¿½ï¿½Úµï¿½Í¼Æ¬ï¿½ï¿½URLï¿½ï¿½ï¿½ï¿½ï¿½Ä±ï¿½
 dTree.prototype.node = function(node, nodeId) {
 
 	var str = '<div  class="dTreeNode">' + this.indent(node, nodeId);
@@ -325,7 +325,7 @@ dTree.prototype.setCS = function(node) {
 
 
 // Returns the selected node
-//·µ»ØÑ¡ÖÐµÄ½ÚµãµÄId
+//ï¿½ï¿½ï¿½ï¿½Ñ¡ï¿½ÐµÄ½Úµï¿½ï¿½Id
 dTree.prototype.getSelected = function() {
 
 	var sn = this.getCookie('cs' + this.obj);
@@ -333,11 +333,11 @@ dTree.prototype.getSelected = function() {
 	return (sn) ? sn : null;
 
 };
-//»ñÈ¡Ñ¡ÖÐµÄ½Úµã¶ÔÏó
+//ï¿½ï¿½È¡Ñ¡ï¿½ÐµÄ½Úµï¿½ï¿½ï¿½ï¿½
 dTree.prototype.getSelectNode = function (){
-	//»ñÈ¡½ÚµãId
+	//ï¿½ï¿½È¡ï¿½Úµï¿½Id
 	var sn = this.getCookie('cs' + this.obj);
-	//ÔÚ¼¯ºÏÖÐ²éÑ¯È¥½Úµã¶ÔÏó
+	//ï¿½Ú¼ï¿½ï¿½ï¿½ï¿½Ð²ï¿½Ñ¯È¥ï¿½Úµï¿½ï¿½ï¿½ï¿½
 	for(var n=0;n<this.aNodes.length;n++){
 		if(this.aNodes[n].id==sn){
 			return this.aNodes[n];
@@ -400,7 +400,7 @@ dTree.prototype.o = function(id) {
 
 
 // Open or close all nodes
-//»ñÈ¡ËùÓÐ½Úµã
+//ï¿½ï¿½È¡ï¿½ï¿½ï¿½Ð½Úµï¿½
 dTree.prototype.oAll = function(status) {
 
 	for (var n=0; n<this.aNodes.length; n++) {
@@ -422,7 +422,7 @@ dTree.prototype.oAll = function(status) {
 
 
 // Opens the tree to a specific node
-// ´ò¿ªÊ÷¾ßÌåµÄ½Úµã
+// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½Úµï¿½
 dTree.prototype.openTo = function(nId, bSelect, bFirst) {
 
 	if (!bFirst) {
@@ -462,7 +462,7 @@ dTree.prototype.openTo = function(nId, bSelect, bFirst) {
 
 
 // Closes all nodes on the same level as certain node
-//¹Ø±ÕËùÓÐµÄ×Ó½Úµã
+//ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½Ó½Úµï¿½
 dTree.prototype.closeLevel = function(node) {
 
 	for (var n=0; n<this.aNodes.length; n++) {
@@ -484,7 +484,7 @@ dTree.prototype.closeLevel = function(node) {
 
 
 // Closes all children of a node
-//¹Ø±ÕËùÓÐµÄ×Ó½Úµã
+//ï¿½Ø±ï¿½ï¿½ï¿½ï¿½Ðµï¿½ï¿½Ó½Úµï¿½
 dTree.prototype.closeAllChildren = function(node) {
 
 	for (var n=0; n<this.aNodes.length; n++) {
@@ -505,7 +505,7 @@ dTree.prototype.closeAllChildren = function(node) {
 
 
 // Change the status of a node(open or closed)
-//¸Ä±ä½ÚµãµÄ×´Ì¬
+//ï¿½Ä±ï¿½Úµï¿½ï¿½×´Ì¬
 dTree.prototype.nodeStatus = function(status, id, bottom) {
 
 	eDiv	= document.getElementById('d' + this.obj + id);
@@ -535,7 +535,7 @@ dTree.prototype.nodeStatus = function(status, id, bottom) {
 
 
 // [Cookie] Clears a cookie
-//É¾³ýCookie
+//É¾ï¿½ï¿½Cookie
 dTree.prototype.clearCookie = function() {
 
 	var now = new Date();
@@ -551,7 +551,7 @@ dTree.prototype.clearCookie = function() {
 
 
 // [Cookie] Sets value in a cookie
-//ÉèÖÃCookie
+//ï¿½ï¿½ï¿½ï¿½Cookie
 dTree.prototype.setCookie = function(cookieName, cookieValue, expires, path, domain, secure) {
 
 	document.cookie =
@@ -571,7 +571,7 @@ dTree.prototype.setCookie = function(cookieName, cookieValue, expires, path, dom
 
 
 // [Cookie] Gets a value from a cookie
-// »ñÈ¡Cookie
+// ï¿½ï¿½È¡Cookie
 dTree.prototype.getCookie = function(cookieName) {
 
 	var cookieValue = '';
@@ -597,7 +597,7 @@ dTree.prototype.getCookie = function(cookieName) {
 
 
 // [Cookie] Returns ids of open nodes as a string
-// ÐÞ¸ÄCookie
+// ï¿½Þ¸ï¿½Cookie
 dTree.prototype.updateCookie = function() {
 
 	var str = '';
