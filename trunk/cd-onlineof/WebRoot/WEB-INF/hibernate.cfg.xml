@@ -29,6 +29,7 @@
 		<mapping class="com.cd_help.onlineOF.data.UsersData"/>
 		<mapping class="com.cd_help.onlineOF.data.RoleData"/>
 		<mapping class="com.cd_help.onlineOF.data.PrivilegeData"/>
+		<mapping class="com.cd_help.onlineOF.data.MemberData"/>
 	</session-factory>
 	
 </hibernate-configuration>
