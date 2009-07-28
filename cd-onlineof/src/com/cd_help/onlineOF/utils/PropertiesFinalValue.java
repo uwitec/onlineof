@@ -1,0 +1,38 @@
+/**
+ * 
+ */
+package com.cd_help.onlineOF.utils;
+
+
+/**
+ * <b><code></code></b>
+ * <p/>
+ * Comment here
+ * <p/>
+ * <b>Creation Time:</b> 2009-7-28
+ * @author SongHao
+ * @version 0.0.0.1
+ *
+ * @since cd_help-onlineOF 0.0.0.1
+ */
+public final class PropertiesFinalValue {
+	private final static PropertiesFinalValue pfv = new PropertiesFinalValue();
+
+	static PropertiesUtil pu;
+
+	private PropertiesFinalValue() {
+		if (PropertiesFinalValue.pu == null) {
+			PropertiesFinalValue.pu = new PropertiesUtil("/onlineof.properties");
+		}
+	}
+
+	public static PropertiesFinalValue getInstance() {
+		return PropertiesFinalValue.pfv;
+	}
+	
+	public static final String ORDER_UNSET = PropertiesFinalValue.pu.getProperty("order.unset");
+	
+	public static final String ORDER_GIVING = PropertiesFinalValue.pu.getProperty("order.giving");
+	
+	public static final String ORDER_OVER = PropertiesFinalValue.pu.getProperty("order.over");
+}
