@@ -8,7 +8,6 @@ package com.cd_help.onlineOF.api;
 import java.io.Serializable;
 import java.util.List;
 
-import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 
 /**
@@ -26,48 +25,48 @@ import com.cd_help.onlineOF.utils.PageBean;
 @SuppressWarnings("unchecked")
 public interface BaseDao {
 
-	public List find(String queryString) throws AppException;
+	public List find(String queryString) throws Exception;
 
-	public List find(String queryString, Object value) throws AppException;
+	public List find(String queryString, Object value) throws Exception;
 
-	public List find(final String queryString, final Object[] values) throws AppException;
+	public List find(final String queryString, final Object[] values) throws Exception;
 
 	public List findByNamedParam(String queryString, String paramName,
-			Object value) throws AppException;
+			Object value) throws Exception;
 
-	public List findByNamedQuery(String queryName) throws AppException;
+	public List findByNamedQuery(String queryName) throws Exception;
 
-	public List findByNamedQuery(String queryName, Object value) throws AppException;
+	public List findByNamedQuery(String queryName, Object value) throws Exception;
 
-	public int countByNamedQuery(String queryName) throws AppException;
+	public int countByNamedQuery(String queryName) throws Exception;
 
-	public List findByNamedQuery(String queryName, int start, int limit) throws AppException;
+	public List findByNamedQuery(String queryName, int start, int limit) throws Exception;
 
-	public List findByNamedQuery(final String queryName, final Object[] values) throws AppException;
+	public List findByNamedQuery(final String queryName, final Object[] values) throws Exception;
 
 	public List findByNamedQueryAndNamedParam(String queryName,
-			String paramName, Object value) throws AppException;
+			String paramName, Object value) throws Exception;
 
 	public List findByNamedQueryAndNamedParam(final String queryName,
-			final String[] paramNames, final Object[] values) throws AppException;
+			final String[] paramNames, final Object[] values) throws Exception;
 
-	public void flush() throws AppException;
+	public void flush() throws Exception;
 
-	public void clear() throws AppException;
+	public void clear() throws Exception;
 
-	public boolean exist(Class entityClass, Serializable id) throws AppException;
+	public boolean exist(Class entityClass, Serializable id) throws Exception;
 
-	public Object get(Class entityClass, Serializable id) throws AppException;
+	public Object get(Class entityClass, Serializable id) throws Exception;
 
-	public void save(Object entity) throws AppException;
+	public void save(Object entity) throws Exception;
 
-	public void update(Object entity) throws AppException;
+	public void update(Object entity) throws Exception;
 
-	public void delete(Object entity) throws AppException;
+	public void delete(Object entity) throws Exception;
 
-	public List loadAll(final Class entityClass) throws AppException;
+	public List loadAll(final Class entityClass) throws Exception;
 	
 	public PageBean searchByPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws AppException;
+			Object[] condition, PageBean pageBean) throws Exception;
 	
 }

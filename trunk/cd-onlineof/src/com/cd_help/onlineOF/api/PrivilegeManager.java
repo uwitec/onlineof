@@ -8,7 +8,6 @@ package com.cd_help.onlineOF.api;
 import java.util.List;
 
 import com.cd_help.onlineOF.data.Session;
-import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 
 /**
@@ -24,16 +23,18 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
  */
 public interface PrivilegeManager {
 	
-public PrivilegeVo get(Session session,String id) throws AppException;
+public PrivilegeVo get(Session session,String id) throws Exception;
 	
-	public List<PrivilegeVo> loadAll(Session session) throws AppException;
+	public List<PrivilegeVo> loadAll(Session session) throws Exception;
 
-	public void update(Session session,String id) throws AppException;
+	public void update(Session session,String id) throws Exception;
 	
-	public void delete(Session session,String id) throws AppException;
+	public void delete(Session session,String id) throws Exception;
 	
-	public List<PrivilegeVo> loadTopModelPrivilege(Session session) throws AppException;
+	public List<PrivilegeVo> loadTopModelPrivilege(Session session) throws Exception;
     
-	public List<PrivilegeVo> loadChildModelPrivilegeByParent(Session session,String parentId) throws AppException;
+	public List<PrivilegeVo> loadChildModelPrivilegeByParent(Session session,String parentId) throws Exception;
+	
+	public List<PrivilegeVo> getPrivilegeByRoleId(Session session, String roleId) throws Exception;
 
 }

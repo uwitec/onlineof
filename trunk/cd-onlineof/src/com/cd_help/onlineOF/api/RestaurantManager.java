@@ -29,7 +29,7 @@ public interface RestaurantManager{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public List<RestaurantVo> loadAll() throws AppException;
+	public List<RestaurantVo> loadAll() throws Exception;
 	
 	/**
 	 * 保存
@@ -38,7 +38,7 @@ public interface RestaurantManager{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public RestaurantVo save(RestaurantVo restaurantVo) throws AppException;
+	public RestaurantVo save(RestaurantVo restaurantVo) throws Exception;
 	
 	/**
 	 * 删除
@@ -46,5 +46,5 @@ public interface RestaurantManager{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void delete(String id) throws AppException;
+	public void delete(String id) throws Exception;
 }

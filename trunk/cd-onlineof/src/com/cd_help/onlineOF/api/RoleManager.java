@@ -32,7 +32,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public List<RoleVo> loadAll(Session session) throws AppException;
+	public List<RoleVo> loadAll(Session session) throws Exception;
 	
 	/**
 	 * 根据条件分页查询
@@ -47,7 +47,7 @@ public interface RoleManager {
 	 */
 	public PageBean searchByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, Session session)
-			throws AppException;
+			throws Exception;
 	
 	/**
 	 * 删除角色
@@ -56,7 +56,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void delete(Session session, String id) throws AppException;
+	public void delete(Session session, String id) throws Exception;
 	
 	/**
 	 * 新建角色
@@ -65,7 +65,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void addRole(Session session,RoleVo roleVo) throws AppException;
+	public void addRole(Session session,RoleVo roleVo) throws Exception;
 	
 	/**
 	 * 根据ID获取角色信息
@@ -75,7 +75,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public RoleVo getRoleById(Session session, String roleId) throws AppException;
+	public RoleVo getRoleById(Session session, String roleId) throws Exception;
 	
 	/**
 	 * 修改角色
@@ -84,6 +84,6 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void updateRole(Session session, RoleVo roleVo) throws AppException;
+	public void updateRole(Session session, RoleVo roleVo) throws Exception;
 
 }

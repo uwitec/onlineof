@@ -8,7 +8,6 @@ package com.cd_help.onlineOF.api;
 import java.util.List;
 
 import com.cd_help.onlineOF.data.Session;
-import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
@@ -27,22 +26,22 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 @SuppressWarnings("unchecked")
 public interface UsersManager {
 
-	public UsersVo get(Session session, String id) throws AppException;
+	public UsersVo get(Session session, String id) throws Exception;
 	
-	public boolean checkUsersByName(String usersname) throws AppException;
+	public boolean checkUsersByName(String usersname) throws Exception;
 	
-	public void addUsers(Session session,UsersVo usersVo) throws AppException;
+	public void addUsers(Session session,UsersVo usersVo) throws Exception;
 	
-    public List<UsersVo> loadAll(Session session) throws AppException;
+    public List<UsersVo> loadAll(Session session) throws Exception;
 
 	public PageBean searchByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, Session session)
-			throws AppException;
+			throws Exception;
 	
-	public void update(Session session, UsersVo usersVo) throws AppException;
+	public void update(Session session, UsersVo usersVo) throws Exception;
 
-	public void delete(Session session, String id) throws AppException;
+	public void delete(Session session, String id) throws Exception;
 
-	public UsersVo login(String username, String password) throws AppException;
+	public UsersVo login(String username, String password) throws Exception;
 	
 }
