@@ -36,9 +36,9 @@ public class UsersManagerDwrAction extends BaseAction{
 		try {
 			boolean bool = this.getOnlineOF().getUsersManager().checkUsersByName(usersname);
 			return bool;
-		} catch (AppException e) {
-			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage());
+		} catch (Exception e) {
+			log.error(null,e);
+			 throw new AppException("",e.getMessage());
 		}
 	}
 	
@@ -55,9 +55,9 @@ public class UsersManagerDwrAction extends BaseAction{
 		UsersVo usersVo = null; 
 		try {
 		    usersVo = this.getOnlineOF().getUsersManager().login(params[0], params[1]);
-		} catch (AppException e) {
-			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage());
+		} catch (Exception e) {
+			log.error(null,e);
+			 throw new AppException("",e.getMessage());
 		}
 		return usersVo;
 	}
