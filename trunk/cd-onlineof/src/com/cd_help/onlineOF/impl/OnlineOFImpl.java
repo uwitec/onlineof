@@ -23,7 +23,6 @@ import com.cd_help.onlineOF.api.RoleManager;
 import com.cd_help.onlineOF.api.SessionManager;
 import com.cd_help.onlineOF.api.UsersManager;
 import com.cd_help.onlineOF.data.Session;
-import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -220,7 +219,7 @@ public class OnlineOFImpl implements OnlineOF{
 	/**
 	 * @see com.cd_help.onlineOF.api.OnlineOF#login(java.lang.String, java.lang.String)
 	 */
-	public Session login(String username, String password) throws AppException {
+	public Session login(String username, String password) throws Exception {
 		UsersVo usersVo = usersManager.login(username, password);
 		Session session = sessionManager.createSession(usersVo);
 		return session;

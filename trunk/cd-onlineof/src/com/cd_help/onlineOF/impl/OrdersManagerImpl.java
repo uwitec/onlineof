@@ -38,8 +38,12 @@ public class OrdersManagerImpl implements OrdersManager{
 	
 	public void create(OrdersVo ordersVo) throws AppException {
 		OrdersData ordersData = new OrdersData();
-		BeanUtilsHelp.copyProperties(ordersData, ordersVo);
-		ordersDataDao.save(ordersData);
+		try{
+			BeanUtilsHelp.copyProperties(ordersData, ordersVo);
+			ordersDataDao.save(ordersData);
+		}catch(Exception e){
+			throw new AppException("","系统错误!");
+		}
 	}
 
 	public OrdersVo get(Integer id) throws AppException {
@@ -50,9 +54,10 @@ public class OrdersManagerImpl implements OrdersManager{
 	 * 检查权限
 	 * @param session
 	 * @return
-	 * @throws AppException
+	 * @throws AppAppAppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
+	@SuppressWarnings("unused")
 	private boolean checkPrivilege(Session session) throws AppException{
 		return true;
 	}

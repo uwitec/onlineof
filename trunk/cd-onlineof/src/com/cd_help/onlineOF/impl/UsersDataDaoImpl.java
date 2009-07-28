@@ -15,7 +15,6 @@ import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.data.RoleData;
 import com.cd_help.onlineOF.data.UsersData;
-import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
@@ -37,18 +36,18 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 @SuppressWarnings("unchecked")
 public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 
-	public void delete(String id) throws AppException {
+	public void delete(String id) throws Exception {
 	    this.delete(this.get(UsersData.class, id));
 	}
 
-	public UsersVo get(String id) throws AppException {
+	public UsersVo get(String id) throws Exception {
 		UsersData usersData = (UsersData)this.get(UsersData.class, id);
 		UsersVo usersVo = new UsersVo();
 		BeanUtilsHelp.copyProperties(usersVo, usersData);
 		return usersVo;
 	}
 
-	public List<UsersVo> loadAll() throws AppException {
+	public List<UsersVo> loadAll() throws Exception {
 		List<UsersData> usersList = this.findByNamedQuery("loadAllUsers");
 		List<UsersVo> usersVos = new ArrayList<UsersVo>();
 		for(UsersData users : usersList){
@@ -62,14 +61,14 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 		return usersVos;
 	}
 
-	public void update(UsersVo usersVo) throws AppException {
+	public void update(UsersVo usersVo) throws Exception {
          UsersData usersData = new UsersData();
          BeanUtilsHelp.copyProperties(usersData, usersVo);
          this.update(usersData);
 	}
 
 	public UsersVo login(String usersname, String password)
-			throws AppException {
+			throws Exception {
 		List<UsersData> usersList = this.findByNamedQueryAndNamedParam("getUsersByName", "usersname",usersname);
 		if(usersList.size() > 0){
 			UsersData users = usersList.get(0);
@@ -87,7 +86,7 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 	}
 
 	public PageBean searchByPageBean(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws AppException {
+			Object[] condition, PageBean pageBean) throws Exception {
 		pageBean = this.searchByPage(hqlName, paramName,
 				condition, pageBean);
 		
@@ -116,7 +115,7 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 	/**
 	 * @see com.cd_help.onlineOF.api.UsersDataDao#checkUsersByName(java.lang.String)
 	 */
-	public boolean checkUsersByName(String usersname) throws AppException {
+	public boolean checkUsersByName(String usersname) throws Exception {
 		List<UsersData> users = this.findByNamedQueryAndNamedParam("getUsersByName", "usersname", usersname);
 		if(users.size() > 0){
 			return false;
@@ -129,7 +128,7 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 	 * @see com.cd_help.onlineOF.api.UsersDataDao#addUsers(com.cd_help.onlineOF.web.vo.UsersVo, java.util.List)
 	 */
 	public void addUsers(UsersVo usersVo)
-			throws AppException {
+			throws Exception {
           UsersData usersData = new UsersData();
           BeanUtilsHelp.copyProperties(usersData, usersVo);
           usersData.setUsersId(StringUtil.getUUID());

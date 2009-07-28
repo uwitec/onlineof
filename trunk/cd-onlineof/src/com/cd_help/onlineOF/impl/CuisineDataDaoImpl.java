@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.CuisineDataDao;
-import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.vo.CuisineVo;
 
 /**
@@ -29,27 +28,27 @@ import com.cd_help.onlineOF.web.vo.CuisineVo;
 @Transactional
 public class CuisineDataDaoImpl extends BaseDaoSupport implements CuisineDataDao{
 
-	public void delete(String id) throws AppException {
+	public void delete(String id) throws Exception {
 		
 	}
 
-	public boolean exist(String id) throws AppException {
+	public boolean exist(String id) throws Exception {
 		return false;
 	}
 
-	public CuisineVo get(String id) throws AppException {
+	public CuisineVo get(String id) throws Exception {
 		return null;
 	}
 
-	public List<CuisineVo> loadAll() throws AppException {
+	public List<CuisineVo> loadAll() throws Exception {
 		return null;
 	}
 
-	public CuisineVo save(CuisineVo cuisineDataVo) throws AppException {
+	public CuisineVo save(CuisineVo cuisineDataVo) throws Exception {
 		return null;
 	}
 
-	public void update(CuisineVo cuisineDataVo) throws AppException {
+	public void update(CuisineVo cuisineDataVo) throws Exception {
 		
 	}
 

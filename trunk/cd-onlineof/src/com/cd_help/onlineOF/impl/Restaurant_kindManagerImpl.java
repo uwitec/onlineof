@@ -5,7 +5,6 @@
  */
 package com.cd_help.onlineOF.impl;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +43,8 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private boolean checkPrivilege(Session session) throws AppException {
+	@SuppressWarnings("unused")
+	private boolean checkPrivilege(Session session) throws Exception {
 		return true;
 	}
 
@@ -70,13 +70,7 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 		Restaurant_kindVo restaurantTypeVo = new Restaurant_kindVo();
 		try {
 			BeanUtils.copyProperties(restaurantTypeVo, restaurantType);
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new AppException("rpexception0001", "数据转换异常!");
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch(Exception e){
 			throw new AppException("rpexception0001", "数据转换异常!");
 		}
 		return restaurantTypeVo;
@@ -95,13 +89,7 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 		Restaurant_kindData restaurantTypeData = new Restaurant_kindData();
 		try {
 			BeanUtils.copyProperties(restaurantTypeData, restaurantTypeVo);
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new AppException("rpexception0001", "数据转换异常!");
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		}catch(Exception e){
 			throw new AppException("rpexception0001", "数据转换异常!");
 		}
 		return restaurantTypeData;
@@ -114,10 +102,13 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 */
 	public void addRestaurantType(Restaurant_kindVo restaurantTypeVo)
 			throws AppException {
-		// TODO Auto-generated method stub
-		Restaurant_kindData restaurantTypeData = this
-				.getRestaurantTypeData(restaurantTypeVo);
-		restaurant_kindDataDao.save(restaurantTypeData);
+		try{
+			Restaurant_kindData restaurantTypeData = this
+					.getRestaurantTypeData(restaurantTypeVo);
+			restaurant_kindDataDao.save(restaurantTypeData);
+		}catch(Exception e){
+			throw new AppException("","保存出错!");
+		}
 	}
 
 	/**
@@ -126,10 +117,13 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 * @see com.cd_help.onlineOF.api.RestaurantTypeManager#delRestaurantType(java.lang.String)
 	 */
 	public void delRestaurantType(String id) throws AppException {
-		// TODO Auto-generated method stub
+		try{
 		Restaurant_kindData restaurantTypeData = (Restaurant_kindData) restaurant_kindDataDao
 				.get(Restaurant_kindData.class, id);
 		restaurant_kindDataDao.delete(restaurantTypeData);
+		}catch(Exception e){
+			throw new AppException("","删除出错!");
+		}
 	}
 
 	/**
@@ -139,17 +133,19 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Restaurant_kindVo> getRestaurantTypeAll() throws AppException {
-		// TODO Auto-generated method stub
-		@SuppressWarnings("unused")
-		List<Restaurant_kindData> restaurantTypes = restaurant_kindDataDao
-				.find("from RestaurantTypeData");
 		List<Restaurant_kindVo> restaurantTypeVos = null;
-		if (restaurantTypes != null && restaurantTypes.size() > 0) {
-			restaurantTypeVos = new ArrayList<Restaurant_kindVo>();
-			for (Restaurant_kindData restaurantTypeData : restaurantTypes) {
-				restaurantTypeVos.add(this
-						.getRestaurantTypeVo(restaurantTypeData));
+		try{
+			List<Restaurant_kindData> restaurantTypes = restaurant_kindDataDao
+					.find("from RestaurantTypeData");
+			if (restaurantTypes != null && restaurantTypes.size() > 0) {
+				restaurantTypeVos = new ArrayList<Restaurant_kindVo>();
+				for (Restaurant_kindData restaurantTypeData : restaurantTypes) {
+					restaurantTypeVos.add(this
+							.getRestaurantTypeVo(restaurantTypeData));
+				}
 			}
+		}catch(Exception e){
+			throw new AppException("","系统错误!");
 		}
 		return restaurantTypeVos;
 	}
@@ -161,10 +157,13 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 */
 	public Restaurant_kindVo getRestaurantTypeById(String id)
 			throws AppException {
-		// TODO Auto-generated method stub
-		Restaurant_kindData restaurantTypeData = (Restaurant_kindData) restaurant_kindDataDao
-				.get(Restaurant_kindData.class, id);
-		return this.getRestaurantTypeVo(restaurantTypeData);
+        try{ 
+			Restaurant_kindData restaurantTypeData = (Restaurant_kindData) restaurant_kindDataDao
+					.get(Restaurant_kindData.class, id);
+			return this.getRestaurantTypeVo(restaurantTypeData);
+        }catch(Exception e){
+        	throw new AppException("","系统错误!");
+        }
 	}
 
 	/**
@@ -174,19 +173,13 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 */
 	public void updRestaurantType(Restaurant_kindVo restaurantTypeVo)
 			throws AppException {
-		// TODO Auto-generated method stub
-		Restaurant_kindData restaurantTypeData = (Restaurant_kindData) restaurant_kindDataDao
-				.get(Restaurant_kindData.class, restaurantTypeVo
-						.getRestaurant_kind_Id());
-		restaurantTypeVo.setCreateTime(restaurantTypeData.getCreateTime());
-		try {
-			BeanUtils.copyProperties(restaurantTypeData, restaurantTypeVo);
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new AppException("rpexception0001", "数据转换异常!");
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
+		try{
+			Restaurant_kindData restaurantTypeData = (Restaurant_kindData) restaurant_kindDataDao
+					.get(Restaurant_kindData.class, restaurantTypeVo
+							.getRestaurant_kind_Id());
+			restaurantTypeVo.setCreateTime(restaurantTypeData.getCreateTime());
+				BeanUtils.copyProperties(restaurantTypeData, restaurantTypeVo);
+		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("rpexception0001", "数据转换异常!");
 		}
@@ -202,12 +195,11 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	public PageBean getRestaurantKindPage(String qhl, String[] params,
 			Object[] objs, PageBean pageBean, Session session)
 			throws AppException {
-		// TODO Auto-generated method stub
 		PageBean page = null;
 		try {
 			page = restaurant_kindDataDao.getRestaurantKindPage(qhl, params,
 					objs, pageBean);
-		} catch (AppException e) {
+		} catch (Exception e) {
 			throw new AppException("0000014", "加载餐厅分类信息出错!");
 		}
 		return page;

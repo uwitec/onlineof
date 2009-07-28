@@ -54,7 +54,7 @@ public class UsersManagerImpl implements UsersManager {
 			} else {
 				throw new AppException("0000000", "权限不够!");
 			}
-		} catch (AppException e) {
+		} catch (Exception e) {
 			throw new AppException("0000012", "删除失败");
 		}
 	}
@@ -67,7 +67,7 @@ public class UsersManagerImpl implements UsersManager {
 			} else {
 				throw new AppException("0000000", "权限不够!");
 			}
-		} catch (AppException e) {
+		} catch (Exception e) {
 			throw new AppException("0000013", "获取用户信息出错!");
 		}
 		return usersVo;
@@ -81,7 +81,7 @@ public class UsersManagerImpl implements UsersManager {
 			} else {
 				throw new AppException("0000000", "权限不够!");
 			}
-		} catch (AppException e) {
+		} catch (Exception e) {
 			throw new AppException("0000014", "加载用户信息出错!");
 		}
 		return usersVoList;
@@ -107,7 +107,7 @@ public class UsersManagerImpl implements UsersManager {
 			}else{
 				throw new AppException("0000011", "用户名或密码错误!");
 			}
-		} catch (AppException e) {
+		} catch (Exception e) {
 			throw new AppException("0000011", "系统错误!");
 		}
 	}
@@ -119,7 +119,7 @@ public class UsersManagerImpl implements UsersManager {
 			} else {
 				throw new AppException("0000000", "权限不够!");
 			}
-		} catch (AppException e) {
+		} catch (Exception e) {
 			throw new AppException("0000011", "修改用户信息出错!");
 		}
 	}
@@ -151,7 +151,7 @@ public class UsersManagerImpl implements UsersManager {
 			PageBean page = null;
 			try{
 				page = usersDataDao.searchByPageBean(hqlName, paramName, condition, pageBean);
-			}catch(AppException e){
+			}catch(Exception e){
 				throw new AppException("0000014", "加载用户信息出错!");
 			}
 			return page;
@@ -167,7 +167,7 @@ public class UsersManagerImpl implements UsersManager {
 		boolean isExits;
 		try{
 			isExits = usersDataDao.checkUsersByName(usersname);
-		}catch(AppException e){
+		}catch(Exception e){
 			throw new AppException("","系统错误!请联系系统管理员.");
 		}
 		return isExits;
@@ -184,7 +184,7 @@ public class UsersManagerImpl implements UsersManager {
 			}else{
 				throw new AppException("0000000", "权限不够!");
 			}
-		}catch(AppException e){
+		}catch(Exception e){
 			throw new AppException("0000000","添加用户失败!");
 		}
 	}

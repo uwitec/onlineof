@@ -46,7 +46,7 @@ public class RoleManagerImpl implements RoleManager{
 		if(this.checkPrivilege(session)){
 			try{
 				roleVos = roleDataDao.loadAll();
-			}catch(AppException e){
+			}catch(Exception e){
 				throw new AppException("000000","系统出错!请联系系统管理员.");
 			}
 			return roleVos;
@@ -81,7 +81,7 @@ public class RoleManagerImpl implements RoleManager{
 			PageBean page = null;
 			try{
 				page = roleDataDao.searchByPageBean(hqlName, paramName, condition, pageBean);
-			}catch(AppException e){
+			}catch(Exception e){
 				throw new AppException("0000014", "加载用户信息出错!");
 			}
 			return page;
@@ -97,7 +97,7 @@ public class RoleManagerImpl implements RoleManager{
 		if(this.checkPrivilege(session)){
 			try{
 				roleDataDao.delete(id);
-			}catch(AppException e){
+			}catch(Exception e){
 				throw new AppException("0000014", "删除失败!");
 			}
 		}else{
@@ -112,7 +112,7 @@ public class RoleManagerImpl implements RoleManager{
 		if(this.checkPrivilege(session)){
 			try{
 				roleDataDao.add(roleVo);
-			}catch(AppException e){
+			}catch(Exception e){
 				throw new AppException("0000014", "新建失败!");
 			}
 		}else{
@@ -129,7 +129,7 @@ public class RoleManagerImpl implements RoleManager{
 		if(this.checkPrivilege(session)){
 			try{
 				roleVo = roleDataDao.getRoleById(roleId);
-			}catch(AppException e){
+			}catch(Exception e){
 				throw new AppException("0000014", "系统错误!");
 			}
 		}else{
@@ -145,7 +145,7 @@ public class RoleManagerImpl implements RoleManager{
 		if(this.checkPrivilege(session)){
 			try{
 				roleDataDao.updateRole(roleVo);
-			}catch(AppException e){
+			}catch(Exception e){
 				throw new AppException("0000014", "修改失败!");
 			}
 		}else{

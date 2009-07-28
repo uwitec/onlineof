@@ -23,7 +23,6 @@ import org.springframework.orm.hibernate3.SessionFactoryUtils;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.BaseDao;
-import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.PageService;
 
@@ -73,34 +72,34 @@ public class BaseDaoSupport implements BaseDao {
 		return this.hibernateTemplate;
 	}
 
-	protected final void releaseSession(Session session) throws AppException {
+	protected final void releaseSession(Session session) throws Exception {
 		SessionFactoryUtils.releaseSession(session, getSessionFactory());
 	} 
 
-	public List find(String queryString) throws AppException{
+	public List find(String queryString) throws Exception{
 		return find(queryString, (Object[]) null);
 	}
 
-	public List find(String queryString, Object value) throws AppException{
+	public List find(String queryString, Object value) throws Exception{
 		return find(queryString, new Object[] { value });
 	}
 
-	public List find(final String queryString, final Object[] values) throws AppException{
+	public List find(final String queryString, final Object[] values) throws Exception{
 		return getHibernateTemplate().find(queryString, values);
 	}
 
 	public List findByNamedParam(String queryString, String paramName,
-			Object value) throws AppException{
+			Object value) throws Exception{
 		return getHibernateTemplate().findByNamedParam(queryString, paramName,
 				value);
 	}
 
-	public List findByNamedQuery(String queryName) throws AppException{
+	public List findByNamedQuery(String queryName) throws Exception{
 		return findByNamedQuery(queryName, (Object[]) null);
 	}
 
 	public List findByNamedQuery(final String queryName, final int start,
-			final int limit) throws AppException{
+			final int limit) throws Exception{
 		return (List) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
@@ -110,60 +109,60 @@ public class BaseDaoSupport implements BaseDao {
 		});
 	}
 
-	public List findByNamedQuery(String queryName, Object value) throws AppException{
+	public List findByNamedQuery(String queryName, Object value) throws Exception{
 		return findByNamedQuery(queryName, new Object[] { value });
 	}
 
-	public List findByNamedQuery(final String queryName, final Object[] values) throws AppException{
+	public List findByNamedQuery(final String queryName, final Object[] values) throws Exception{
 		return getHibernateTemplate().findByNamedQuery(queryName, values);
 	}
 
 	public List findByNamedQueryAndNamedParam(String queryName,
-			String paramName, Object value) throws AppException{
+			String paramName, Object value) throws Exception{
 		return findByNamedQueryAndNamedParam(queryName,
 				new String[] { paramName }, new Object[] { value });
 	}
 
 	public List findByNamedQueryAndNamedParam(final String queryName,
-			final String[] paramNames, final Object[] values) throws AppException{
+			final String[] paramNames, final Object[] values) throws Exception{
 		return getHibernateTemplate().findByNamedQueryAndNamedParam(queryName,
 				paramNames, values);
 	}
 
-	public void flush() throws AppException{
+	public void flush() throws Exception{
 		getHibernateTemplate().flush();
 	}
 
-	public void clear() throws AppException{
+	public void clear() throws Exception{
 		getHibernateTemplate().clear();
 	}
 
-	public Object get(Class entityClass, Serializable id) throws AppException{
+	public Object get(Class entityClass, Serializable id) throws Exception{
 		return getHibernateTemplate().get(entityClass, id);
 	}
 
-	public boolean exist(Class entityClass, Serializable id) throws AppException{
+	public boolean exist(Class entityClass, Serializable id) throws Exception{
 		return getHibernateTemplate().get(entityClass, id) == null ? false
 				: true;
 	}
 
-	public void save(Object entity) throws AppException{
+	public void save(Object entity) throws Exception{
 		getHibernateTemplate().save(entity);
 	}
 
-	public void update(Object entity) throws AppException{
+	public void update(Object entity) throws Exception{
 		getHibernateTemplate().update(entity);
 	}
 
-	public void delete(Object entity) throws AppException{
+	public void delete(Object entity) throws Exception{
 		getHibernateTemplate().delete(entity);
 	}
 
-	public List loadAll(final Class entityClass) throws AppException{
+	public List loadAll(final Class entityClass) throws Exception{
 		return getHibernateTemplate().loadAll(entityClass);
 	}
 
-	public int countByNamedQuery(final String queryName) throws AppException{
+	public int countByNamedQuery(final String queryName) throws Exception{
 		return ((Long) getHibernateTemplate().execute(new HibernateCallback() {
 			public Object doInHibernate(Session session)
 					throws HibernateException, SQLException {
@@ -173,7 +172,7 @@ public class BaseDaoSupport implements BaseDao {
 	}
 	
 	public int queryCountByHql(String hqlName, String[] paramName,
-			Object[] condition) throws AppException{
+			Object[] condition) throws Exception{
 		SessionFactory factory = new AnnotationConfiguration().buildSessionFactory();
 		Session session = factory.openSession();
 		String hqlString = session.getNamedQuery(hqlName).getQueryString();
@@ -191,7 +190,7 @@ public class BaseDaoSupport implements BaseDao {
 	
 	@Transactional
 	public PageBean searchByPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws AppException{
+			Object[] condition, PageBean pageBean) throws Exception{
 		return this.pageService.getPageBean(hqlName, paramName, condition,
 				pageBean, this.getHibernateTemplate().getSessionFactory().getCurrentSession());
 	}

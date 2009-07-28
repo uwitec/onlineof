@@ -65,7 +65,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 			}else{
 				throw new AppException("0000000","权限不够!");
 			}
-		}catch(AppException e){
+		}catch(Exception e){
 			throw new AppException("0000015","获取所有权限出错!");
 		}
 	}
@@ -82,7 +82,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 			}else{
 				throw new AppException("0000000","权限不够!");
 			}
-		}catch(AppException e){
+		}catch(Exception e){
 			throw new AppException("0000015","获取模块子权限出错!");
 		}
 		return privilegeVos;
@@ -99,7 +99,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 			}else{
 				throw new AppException("0000000","权限不够!");
 			}
-		}catch(AppException e){
+		}catch(Exception e){
 			e.printStackTrace();
 			throw new AppException("0000015","获取顶级模块权限出错!");
 		}
@@ -119,6 +119,22 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 	 */
 	private boolean checkPrivilege(Session session) throws AppException{
 		return true;
+	}
+
+	public List<PrivilegeVo> getPrivilegeByRoleId(Session session, String roleId)
+			throws AppException {
+		List<PrivilegeVo> privilegeVos = null;
+		try{
+			if(this.checkPrivilege(session)){
+				privilegeVos = privilegeDataDao.getPrivilegeByRoleId(roleId);
+			}else{
+				throw new AppException("0000000","权限不够!");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new AppException("0000015","获取权限出错!");
+		}
+		return privilegeVos;
 	}
 
 }
