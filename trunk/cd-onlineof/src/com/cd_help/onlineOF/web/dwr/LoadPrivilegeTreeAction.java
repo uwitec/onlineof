@@ -51,9 +51,9 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 			 for(PrivilegeVo pv : privileges){
 				 System.out.print("模块权限: "+pv.getPrivilegeName());
 			 }
-		 }catch(AppException e){
+		 }catch(Exception e){
 			 log.error(null,e);
-			 throw new AppException(e.getError_code(),e.getMessage());
+			 throw new AppException("",e.getMessage());
 		 }
 		 return privileges;
 	 }
@@ -74,9 +74,9 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 			 for(PrivilegeVo pv : childPrivileges){
 				 System.out.println("模块权限: "+pv.getPrivilegeName());
 			 }
-		 }catch(AppException e){
+		 }catch(Exception e){
 			 log.error(null,e);
-			 throw new AppException(e.getError_code(),e.getMessage());
+			 throw new AppException("",e.getMessage());
 		 }
 		 return childPrivileges;
 	}
@@ -96,9 +96,32 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 			 for(PrivilegeVo pv : privilegeVos){
 				 log.debug("权限: "+pv.getPrivilegeName());
 			 }
-		}catch(AppException e){
-			 log.error(null,e);
-			 throw new AppException(e.getError_code(),e.getMessage());
+		}catch(Exception e){
+			log.error(null,e);
+			 throw new AppException("",e.getMessage());
+		}
+		return privilegeVos;
+	}
+	
+	/**
+	 * comment here
+	 * @param roleId
+	 * @return
+	 * @throws AppException 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<PrivilegeVo> getPrivilegeByRoleId(String roleId) throws AppException{
+		List<PrivilegeVo> privilegeVos = null;
+		try{
+			HttpSession httpSession = WebContextFactory.get().getSession();
+			Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			privilegeVos = this.getOnlineOF().getPrivilegeManager().getPrivilegeByRoleId(session, roleId);
+			for(PrivilegeVo pv : privilegeVos){
+			   log.debug("权限: "+pv.getPrivilegeName());
+		    }
+		}catch(Exception e){
+			log.error(null,e);
+			 throw new AppException("",e.getMessage());
 		}
 		return privilegeVos;
 	}
