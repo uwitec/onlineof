@@ -28,7 +28,7 @@ public interface OrdersManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public OrdersVo get(Integer id) throws AppException;
+	public OrdersVo get(Integer id) throws Exception;
 	
 	/**
 	 * 生成订单
@@ -36,6 +36,6 @@ public interface OrdersManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void create(OrdersVo ordersVo) throws AppException;
+	public void create(OrdersVo ordersVo) throws Exception;
 
 }

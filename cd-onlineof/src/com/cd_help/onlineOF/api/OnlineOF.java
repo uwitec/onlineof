@@ -27,7 +27,7 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public UsersManager getUsersManager() throws AppException;
+	public UsersManager getUsersManager() throws Exception;
 	
 	/**
 	 * 订单管理
@@ -35,7 +35,7 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public OrdersManager getOrdersManager() throws AppException;
+	public OrdersManager getOrdersManager() throws Exception;
 	
 	/**
 	 * 餐厅管理
@@ -43,7 +43,7 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public RestaurantManager getRestaurantManager() throws AppException;
+	public RestaurantManager getRestaurantManager() throws Exception;
 	
 	/**
 	 * 餐厅类别管理
@@ -51,7 +51,7 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public Restaurant_kindManager getRestaurant_kindManager() throws AppException;
+	public Restaurant_kindManager getRestaurant_kindManager() throws Exception;
 	
 	/**
 	 * 饮食类别管理
@@ -59,7 +59,7 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public Food_kindManager getFood_kindManager() throws AppException;
+	public Food_kindManager getFood_kindManager() throws Exception;
     
 	/**
 	 * 菜系管理
@@ -67,7 +67,7 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public CuisineManager getCuisineManager() throws AppException;
+	public CuisineManager getCuisineManager() throws Exception;
 	
 	/**
 	 * 饮食管理
@@ -75,7 +75,7 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public FoodManager getFoodManager() throws AppException;
+	public FoodManager getFoodManager() throws Exception;
 	
 	/**
 	 * 信誉管理
@@ -83,7 +83,7 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public CredibilityManager getCredibilityManager() throws AppException;
+	public CredibilityManager getCredibilityManager() throws Exception;
 	
 	/**
 	 * 角色管理
@@ -91,7 +91,7 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public RoleManager getRoleManager() throws AppException;
+	public RoleManager getRoleManager() throws Exception;
 	
 	/**
 	 * 用户session管理
@@ -99,7 +99,7 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public SessionManager getSessionManager() throws AppException;
+	public SessionManager getSessionManager() throws Exception;
 	
 	/**
 	 * 权限管理
@@ -107,7 +107,7 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public PrivilegeManager getPrivilegeManager() throws AppException;
+	public PrivilegeManager getPrivilegeManager() throws Exception;
 	/**
 	 * 用户登录
 	 * @param username
@@ -116,6 +116,6 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public Session login(String username,String password) throws AppException;
+	public Session login(String username,String password) throws Exception;
 	
 }

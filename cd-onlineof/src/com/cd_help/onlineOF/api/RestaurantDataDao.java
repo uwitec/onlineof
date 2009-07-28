@@ -7,7 +7,6 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
-import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
 /**
@@ -23,15 +22,15 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
  */
 public interface RestaurantDataDao extends BaseDao{
 	
-	public List<RestaurantVo> loadAll() throws AppException;
+	public List<RestaurantVo> loadAll() throws Exception;
 	
-	public RestaurantVo get(String id) throws AppException;
+	public RestaurantVo get(String id) throws Exception;
 	
-	public RestaurantVo save(RestaurantVo restaurantVo) throws AppException;
+	public RestaurantVo save(RestaurantVo restaurantVo) throws Exception;
 	
-	public boolean exist(String id) throws AppException;
+	public boolean exist(String id) throws Exception;
 	
-	public void delete(String id) throws AppException;
+	public void delete(String id) throws Exception;
 	
-	public void update(RestaurantVo restaurantVo) throws AppException;
+	public void update(RestaurantVo restaurantVo) throws Exception;
 }

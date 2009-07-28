@@ -7,7 +7,6 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
-import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.vo.Food_kindVo;
 
 /**
@@ -23,16 +22,16 @@ import com.cd_help.onlineOF.web.vo.Food_kindVo;
  */
 public interface Food_kindDataDao extends BaseDao{
 	
-    public List<Food_kindVo> loadAll() throws AppException;
+    public List<Food_kindVo> loadAll() throws Exception;
 	
-	public Food_kindVo get(String id) throws AppException;
+	public Food_kindVo get(String id) throws Exception;
 	
-	public Food_kindVo save(Food_kindVo food_kindVo) throws AppException;
+	public Food_kindVo save(Food_kindVo food_kindVo) throws Exception;
 	
-	public boolean exist(String id) throws AppException;
+	public boolean exist(String id) throws Exception;
 	
-	public void delete(String id) throws AppException;
+	public void delete(String id) throws Exception;
 	
-	public void update(Food_kindVo food_kindVo) throws AppException;
+	public void update(Food_kindVo food_kindVo) throws Exception;
 
 }

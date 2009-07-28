@@ -29,7 +29,7 @@ public interface FoodManager {
      * @throws AppException
      * @since cd_help-onlineOF 0.0.0.1
      */
-    public List<FoodVo> loadAll() throws AppException;
+    public List<FoodVo> loadAll() throws Exception;
 	
 	/**
 	 * 根据ID获取
@@ -38,7 +38,7 @@ public interface FoodManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public FoodVo get(String id) throws AppException;
+	public FoodVo get(String id) throws Exception;
 	
 	/**
 	 * 保存
@@ -47,7 +47,7 @@ public interface FoodManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public FoodVo save(FoodVo foodVo) throws AppException;
+	public FoodVo save(FoodVo foodVo) throws Exception;
 	
 	/**
 	 * 判断是否存在
@@ -56,7 +56,7 @@ public interface FoodManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public boolean exist(String id) throws AppException;
+	public boolean exist(String id) throws Exception;
 	
 	/**
 	 * 删除
@@ -64,7 +64,7 @@ public interface FoodManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void delete(String id) throws AppException;
+	public void delete(String id) throws Exception;
 	
 	/**
 	 * 修改
@@ -72,5 +72,5 @@ public interface FoodManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void update(FoodVo foodVo) throws AppException;
+	public void update(FoodVo foodVo) throws Exception;
 }

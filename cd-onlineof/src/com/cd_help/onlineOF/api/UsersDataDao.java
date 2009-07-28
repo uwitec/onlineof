@@ -25,7 +25,7 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
  */
 public interface UsersDataDao extends BaseDao {
 
-	public UsersVo get(String id) throws AppException;
+	public UsersVo get(String id) throws Exception;
 	
 	/**
 	 * 检测用户
@@ -34,19 +34,19 @@ public interface UsersDataDao extends BaseDao {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public boolean checkUsersByName(String usersname) throws AppException;
+	public boolean checkUsersByName(String usersname) throws Exception;
 	
-	public void addUsers(UsersVo usersVo) throws AppException;
+	public void addUsers(UsersVo usersVo) throws Exception;
 
-	public List<UsersVo> loadAll() throws AppException;
+	public List<UsersVo> loadAll() throws Exception;
 
-	public void update(UsersVo usersVo) throws AppException;
+	public void update(UsersVo usersVo) throws Exception;
 
-	public void delete(String id) throws AppException;
+	public void delete(String id) throws Exception;
 
-	public UsersVo login(String username, String password) throws AppException;
+	public UsersVo login(String username, String password) throws Exception;
 	
 	public PageBean searchByPageBean(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws AppException;
+			Object[] condition, PageBean pageBean) throws Exception;
 	
 }
