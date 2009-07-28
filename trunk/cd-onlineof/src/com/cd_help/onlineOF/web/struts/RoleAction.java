@@ -57,9 +57,9 @@ public class RoleAction extends BaseAction{
 					null == this.roleName ? "%" : "%" + this.roleName + "%"};
 			this.pb = this.getOnlineOF().getRoleManager().searchByPage(hql,
 					params, conditions, this.pb, this.getSession());
-		}catch(AppException e){
+		}catch(Exception e){
 			log.error(null,e);
-			throw new AppException(e.getError_code(),e.getMessage());
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}
@@ -81,9 +81,9 @@ public class RoleAction extends BaseAction{
 				}
 			}
 			this.searchRolesByPage();
-		} catch (AppException e) {
+		} catch (Exception e) {
 			log.error(null,e);
-			throw new AppException(e.getError_code(),e.getMessage());
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}
@@ -111,9 +111,9 @@ public class RoleAction extends BaseAction{
 		try{
 			this.getOnlineOF().getRoleManager().addRole(this.getSession(), roleVo);
 			this.searchRolesByPage();
-		}catch(AppException e){
+		}catch(Exception e){
 			log.error(null,e);
-			throw new AppException(e.getError_code(),e.getMessage());
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}
@@ -129,9 +129,9 @@ public class RoleAction extends BaseAction{
 		try{
 		    roleVo = this.getOnlineOF().getRoleManager().getRoleById(this.getSession(), roleId);
 		    action="updateRole.do";
-		}catch(AppException e){
+		}catch(Exception e){
 			log.error(null,e);
-			throw new AppException(e.getError_code(),e.getMessage());
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}
@@ -156,9 +156,9 @@ public class RoleAction extends BaseAction{
 		try{
 		    this.getOnlineOF().getRoleManager().updateRole(this.getSession(), roleVo);
 		    this.searchRolesByPage();
-		}catch(AppException e){
+		}catch(Exception e){
 			log.error(null,e);
-			throw new AppException(e.getError_code(),e.getMessage());
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}

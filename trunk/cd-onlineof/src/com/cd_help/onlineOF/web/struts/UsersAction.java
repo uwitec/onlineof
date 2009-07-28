@@ -76,9 +76,9 @@ public class UsersAction extends BaseAction {
 			loadAllRestaurant();
 			this.pb = this.getOnlineOF().getUsersManager().searchByPage(hql,
 					params, conditions, this.pb, this.getSession());
-		} catch (AppException e) {
+		} catch (Exception e) {
 			log.error(null,e);
-			throw new AppException(e.getError_code(),e.getMessage());
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}
@@ -95,9 +95,9 @@ public class UsersAction extends BaseAction {
 			loadAllRestaurant(); 
 			// 加载所有角色
 			roleVos = this.getOnlineOF().getRoleManager().loadAll(this.getSession());
-		}catch(AppException e){
-			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage());
+		}catch(Exception e){
+			log.error(null,e);
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}
@@ -114,9 +114,9 @@ public class UsersAction extends BaseAction {
 			usersVo.setPassword(StringUtil.encodePassword(usersVo.getPassword(), "MD5"));
 			this.getOnlineOF().getUsersManager().addUsers(this.getSession(), usersVo);
 			this.searchUsersByPage();
-		}catch(AppException e){
-			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage());
+		}catch(Exception e){
+			log.error(null,e);
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}
@@ -139,14 +139,14 @@ public class UsersAction extends BaseAction {
 				}
 			}
 			this.searchUsersByPage();
-		} catch (AppException e) {
-			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage());
+		} catch (Exception e) {
+			log.error(null,e);
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}
 	
-	private void loadAllRestaurant() throws AppException{
+	private void loadAllRestaurant() throws Exception{
 		// 加载所有餐厅
 		restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
 	}
@@ -166,9 +166,9 @@ public class UsersAction extends BaseAction {
 			loadAllRestaurant(); 
 			// 加载所有角色
 			roleVos = this.getOnlineOF().getRoleManager().loadAll(this.getSession());
-		} catch (AppException e) {
-			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage());
+		} catch (Exception e) {
+			log.error(null,e);
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}
@@ -184,9 +184,9 @@ public class UsersAction extends BaseAction {
 		try{
 			this.getOnlineOF().getUsersManager().update(this.getSession(), usersVo);
 			this.searchUsersByPage();
-		}catch(AppException e){
-			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage());
+		}catch(Exception e){
+			log.error(null,e);
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}

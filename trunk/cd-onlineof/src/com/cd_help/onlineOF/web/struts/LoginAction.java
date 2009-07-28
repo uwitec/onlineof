@@ -40,17 +40,18 @@ public class LoginAction extends BaseAction{
 	/**
 	 * 用户登录
 	 * @return
+	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String doLogin(){
+	public String doLogin() throws AppException{
 		log.debug("--->> begin doLogin");
 		Session session = null;
 		try {
 			session = this.getOnlineOF().login(usersname, password);
 			System.out.println("用户名： "+usersname + "密码: "+password);
 			this.getRequest().getSession().setAttribute(WebConstants.ATTRIBUTE_SESSION,session);
-		} catch (AppException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}
