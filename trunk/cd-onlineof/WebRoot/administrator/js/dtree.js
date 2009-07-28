@@ -21,7 +21,7 @@
 
 
 // Node object	
- //�������һ��ڵ�
+ //申明树的一个节点
 function Node(id, pid, name, url, title, target, icon, iconOpen, open,inputName,inputValue,inputType,myOnClick) {
 
 	this.id = id; 
@@ -49,7 +49,7 @@ function Node(id, pid, name, url, title, target, icon, iconOpen, open,inputName,
 
  
 // Tree object
-//����һ����
+//定义一棵树
 function dTree(objName,pathImgCss,inputType,pathImgCssDir) {
 
 	this.config = { 
@@ -111,7 +111,7 @@ function dTree(objName,pathImgCss,inputType,pathImgCssDir) {
 
  } 
 // Adds a new node to the node array
-//��������ӽڵ�ķ���
+//定义树添加节点的方法
 dTree.prototype.add = function(id, pid, name, url, title, target, icon, iconOpen, open) { 
 	this.aNodes[this.aNodes.length] = new Node(id, pid, name, url, title, target, icon, iconOpen, open,this.inputName,this.inputValue,this.inputType,this.myOnClick);
 
@@ -120,7 +120,7 @@ dTree.prototype.add = function(id, pid, name, url, title, target, icon, iconOpen
 
 
 // Open/close all nodes
-//����ȫ���ڵ�չ���ķ���
+//定义全部节点展开的方法
 dTree.prototype.openAll = function() {
 
 	this.oAll(true);
@@ -136,7 +136,7 @@ dTree.prototype.closeAll = function() {
 
 
 // Outputs the tree to the page
-// �������
+// 将树输出
 dTree.prototype.toString = function() {
 
 	var str = '<div id="div_dtree" class="dtree">\n';
@@ -164,7 +164,7 @@ dTree.prototype.toString = function() {
 
 
 // Creates the tree structure
-//��ӽڵ�(��ڵ����)
+//增加节点(给节点对象)
 dTree.prototype.addNode = function(pNode) {
 
 	var str = ''; 
@@ -199,7 +199,7 @@ dTree.prototype.addNode = function(pNode) {
 
 
 // Creates the node icon, url and text
-//�����ڵ�ͼƬ��URL�����ı�
+//创建节点图片、URL、和文本
 dTree.prototype.node = function(node, nodeId) {
 
 	var str = '<div  class="dTreeNode">' + this.indent(node, nodeId);
@@ -325,7 +325,7 @@ dTree.prototype.setCS = function(node) {
 
 
 // Returns the selected node
-//����ѡ�еĽڵ��Id
+//返回选中的节点的Id
 dTree.prototype.getSelected = function() {
 
 	var sn = this.getCookie('cs' + this.obj);
@@ -333,11 +333,11 @@ dTree.prototype.getSelected = function() {
 	return (sn) ? sn : null;
 
 };
-//��ȡѡ�еĽڵ����
+//获取选中的节点对象
 dTree.prototype.getSelectNode = function (){
-	//��ȡ�ڵ�Id
+	//获取节点Id
 	var sn = this.getCookie('cs' + this.obj);
-	//�ڼ����в�ѯȥ�ڵ����
+	//在集合中查询去节点对象
 	for(var n=0;n<this.aNodes.length;n++){
 		if(this.aNodes[n].id==sn){
 			return this.aNodes[n];
@@ -400,7 +400,7 @@ dTree.prototype.o = function(id) {
 
 
 // Open or close all nodes
-//��ȡ���нڵ�
+//获取所有节点
 dTree.prototype.oAll = function(status) {
 
 	for (var n=0; n<this.aNodes.length; n++) {
@@ -422,7 +422,7 @@ dTree.prototype.oAll = function(status) {
 
 
 // Opens the tree to a specific node
-// �������Ľڵ�
+// 打开树具体的节点
 dTree.prototype.openTo = function(nId, bSelect, bFirst) {
 
 	if (!bFirst) {
@@ -462,7 +462,7 @@ dTree.prototype.openTo = function(nId, bSelect, bFirst) {
 
 
 // Closes all nodes on the same level as certain node
-//�ر����е��ӽڵ�
+//关闭所有的子节点
 dTree.prototype.closeLevel = function(node) {
 
 	for (var n=0; n<this.aNodes.length; n++) {
@@ -484,7 +484,7 @@ dTree.prototype.closeLevel = function(node) {
 
 
 // Closes all children of a node
-//�ر����е��ӽڵ�
+//关闭所有的子节点
 dTree.prototype.closeAllChildren = function(node) {
 
 	for (var n=0; n<this.aNodes.length; n++) {
@@ -505,7 +505,7 @@ dTree.prototype.closeAllChildren = function(node) {
 
 
 // Change the status of a node(open or closed)
-//�ı�ڵ��״̬
+//改变节点的状态
 dTree.prototype.nodeStatus = function(status, id, bottom) {
 
 	eDiv	= document.getElementById('d' + this.obj + id);
@@ -535,7 +535,7 @@ dTree.prototype.nodeStatus = function(status, id, bottom) {
 
 
 // [Cookie] Clears a cookie
-//ɾ��Cookie
+//删除Cookie
 dTree.prototype.clearCookie = function() {
 
 	var now = new Date();
@@ -551,7 +551,7 @@ dTree.prototype.clearCookie = function() {
 
 
 // [Cookie] Sets value in a cookie
-//����Cookie
+//设置Cookie
 dTree.prototype.setCookie = function(cookieName, cookieValue, expires, path, domain, secure) {
 
 	document.cookie =
@@ -571,7 +571,7 @@ dTree.prototype.setCookie = function(cookieName, cookieValue, expires, path, dom
 
 
 // [Cookie] Gets a value from a cookie
-// ��ȡCookie
+// 获取Cookie
 dTree.prototype.getCookie = function(cookieName) {
 
 	var cookieValue = '';
@@ -597,7 +597,7 @@ dTree.prototype.getCookie = function(cookieName) {
 
 
 // [Cookie] Returns ids of open nodes as a string
-// �޸�Cookie
+// 修改Cookie
 dTree.prototype.updateCookie = function() {
 
 	var str = '';
@@ -698,10 +698,10 @@ function setParent(obj)
 	//	alert(obj.outerHTML);
     if(obj.nodeId==0) return ; 
 	if(obj.parentElement.parentElement.previousSibling){
-		var  items = obj.parentElement.parentElement.previousSibling.getElementsByTagName("INPUT"); 
+		var  items = obj.parentElement.parentElement.previousSibling.getElementsByTagName("INPUT");
+		items[0].checked = obj.checked;
+        setParent(items[0]); 
 	}
-    items[0].checked = obj.checked;
-    setParent(items[0]); 	 	
 }
 
 
