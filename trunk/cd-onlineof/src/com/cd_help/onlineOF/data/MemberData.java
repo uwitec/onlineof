@@ -43,21 +43,21 @@ public class MemberData implements Serializable{
 	 * comment here
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "name", nullable = true, length = 11)
+	@Column(name = "gender", nullable = true, length = 11)
 	private Integer gender;
 	
 	/**
 	 * comment here
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "name", nullable = true, length = 15)
+	@Column(name = "loginname", nullable = true, length = 15)
 	private String loginname;
 	
 	/**
 	 * comment here
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "name", nullable = true, length = 32)
+	@Column(name = "password", nullable = true, length = 32)
 	private String password;
 
 	public String getMemberId() {
