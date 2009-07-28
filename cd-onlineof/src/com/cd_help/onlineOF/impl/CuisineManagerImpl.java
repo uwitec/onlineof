@@ -32,7 +32,8 @@ public class CuisineManagerImpl implements CuisineManager{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private boolean checkPrivilege(Session session) throws AppException{
+	@SuppressWarnings("unused")
+	private boolean checkPrivilege(Session session) throws Exception{
 		return true;
 	}
 }

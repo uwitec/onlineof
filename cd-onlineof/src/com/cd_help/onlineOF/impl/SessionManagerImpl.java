@@ -56,17 +56,22 @@ public class SessionManagerImpl implements SessionManager{
 	public Session createSession(UsersVo usersVo) throws AppException {
 		@SuppressWarnings("unused")
 		UsersVo vo = usersVo;
-		List<PrivilegeData> privileges = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByRoleId", "roleId", usersVo.getRoleId());
-		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
-		for(PrivilegeData p : privileges){
-			PrivilegeVo pv = new PrivilegeVo();
-			BeanUtilsHelp.copyProperties(pv,p);
-			if(null != p.getParent()){
-				pv.setParentId(p.getParent().getPrivilegeId());
+		Session session = null;
+		try{
+			List<PrivilegeData> privileges = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByRoleId", "roleId", usersVo.getRoleId());
+			List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
+			for(PrivilegeData p : privileges){
+				PrivilegeVo pv = new PrivilegeVo();
+				BeanUtilsHelp.copyProperties(pv,p);
+				if(null != p.getParent()){
+					pv.setParentId(p.getParent().getPrivilegeId());
+				}
+				privilegeVos.add(pv);
 			}
-			privilegeVos.add(pv);
+		    session = new Session(usersVo,privilegeVos);
+		}catch(Exception e){
+			throw new AppException("","系统错误!");
 		}
-		Session session = new Session(usersVo,privilegeVos);
 		return session;
 	}
 

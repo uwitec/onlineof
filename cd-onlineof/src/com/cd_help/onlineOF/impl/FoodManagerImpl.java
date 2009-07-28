@@ -40,42 +40,74 @@ public class FoodManagerImpl implements FoodManager{
 	 * @see com.cd_help.onlineOF.api.FoodManager#delete(java.lang.String)
 	 */
 	public void delete(String id) throws AppException {
-		foodDataDao.delete(id);
+		try{
+			foodDataDao.delete(id);
+		}catch(Exception e){
+			throw new AppException("","删除出错!");
+		}
 	}
 
 	/**
 	 * @see com.cd_help.onlineOF.api.FoodManager#exist(java.lang.String)
 	 */
 	public boolean exist(String id) throws AppException {
-		return foodDataDao.exist(id);
+		boolean bool = false;
+		try{
+			bool = foodDataDao.exist(id);
+		}catch(Exception e){
+			throw new AppException("","系统错误!");
+		}
+		return bool;
 	}
 
 	/**
 	 * @see com.cd_help.onlineOF.api.FoodManager#get(java.lang.String)
 	 */
 	public FoodVo get(String id) throws AppException {
-		return foodDataDao.get(id);
+		FoodVo foodVo = null;
+		try{
+			foodVo = foodDataDao.get(id);
+		}catch(Exception e){
+			throw new AppException("","系统错误!");
+		}
+		return foodVo;
 	}
 
 	/**
 	 * @see com.cd_help.onlineOF.api.FoodManager#loadAll()
 	 */
 	public List<FoodVo> loadAll() throws AppException {
-		return foodDataDao.loadAll();
+		List<FoodVo> foodVos = null;
+		try{
+			foodVos = foodDataDao.loadAll();
+		}catch(Exception e){
+			throw new AppException("","系统错误!");
+		}
+		return foodVos;
 	}
 
 	/**
 	 * @see com.cd_help.onlineOF.api.FoodManager#save(com.cd_help.onlineOF.web.vo.FoodVo)
 	 */
 	public FoodVo save(FoodVo foodVo) throws AppException {
-		return foodDataDao.save(foodVo);
+		FoodVo fv = null;
+		try{
+			fv = foodDataDao.save(foodVo);
+		}catch(Exception e){
+			throw new AppException("","保存出错!");
+		}
+		return fv;
 	}
 
 	/**
 	 * @see com.cd_help.onlineOF.api.FoodManager#update(com.cd_help.onlineOF.web.vo.FoodVo)
 	 */
 	public void update(FoodVo foodVo) throws AppException {
-		foodDataDao.update(foodVo);
+		try{
+			foodDataDao.update(foodVo);
+		}catch(Exception e){
+			throw new AppException("","更新出错!");
+		}
 	}
 	
 	/**
@@ -85,6 +117,7 @@ public class FoodManagerImpl implements FoodManager{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
+	@SuppressWarnings("unused")
 	private boolean checkPrivilege(Session session) throws AppException{
 		return true;
 	}

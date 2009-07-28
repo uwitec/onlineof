@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.FoodDataDao;
 import com.cd_help.onlineOF.data.FoodData;
-import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.StringUtil;
 import com.cd_help.onlineOF.web.vo.FoodVo;
@@ -33,32 +32,32 @@ import com.cd_help.onlineOF.web.vo.FoodVo;
 @SuppressWarnings("unchecked")
 public class FoodDataDaoImpl extends BaseDaoSupport implements FoodDataDao{
 
-	public void delete(String id) throws AppException {
+	public void delete(String id) throws Exception {
 		if(!this.exist(id)){
-			throw new AppException();
+			throw new Exception();
 		}else{
 			this.delete(this.get(FoodData.class, id));
 		}
 	}
 
-	public boolean exist(String id) throws AppException {
+	public boolean exist(String id) throws Exception {
 		try {
 			FoodData foodData = (FoodData) getHibernateTemplate().get(
 					FoodData.class, id);
 			return foodData == null ? false : true;
 		} catch (Exception e) {
-			throw new AppException();
+			throw new Exception();
 		}
 	}
 
-	public FoodVo get(String id) throws AppException {
+	public FoodVo get(String id) throws Exception {
 		FoodData foodData = (FoodData)this.get(FoodData.class,id);
 		FoodVo foodVo = new FoodVo();
 		BeanUtilsHelp.copyProperties(foodVo,foodData);
 		return foodVo;
 	}
 
-	public List<FoodVo> loadAll() throws AppException {
+	public List<FoodVo> loadAll() throws Exception {
 		List<FoodVo> foodVoList =  this.findByNamedQuery("loadAllFood");
 		System.out.println(foodVoList.size());
 		for(FoodVo fv : foodVoList){
@@ -67,7 +66,7 @@ public class FoodDataDaoImpl extends BaseDaoSupport implements FoodDataDao{
 		return foodVoList;
 	}
 
-	public FoodVo save(FoodVo foodVo) throws AppException {
+	public FoodVo save(FoodVo foodVo) throws Exception {
 		foodVo.setFoodId(StringUtil.getUUID());
 		FoodData foodData = new FoodData();
 		BeanUtilsHelp.copyProperties(foodData,foodVo);
@@ -76,7 +75,7 @@ public class FoodDataDaoImpl extends BaseDaoSupport implements FoodDataDao{
 		return foodVo;
 	}
 
-	public void update(FoodVo foodVo) throws AppException {
+	public void update(FoodVo foodVo) throws Exception {
 	    FoodData foodData = (FoodData)this.get(FoodData.class,foodVo.getFoodId());
         BeanUtilsHelp.copyProperties(foodData, foodVo);
 		this.update(foodData);  

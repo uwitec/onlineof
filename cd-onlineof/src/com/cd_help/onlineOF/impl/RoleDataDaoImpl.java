@@ -38,7 +38,7 @@ public class RoleDataDaoImpl extends BaseDaoSupport implements RoleDataDao{
 	/**
 	 * @see com.cd_help.onlineOF.api.RoleDataDao#loadAll()
 	 */
-	public List<RoleVo> loadAll() throws AppException{
+	public List<RoleVo> loadAll() throws Exception{
 		List<RoleVo> roleVos =  this.findByNamedQuery("loadAllRole");
 		return roleVos;
 	}
@@ -47,7 +47,7 @@ public class RoleDataDaoImpl extends BaseDaoSupport implements RoleDataDao{
 	 * @see com.cd_help.onlineOF.api.RoleDataDao#searchByPageBean(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean)
 	 */
 	public PageBean searchByPageBean(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws AppException {
+			Object[] condition, PageBean pageBean) throws Exception {
 		pageBean = this.searchByPage(hqlName, paramName,
 				condition, pageBean);
 		
@@ -67,7 +67,7 @@ public class RoleDataDaoImpl extends BaseDaoSupport implements RoleDataDao{
 	/**
 	 * @see com.cd_help.onlineOF.api.RoleDataDao#delete(java.lang.String)
 	 */
-	public void delete(String id) throws AppException {
+	public void delete(String id) throws Exception {
 		RoleData roleData = (RoleData)this.get(RoleData.class, id);
 		if (null == roleData) {
 			throw new AppException("1006", "没有找到角色[id=" + id + "]");
@@ -78,7 +78,7 @@ public class RoleDataDaoImpl extends BaseDaoSupport implements RoleDataDao{
 	/**
 	 * @see com.cd_help.onlineOF.api.RoleDataDao#add(com.cd_help.onlineOF.web.vo.RoleVo)
 	 */
-	public void add(RoleVo roleVo) throws AppException {
+	public void add(RoleVo roleVo) throws Exception {
 		RoleData roleData = new RoleData();
 		BeanUtilsHelp.copyProperties(roleData, roleVo);
 		roleData.setRoleId(StringUtil.getUUID());
@@ -88,7 +88,7 @@ public class RoleDataDaoImpl extends BaseDaoSupport implements RoleDataDao{
 	/**
 	 * @see com.cd_help.onlineOF.api.RoleDataDao#getRoleById(java.lang.String)
 	 */
-	public RoleVo getRoleById(String roleId) throws AppException {
+	public RoleVo getRoleById(String roleId) throws Exception {
 		RoleVo roleVo = new RoleVo();
 		RoleData roleData = (RoleData)this.get(RoleData.class, roleId);
 		BeanUtilsHelp.copyProperties(roleVo, roleData);
@@ -98,7 +98,7 @@ public class RoleDataDaoImpl extends BaseDaoSupport implements RoleDataDao{
 	/**
 	 * @see com.cd_help.onlineOF.api.RoleDataDao#updateRole(com.cd_help.onlineOF.web.vo.RoleVo)
 	 */
-	public void updateRole(RoleVo roleVo) throws AppException {
+	public void updateRole(RoleVo roleVo) throws Exception {
 		RoleData roleData = (RoleData)this.get(RoleData.class, roleVo.getRoleId());
 		BeanUtilsHelp.copyProperties(roleData, roleVo);
 		roleData.setRoleName(roleVo.getRoleName());

@@ -32,6 +32,7 @@ public class Food_kindManagerImpl implements Food_kindManager{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
+	@SuppressWarnings("unused")
 	private boolean checkPrivilege(Session session) throws AppException{
 		return true;
 	}

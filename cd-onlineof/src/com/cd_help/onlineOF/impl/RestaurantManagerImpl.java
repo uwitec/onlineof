@@ -44,7 +44,12 @@ public class RestaurantManagerImpl implements RestaurantManager{
 	 * @see com.cd_help.onlineOF.api.RestaurantManager#loadAll()
 	 */
 	public List<RestaurantVo> loadAll() throws AppException{
-		List<RestaurantVo> restaurantList = restaurantDataDao.loadAll();
+		List<RestaurantVo> restaurantList = null;
+		try{
+		    restaurantList = restaurantDataDao.loadAll();
+		}catch(Exception e){
+			throw new AppException("","加载出错!");
+		}
 		return restaurantList;
 	}
 	
@@ -52,14 +57,22 @@ public class RestaurantManagerImpl implements RestaurantManager{
 	 * @see com.cd_help.onlineOF.api.RestaurantManager#save(com.cd_help.onlineOF.web.vo.RestaurantVo)
 	 */
 	public RestaurantVo save(RestaurantVo restaurantVo) throws AppException {
-		return restaurantDataDao.save(restaurantVo);
+		try{
+		  return restaurantDataDao.save(restaurantVo);
+		}catch(Exception e){
+			throw new AppException("","保存出错!");
+		}
 	}
 	
 	/**
 	 * @see com.cd_help.onlineOF.api.RestaurantManager#delete(java.lang.String)
 	 */
 	public void delete(String id) throws AppException {
-		restaurantDataDao.delete(restaurantDataDao.get(RestaurantData.class, id));
+		try{
+			restaurantDataDao.delete(restaurantDataDao.get(RestaurantData.class, id));
+		}catch(Exception e){
+			throw new AppException("","删除出错!");
+		}
 	}
 	
 	/**
@@ -69,6 +82,7 @@ public class RestaurantManagerImpl implements RestaurantManager{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
+	@SuppressWarnings("unused")
 	private boolean checkPrivilege(Session session) throws AppException{
 		return true;
 	}
