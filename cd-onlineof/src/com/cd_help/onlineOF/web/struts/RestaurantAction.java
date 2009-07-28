@@ -47,14 +47,15 @@ public class RestaurantAction extends BaseAction{
 	/**
 	 * 获取所有餐厅信息
 	 * @return
+	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String loadAllRestaurant(){
+	public String loadAllRestaurant() throws AppException{
 		log.debug("--->> begin loadAll");
 		try {
 			restaurantList = this.getOnlineOF().getRestaurantManager().loadAll();
-		} catch (AppException e) {
-			e.printStackTrace();
+		} catch (Exception e) {
+			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}

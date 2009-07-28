@@ -10,5 +10,5 @@ import org.springframework.stereotype.Service;
 @SuppressWarnings("serial")
 @Service("privilegeAction")
 public class PrivilegeAction extends BaseAction{
-
+	
 }
