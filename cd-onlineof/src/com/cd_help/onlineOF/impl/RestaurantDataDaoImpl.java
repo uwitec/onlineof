@@ -12,7 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.RestaurantDataDao;
 import com.cd_help.onlineOF.data.RestaurantData;
-import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.StringUtil;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
@@ -50,13 +49,9 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements RestaurantD
 	}
 
 	public boolean exist(String id) throws Exception {
-		try {
 			RestaurantData restaurantData = (RestaurantData) getHibernateTemplate().get(
 					RestaurantData.class, id);
 			return restaurantData == null ? false : true;
-		} catch (Exception e) {
-			throw new AppException();
-		}
 	}
 
 	public RestaurantVo save(RestaurantVo restaurantVo) throws Exception {
@@ -70,7 +65,7 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements RestaurantD
 
 	public void delete(String id) throws Exception {
 		if(!this.exist(id)){
-			throw new AppException();
+			throw new Exception();
 		}else{
 			this.delete(this.get(RestaurantData.class, id));
 		}
