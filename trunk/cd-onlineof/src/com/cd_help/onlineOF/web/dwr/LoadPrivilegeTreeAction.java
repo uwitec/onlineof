@@ -93,9 +93,6 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 			 HttpSession httpSession = WebContextFactory.get().getSession();
 			 Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			 privilegeVos = this.getOnlineOF().getPrivilegeManager().loadAll(session);
-			 for(PrivilegeVo pv : privilegeVos){
-				 log.debug("权限: "+pv.getPrivilegeName());
-			 }
 		}catch(Exception e){
 			log.error(null,e);
 			 throw new AppException("",e.getMessage());
@@ -104,23 +101,21 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 	}
 	
 	/**
-	 * comment here
+	 * 获取角色所拥有的权限
 	 * @param roleId
 	 * @return
 	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public List<PrivilegeVo> getPrivilegeByRoleId(String roleId) throws AppException{
+		log.debug("--->>> begin getPrivilegeByRoleId -- roleId: "+roleId);
 		List<PrivilegeVo> privilegeVos = null;
 		try{
 			HttpSession httpSession = WebContextFactory.get().getSession();
 			Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			privilegeVos = this.getOnlineOF().getPrivilegeManager().getPrivilegeByRoleId(session, roleId);
-			for(PrivilegeVo pv : privilegeVos){
-			   log.debug("权限: "+pv.getPrivilegeName());
-		    }
 		}catch(Exception e){
-			log.error(null,e);
+			 log.error(null,e);
 			 throw new AppException("",e.getMessage());
 		}
 		return privilegeVos;
