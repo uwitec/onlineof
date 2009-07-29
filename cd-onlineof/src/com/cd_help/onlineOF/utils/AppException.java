@@ -20,34 +20,16 @@ package com.cd_help.onlineOF.utils;
 public class AppException extends Exception{
 
 	
-	/**
-	 * 错误编号
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
+	/* 错误编号 */
 	private String error_code;
-	
-	/**
-	 * 错误信息
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	private String message;
-	
-	/**
-	 * Constructs a <code>AppException</code>
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	public AppException(){}
 
-	/**
-	 * Constructs a <code>AppException</code>
-	 * @param error_code
-	 * @param message
-	 * @param e
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
 	public AppException(String error_code, String message) {
+		this(error_code, message, null);
+	}
+
+	public AppException(String error_code, String message, Throwable e) {
+		super(message, e);
 		this.error_code = error_code;
-		this.message = message;
 	}
 
 	public String getError_code() {
@@ -56,15 +38,6 @@ public class AppException extends Exception{
 
 	public void setError_code(String error_code) {
 		this.error_code = error_code;
-	}
-
-	@Override
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
 	}
 	
 }
