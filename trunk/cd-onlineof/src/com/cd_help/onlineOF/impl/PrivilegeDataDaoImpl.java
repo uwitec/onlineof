@@ -107,13 +107,27 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 		return privilegeVos;
 	}
 
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#update(java.lang.String)
+	 */
 	public void update(String id) throws Exception {
 		
 	}
 
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#getPrivilegeByRoleId(java.lang.String)
+	 */
 	public List<PrivilegeVo> getPrivilegeByRoleId(String roleId)
 			throws Exception {
-		return null;
+		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getPrivilegeByRoleId", "roleId", roleId);
+		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
+		PrivilegeVo pv = null;
+		for(PrivilegeData pd : privileges){
+			pv = new PrivilegeVo();
+			BeanUtilsHelp.copyProperties(pv, pd);
+			privilegeVos.add(pv);
+		}
+		return privilegeVos;
 	}
 
 }

@@ -127,6 +127,11 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 		try{
 			if(this.checkPrivilege(session)){
 				privilegeVos = privilegeDataDao.getPrivilegeByRoleId(roleId);
+				if(privilegeVos.size() > 0){
+					return privilegeVos;
+				}else{
+					return null;
+				}
 			}else{
 				throw new AppException("0000000","权限不够!");
 			}
@@ -134,7 +139,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 			e.printStackTrace();
 			throw new AppException("0000015","获取权限出错!");
 		}
-		return privilegeVos;
 	}
 
 }
