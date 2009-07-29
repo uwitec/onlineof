@@ -142,6 +142,10 @@ public class RoleAction extends BaseAction{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public String setRolePrivilege(){
+		// 将角色ID放入request作用域
+		log.debug("--->>> begin setRolePrivilege");
+		String id = this.getRequest().getParameter("roleId");
+		this.getRequest().setAttribute("roleId", id);
 		return SUCCESS;
 	}
 	
