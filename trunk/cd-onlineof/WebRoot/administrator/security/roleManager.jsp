@@ -29,8 +29,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             window.location.href="forwardAddNewRole.do";
         }
         // 设置角色权限
-        function forwardRolePrivilege(){
-           winOpen("权限设置","setRolePrivilege.do",400,500,"yes",true);
+        function forwardRolePrivilege(roleId){
+           winOpen("权限设置","setRolePrivilege.do?roleId="+roleId,400,500,"yes",true);
         }
     </script>
   </head>
@@ -61,7 +61,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	             <td><input type="checkbox" id="checksItem" name="checksItem" value="<s:property value='roleId'/>"/></td>
 	           	 <td><span style="white-space: nowrap;"><s:property value="roleName"/></span></td>
 	             <td><span style="white-space: nowrap;"><s:property value="description"/></span></td>
-	             <td><a href="editRole.do?roleId=<s:property value='roleId'/>">编辑</a>/<a href="javascript:forwardRolePrivilege();">权限设置</a></td>
+	             <td><a href="editRole.do?roleId=<s:property value='roleId'/>">编辑</a>/<a href="javascript:forwardRolePrivilege('<s:property value='roleId'/>');">权限设置</a></td>
 	           </tr>
 	        </s:iterator>
 	       </s:if>
