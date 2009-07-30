@@ -23,11 +23,16 @@ import javax.persistence.Table;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-@SuppressWarnings("serial")
 @Entity
 @Table(name = "member")
 public class MemberData implements Serializable{
 	
+	/**
+	 * comment here
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(length=32)
 	private String memberId;

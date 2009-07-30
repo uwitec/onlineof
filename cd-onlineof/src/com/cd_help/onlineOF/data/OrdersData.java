@@ -7,12 +7,16 @@ package com.cd_help.onlineOF.data;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -26,182 +30,204 @@ import javax.persistence.TemporalType;
  * 订单类
  * <p/>
  * <b>Creation Time:</b> Jul 2, 2009
+ * 
  * @author TanDong
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Entity
 @Table(name = "orders")
-@NamedQueries( { 
-	@NamedQuery(name = "loadAllOrders", query = "select new com.cd_help.onlineOF.web.vo.OrdersVo(o.ordersId,o.ordersCode,o.number,o.remark,o.contactPhone,o.contactName,o.contactGender,o.requestTime,o.requestAddress,o.ordersDate) from OrdersData o"), 
-})
-public class OrdersData implements Serializable{
-	
+public class OrdersData implements Serializable {
+
 	/**
 	 * comment here
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 订单ID
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Id
-	@Column(length=32)
+	@Column(length = 32)
 	private String ordersId;
 	/**
 	 * 订单号
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Column(name = "orders_code", nullable = true, length = 15)
 	private String ordersCode;
-	
-	/**
-	 * 数量
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	@Column(name = "number", nullable = false, length = 15)
-	private Integer number;
-	
+
 	/**
 	 * 下单日期
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Temporal(TemporalType.DATE)
 	private Date ordersDate;
+
 	/**
 	 * 备注
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Column(name = "remark", nullable = true, length = 15)
 	private String remark;
-	/**
-	 * 就餐时间
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	@Temporal(TemporalType.DATE)
-	private Date requestTime;
+
 	/**
 	 * 送餐地址
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Column(name = "requestAddress", nullable = true, length = 15)
 	private String requestAddress;
 	/**
 	 * 联系人
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Column(name = "contactName", nullable = true, length = 15)
 	private String contactName;
-	
+
 	/**
 	 * 联系人性别
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Column(name = "contactGender", nullable = true, length = 11)
 	private Integer contactGender;
 	/**
 	 * 联系电话
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Column(name = "contactPhone", nullable = true, length = 15)
 	private String contactPhone;
 	/**
-	 * 所订饮食
+	 * 狀態
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "foodId", referencedColumnName = "foodId", nullable = false, insertable = false, updatable = false)
-	private FoodData foodData;
-	
+	@Column(name = "status", nullable = true, length = 20)
+	private String status;
 	/**
-	 * 餐厅
+	 * 所订饮食
+	 * 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
+	@JoinTable(name = "orders_food", joinColumns = { @JoinColumn(name = "foodId") }, inverseJoinColumns = { @JoinColumn(name = "ordersId") })
+	private List<FoodData> foodList;
+	/**
+	 * 订单用户
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "restaurantId", referencedColumnName = "restaurantId", nullable = false, insertable = false, updatable = false)
-	private RestaurantData restaurantData;
-	
+	@JoinColumn(name = "memberId", referencedColumnName = "memberId", nullable = false, insertable = false, updatable = false)
+	private MemberData memberData;
+
+	public MemberData getMemberData() {
+		return memberData;
+	}
+
+	public void setMemberData(MemberData memberData) {
+		this.memberData = memberData;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public List<FoodData> getFoodList() {
+		return foodList;
+	}
+
+	public void setFoodList(List<FoodData> foodList) {
+		this.foodList = foodList;
+	}
+
 	public String getOrdersId() {
 		return ordersId;
 	}
+
 	public void setOrdersId(String ordersId) {
 		this.ordersId = ordersId;
 	}
+
 	public String getOrdersCode() {
 		return ordersCode;
 	}
+
 	public void setOrdersCode(String ordersCode) {
 		this.ordersCode = ordersCode;
 	}
+
 	public Date getOrdersDate() {
 		return ordersDate;
 	}
+
 	public void setOrdersDate(Date ordersDate) {
 		this.ordersDate = ordersDate;
 	}
+
 	public String getRemark() {
 		return remark;
 	}
+
 	public void setRemark(String remark) {
 		this.remark = remark;
 	}
-	public Date getRequestTime() {
-		return requestTime;
-	}
-	public void setRequestTime(Date requestTime) {
-		this.requestTime = requestTime;
-	}
+
 	public String getRequestAddress() {
 		return requestAddress;
 	}
+
 	public void setRequestAddress(String requestAddress) {
 		this.requestAddress = requestAddress;
 	}
+
 	public String getContactName() {
 		return contactName;
 	}
+
 	public void setContactName(String contactName) {
 		this.contactName = contactName;
 	}
+
 	public String getContactPhone() {
 		return contactPhone;
 	}
+
 	public void setContactPhone(String contactPhone) {
 		this.contactPhone = contactPhone;
 	}
-	public FoodData getFoodData() {
-		return foodData;
-	}
-	public void setFoodData(FoodData foodData) {
-		this.foodData = foodData;
-	}
-	public RestaurantData getRestaurantData() {
-		return restaurantData;
-	}
-	public void setRestaurantData(RestaurantData restaurantData) {
-		this.restaurantData = restaurantData;
-	}
-	public Integer getNumber() {
-		return number;
-	}
-	public void setNumber(Integer number) {
-		this.number = number;
-	}
+
 	public Integer getContactGender() {
 		return contactGender;
 	}
+
 	public void setContactGender(Integer contactGender) {
 		this.contactGender = contactGender;
 	}
+
 	@Override
 	public int hashCode() {
 		int hash = 0;
-		hash += (this.ordersId != null ? this.ordersId.hashCode() : super.hashCode());
+		hash += (this.ordersId != null ? this.ordersId.hashCode() : super
+				.hashCode());
 		return hash;
 	}
+
 	@Override
 	public boolean equals(Object object) {
 		if (!(object instanceof OrdersData)) {
@@ -209,7 +235,8 @@ public class OrdersData implements Serializable{
 		}
 		OrdersData other = (OrdersData) object;
 		if (this.ordersId != other.ordersId
-				&& (this.ordersId == null || !this.ordersId.equals(other.ordersId))){
+				&& (this.ordersId == null || !this.ordersId
+						.equals(other.ordersId))) {
 			return false;
 		}
 		return true;
