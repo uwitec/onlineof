@@ -1,12 +1,18 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="page" uri="onlineOF/pages.tld"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+    <base href="<%=basePath%>">
     <title>系统用户管理</title>
-    <link type="text/css" rel="stylesheet" href="${pageContext.request.contextPath}/common/css/common.css"/>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
+    <link type="text/css" rel="stylesheet" href="common/css/common.css"/>
+    <link href="administrator/css/table.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="common/js/common.js"></script>
     <script language="javascript">
         // 根据名称(模糊查询)和所属餐厅查询用户
         function search(){
@@ -56,8 +62,8 @@
       	      <span style="white-space: nowrap;"><input type="button" value="删除" onclick="deleteUsers()"/></span>
       	      <span style="white-space: nowrap;"><input type="button" value="添加新用户" onclick="forwardAddNewUsers()"/></span>
       	     </span>
-      	   </div>
-      <table class="table" style="width:100%;">
+      </div>
+      <table style="width:100%;">
          <thead>
            <tr>
                <th><input type="checkbox" id="checkAll" name="checkAll" onclick="checkedAll()"/></th>
@@ -87,13 +93,13 @@
 	             <td><span style="white-space: nowrap;"><s:property value="birthday"/></span></td>
 	             <td><span style="white-space: nowrap;"><s:property value="restaurantName"/></span></td>
 	             <td><span style="white-space: nowrap;"><s:property value="roleName"/></span></td>
-	             <td><a href="editUsres.do?usersId=<s:property value='usersId'/>">编辑</a>/<a href="setPassword.do?usersId=<s:property value='usersId'/>">密码设置</a></td>
+	             <td><a href="editUsres.do?usersId=<s:property value='usersId'/>">编辑</a></td>
 	           </tr>
 	        </s:iterator>
 	       </s:if>
 	       <s:else>
 	          <tr>
-	            <td colspan="7"><span style="white-space: nowrap;"><font style="color:red;">暂无数据</font></span></td> 
+	            <td colspan="8"><span style="white-space: nowrap;"><font style="color:red;">暂无数据</font></span></td> 
 	          </tr>
 	       </s:else> 
          </tbody>

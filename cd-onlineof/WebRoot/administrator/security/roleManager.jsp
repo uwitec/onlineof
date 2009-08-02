@@ -12,6 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>角色管理</title>
     <link type="text/css" rel="stylesheet" href="common/css/common.css"/>
     <script type="text/javascript" src="common/js/common.js"></script>
+    <link href="administrator/css/table.css" rel="stylesheet" type="text/css" />
     <script language="javascript">
        // 删除角色
         function deleteRole(){
@@ -30,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         // 设置角色权限
         function forwardRolePrivilege(roleId){
-           winOpen("权限设置","setRolePrivilege.do?roleId="+roleId,400,500,"yes",true);
+           winOpen("权限设置","setRolePrivilege.do?roleId="+roleId,400,490,"yes",true);
         }
     </script>
   </head>
@@ -45,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       	      <span style="white-space: nowrap;"><input type="button" value="添加新角色" onclick="forwardAddNewRole()"/></span>
       	     </span>
       </div>
-      <table class="table" style="width:100%;">
+      <table style="width:100%;">
          <thead>
            <tr>
                <th><input type="checkbox" id="checkAll" name="checkAll" onclick="checkedAll()"/></th>
@@ -67,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       </s:if>
 	       <s:else>
 	          <tr>
-	            <td colspan="7"><span style="white-space: nowrap;"><font style="color:red;">暂无数据</font></span></td> 
+	            <td colspan="4"><span style="white-space: nowrap;"><font style="color:red;">暂无数据</font></span></td> 
 	          </tr>
 	       </s:else> 
          </tbody>
@@ -78,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<page:pages1 pagesize="${pb.pagesize}"
 			currentPage="${pb.currentPage}" totalPage="${pb.totalPage}"
 			totalRow="${pb.totalRow}" liststep="10" dispalytext="个角色"
-			url="searchUsersByPage.do" />
+			url="searchRolesByPage.do" />
 	</div>
 	<!-- 分页end -->
   </body>
