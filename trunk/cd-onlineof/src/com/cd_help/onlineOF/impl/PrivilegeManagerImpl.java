@@ -16,6 +16,7 @@ import com.cd_help.onlineOF.api.PrivilegeDataDao;
 import com.cd_help.onlineOF.api.PrivilegeManager;
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 
 /**
@@ -40,19 +41,10 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 		this.privilegeDataDao = privilegeDataDao;
 	}
 
-	public void delete(Session session, String id) throws AppException {
-		
-	}
-
-	public PrivilegeVo get(Session session, String id) throws AppException {
-		return null;
-	}
-
-
 	/**
 	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadAll(com.cd_help.onlineOF.data.Session)
 	 */
-	public List<PrivilegeVo> loadAll(Session session) throws AppException {
+	public List<PrivilegeVo> loadAllPrivilege(Session session) throws AppException {
 		List<PrivilegeVo> privilegeVos = null;
 		try{
 			if(this.checkPrivilege(session)){
@@ -106,10 +98,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 		return privilegeVos;
 	}
 
-	public void update(Session session, String id) throws AppException {
-		
-	}
-	
 	/**
 	 * 检查权限
 	 * @param session
@@ -121,6 +109,9 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 		return true;
 	}
 
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getPrivilegeByRoleId(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 */
 	public List<PrivilegeVo> getPrivilegeByRoleId(Session session, String roleId)
 			throws AppException {
 		List<PrivilegeVo> privilegeVos = null;
@@ -138,6 +129,90 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 		}catch(Exception e){
 			e.printStackTrace();
 			throw new AppException("0000015","获取权限出错!");
+		}
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#searchByPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.data.Session)
+	 */
+	public PageBean searchPrivilegesByPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean, Session session)
+			throws Exception {
+		if(this.checkPrivilege(session)){
+			PageBean page = null;
+			try{
+				page = privilegeDataDao.searchByPageBean(hqlName, paramName, condition, pageBean);
+			}catch(Exception e){
+				throw new AppException("0000014", "加载权限信息出错!");
+			}
+			return page;
+		}else{
+			throw new AppException("0000000", "权限不够!");
+		}
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getPrivilegeById(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 */
+	public PrivilegeVo getPrivilegeById(Session session, String privilegeId)
+			throws Exception {
+		PrivilegeVo privilegeVo = null;
+		if(this.checkPrivilege(session)){
+			try{
+				privilegeVo = privilegeDataDao.getPrivilegeById(privilegeId);
+			}catch(Exception e){
+				throw new AppException("0000014", "系统错误!");
+			}
+		}else{
+			throw new AppException("0000000", "权限不够!");
+		}
+		return privilegeVo;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#addPrivilege(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.web.vo.PrivilegeVo)
+	 */
+	public void addPrivilege(Session session, PrivilegeVo privilegeVo)
+			throws Exception {
+		if(this.checkPrivilege(session)){
+			try{
+				privilegeDataDao.addPrivilege(privilegeVo);
+			}catch(Exception e){
+				throw new AppException("0000014", "新建失败!");
+			}
+		}else{
+			throw new AppException("0000000", "权限不够!");
+		}
+		
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#deletePrivilege(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 */
+	public void deletePrivilege(Session session, String id) throws Exception {
+		if(this.checkPrivilege(session)){
+			try{
+				privilegeDataDao.deletePrivilege(id);
+			}catch(Exception e){
+				throw new AppException("0000014", "删除失败!");
+			}
+		}else{
+			throw new AppException("0000000", "权限不够!");
+		}
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#updatePrivilege(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.web.vo.PrivilegeVo)
+	 */
+	public void updatePrivilege(Session session, PrivilegeVo privilegeVo) throws Exception {
+		if(this.checkPrivilege(session)){
+			try{
+				privilegeDataDao.updatePrivilege(privilegeVo);
+			}catch(Exception e){
+				throw new AppException("0000014", "修改失败!",e);
+			}
+		}else{
+			throw new AppException("0000000", "权限不够!");
 		}
 	}
 

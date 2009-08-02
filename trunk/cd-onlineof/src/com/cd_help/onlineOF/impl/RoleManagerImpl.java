@@ -41,11 +41,11 @@ public class RoleManagerImpl implements RoleManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.RoleManager#loadAll(com.cd_help.onlineOF.data.Session)
 	 */
-	public List<RoleVo> loadAll(Session session) throws AppException {
+	public List<RoleVo> loadAllRole(Session session) throws AppException {
 		List<RoleVo> roleVos = null;
 		if(this.checkPrivilege(session)){
 			try{
-				roleVos = roleDataDao.loadAll();
+				roleVos = roleDataDao.loadAllRole();
 			}catch(Exception e){
 				throw new AppException("000000","系统出错!请联系系统管理员.");
 			}
@@ -74,15 +74,15 @@ public class RoleManagerImpl implements RoleManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.RoleManager#searchByPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.data.Session)
 	 */
-	public PageBean searchByPage(String hqlName, String[] paramName,
+	public PageBean searchRolesByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, Session session)
 			throws AppException {
 		if(this.checkPrivilege(session)){
 			PageBean page = null;
 			try{
-				page = roleDataDao.searchByPageBean(hqlName, paramName, condition, pageBean);
+				page = roleDataDao.searchRolesByPageBean(hqlName, paramName, condition, pageBean);
 			}catch(Exception e){
-				throw new AppException("0000014", "加载用户信息出错!");
+				throw new AppException("0000014", "加载角色信息出错!");
 			}
 			return page;
 		}else{
@@ -93,11 +93,12 @@ public class RoleManagerImpl implements RoleManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.RoleManager#delete(com.cd_help.onlineOF.data.Session, java.lang.String)
 	 */
-	public void delete(Session session, String id) throws AppException {
+	public void deleteRole(Session session, String id) throws AppException {
 		if(this.checkPrivilege(session)){
 			try{
-				roleDataDao.delete(id);
+				roleDataDao.deleteRole(id);
 			}catch(Exception e){
+				e.printStackTrace();
 				throw new AppException("0000014", "删除失败!");
 			}
 		}else{
@@ -111,7 +112,7 @@ public class RoleManagerImpl implements RoleManager{
 	public void addRole(Session session, RoleVo roleVo) throws AppException{
 		if(this.checkPrivilege(session)){
 			try{
-				roleDataDao.add(roleVo);
+				roleDataDao.addRole(roleVo);
 			}catch(Exception e){
 				throw new AppException("0000014", "新建失败!");
 			}
@@ -146,10 +147,26 @@ public class RoleManagerImpl implements RoleManager{
 			try{
 				roleDataDao.updateRole(roleVo);
 			}catch(Exception e){
-				throw new AppException("0000014", "修改失败!");
+				throw new AppException("0000014", "修改失败!",e);
 			}
 		}else{
 			throw new AppException("0000000", "权限不够!");
+		}
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.RoleManager#saveRolePrivileges(com.cd_help.onlineOF.data.Session, java.lang.String, java.lang.String)
+	 */
+	public void saveRolePrivileges(Session session, String[] privileges,
+			String roleId) throws Exception {
+		try{
+			if(this.checkPrivilege(session)){
+			    roleDataDao.saveRolePrivileges(privileges, roleId);
+			}else{
+				throw new AppException("0000000", "权限不够!");
+			}
+		}catch(Exception e){
+			throw new AppException("","",e);
 		}
 	}
 }
