@@ -36,6 +36,7 @@ public class RoleAction extends BaseAction{
 	private String checksItem[] = {};
 	private String roleId;
 	private String action;
+	private String rolePrivileges;
 	
 	/**
 	 * 根据条件分页查询
@@ -55,7 +56,7 @@ public class RoleAction extends BaseAction{
 			params = new String[] { "roleName"};
 			conditions = new Object[] {
 					null == this.roleName ? "%" : "%" + this.roleName + "%"};
-			this.pb = this.getOnlineOF().getRoleManager().searchByPage(hql,
+			this.pb = this.getOnlineOF().getRoleManager().searchRolesByPage(hql,
 					params, conditions, this.pb, this.getSession());
 		}catch(Exception e){
 			log.error(null,e);
@@ -76,13 +77,13 @@ public class RoleAction extends BaseAction{
 			if(null != this.checksItem){
 				for(int i=0; i<this.checksItem.length; i++){
 					log.debug(this.checksItem[i]);
-					this.getOnlineOF().getRoleManager().delete(this.getSession(),
+					this.getOnlineOF().getRoleManager().deleteRole(this.getSession(),
 							this.checksItem[i]);
 				}
 			}
 			this.searchRolesByPage();
 		} catch (Exception e) {
-			log.error(null,e);
+			log.error(e);
 			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
@@ -137,16 +138,42 @@ public class RoleAction extends BaseAction{
 	}
 	
 	/**
-	 * 设置角色权限
+	 * 跳转到设置角色权限页面
 	 * @return
+	 * @throws Exception 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String setRolePrivilege(){
+	public String setRolePrivilege() throws Exception{
 		// 将角色ID放入request作用域
 		log.debug("--->>> begin setRolePrivilege");
-		String id = this.getRequest().getParameter("roleId");
-		this.getRequest().setAttribute("roleId", id);
+		try{
+			String id = this.getRequest().getParameter("roleId");
+			roleVo = this.getOnlineOF().getRoleManager().getRoleById(this.getSession(), id);
+		}catch(Exception e){
+			throw new AppException("",e.getMessage(),e);
+		}
 		return SUCCESS;
+	}
+	
+	/**
+	 * 保存角色拥有权限
+	 * @return
+	 * @throws AppException 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String saveRolePrivilege() throws AppException{
+		log.debug("--->> begin saveRolePrivilege--当前角色: "+roleId);
+		try{
+			String[] privileges = null;
+			if (rolePrivileges != null) {
+				privileges = rolePrivileges.split(",");
+			}
+			this.getOnlineOF().getRoleManager().saveRolePrivileges(this.getSession(), privileges, roleId);
+		}catch(Exception e){
+			log.error(null,e);
+			throw new AppException("",e.getMessage(),e);
+		}
+	    return SUCCESS;
 	}
 	
 	/**
@@ -223,5 +250,13 @@ public class RoleAction extends BaseAction{
 
 	public void setAction(String action) {
 		this.action = action;
+	}
+
+	public String getRolePrivileges() {
+		return rolePrivileges;
+	}
+
+	public void setRolePrivileges(String rolePrivileges) {
+		this.rolePrivileges = rolePrivileges;
 	}
 }
