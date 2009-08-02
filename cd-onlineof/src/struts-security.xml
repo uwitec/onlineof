@@ -74,5 +74,29 @@
                 /administrator/security/rolePrivilegeSet.jsp
              </result>
 	     </action>
+	     <action name="saveRolePrivilege" class="roleAction" method="saveRolePrivilege">
+		     <result name="success">
+                /administrator/security/rolePrivilegeSet.jsp
+             </result>
+	     </action>
+	</package>
+	
+	<!-- 权限管理 -->
+	<package name="privilegeManager" extends="common-default">
+		<action name="searchPrivilegesByPage" class="privilegeAction" method="searchPrivilegesByPage">
+		     <result name="success">
+                /administrator/security/privilegeManager.jsp
+             </result>
+	    </action>
+	    <action name="editPrivilege" class="privilegeAction" method="editPrivilege">
+		     <result name="success">
+                /administrator/security/privilegeEdit.jsp
+             </result>
+	    </action>
+	    <action name="updatePrivilege" class="privilegeAction" method="updatePrivilege">
+		     <result name="success">
+                /administrator/security/privilegeManager.jsp
+             </result>
+	     </action>
 	</package>
 </struts>
