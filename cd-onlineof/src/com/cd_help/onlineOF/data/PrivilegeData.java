@@ -45,6 +45,8 @@ import javax.persistence.Table;
 	@NamedQuery(name="getChildModelPrivilegeByRoleId",query="select DISTINCT p from PrivilegeData p join p.roleList r where p.kind = 'Model' and p.parent.privilegeId = :parentId and r.roleId = :roleId"),
 	/*获取所有权限*/
 	@NamedQuery(name="loadAllPrivilege",query="select DISTINCT p from PrivilegeData p"),
+	/*分页获取权限*/
+	@NamedQuery(name="searchPrivilegeByPage",query="from PrivilegeData p where p.privilegeName like :privilegeName order by p.kind"),
 })
 public class PrivilegeData implements Serializable{
 	
