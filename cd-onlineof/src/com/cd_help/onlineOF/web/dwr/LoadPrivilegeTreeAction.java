@@ -53,7 +53,7 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 			 }
 		 }catch(Exception e){
 			 log.error(null,e);
-			 throw new AppException("",e.getMessage());
+			 throw new AppException("",e.getMessage(),e);
 		 }
 		 return privileges;
 	 }
@@ -71,12 +71,9 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 			 HttpSession httpSession = WebContextFactory.get().getSession();
 			 Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			 childPrivileges = this.getOnlineOF().getPrivilegeManager().loadChildModelPrivilegeByParent(session, parentId);
-			 for(PrivilegeVo pv : childPrivileges){
-				 System.out.println("模块权限: "+pv.getPrivilegeName());
-			 }
 		 }catch(Exception e){
 			 log.error(null,e);
-			 throw new AppException("",e.getMessage());
+			 throw new AppException("",e.getMessage(),e);
 		 }
 		 return childPrivileges;
 	}
@@ -94,8 +91,8 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 			 Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			 privilegeVos = this.getOnlineOF().getPrivilegeManager().loadAllPrivilege(session);
 		}catch(Exception e){
-			log.error(null,e);
-			 throw new AppException("",e.getMessage());
+			 log.error(null,e);
+			 throw new AppException("",e.getMessage(),e);
 		}
 		return privilegeVos;
 	}
@@ -116,7 +113,7 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 			privilegeVos = this.getOnlineOF().getPrivilegeManager().getPrivilegeByRoleId(session, roleId);
 		}catch(Exception e){
 			 log.error(null,e);
-			 throw new AppException("",e.getMessage());
+			 throw new AppException("",e.getMessage(),e);
 		}
 		return privilegeVos;
 	}

@@ -38,6 +38,7 @@ public class PrivilegeAction extends BaseAction{
 	private PrivilegeVo privilegeVo;
 	private String privilegeId;
 	private String action;
+	private String checksItem[] = {};
 	
 	/**
 	 * 获取所有权限
@@ -64,6 +65,19 @@ public class PrivilegeAction extends BaseAction{
 		}
 		return SUCCESS;
 	}
+	
+	/**
+	 * 跳转到新建权限页面
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String forwardAddNewPrivilege(){
+		log.debug("--->> begin forwardAddNewPrivilege");
+		action="addPrivilege.do";
+		privilegeVo = null;
+		return SUCCESS;
+	}
+	
 	/**
 	 * 新建权限
 	 * @return
@@ -112,6 +126,29 @@ public class PrivilegeAction extends BaseAction{
 		    this.searchPrivilegesByPage();
 		}catch(Exception e){
 			log.error(null,e);
+			throw new AppException("",e.getMessage());
+		}
+		return SUCCESS;
+	}
+	/**
+	 * 删除权限
+	 * @return
+	 * @throws AppException 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String deletePrivilege() throws AppException{
+		log.debug("--->> begin deletePrivilege");
+		try {
+			if(null != this.checksItem){
+				for(int i=0; i<this.checksItem.length; i++){
+					log.debug(this.checksItem[i]);
+					this.getOnlineOF().getPrivilegeManager().deletePrivilege(this.getSession(),
+							this.checksItem[i]);
+				}
+			}
+			this.searchPrivilegesByPage();
+		} catch (Exception e) {
+			log.error(e);
 			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
