@@ -18,12 +18,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         function deletePrivilege(){
             var len = getAllCheckedValue();
             if(len > 0){
-                var roleForm = document.getElementById("privilegeForm");
-	            roleForm.action="deletePrivilege.do";
-	            roleForm.submit();
+                var privilegeForm = document.getElementById("privilegeForm");
+	            privilegeForm.action="deletePrivilege.do";
+	            privilegeForm.submit();
             }else{
                 alert("请选择!");
             }
+        }
+        // 查询
+        function search(){
+            var privilegeName = document.getElementById("privilegeName").value;
+            window.location.href="searchPrivilegesByPage.do?privilegeName="+privilegeName;
         }
         // 跳转到添加新权限页面
         function forwardAddNewPrivilege(){
@@ -32,12 +37,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </script>
   </head>
   <body style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;">
-    <form id="privilegeForm" name="privilegeForm" action="searchPrivilegesByPage.do" mthod="post">
+    <form id="privilegeForm" name="privilegeForm" action="#" mthod="post">
      <div style="width:100%;font-size:10pt;">
    	     <span style="white-space: nowrap;">
    	      <span style="white-space: nowrap;">权限名</span>
    	      <input type="text" id="privilegeName" name="privilegeName"/>
-   	      <span style="white-space: nowrap;"><input type="submit" value="查询"/></span>
+   	      <span style="white-space: nowrap;"><input type="button" value="查询" onclick="search()"/></span>
    	      <span style="white-space: nowrap;"><input type="button" value="删除" onclick="deletePrivilege()"/></span>
    	      <span style="white-space: nowrap;"><input type="button" value="添加新权限" onclick="forwardAddNewPrivilege()"/></span>
    	     </span>

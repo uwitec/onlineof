@@ -4,37 +4,7 @@
 <html>
   <head>
     <title>新建用户</title>
-    <style rel="stylesheet" type="text/css">
-       .table{
-       		border-collapse: collapse;
-			padding: 5px;
-			border-color: gray;
-			border-style: solid;
-			border-width: 1px 1px 1px 1px;
-       	}
-       .table thead th{
-       		background-color:#E4E4E4;
-       		text-align: center;
-			padding: 5px;
-			font-size: 12px;
-			border-color: gray;
-			border-style: solid;
-			border-width: 1px 0px 0px 1px;
-       	}
-       .table tbody td{
-			padding: 5px;
-			font-family: "arial";
-			font-size: 12px;
-       }
-       .table tfoot td{
-       		text-align: center;
-			padding: 5px;
-			font-size: 12px;
-			border-color: gray;
-			border-style: solid;
-			border-width: 1px 0px 0px 1px;
-       	}
-    </style>
+    <link href="administrator/css/table.css" rel="stylesheet" type="text/css" />
     <script src="${pageContext.request.contextPath}/dwr/interface/usersManagerDwrAction.js"></script>
     <script src="${pageContext.request.contextPath}/dwr/engine.js"></script>
     <script src="${pageContext.request.contextPath}/dwr/util.js"></script>
@@ -95,8 +65,8 @@
       </thead>
       <tbody>
          <tr>
-           <td align="right"><span style="white-space: nowrap;">用户名</span></td>
-           <td>
+           <td style="text-align:right;"><span style="white-space: nowrap;">用户名</span></td>
+           <td style="text-align:left;">
               <span style="white-space: nowrap;">
            		<input type="text" id="usersVo.usersname" name="usersVo.usersname" size=30/>
            		<input type="button" value="检测用户" onclick="checkUsers()">
@@ -105,16 +75,16 @@
            </td>
          </tr>
          <tr>
-           <td align="right"><span style="white-space: nowrap;">密码</span></td>
-           <td><input type="password" id="usersVo.password" name="usersVo.password" size=30></td>
+           <td style="text-align:right;"><span style="white-space: nowrap;">密码</span></td>
+           <td style="text-align:left;"><input type="password" id="usersVo.password" name="usersVo.password" size=30></td>
          </tr>
          <tr>
-           <td align="right"><span style="white-space: nowrap;">确认密码</span></td>
-           <td><input type="password" id="surePassword" name="surePassword" size=30></td>
+           <td style="text-align:right;"><span style="white-space: nowrap;">确认密码</span></td>
+           <td style="text-align:left;"><input type="password" id="surePassword" name="surePassword" size=30></td>
          </tr>
          <tr>
-           <td align="right"><span style="white-space: nowrap;">性别</span></td>
-           <td>
+           <td style="text-align:right;"><span style="white-space: nowrap;">性别</span></td>
+           <td style="text-align:left;">
               <select id="usersVo.gender" name="usersVo.gender">
                  <option value="1">男</option>
                  <option value="0">女</option>
@@ -122,12 +92,12 @@
            </td>
          </tr>
          <tr>
-           <td align="right"><span style="white-space: nowrap;">出生日期</span></td>
-           <td><input type="text" id="usersVo.birthdayStr" name="usersVo.birthdayStr" size=30 onFocus="new WdatePicker(this,'%Y%M%D',false)" class="Wdate"></td>
+           <td style="text-align:right;"><span style="white-space: nowrap;">出生日期</span></td>
+           <td style="text-align:left;"><input type="text" id="usersVo.birthdayStr" name="usersVo.birthdayStr" size=30 onFocus="new WdatePicker(this,'%Y%M%D',false)" class="Wdate"></td>
          </tr>
          <tr>
-           <td align="right"><span style="white-space: nowrap;">所属餐厅</span></td>
-           <td>
+           <td style="text-align:right;"><span style="white-space: nowrap;">所属餐厅</span></td>
+           <td style="text-align:left;">
              <select id="usersVo.restaurantId" name="usersVo.restaurantId">
       	        <s:if test="restaurantVos.size == 0">
       	           <option>暂无数据</option>
@@ -142,8 +112,8 @@
            </td>
          </tr>
          <tr>
-           <td align="right"><span style="white-space: nowrap;">所属角色</span></td>
-           <td>
+           <td style="text-align:right;"><span style="white-space: nowrap;">所属角色</span></td>
+           <td style="text-align:left;">
               <select id="usersVo.roleId" name="usersVo.roleId">
       	        <s:if test="roleVos.size > 0">
       	            <option value="">--请选择--</option>

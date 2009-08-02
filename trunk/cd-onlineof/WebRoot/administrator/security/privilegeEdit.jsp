@@ -46,6 +46,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              </td>
            </tr>
            <tr>
+             <td style="text-align:right;">上级</td>
+             <td style="text-align:left;">
+                <select>
+                  <option>还没有做</option>
+                </select>
+             </td>
+           </tr>
+           <tr>
              <td style="text-align:right;"t>对应方法名</td>
              <td style="text-align:left;">
              	<input type="text" id="privilegeVo.methodName" name="privilegeVo.methodName" value="<s:property value='privilegeVo.methodName'/>"  size="30"/>

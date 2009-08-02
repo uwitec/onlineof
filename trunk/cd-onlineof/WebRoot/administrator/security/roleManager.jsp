@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         }
         // 设置角色权限
         function forwardRolePrivilege(roleId){
-           winOpen("权限设置","setRolePrivilege.do?roleId="+roleId,400,490,"yes",true);
+           winOpen("权限设置","setRolePrivilege.do?roleId="+roleId,400,490,"no",true);
         }
     </script>
   </head>
