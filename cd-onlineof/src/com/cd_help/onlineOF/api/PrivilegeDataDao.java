@@ -7,6 +7,7 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 
 /**
@@ -22,17 +23,22 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
  */
 public interface PrivilegeDataDao extends BaseDao{
 	
-    public PrivilegeVo get(String id) throws Exception;
-	
 	public List<PrivilegeVo> loadAll() throws Exception;
 
-	public void update(String id) throws Exception;
+	public void updatePrivilege(PrivilegeVo privilegeVo) throws Exception;
 	
-	public void delete(String id) throws Exception;
+	public void deletePrivilege(String id) throws Exception;
 	
 	public List<PrivilegeVo> loadTopModelPrivilege(String roleId) throws Exception;
     
 	public List<PrivilegeVo> loadChildModelPrivilegeByParent(String parentId,String roleId) throws Exception;
 	
 	public List<PrivilegeVo> getPrivilegeByRoleId(String roleId) throws Exception;
+	
+	public PageBean searchByPageBean(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws Exception;
+	
+	public PrivilegeVo getPrivilegeById(String privilegeId) throws Exception;
+	
+	public void addPrivilege(PrivilegeVo privilegeVo) throws Exception;
 }

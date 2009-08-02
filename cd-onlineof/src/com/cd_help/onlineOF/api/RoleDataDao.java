@@ -30,7 +30,7 @@ public interface RoleDataDao extends BaseDao{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public List<RoleVo> loadAll() throws Exception;
+	public List<RoleVo> loadAllRole() throws Exception;
 	
 	/**
 	 * 删除角色
@@ -38,7 +38,7 @@ public interface RoleDataDao extends BaseDao{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void delete(String id) throws Exception;
+	public void deleteRole(String id) throws Exception;
 	
 	/**
 	 * 分页查询
@@ -50,7 +50,7 @@ public interface RoleDataDao extends BaseDao{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public PageBean searchByPageBean(String hqlName, String[] paramName,
+	public PageBean searchRolesByPageBean(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean) throws Exception;
 	
 	/**
@@ -59,7 +59,7 @@ public interface RoleDataDao extends BaseDao{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void add(RoleVo roleVo) throws Exception;
+	public void addRole(RoleVo roleVo) throws Exception;
 	
 	/**
 	 * 根据ID获取角色信息
@@ -77,5 +77,14 @@ public interface RoleDataDao extends BaseDao{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public void updateRole(RoleVo roleVo) throws Exception;
+	
+	/**
+	 * 保存角色权限
+	 * @param privileges
+	 * @param roleId
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void saveRolePrivileges(String[] privileges,String roleId) throws Exception;
 
 }

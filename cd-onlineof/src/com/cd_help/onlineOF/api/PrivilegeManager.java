@@ -8,6 +8,7 @@ package com.cd_help.onlineOF.api;
 import java.util.List;
 
 import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 
 /**
@@ -23,18 +24,23 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
  */
 public interface PrivilegeManager {
 	
-public PrivilegeVo get(Session session,String id) throws Exception;
-	
-	public List<PrivilegeVo> loadAll(Session session) throws Exception;
+	public List<PrivilegeVo> loadAllPrivilege(Session session) throws Exception;
 
-	public void update(Session session,String id) throws Exception;
+	public void updatePrivilege(Session session,PrivilegeVo privilegeVo) throws Exception;
 	
-	public void delete(Session session,String id) throws Exception;
+	public void deletePrivilege(Session session,String id) throws Exception;
 	
 	public List<PrivilegeVo> loadTopModelPrivilege(Session session) throws Exception;
     
 	public List<PrivilegeVo> loadChildModelPrivilegeByParent(Session session,String parentId) throws Exception;
 	
 	public List<PrivilegeVo> getPrivilegeByRoleId(Session session, String roleId) throws Exception;
+	
+	public PageBean searchPrivilegesByPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean, Session session) throws Exception;
+	
+	public PrivilegeVo getPrivilegeById(Session session, String privilegeId) throws Exception;
+	
+	public void addPrivilege(Session session, PrivilegeVo privilegeVo) throws Exception;
 
 }
