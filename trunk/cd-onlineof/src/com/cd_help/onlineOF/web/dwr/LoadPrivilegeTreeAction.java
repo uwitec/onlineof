@@ -92,7 +92,7 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 		try{
 			 HttpSession httpSession = WebContextFactory.get().getSession();
 			 Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
-			 privilegeVos = this.getOnlineOF().getPrivilegeManager().loadAll(session);
+			 privilegeVos = this.getOnlineOF().getPrivilegeManager().loadAllPrivilege(session);
 		}catch(Exception e){
 			log.error(null,e);
 			 throw new AppException("",e.getMessage());
