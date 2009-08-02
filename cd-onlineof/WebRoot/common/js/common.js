@@ -14,6 +14,13 @@ function getAllCheckedValue(){
 	}
 	return values.length;
 }
+/**
+ * Close the window of model
+ * @author TanDong
+ */
+function closeWindow(){
+    window.close();
+}
 
 /**
  * Select all
