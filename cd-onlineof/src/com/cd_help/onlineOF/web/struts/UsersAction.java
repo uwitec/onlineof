@@ -94,7 +94,7 @@ public class UsersAction extends BaseAction {
 			// 加载所有餐厅
 			loadAllRestaurant(); 
 			// 加载所有角色
-			roleVos = this.getOnlineOF().getRoleManager().loadAll(this.getSession());
+			roleVos = this.getOnlineOF().getRoleManager().loadAllRole(this.getSession());
 		}catch(Exception e){
 			log.error(null,e);
 			throw new AppException("",e.getMessage());
@@ -165,7 +165,7 @@ public class UsersAction extends BaseAction {
 			// 加载所有餐厅
 			loadAllRestaurant(); 
 			// 加载所有角色
-			roleVos = this.getOnlineOF().getRoleManager().loadAll(this.getSession());
+			roleVos = this.getOnlineOF().getRoleManager().loadAllRole(this.getSession());
 		} catch (Exception e) {
 			log.error(null,e);
 			throw new AppException("",e.getMessage());
@@ -185,7 +185,7 @@ public class UsersAction extends BaseAction {
 			this.getOnlineOF().getUsersManager().update(this.getSession(), usersVo);
 			this.searchUsersByPage();
 		}catch(Exception e){
-			log.error(null,e);
+			log.error(e);
 			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
