@@ -3,37 +3,7 @@
 <html>
   <head>
     <title>编辑用户信息</title>
-    <style rel="stylesheet" type="text/css">
-       .edittable{
-       		border-collapse: collapse;
-			padding: 5px;
-			border-color: gray;
-			border-style: solid;
-			border-width: 1px 1px 1px 1px;
-       	}
-       .edittable thead th{
-       		background-color:#E4E4E4;
-       		text-align: center;
-			padding: 5px;
-			font-size: 12px;
-			border-color: gray;
-			border-style: solid;
-			border-width: 1px 0px 0px 1px;
-       	}
-       .edittable tbody td{
-			padding: 5px;
-			font-family: "arial";
-			font-size: 12px;
-       }
-       .edittable tfoot td{
-       		text-align: center;
-			padding: 5px;
-			font-size: 12px;
-			border-color: gray;
-			border-style: solid;
-			border-width: 1px 0px 0px 1px;
-       	}
-    </style>
+    <link href="administrator/css/table.css" rel="stylesheet" type="text/css" />
     <script language="javascript" src="${pageContext.request.contextPath}/common/js/My97DatePicker/WdatePicker.js"></script>
     <script language="">
        // 返回
@@ -44,14 +14,14 @@
   </head>
   <body style="margin-top:1px;margin-bottom:0px;margin-left:0px;margin-right:0px;">
     <form id="editForm" name="editForm" action="updateUsers.do" method="post">
-       <table class="edittable" style="width:100%;">
+       <table style="width:100%;">
           <thead>
              <th colspan="2">编辑用户信息</th>
           </thead>
           <tbody>
              <tr>
-	           <td align="right"><span style="white-space: nowrap;">用户名</span></td>
-	           <td>
+	           <td style="text-align:right;"><span style="white-space: nowrap;">用户名</span></td>
+	           <td style="text-align:left;">
 	              <span style="white-space: nowrap;">
 	                <!-- 隐藏域用户ID -->
 	                <input type="hidden" value="<s:property value='usersVo.usersId'/>"/>
@@ -60,8 +30,8 @@
 	           </td>
 	         </tr>
 	         <tr>
-	           <td align="right"><span style="white-space: nowrap;">性别</span></td>
-	           <td>
+	           <td style="text-align:right;"><span style="white-space: nowrap;">性别</span></td>
+	           <td style="text-align:left;">
 	              <select id="usersVo.gender" name="usersVo.gender">
 	                 <s:if test="usersVo.gender == 1">
 	                   <option value="1" selected>男</option>
@@ -75,12 +45,12 @@
 	           </td>
 	         </tr>
 	         <tr>
-	           <td align="right"><span style="white-space: nowrap;">出生日期</span></td>
-	           <td><input type="text" id="usersVo.birthdayStr" name="usersVo.birthdayStr" size=30 onFocus="new WdatePicker(this,'%Y%M%D',false)" class="Wdate" value="<s:property value='usersVo.birthday'/>"></td>
+	           <td style="text-align:right;"><span style="white-space: nowrap;">出生日期</span></td>
+	           <td style="text-align:left;"><input type="text" id="usersVo.birthdayStr" name="usersVo.birthdayStr" size=30 onFocus="new WdatePicker(this,'%Y%M%D',false)" class="Wdate" value="<s:property value='usersVo.birthday'/>"></td>
 	         </tr>
 	         <tr>
-	           <td align="right"><span style="white-space: nowrap;">所属餐厅</span></td>
-	           <td>
+	           <td style="text-align:right;"><span style="white-space: nowrap;">所属餐厅</span></td>
+	           <td style="text-align:left;">
 	             <select id="usersVo.restaurantId" name="usersVo.restaurantId">
 	      	        <s:if test="restaurantVos.size == 0">
 	      	           <option>暂无数据</option>
@@ -100,8 +70,8 @@
 	           </td>
 	         </tr>
 	         <tr>
-	           <td align="right"><span style="white-space: nowrap;">所属角色</span></td>
-	           <td>
+	           <td style="text-align:right;"><span style="white-space: nowrap;">所属角色</span></td>
+	           <td style="text-align:left;">
       	         <select id="usersVo.roleId" name="usersVo.roleId">
 	      	        <s:if test="roleVos.size == 0">
 	      	           <option>暂无数据</option>
