@@ -14,9 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.PrivilegeDataDao;
 import com.cd_help.onlineOF.data.PrivilegeData;
-import com.cd_help.onlineOF.data.Session;
-import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
+import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.utils.StringUtil;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 
 /**
@@ -35,11 +35,12 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 @Service("privilegeDataDao")
 public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDataDao{
 
-	public void delete(String id) throws AppException {
-	}
-
-	public PrivilegeVo get(String id) throws AppException {
-		return null;
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#deletePrivilege(java.lang.String)
+	 */
+	public void deletePrivilege(String id) throws Exception {
+		PrivilegeData privilegeData = (PrivilegeData)this.get(PrivilegeData.class, id);
+        this.delete(privilegeData);	
 	}
 
 	/**
@@ -63,10 +64,6 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 			}
 		}
 		return privilegeVos;
-	}
-
-	public void update(Session session,String id) throws AppException {
-		
 	}
 
 	/**
@@ -110,8 +107,10 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 	/**
 	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#update(java.lang.String)
 	 */
-	public void update(String id) throws Exception {
-		
+	public void updatePrivilege(PrivilegeVo privilegeVo) throws Exception {
+		PrivilegeData privilegeData = (PrivilegeData)this.get(PrivilegeData.class, privilegeVo.getPrivilegeId());
+		BeanUtilsHelp.copyProperties(privilegeData, privilegeVo);
+		this.update(privilegeData);
 	}
 
 	/**
@@ -128,6 +127,48 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 			privilegeVos.add(pv);
 		}
 		return privilegeVos;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#searchByPageBean(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean)
+	 */
+	public PageBean searchByPageBean(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws Exception {
+		
+		pageBean = this.searchByPage(hqlName, paramName,
+				condition, pageBean);
+		
+		List<PrivilegeVo> list = new ArrayList<PrivilegeVo>();
+		PrivilegeData privilegeData = null;
+		PrivilegeVo privilegeVo = null;
+		for (Object obj : pageBean.getArray()) {
+			privilegeData = (PrivilegeData) obj;
+			privilegeVo = new PrivilegeVo();
+			BeanUtilsHelp.copyProperties(privilegeVo, privilegeData);
+			list.add(privilegeVo);
+		}
+		pageBean.setArray(list);
+		return pageBean;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#getPrivilegeById(java.lang.String)
+	 */
+	public PrivilegeVo getPrivilegeById(String privilegeId) throws Exception {
+		PrivilegeVo privilegeVo = new PrivilegeVo();
+		PrivilegeData privilegeData = (PrivilegeData)this.get(PrivilegeData.class, privilegeId);
+		BeanUtilsHelp.copyProperties(privilegeVo, privilegeData);
+		return privilegeVo;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#addPrivilege(com.cd_help.onlineOF.web.vo.PrivilegeVo)
+	 */
+	public void addPrivilege(PrivilegeVo privilegeVo) throws Exception {
+		PrivilegeData privilegeData = new PrivilegeData();
+		BeanUtilsHelp.copyProperties(privilegeData, privilegeVo);
+		privilegeData.setPrivilegeId(StringUtil.getUUID());
+		this.save(privilegeData); 
 	}
 
 }
