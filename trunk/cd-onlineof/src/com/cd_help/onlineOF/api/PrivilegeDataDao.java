@@ -23,7 +23,7 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
  */
 public interface PrivilegeDataDao extends BaseDao{
 	
-	public List<PrivilegeVo> loadAll() throws Exception;
+	public List<PrivilegeVo> loadAllPrivilege() throws Exception;
 
 	public void updatePrivilege(PrivilegeVo privilegeVo) throws Exception;
 	
