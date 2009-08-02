@@ -61,19 +61,19 @@ public class PrivilegeData implements Serializable{
 	 * 权限名称
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "privilegeName", nullable = true, length = 15)
+	@Column(name = "privilegeName", nullable = true, length = 50)
 	private String privilegeName;
 	/**
 	 * 对应的方法名
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "methodName", nullable = true, length = 15)
+	@Column(name = "methodName", nullable = true, length = 50)
 	private String methodName;
 	/**
 	 * 类别标识(模块/操作)
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "kind", nullable = true, length = 15)
+	@Column(name = "kind", nullable = true, length = 50)
 	private String kind;
 	/**
 	 * 请求路径
