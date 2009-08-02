@@ -97,6 +97,21 @@
 		     <result name="success">
                 /administrator/security/privilegeManager.jsp
              </result>
-	     </action>
+	    </action>
+	    <action name="forwardAddNewPrivilege" class="privilegeAction" method="forwardAddNewPrivilege">
+		     <result name="success">
+                /administrator/security/privilegeEdit.jsp
+             </result>
+	    </action>
+	    <action name="addPrivilege" class="privilegeAction" method="addPrivilege">
+		     <result name="success">
+                /administrator/security/privilegeManager.jsp
+             </result>
+	    </action>
+	    <action name="deletePrivilege" class="privilegeAction" method="deletePrivilege">
+		     <result name="success">
+                /administrator/security/privilegeManager.jsp
+             </result>
+	    </action>
 	</package>
 </struts>
