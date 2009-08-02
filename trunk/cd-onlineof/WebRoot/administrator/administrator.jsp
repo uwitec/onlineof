@@ -12,11 +12,11 @@
         </tr> 
         <tr>
           <td style="width:15%;height:90%;">
-            <div style="height:75%;width:98%;border:1px solid #A9A9A9;overflow:auto;">
+            <div style="height:85%;width:98%;border:1px solid #A9A9A9;overflow:auto;">
                <!-- 导入用户权限树页面 -->
                <jsp:include page="navigationTree.jsp"></jsp:include>
             </div>
-            <div style="height:25%;width:99%;font-size:10pt;text-align:center;background: #E6EAE9;">技术支持:<br/>耗子,振哥,咚咚<br/>QQ:935760092</div>
+            <div style="height:15%;width:99%;font-size:10pt;text-align:center;background: #E6EAE9;">技术支持:<br/>耗子,振哥,咚咚<br/>QQ:935760092</div>
           </td>
           <td style="width:85%;height:90%;">
             <table style="width:100%;font-size:10pt;border:1px solid #A9A9A9;height:5%;padding:0px;background: #E6EAE9;">
