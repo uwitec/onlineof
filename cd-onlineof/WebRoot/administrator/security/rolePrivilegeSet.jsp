@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <tbody>
                    <tr>
                       <td style="text-align:left;">
-                         <div id="rolePrivilegeTree" style="font-size:10pt;overflow:auto;width:100%;height:100%;"></div>
+                         <div id="rolePrivilegeTree" style="font-size:10pt;width:100%;height:425px;overflow:auto;"></div>
                       </td>
                    </tr>
                    <tr>
