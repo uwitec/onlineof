@@ -46,7 +46,7 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 	/**
 	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#loadAll()
 	 */
-	public List<PrivilegeVo> loadAll() throws Exception {
+	public List<PrivilegeVo> loadAllPrivilege() throws Exception {
 		List<PrivilegeData> privileges = this.findByNamedQuery("loadAllPrivilege");
 		List<PrivilegeVo> privilegeVos = null;
 		if(privileges.size() > 0){

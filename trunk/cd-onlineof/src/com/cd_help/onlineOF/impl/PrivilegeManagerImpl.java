@@ -48,8 +48,11 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 		List<PrivilegeVo> privilegeVos = null;
 		try{
 			if(this.checkPrivilege(session)){
-		        privilegeVos = privilegeDataDao.loadAll();
+		        privilegeVos = privilegeDataDao.loadAllPrivilege();
 		        if(privilegeVos.size() > 0){
+		        	for(PrivilegeVo pv : privilegeVos){
+		        		System.out.println("权限: "+pv.getPrivilegeName());
+		        	}
 		        	return privilegeVos;
 		        }else{
 		        	return null;
