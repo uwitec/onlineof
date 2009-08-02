@@ -205,4 +205,12 @@ public class PrivilegeAction extends BaseAction{
 	public void setAction(String action) {
 		this.action = action;
 	}
+
+	public String[] getChecksItem() {
+		return checksItem;
+	}
+
+	public void setChecksItem(String[] checksItem) {
+		this.checksItem = checksItem;
+	}
 }
