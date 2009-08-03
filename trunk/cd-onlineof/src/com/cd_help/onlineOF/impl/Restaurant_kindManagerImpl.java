@@ -100,7 +100,7 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 * 
 	 * @see com.cd_help.onlineOF.api.RestaurantTypeManager#addRestaurantType(com.cd_help.onlineOF.web.vo.Restaurant_kindVo)
 	 */
-	public void addRestaurantType(Restaurant_kindVo restaurantTypeVo)
+	public void addRestaurantKind(Restaurant_kindVo restaurantTypeVo)
 			throws AppException {
 		try{
 			Restaurant_kindData restaurantTypeData = this
@@ -116,7 +116,7 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 * 
 	 * @see com.cd_help.onlineOF.api.RestaurantTypeManager#delRestaurantType(java.lang.String)
 	 */
-	public void delRestaurantType(String id) throws AppException {
+	public void delRestaurantKind(String id) throws AppException {
 		try{
 		Restaurant_kindData restaurantTypeData = (Restaurant_kindData) restaurant_kindDataDao
 				.get(Restaurant_kindData.class, id);
@@ -132,7 +132,7 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 * @see com.cd_help.onlineOF.api.RestaurantTypeManager#getRestaurantTypeAll()
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Restaurant_kindVo> getRestaurantTypeAll() throws AppException {
+	public List<Restaurant_kindVo> getRestaurantKindAll() throws AppException {
 		List<Restaurant_kindVo> restaurantTypeVos = null;
 		try{
 			List<Restaurant_kindData> restaurantTypes = restaurant_kindDataDao
@@ -155,7 +155,7 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 * 
 	 * @see com.cd_help.onlineOF.api.RestaurantTypeManager#getRestaurantTypeById(java.lang.String)
 	 */
-	public Restaurant_kindVo getRestaurantTypeById(String id)
+	public Restaurant_kindVo getRestaurantKindById(String id)
 			throws AppException {
         try{ 
 			Restaurant_kindData restaurantTypeData = (Restaurant_kindData) restaurant_kindDataDao
@@ -171,7 +171,7 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 * 
 	 * @see com.cd_help.onlineOF.api.RestaurantTypeManager#updRestaurantType(com.cd_help.onlineOF.web.vo.Restaurant_kindVo)
 	 */
-	public void updRestaurantType(Restaurant_kindVo restaurantTypeVo)
+	public void updRestaurantKind(Restaurant_kindVo restaurantTypeVo)
 			throws AppException {
 		try{
 			Restaurant_kindData restaurantTypeData = (Restaurant_kindData) restaurant_kindDataDao

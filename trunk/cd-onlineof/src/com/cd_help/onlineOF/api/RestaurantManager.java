@@ -8,6 +8,7 @@ package com.cd_help.onlineOF.api;
 import java.util.List;
 
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
 
@@ -47,4 +48,18 @@ public interface RestaurantManager{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public void delete(String id) throws Exception;
+	
+	/**
+	 * 餐厅的分页信息
+	 * comment here
+	 * @param hqlName
+	 * @param paramName
+	 * @param condition
+	 * @param pageBean
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public PageBean getRestaurantPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws Exception;
 }

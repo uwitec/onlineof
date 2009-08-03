@@ -17,6 +17,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
@@ -38,7 +39,9 @@ import javax.persistence.Table;
 @Table(name = "restaurant")
 @NamedQueries( { 
 	@NamedQuery(name = "loadAllRestaurant", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img) from RestaurantData r"), 
-	@NamedQuery(name = "getRestaurantById", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img) from RestaurantData r where r.restaurantId = :restaurantId"), 
+	@NamedQuery(name = "getRestaurantById", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img) from RestaurantData r where r.restaurantId = :restaurantId"),
+	@NamedQuery(name = "getRestaurantAllPage",query="from RestaurantData"),
+	@NamedQuery(name = "getRestaurantByKindName",query="from RestaurantData r join r.restaurant_kindData rk where rk.name = :kindName")
 })
 public class RestaurantData implements Serializable{
 
@@ -150,7 +153,14 @@ public class RestaurantData implements Serializable{
 	 */
 	@Column(name = "img", columnDefinition = "BLOB", nullable = true)
 	private byte[] img;
-
+	/**
+	 * 餐厅分类
+	 */
+	@ManyToOne(cascade=CascadeType.REMOVE,fetch=FetchType.EAGER)
+	@JoinColumn(name="restaurant_kindId")
+	private Restaurant_kindData restaurant_kindData = null;
+	
+    
 	public String getRestaurantId() {
 		return restaurantId;
 	}
@@ -158,7 +168,15 @@ public class RestaurantData implements Serializable{
 	public void setRestaurantId(String restaurantId) {
 		this.restaurantId = restaurantId;
 	}
-    
+
+	public Restaurant_kindData getRestaurant_kindData() {
+		return restaurant_kindData;
+	}
+
+	public void setRestaurant_kindData(Restaurant_kindData restaurant_kindData) {
+		this.restaurant_kindData = restaurant_kindData;
+	}
+
 	public CredibilityData getCredibilityData() {
 		return credibilityData;
 	}

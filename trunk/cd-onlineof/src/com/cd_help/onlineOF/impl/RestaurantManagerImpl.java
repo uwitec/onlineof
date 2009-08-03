@@ -17,6 +17,7 @@ import com.cd_help.onlineOF.api.RestaurantManager;
 import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
 /**
@@ -85,6 +86,19 @@ public class RestaurantManagerImpl implements RestaurantManager{
 	@SuppressWarnings("unused")
 	private boolean checkPrivilege(Session session) throws AppException{
 		return true;
+	}
+	@Override
+	public PageBean getRestaurantPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws Exception {
+		// TODO Auto-generated method stub
+		PageBean page = null;
+		try {
+			page = restaurantDataDao.getRestaurantPage(hqlName, paramName,
+					condition, pageBean);
+		} catch (AppException e) {
+			throw new AppException("0000014", "加载餐厅分类信息出错!");
+		}
+		return page;
 	}
 	
 }

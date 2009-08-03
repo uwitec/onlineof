@@ -141,6 +141,17 @@ public class RestaurantVo {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private byte[] img;
+	/**
+	 * 餐厅分类名称
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String resKindName;
+	/**
+	 * 餐厅分类ID
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String resKindId;
+	
 	
 	public String getRestaurantId() {
 		return restaurantId;
@@ -260,5 +271,21 @@ public class RestaurantVo {
 
 	public void setImg(byte[] img) {
 		this.img = img;
+	}
+
+	public String getResKindName() {
+		return resKindName;
+	}
+
+	public void setResKindName(String resKindName) {
+		this.resKindName = resKindName;
+	}
+
+	public String getResKindId() {
+		return resKindId;
+	}
+
+	public void setResKindId(String resKindId) {
+		this.resKindId = resKindId;
 	}
 }

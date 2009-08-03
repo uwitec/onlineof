@@ -1,5 +1,6 @@
 package com.cd_help.onlineOF.web.struts;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,11 +9,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.api.Restaurant_kindManager;
+import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.utils.StringUtil;
 import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
 
+/**
+ * 处理餐厅分类的Action <b><code></code></b> <p/> Comment here <p/> <b>Creation
+ * Time:</b> Jul 28, 2009
+ * 
+ * @author ZhangZhen
+ * @version 0.0.0.1
+ * 
+ * @since cd_help-onlineOF 0.0.0.1
+ */
 @SuppressWarnings("serial")
-@Service("restaurant_kindAction")
+@Service("restaurantKindAction")
 public class Restaurant_kindAction extends BaseAction {
 
 	@Autowired
@@ -39,6 +51,8 @@ public class Restaurant_kindAction extends BaseAction {
 	private int page = 1;
 	/* 分类名称 */
 	private String kindName;
+	/* 删除餐厅分类的ID集合 */
+	private String[] checksItem;
 
 	/**
 	 * 取分页数据的集合 comment here
@@ -49,7 +63,7 @@ public class Restaurant_kindAction extends BaseAction {
 	 */
 	public String getRestaurantKindPage() throws Exception {
 		// TODO Auto-generated method stub\
-		log.debug("laod RestaurantKindPage...");
+		log.debug("load RestaurantKindPage...");
 		String[] params = null;
 		Object[] conditions = null;
 		String hqlName = "";
@@ -60,15 +74,86 @@ public class Restaurant_kindAction extends BaseAction {
 				hqlName = "getResKindAllPage";
 			} else {
 				hqlName = "getResKindByNamePage";
-				params = new String[] { "kindName" };
+				params = new String[] { "name" };
 				conditions = new Object[] { this.getKindName() };
 			}
-			restaurant_kindManager.getRestaurantKindPage(hqlName, params,
-					conditions, this.pageBean, this.getSession());
+			this.pageBean = restaurant_kindManager.getRestaurantKindPage(
+					hqlName, params, conditions, this.pageBean, this
+							.getSession());
 		} catch (Exception ex) {
 			ex.printStackTrace();
+			throw new AppException("loadRestaurantKindPException","加载餐厅分类信息失败.");
 		}
-		return "restaurantKindPage";
+		return SUCCESS;
+	}
+
+	/**
+	 * 保存餐厅分类信息 comment here
+	 * 
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String savaRestaurantKind() throws Exception {
+		// TODO Auto-generated method stub
+		if (restaurant_kindVo != null
+				&& restaurant_kindVo.getRestaurant_kind_Id() != null
+				&& restaurant_kindVo.getRestaurant_kind_Id().length() > 0) {
+			// 修改餐厅分类
+			restaurant_kindManager.updRestaurantKind(restaurant_kindVo);
+		} else {
+			// 新增餐厅分类
+			restaurant_kindVo.setRestaurant_kind_Id(StringUtil.getUUID());
+			Timestamp createTime = new Timestamp(System.currentTimeMillis());
+			restaurant_kindVo.setCreateTime(createTime);
+			restaurant_kindManager.addRestaurantKind(restaurant_kindVo);
+		}
+		return SUCCESS;
+	}
+
+	/**
+	 * 编辑餐厅分类信息 comment here
+	 * 
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String editRestaurantKind() throws Exception {
+		// TODO Auto-generated method stub
+		if (restaurant_kindVo != null
+				&& restaurant_kindVo.getRestaurant_kind_Id() != null
+				&& restaurant_kindVo.getRestaurant_kind_Id().length() > 0) {
+			restaurant_kindVo = restaurant_kindManager
+					.getRestaurantKindById(restaurant_kindVo
+							.getRestaurant_kind_Id());
+		} else {
+			restaurant_kindVo = new Restaurant_kindVo();
+		}
+		return SUCCESS;
+	}
+
+	/**
+	 * 删除餐厅分类 comment here
+	 * 
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String deleteRestaurantKind() throws Exception {
+		// TODO Auto-generated method stub
+		if (restaurant_kindVo != null
+				&& restaurant_kindVo.getRestaurant_kind_Id() != null
+				&& restaurant_kindVo.getRestaurant_kind_Id().length() > 0) {
+			restaurant_kindManager.delRestaurantKind(restaurant_kindVo
+					.getRestaurant_kind_Id());
+		} else if (checksItem != null && checksItem.length > 0) {
+			for (String id : checksItem) {
+				restaurant_kindManager.delRestaurantKind(id);
+			}
+		} else {
+			throw new AppException("delete001", "删除餐厅分类错误!");
+		}
+		return this.getRestaurantKindPage();
 	}
 
 	public void setRestaurant_kindVo(Restaurant_kindVo restaurant_kindVo) {
@@ -101,5 +186,17 @@ public class Restaurant_kindAction extends BaseAction {
 
 	public Restaurant_kindVo getRestaurant_kindVo() {
 		return restaurant_kindVo;
+	}
+
+	public PageBean getPageBean() {
+		return pageBean;
+	}
+
+	public String[] getChecksItem() {
+		return checksItem;
+	}
+
+	public void setChecksItem(String[] checksItem) {
+		this.checksItem = checksItem;
 	}
 }
