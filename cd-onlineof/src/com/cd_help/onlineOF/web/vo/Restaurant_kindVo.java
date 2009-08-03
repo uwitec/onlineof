@@ -17,7 +17,7 @@ public class Restaurant_kindVo {
 	/*餐厅分类ID*/
 	private String restaurant_kind_Id;
 	/*餐厅分类名称*/
-	private String restaurantTypeName;
+	private String name;
 	/*餐厅分类描述*/
 	private String description;
 	/*餐厅分类创建时间*/
@@ -30,11 +30,12 @@ public class Restaurant_kindVo {
 	public void setRestaurant_kind_Id(String restaurant_kind_Id) {
 		this.restaurant_kind_Id = restaurant_kind_Id;
 	}
-	public String getRestaurantTypeName() {
-		return restaurantTypeName;
+
+	public String getName() {
+		return name;
 	}
-	public void setRestaurantTypeName(String restaurantTypeName) {
-		this.restaurantTypeName = restaurantTypeName;
+	public void setName(String name) {
+		this.name = name;
 	}
 	public String getDescription() {
 		return description;

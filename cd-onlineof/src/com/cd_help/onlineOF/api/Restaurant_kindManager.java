@@ -17,22 +17,22 @@ import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
  * 餐厅类别管理接口
  * <p/>
  * <b>Creation Time:</b> Jul 4, 2009
- * @author TanDong
+ * @author ZhangZhen
  * @version 0.0.0.1
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
 public interface Restaurant_kindManager {
 	/*添加餐厅分类信息*/
-	public void addRestaurantType(Restaurant_kindVo restaurantTypeVo)throws Exception;
+	public void addRestaurantKind(Restaurant_kindVo restaurantTypeVo)throws Exception;
 	/*删除餐厅分类信息*/
-	public void delRestaurantType(String id)throws Exception;
+	public void delRestaurantKind(String id)throws Exception;
 	/*修改餐厅分类信息*/
-	public void updRestaurantType(Restaurant_kindVo restaurantTypeVo)throws Exception;
+	public void updRestaurantKind(Restaurant_kindVo restaurantTypeVo)throws Exception;
 	/*根据ID返回餐厅分类信息*/
-	public Restaurant_kindVo getRestaurantTypeById(String id)throws Exception;
+	public Restaurant_kindVo getRestaurantKindById(String id)throws Exception;
 	/*返回集合餐厅分类信息的集合*/
-	public List<Restaurant_kindVo> getRestaurantTypeAll()throws Exception;
+	public List<Restaurant_kindVo> getRestaurantKindAll()throws Exception;
 	/*查询分页信息*/
 	public PageBean getRestaurantKindPage(String qhl,String[] params,Object[] objs,PageBean pageBean,Session session)throws Exception;
 	

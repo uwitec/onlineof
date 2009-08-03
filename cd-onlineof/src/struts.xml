@@ -45,5 +45,5 @@
 	
 	<!-- 导入 -->
 	<include file="struts-security.xml"/>
-	
+	<include file="struts-restaurant.xml" />
 </struts>
