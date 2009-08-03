@@ -63,7 +63,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <s:iterator value="pb.array">
 	           <tr>
 	             <td><input type="checkbox" id="checksItem" name="checksItem" value="<s:property value='privilegeId'/>"/></td>
-	             <td><span style="white-space: nowrap;"><s:property value="privilegeName"/></span></span></td>
+	             <td><span style="white-space: nowrap;"><s:property value="privilegeName"/></span></td>
 	           	 <td><span style="white-space: nowrap;"><s:property value="kind"/></span></td>
 	             <td><span style="white-space: nowrap;"><s:property value="methodName"/></span></td>
 	             <td><span style="white-space: nowrap;"><s:property value="url"/></span></td>

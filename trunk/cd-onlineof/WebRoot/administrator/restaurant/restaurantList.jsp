@@ -24,11 +24,11 @@
 		<link rel="stylesheet" type="text/css" href="common/css/table.css">
 		<SCRIPT type="text/javascript" src="common/js/common.js"></SCRIPT>
 		<script type="text/javascript">
-			//添加餐厅分类信息
+			//添加餐厅信息
 			function addRestaurantKind(){
 				window.location.href="editRestaurantKindAction.do?restaurant_kindVo.restaurant_kind_Id=";
 			}
-			//删除选中的餐厅分类
+			//删除选中的餐厅
 			function delSelectedRestaurantKind(){
 				var cks = document.getElementsByName("checksItem");
 				var tempCkValues = new Array();
@@ -52,8 +52,8 @@
 				<span style="white-space: nowrap;"> <span
 					style="white-space: nowrap;">餐厅分类名称</span> <input type="text"
 						name="kindName" /> <input type="submit" value="搜 索" /> <input
-						type="button" value="新增餐厅分类" onclick="addRestaurantKind();" /> <input
-						type="button" value="删除选定分类" onclick="" /> </span>
+						type="button" value="新增餐厅" onclick="addRestaurantKind();" /> <input
+						type="button" value="删除选定餐厅" onclick="" /> </span>
 			</div>
 			<table class="table" style="width: 100%;">
 				<thead>
@@ -64,13 +64,34 @@
 							</span>
 						</th>
 						<th>
+							<span style="white-space: nowrap;">餐厅名称</span>
+						</th>
+						<th>
+							<span style="white-space: nowrap;">创建者</span>
+						</th>
+						<th>
 							<span style="white-space: nowrap;">餐厅分类名称</span>
 						</th>
 						<th>
-							<span style="white-space: nowrap;">餐厅分类描述</span>
+							<span style="white-space: nowrap;">餐厅联系人</span>
 						</th>
 						<th>
-							<span style="white-space: nowrap;">创建时间</span>
+							<span style="white-space: nowrap;">联系人电话</span>
+						</th>
+						<th>
+							<span style="white-space: nowrap;">联系人手机</span>
+						</th>
+						<th>
+							<span style="white-space: nowrap;">联系人QQ</span>
+						</th>
+						<th>
+							<span style="white-space: nowrap;">联系人邮箱</span>
+						</th>
+						<th>
+							<span style="white-space: nowrap;">餐厅开门时间</span>
+						</th>
+						<th>
+							<span style="white-space: nowrap;">餐厅关闭时间</span>
 						</th>
 						<th>
 							<span style="white-space: nowrap;">操作</span>
@@ -85,7 +106,7 @@
 								<td>
 									<span style="white-space: nowrap;"><input
 											type="checkbox" id="checksItem" name="checksItem"
-											value="${restaurant_kind_Id}" /> </span>
+											value="${restaurantId}" /> </span>
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property
@@ -93,25 +114,55 @@
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property
-											value="description" /> </span>
+											value="createName" /> </span>
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property
-											value="createTime" /> </span>
+											value="resKindName" /> </span>
+								</td>
+								<td>
+									<span style="white-space: nowrap;"><s:property
+											value="contactName" /> </span>
+								</td>
+								<td>
+									<span style="white-space: nowrap;"><s:property
+											value="contactPhone" /> </span>
+								</td>
+								<td>
+									<span style="white-space: nowrap;"><s:property
+											value="mobilePhone" /> </span>
+								</td>
+								<td>
+									<span style="white-space: nowrap;"><s:property
+											value="QQ" /> </span>
+								</td>
+								<td>
+									<span style="white-space: nowrap;"><s:property
+											value="email" /> </span>
+								</td>
+								<td>
+									<span style="white-space: nowrap;"><s:property
+											value="openTime" /> </span>
+								</td>
+								<td>
+									<span style="white-space: nowrap;"><s:property
+											value="closeTime" /> </span>
 								</td>
 								<td>
 									<span style="white-space: nowrap;"> <a
 											href="delRestaurantKindAction.do?restaurant_kindVo.restaurant_kind_Id=${restaurant_kind_Id}"
 											cssClass="button">删除</a> <a
 										href="editRestaurantKindAction.do?restaurant_kindVo.restaurant_kind_Id=${restaurant_kind_Id}"
-										class="button">编辑</a> </span>
+										class="button">编辑</a> 
+										<a href="*.do?">餐厅详细信息</a>
+										</span>
 								</td>
 							</tr>
 						</s:iterator>
 					</s:if>
 					<s:else>
 						<tr>
-							<td colspan="6">
+							<td colspan="12">
 								<span style="white-space: nowrap;"><font
 									style="color: red;">暂无数据</font> </span>
 							</td>
@@ -124,7 +175,7 @@
 				<page:pages1 pagesize="${pageBean.pagesize}"
 					currentPage="${pageBean.currentPage}"
 					totalPage="${pageBean.totalPage}" totalRow="${pageBean.totalRow}"
-					liststep="10" dispalytext="条记录" url="restaurantKindPageAction.do?kindName=${kindName}" />
+					liststep="10" dispalytext="条记录" url="getRestaurantPageAction.do?kindName=${kindName}" />
 			</div>
 			<!-- 分页end -->
 		</form>

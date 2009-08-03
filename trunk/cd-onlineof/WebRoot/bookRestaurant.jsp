@@ -1,6 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
-<%@ taglib prefix="page" uri="/pages"%>
+<%@ taglib prefix="page" uri="/pages" %>
 <html>
   <head>
     <title>餐厅大全</title>
