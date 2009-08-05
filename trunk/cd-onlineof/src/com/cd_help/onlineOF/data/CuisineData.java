@@ -6,13 +6,14 @@
 package com.cd_help.onlineOF.data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -36,6 +37,7 @@ public class CuisineData implements Serializable{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Id
+	@Column(length = 32)
 	private String cuisineId;
 	/**
 	 * 菜系名称
@@ -45,11 +47,19 @@ public class CuisineData implements Serializable{
 	private String name;
 	
 	/**
+	 * 菜系描述
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(nullable=true,columnDefinition="TEXT")
+	private String description;
+	
+	/**
 	 * 所属餐厅
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@ManyToMany(mappedBy = "cuisineDataList")
-	private List<RestaurantData> restaurantList = new ArrayList<RestaurantData>();
+	@ManyToOne(fetch=FetchType.LAZY,cascade=CascadeType.REMOVE)
+	@JoinColumn(name="restaurantId")
+	private RestaurantData restaurant = new RestaurantData();
 	
 	public String getCuisineId() {
 		return cuisineId;
@@ -63,10 +73,17 @@ public class CuisineData implements Serializable{
 	public void setName(String name) {
 		this.name = name;
 	}
-	public List<RestaurantData> getRestaurantList() {
-		return restaurantList;
+	public RestaurantData getRestaurant() {
+		return restaurant;
 	}
-	public void setRestaurantList(List<RestaurantData> restaurantList) {
-		this.restaurantList = restaurantList;
+	public void setRestaurant(RestaurantData restaurant) {
+		this.restaurant = restaurant;
 	}
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 }
