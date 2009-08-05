@@ -78,7 +78,7 @@ public class Restaurant_kindAction extends BaseAction {
 				conditions = new Object[] { this.getKindName() };
 			}
 			this.pageBean = restaurant_kindManager.getRestaurantKindPage(
-					hqlName, params, conditions, this.pageBean, this
+					hqlName, params, conditions, pageBean, this
 							.getSession());
 		} catch (Exception ex) {
 			ex.printStackTrace();

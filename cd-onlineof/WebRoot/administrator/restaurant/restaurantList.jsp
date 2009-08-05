@@ -38,7 +38,7 @@
 						}
 					}
 					if(tempCkValues!=null&&tempCkValues.length>0){
-						window.location.href="delRestaurantKindAction.do?checksItem="+tempCkValues;
+						window.location.href="deleteRestaurantAction.do?checksItem="+tempCkValues;
 					}else{
 						alert("请选择要删除的分类!");
 					}
@@ -48,15 +48,23 @@
 	</head>
 
 	<body>
-		<form action="restaurantKindPageAction.do" name="seachResKind"
+		<form action="getRestaurantPageAction.do" name="seachResKind"
 			method="post">
 			<div style="width: 100%; font-size: 10pt;">
 				<span style="white-space: nowrap;"> <span
-					style="white-space: nowrap;">餐厅分类名称</span> <input type="text"
-						name="kindName" /> <input type="submit" value="搜 索" /> <input
-						type="button" value="新增餐厅" onclick="addRestaurantKind();" /> <input
-						type="button" value="删除选定餐厅"
-						onclick="delSelectedRestaurantKind();" /> </span>
+					style="white-space: nowrap;">餐厅分类名称</span> 
+					<select name="kindId">
+						<option value="">所有类型</option>
+						<s:iterator value="restaurant_kindVos">
+							<option value="${restaurant_kind_Id}" <s:if test="kindId == restaurant_kind_Id">selected</s:if>>
+								${name}
+							</option>
+						</s:iterator>
+					</select>
+					餐厅名称:<input type="text" name="restaurantName" value="${restaurantName}"/>
+					<input type="submit" value="搜 索" /> 
+					<input type="button" value="新增餐厅" onclick="addRestaurantKind();" /> 
+					<input type="button" value="删除选定餐厅" onclick="delSelectedRestaurantKind();" /> </span>
 			</div>
 			<table class="table" style="width: 100%;">
 				<thead>
@@ -125,7 +133,7 @@
 								</td>
 								<td>
 									<span style="white-space: nowrap;"> <a
-										href="delRestaurantKindAction.do?restaurantVo.restaurantId=${restaurantId}"
+										href="deleteRestaurantAction.do?restaurantVo.restaurantId=${restaurantId}"
 										cssClass="button">删除</a> <a
 										href="editRestaurantAction.do?restaurantVo.restaurantId=${restaurantId}"
 										class="button">编辑</a>

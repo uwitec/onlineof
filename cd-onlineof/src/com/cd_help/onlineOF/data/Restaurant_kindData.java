@@ -6,19 +6,14 @@
 package com.cd_help.onlineOF.data;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -64,12 +59,7 @@ public class Restaurant_kindData implements Serializable {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private Timestamp createTime;
-	/**
-	 * 餐厅分类和餐厅关系
-	 */
-	@OneToMany(mappedBy = "restaurant_kindData", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
-	private List<RestaurantData> restaurantDatas = new ArrayList<RestaurantData>();
-
+	
 	public String getDescription() {
 		return description;
 	}
@@ -100,13 +90,5 @@ public class Restaurant_kindData implements Serializable {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<RestaurantData> getRestaurantDatas() {
-		return restaurantDatas;
-	}
-
-	public void setRestaurantDatas(List<RestaurantData> restaurantDatas) {
-		this.restaurantDatas = restaurantDatas;
 	}
 }

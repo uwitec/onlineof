@@ -16,7 +16,6 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
@@ -38,7 +37,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = "loadAllRestaurant", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img) from RestaurantData r"),
 		@NamedQuery(name = "getRestaurantById", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img) from RestaurantData r where r.restaurantId = :restaurantId"),
 		@NamedQuery(name = "getRestaurantAllPage", query = "from RestaurantData"),
-		@NamedQuery(name = "getRestaurantByKindName", query = "from RestaurantData r join r.restaurant_kindData rk where rk.name = :kindName") })
+		@NamedQuery(name = "getRestaurantByKindName", query = "from RestaurantData r where r.restaurant_kindId = :rkindId and r.name like :rname") 
+		})
 public class RestaurantData implements Serializable {
 
 	/**
@@ -167,11 +167,9 @@ public class RestaurantData implements Serializable {
 	@Column(name = "img", columnDefinition = "LONGBLOB", nullable = true)
 	private Blob img;
 	/**
-	 * 餐厅分类
+	 * 餐厅分类ID
 	 */
-	@ManyToOne(cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
-	@JoinColumn(name = "restaurant_kindId")
-	private Restaurant_kindData restaurant_kindData = null;
+	private String restaurant_kindId;
 
 	public String getRestaurantId() {
 		return restaurantId;
@@ -181,12 +179,12 @@ public class RestaurantData implements Serializable {
 		this.restaurantId = restaurantId;
 	}
 
-	public Restaurant_kindData getRestaurant_kindData() {
-		return restaurant_kindData;
+	public String getRestaurant_kindId() {
+		return restaurant_kindId;
 	}
 
-	public void setRestaurant_kindData(Restaurant_kindData restaurant_kindData) {
-		this.restaurant_kindData = restaurant_kindData;
+	public void setRestaurant_kindId(String restaurant_kindId) {
+		this.restaurant_kindId = restaurant_kindId;
 	}
 
 	public CredibilityData getCredibilityData() {
