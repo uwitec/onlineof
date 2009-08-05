@@ -54,12 +54,6 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements
 				RestaurantData.class, id);
 		RestaurantVo restaurantVo = new RestaurantVo();
 		BeanUtilsHelp.copyProperties(restaurantVo, restaurantData);
-		if (restaurantData.getRestaurant_kindData() != null) {
-			restaurantVo.setResKindId(restaurantData.getRestaurant_kindData()
-					.getRestaurant_kind_Id());
-			restaurantVo.setResKindName(restaurantData.getRestaurant_kindData()
-					.getName());
-		}
 		return restaurantVo;
 	}
 
@@ -78,11 +72,6 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements
 		restaurantVo.setRestaurantId(StringUtil.getUUID());
 		RestaurantData restaurantData = new RestaurantData();
 		BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
-		if(restaurantVo.getResKindId()!=null){
-			Restaurant_kindData restaurant_kindData = (Restaurant_kindData) super
-					.get(Restaurant_kindData.class, restaurantVo.getResKindId());
-			restaurantData.setRestaurant_kindData(restaurant_kindData);
-		}
 		this.save(restaurantData);
 		restaurantVo.setRestaurantId(restaurantData.getRestaurantId());
 		return restaurantVo;
@@ -99,6 +88,9 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements
 	public void update(RestaurantVo restaurantVo) throws Exception {
 		RestaurantData restaurantData = (RestaurantData) this.get(
 				RestaurantData.class, restaurantVo.getRestaurantId());
+		if (restaurantVo.getImg() == null) {
+			restaurantVo.setImg(restaurantData.getImg());
+		}
 		BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
 		this.update(restaurantData);
 	}
@@ -124,11 +116,13 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements
 				restaurantData = (RestaurantData) obj;
 				restaurantVo = new RestaurantVo();
 				BeanUtilsHelp.copyProperties(restaurantVo, restaurantData);
-				if (restaurantData.getRestaurant_kindData() != null) {
+				if (restaurantData.getRestaurant_kindId() != null) {
 					restaurantVo.setResKindId(restaurantData
-							.getRestaurant_kindData().getRestaurant_kind_Id());
-					restaurantVo.setResKindName(restaurantData
-							.getRestaurant_kindData().getName());
+							.getRestaurant_kindId());
+					Restaurant_kindData restaurant_kindData = (Restaurant_kindData) super
+							.get(Restaurant_kindData.class, restaurantData
+									.getRestaurant_kindId());
+					restaurantVo.setResKindName(restaurant_kindData.getName());
 				}
 				restaurantVos.add(restaurantVo);
 			}

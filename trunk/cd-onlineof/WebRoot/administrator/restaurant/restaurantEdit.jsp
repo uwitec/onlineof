@@ -56,8 +56,7 @@
 						<td colspan="3" style="text-align: left;">
 							<span><input type="text" name="restaurantVo.address"
 									size=30 value="${restaurantVo.address}" required="string" /> <font
-								size="+1" color="red">*</font>
-							</span>
+								size="+1" color="red">*</font> </span>
 						</td>
 					</tr>
 					<tr>
@@ -67,8 +66,7 @@
 						<td style="text-align: left;">
 							<span><input type="text" name="restaurantVo.openTime"
 									size=30 value="${restaurantVo.openTime}" required="string" />
-								<font size="+1" color="red">*</font>
-							</span>
+								<font size="+1" color="red">*</font> </span>
 						</td>
 						<td align="right">
 							<span style="white-space: nowrap;">餐厅关门时间</span>
@@ -76,8 +74,7 @@
 						<td style="text-align: left;">
 							<span><input type="text" name="restaurantVo.closeTime"
 									size=30 value="${restaurantVo.closeTime}" required="string" />
-								<font size="+1" color="red">*</font>
-							</span>
+								<font size="+1" color="red">*</font> </span>
 						</td>
 					</tr>
 					<tr>
@@ -87,8 +84,7 @@
 						<td colspan="3" style="text-align: left;">
 							<span><input type="text" name="restaurantVo.createName"
 									size=30 value="${restaurantVo.createName}" required="string" />
-								<font size="+1" color="red">*</font>
-							</span>
+								<font size="+1" color="red">*</font> </span>
 						</td>
 					</tr>
 					<tr>
@@ -192,9 +188,8 @@
 							<span style="white-space: nowrap;">餐厅图片</span>
 						</td>
 						<td colspan="3" style="text-align: left;">
-							<span style="white-space: nowrap;"> <input type="hidden"
-									name="restaurantVo.img" value="${restaurantVo.img}" /> <input type="file" name="resFile"
-									required="file"><font size="+1" color="red">注意:只允许(*.jpeg,*.gif,*.png)格式图片上传</font>
+							<span style="white-space: nowrap;"> <input type="file"
+									name="resFile"><font size="+1" color="red">注意:只允许(*.jpeg,*.gif,*.png)格式图片上传</font>
 							</span>
 						</td>
 					</tr>

@@ -7,8 +7,6 @@ package com.cd_help.onlineOF.web.struts;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -78,7 +76,7 @@ public class RestaurantAction extends BaseAction {
 	/* 当前页 */
 	private int page = 1;
 	/* 分类名称 */
-	private String kindName;
+	private String kindId;
 	/* 删除餐厅分类的ID集合 */
 	private String[] checksItem;
 	/* 餐厅图片 */
@@ -87,6 +85,8 @@ public class RestaurantAction extends BaseAction {
 	private String resFileFileName;
 	/* 餐厅分类的集合 */
 	private List<Restaurant_kindVo> restaurant_kindVos = null;
+	/* 餐厅名称 */
+	private String restaurantName;
 	/**
 	 * 餐厅集合
 	 * 
@@ -121,6 +121,7 @@ public class RestaurantAction extends BaseAction {
 	 */
 	public String getRestaurantPage() throws Exception {
 		// TODO Auto-generated method stub
+		restaurant_kindVos = restaurant_kindManager.getRestaurantKindAll();
 		log.debug("load RestaurantPage...");
 		String[] params = null;
 		Object[] conditions = null;
@@ -128,12 +129,12 @@ public class RestaurantAction extends BaseAction {
 		try {
 			this.pageBean.setCurrentPage(page);
 			this.pageBean.setPagesize(2);
-			if (null == kindName || "".endsWith(kindName)) {
+			if (null == kindId || "".endsWith(kindId)) {
 				hqlName = "getRestaurantAllPage";
 			} else {
 				hqlName = "getRestaurantByKindName";
-				params = new String[] { "kindName" };
-				conditions = new Object[] { this.kindName };
+				params = new String[] { "rkindId" ,"rname"};
+				conditions = new Object[] { this.kindId,"%"+this.getRestaurantName()+"%" };
 			}
 			this.pageBean = restaurantManager.getRestaurantPage(hqlName,
 					params, conditions, pageBean);
@@ -157,7 +158,7 @@ public class RestaurantAction extends BaseAction {
 		// TODO Auto-generated method stub
 		log.debug("edit Restaurant...");
 		restaurant_kindVos = restaurant_kindManager.getRestaurantKindAll();
-		if (restaurantVo != null && restaurantVo.getRestaurantId() != null
+		if (null != restaurantVo && null!= restaurantVo.getRestaurantId()
 				&& restaurantVo.getRestaurantId().length() > 0) {
 			restaurantVo = restaurantManager.getRestaurantById(restaurantVo
 					.getRestaurantId());
@@ -183,9 +184,7 @@ public class RestaurantAction extends BaseAction {
 			// 处理修改餐厅信息
 			if (this.resFile != null) {
 				FileInputStream inputStream = new FileInputStream(this.resFile);
-				Blob tempImg = Hibernate.createBlob(inputStream);
-				inputStream.close();
-				restaurantVo.setImg(tempImg);
+				restaurantVo.setImg(Hibernate.createBlob(inputStream));
 			}
 			restaurantManager.updateRestaurant(restaurantVo);
 		} else {
@@ -193,9 +192,7 @@ public class RestaurantAction extends BaseAction {
 			log.debug("size="+this.resFile.length());
 			restaurantVo.setRestaurantId(StringUtil.getUUID());
 			FileInputStream inputStream = new FileInputStream(this.resFile);
-			Blob tempImg = Hibernate.createBlob(inputStream);
-			inputStream.close();
-			restaurantVo.setImg(tempImg);
+			restaurantVo.setImg(Hibernate.createBlob(inputStream));
 			restaurantManager.save(restaurantVo);
 		}
 		return this.getRestaurantPage();
@@ -211,9 +208,14 @@ public class RestaurantAction extends BaseAction {
 	public String deleteRestaurant() throws Exception {
 		// TODO Auto-generated method stub
 		log.debug("delete restaurant...");
-		if (restaurantVo != null && restaurantVo.getRestaurantId() != null
+		if (null != restaurantVo && null != restaurantVo.getRestaurantId()
 				&& restaurantVo.getRestaurantId().length() > 0) {
 			restaurantManager.delete(restaurantVo.getRestaurantId());
+		}
+		if(null != checksItem && checksItem.length > 0){
+			for(String str:checksItem){
+				restaurantManager.delete(str);
+			}
 		}
 		return this.getRestaurantPage();
 	}
@@ -258,12 +260,12 @@ public class RestaurantAction extends BaseAction {
 		this.page = page;
 	}
 
-	public String getKindName() {
-		return kindName;
+	public String getKindId() {
+		return kindId;
 	}
 
-	public void setKindName(String kindName) {
-		this.kindName = kindName;
+	public void setKindId(String kindId) {
+		this.kindId = kindId;
 	}
 
 	public String[] getChecksItem() {
@@ -300,5 +302,13 @@ public class RestaurantAction extends BaseAction {
 
 	public void setRestaurant_kindVos(List<Restaurant_kindVo> restaurant_kindVos) {
 		this.restaurant_kindVos = restaurant_kindVos;
+	}
+
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
 	}
 }

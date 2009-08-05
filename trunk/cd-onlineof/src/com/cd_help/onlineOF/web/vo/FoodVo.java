@@ -5,12 +5,10 @@
  */
 package com.cd_help.onlineOF.web.vo;
 
+import java.sql.Blob;
+
 /**
- * <b><code></code></b>
- * <p/>
- * 饮食VO
- * <p/>
- * <b>Creation Time:</b> Jul 18, 2009
+ * <b><code></code></b> <p/> 饮食VO <p/> <b>Creation Time:</b> Jul 18, 2009
  * 
  * @author TanDong
  * @version 0.0.0.1
@@ -54,7 +52,7 @@ public class FoodVo {
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private byte[] img;
+	private Blob img;
 	/**
 	 * 是否是特色
 	 * 
@@ -106,7 +104,7 @@ public class FoodVo {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public FoodVo(String foodId, String name, double price,
-			String introduction, byte[] img, Integer isSigns) {
+			String introduction, Blob img, Integer isSigns) {
 		this.foodId = foodId;
 		this.name = name;
 		this.price = price;
@@ -179,11 +177,11 @@ public class FoodVo {
 		this.introduction = introduction;
 	}
 
-	public byte[] getImg() {
+	public Blob getImg() {
 		return img;
 	}
 
-	public void setImg(byte[] img) {
+	public void setImg(Blob img) {
 		this.img = img;
 	}
 
