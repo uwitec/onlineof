@@ -44,5 +44,22 @@
 				/administrator/restaurant/restaurantList.jsp
 			</result>
 		</action>
+		<action name="editRestaurantAction" class="restaurantAction" method="editRestaurant">
+			<result name="success">
+				/administrator/restaurant/restaurantEdit.jsp
+			</result>
+		</action>
+		<action name="savaRestaurantAction" class="restaurantAction" method="savaRestaurant">
+			<result name="success">
+				/administrator/restaurant/restaurantList.jsp
+			</result>
+			<interceptor-ref name="fileUpload"></interceptor-ref>
+			<interceptor-ref name="defaultStack"></interceptor-ref>
+		</action>
+		<action name="deleteRestaurantAction" class="restaurantAction" method="deleteRestaurant">
+			<result name="success">
+				/administrator/restaurant/restaurantList.jsp
+			</result>
+		</action>
 	</package>
 </struts>

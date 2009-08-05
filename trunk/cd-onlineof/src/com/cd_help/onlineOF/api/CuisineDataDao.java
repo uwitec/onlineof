@@ -7,6 +7,7 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.CuisineVo;
 
 /**
@@ -33,4 +34,7 @@ public interface CuisineDataDao extends BaseDao{
 	public void delete(String id) throws Exception;
 	
 	public void update(CuisineVo cuisineDataVo) throws Exception;
+	
+	public PageBean getCuisinePage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean)throws Exception;
 }

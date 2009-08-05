@@ -12,5 +12,7 @@ public class TestPwd extends TestCase{
 		System.out.println("Password1="+pwd1);
 		String pwd2 = StringUtil.encodePassword(str2, "sha");
 		System.out.println("Password2="+pwd2);
+		String pwd3 = StringUtil.encodePassword("onlineof", "MD5");
+		System.out.println("Password3="+pwd3);
 	}
 }

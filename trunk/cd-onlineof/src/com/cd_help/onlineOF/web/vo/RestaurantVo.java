@@ -5,29 +5,30 @@
  */
 package com.cd_help.onlineOF.web.vo;
 
+import java.sql.Blob;
+
 /**
- * <b><code></code></b>
- * <p/>
- * 餐厅VO对象
- * <p/>
- * <b>Creation Time:</b> Jul 4, 2009
+ * <b><code></code></b> <p/> 餐厅VO对象 <p/> <b>Creation Time:</b> Jul 4, 2009
+ * 
  * @author TanDong
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
 public class RestaurantVo {
-	
+
 	/**
 	 * Constructs a <code>RestaurantVo</code>
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public RestaurantVo(){
-		
+	public RestaurantVo() {
+
 	}
 
 	/**
 	 * Constructs a <code>RestaurantVo</code>
+	 * 
 	 * @param restaurantId
 	 * @param name
 	 * @param address
@@ -48,8 +49,8 @@ public class RestaurantVo {
 	public RestaurantVo(String restaurantId, String name, String address,
 			String openTime, String closeTime, String createName,
 			String contactName, String contactPhone, String QQ,
-			String mobilePhone, Integer contactGender,
-			Integer status, String introduction, String email, byte[] img) {
+			String mobilePhone, Integer contactGender, Integer status,
+			String introduction, String email, Blob img) {
 		this.restaurantId = restaurantId;
 		this.name = name;
 		this.closeTime = closeTime;
@@ -68,91 +69,107 @@ public class RestaurantVo {
 
 	/**
 	 * 餐厅ID
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String restaurantId;
 	/**
 	 * 名称
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String name;
 	/**
 	 * 地址
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String address;
 	/**
 	 * 餐厅开门时间
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String openTime;
 	/**
 	 * 餐厅关闭时间
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String closeTime;
 	/**
 	 * 创建人
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String createName;
 	/**
 	 * 联系人
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String contactName;
 	/**
 	 * 联系人电话
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String contactPhone;
 	/**
 	 * QQ
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String QQ;
 	/**
 	 * 联系人手机
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String mobilePhone;
 	/**
 	 * 联系人性别
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private Integer contactGender;
 	/**
 	 * 状态
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private Integer status;
 	/**
 	 * 餐厅简介
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String introduction;
 	/**
 	 * 联系人邮箱
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String email;
 	/**
 	 * 图片
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private byte[] img;
+	private Blob img;
 	/**
 	 * 餐厅分类名称
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String resKindName;
 	/**
 	 * 餐厅分类ID
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String resKindId;
-	
-	
+
 	public String getRestaurantId() {
 		return restaurantId;
 	}
@@ -265,11 +282,11 @@ public class RestaurantVo {
 		this.email = email;
 	}
 
-	public byte[] getImg() {
+	public Blob getImg() {
 		return img;
 	}
 
-	public void setImg(byte[] img) {
+	public void setImg(Blob img) {
 		this.img = img;
 	}
 

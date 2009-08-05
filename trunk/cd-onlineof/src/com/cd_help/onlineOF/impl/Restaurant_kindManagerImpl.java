@@ -136,7 +136,7 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 		List<Restaurant_kindVo> restaurantTypeVos = null;
 		try{
 			List<Restaurant_kindData> restaurantTypes = restaurant_kindDataDao
-					.find("from RestaurantTypeData");
+					.find("from Restaurant_kindData");
 			if (restaurantTypes != null && restaurantTypes.size() > 0) {
 				restaurantTypeVos = new ArrayList<Restaurant_kindVo>();
 				for (Restaurant_kindData restaurantTypeData : restaurantTypes) {
