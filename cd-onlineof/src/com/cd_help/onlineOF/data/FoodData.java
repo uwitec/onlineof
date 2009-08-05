@@ -6,6 +6,7 @@
 package com.cd_help.onlineOF.data;
 
 import java.io.Serializable;
+import java.sql.Blob;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -89,8 +90,8 @@ public class FoodData implements Serializable {
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "img", columnDefinition = "BLOB", nullable = true)
-	private byte[] img;
+	@Column(name = "img", columnDefinition = "LONGBLOB", nullable = true)
+	private Blob img;
 	/**
 	 * 是否是特色
 	 * 
@@ -173,11 +174,11 @@ public class FoodData implements Serializable {
 		this.introduction = introduction;
 	}
 
-	public byte[] getImg() {
+	public Blob getImg() {
 		return img;
 	}
 
-	public void setImg(byte[] img) {
+	public void setImg(Blob img) {
 		this.img = img;
 	}
 
