@@ -11,47 +11,46 @@ import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
-
 /**
- * <b><code></code></b>
- * <p/>
- * 餐厅管理接口
- * <p/>
- * <b>Creation Time:</b> Jul 4, 2009
+ * <b><code></code></b> <p/> 餐厅管理接口 <p/> <b>Creation Time:</b> Jul 4, 2009
+ * 
  * @author TanDong
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
-public interface RestaurantManager{
+public interface RestaurantManager {
 	/**
 	 * 获取所有餐厅信息
+	 * 
 	 * @return
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public List<RestaurantVo> loadAll() throws Exception;
-	
+
 	/**
 	 * 保存
+	 * 
 	 * @param restaurantVo
 	 * @return
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public RestaurantVo save(RestaurantVo restaurantVo) throws Exception;
-	
+
 	/**
 	 * 删除
+	 * 
 	 * @param id
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public void delete(String id) throws Exception;
-	
+
 	/**
-	 * 餐厅的分页信息
-	 * comment here
+	 * 餐厅的分页信息 comment here
+	 * 
 	 * @param hqlName
 	 * @param paramName
 	 * @param condition
@@ -62,4 +61,23 @@ public interface RestaurantManager{
 	 */
 	public PageBean getRestaurantPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean) throws Exception;
+
+	/**
+	 * 根据餐厅ID查询餐厅对象
+	 * comment here
+	 * @param restaurantId
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public RestaurantVo getRestaurantById(String restaurantId) throws Exception;
+	
+	/**
+	 * 修改餐厅信息
+	 * comment here
+	 * @param restaurantVo
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void updateRestaurant(RestaurantVo restaurantVo)throws Exception;
 }

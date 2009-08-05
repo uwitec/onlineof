@@ -11,11 +11,34 @@ package com.cd_help.onlineOF.web.vo;
  * 菜系VO
  * <p/>
  * <b>Creation Time:</b> Jul 18, 2009
- * @author TanDong
+ * @author ZhangZhen
  * @version 0.0.0.1
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
 public class CuisineVo {
-
+	/**
+	 * 菜系ID
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String cuisineId;
+	/**
+	 * 菜系名称
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String name;
+	public String getCuisineId() {
+		return cuisineId;
+	}
+	public void setCuisineId(String cuisineId) {
+		this.cuisineId = cuisineId;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	
+	
 }

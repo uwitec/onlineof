@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.CuisineDataDao;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.CuisineVo;
 
 /**
@@ -50,6 +51,16 @@ public class CuisineDataDaoImpl extends BaseDaoSupport implements CuisineDataDao
 
 	public void update(CuisineVo cuisineDataVo) throws Exception {
 		
+	}
+
+	/**
+	 * 取菜系的分页数据
+	 * @see com.cd_help.onlineOF.api.CuisineDataDao#getCuisinePage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean)
+	 */
+	public PageBean getCuisinePage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

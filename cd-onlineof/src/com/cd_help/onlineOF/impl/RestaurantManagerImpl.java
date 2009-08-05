@@ -100,5 +100,19 @@ public class RestaurantManagerImpl implements RestaurantManager{
 		}
 		return page;
 	}
+	@Override
+	public RestaurantVo getRestaurantById(String restaurantId) throws Exception {
+		// TODO Auto-generated method stub
+		if(restaurantId!=null && restaurantId.length() > 0){
+			RestaurantVo restaurantVo = restaurantDataDao.get(restaurantId);
+			return restaurantVo;
+		}
+		return null;
+	}
+	@Override
+	public void updateRestaurant(RestaurantVo restaurantVo) throws Exception {
+		// TODO Auto-generated method stub
+		restaurantDataDao.update(restaurantVo);
+	}
 	
 }
