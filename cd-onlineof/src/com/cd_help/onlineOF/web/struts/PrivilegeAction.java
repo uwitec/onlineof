@@ -10,6 +10,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
@@ -29,6 +30,7 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
  */
 @SuppressWarnings("serial")
 @Service("privilegeAction")
+@Scope("prototype")
 public class PrivilegeAction extends BaseAction{
 	
 	private List<PrivilegeVo> privilegeVos;  // 所有权限
@@ -38,43 +40,34 @@ public class PrivilegeAction extends BaseAction{
 	private PrivilegeVo privilegeVo;
 	private String privilegeId;
 	private String action;
-	private String checksItem[] = {};
+	// 所有模块权限
+	private List<PrivilegeVo> allModelPrivileges;
 	
 	/**
-	 * 获取所有权限
+	 * 权限管理
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String doPrivilegeManager(){
+	   action="addPrivilege.do";	
+	   return SUCCESS;	
+	}
+	/**
+	 * 跳转到新建权限页面
 	 * @return
 	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String searchPrivilegesByPage() throws AppException{
-		log.debug("--->> searchPrivilegesByPage");
-		String params[] = null;
-		Object conditions[] = null;
-		String hql = "searchPrivilegeByPage";
+	public String forwardAddNewPrivilege() throws AppException{
+		log.debug("--->> begin forwardAddNewPrivilege");
 		try{
-			this.pb.setCurrentPage(page);
-			this.pb.setPagesize(10);
-			params = new String[] { "privilegeName"};
-			conditions = new Object[] {
-					null == this.privilegeName ? "%" : "%" + this.privilegeName + "%"};
-			this.pb = this.getOnlineOF().getPrivilegeManager().searchPrivilegesByPage(hql,
-					params, conditions, this.pb, this.getSession());
+			action="addPrivilege.do";
+			privilegeVo = null;
+			allModelPrivileges = this.getOnlineOF().getPrivilegeManager().loadAllModelPrivilege(this.getSession());
 		}catch(Exception e){
 			log.error(null,e);
 			throw new AppException("",e.getMessage());
 		}
-		return SUCCESS;
-	}
-	
-	/**
-	 * 跳转到新建权限页面
-	 * @return
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	public String forwardAddNewPrivilege(){
-		log.debug("--->> begin forwardAddNewPrivilege");
-		action="addPrivilege.do";
-		privilegeVo = null;
 		return SUCCESS;
 	}
 	
@@ -87,8 +80,8 @@ public class PrivilegeAction extends BaseAction{
 	public String addPrivilege() throws AppException{
 		log.debug("--->> begin addPrivilege");
 		try{
-			this.getOnlineOF().getPrivilegeManager().addPrivilege(this.getSession(), privilegeVo);
-			this.searchPrivilegesByPage();
+			privilegeVo = this.getOnlineOF().getPrivilegeManager().addPrivilege(this.getSession(), privilegeVo);
+			this.getRequest().setAttribute("addSuccess", "addSuccess");
 		}catch(Exception e){
 			log.error(null,e);
 			throw new AppException("",e.getMessage());
@@ -107,6 +100,7 @@ public class PrivilegeAction extends BaseAction{
 		try{
 		    privilegeVo = this.getOnlineOF().getPrivilegeManager().getPrivilegeById(this.getSession(), privilegeId);
 		    action="updatePrivilege.do";
+		    allModelPrivileges = this.getOnlineOF().getPrivilegeManager().loadAllModelPrivilege(this.getSession());
 		}catch(Exception e){
 			log.error(null,e);
 			throw new AppException("",e.getMessage(),e);
@@ -123,34 +117,40 @@ public class PrivilegeAction extends BaseAction{
 		log.debug("--->> begin updatePrivilege");
 		try{
 		    this.getOnlineOF().getPrivilegeManager().updatePrivilege(this.getSession(), privilegeVo);
-		    this.searchPrivilegesByPage();
+		    this.getRequest().setAttribute("updateSuccess", "updateSuccess");
 		}catch(Exception e){
 			log.error(null,e);
 			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
 	}
+
 	/**
-	 * 删除权限
+	 * 根据ID删除权限
 	 * @return
-	 * @throws AppException 
+	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String deletePrivilege() throws AppException{
+	public String deletePrivilegeById() throws AppException{
 		log.debug("--->> begin deletePrivilege");
-		try {
-			if(null != this.checksItem){
-				for(int i=0; i<this.checksItem.length; i++){
-					log.debug(this.checksItem[i]);
-					this.getOnlineOF().getPrivilegeManager().deletePrivilege(this.getSession(),
-							this.checksItem[i]);
-				}
-			}
-			this.searchPrivilegesByPage();
-		} catch (Exception e) {
+		try{
+			this.getOnlineOF().getPrivilegeManager().deletePrivilege(this.getSession(),privilegeId);
+			privilegeVo = null;
+			this.getRequest().setAttribute("deleteSuccess", "deleteSuccess");
+		}catch(Exception e){
 			log.error(e);
 			throw new AppException("",e.getMessage());
 		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 弹出窗口选择父权限
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String selectParentPrivilege(){
+		log.debug("--->> begin selectParentPrivilege");
 		return SUCCESS;
 	}
 
@@ -206,11 +206,12 @@ public class PrivilegeAction extends BaseAction{
 		this.action = action;
 	}
 
-	public String[] getChecksItem() {
-		return checksItem;
+	public List<PrivilegeVo> getAllModelPrivileges() {
+		return allModelPrivileges;
 	}
 
-	public void setChecksItem(String[] checksItem) {
-		this.checksItem = checksItem;
+	public void setAllModelPrivileges(List<PrivilegeVo> allModelPrivileges) {
+		this.allModelPrivileges = allModelPrivileges;
 	}
+	
 }
