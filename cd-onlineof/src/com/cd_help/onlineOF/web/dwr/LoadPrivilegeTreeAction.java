@@ -33,6 +33,47 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 @Service("loadPrivilegeTreeAction")
 public class LoadPrivilegeTreeAction extends BaseAction {
 	
+	/**
+	 * 获取所有顶级权限
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<PrivilegeVo> getTopPrivilege() throws AppException{
+		log.debug("--->> begin getTopPrivilege");
+		List<PrivilegeVo> topPrivileges = null;
+		try{
+			HttpSession httpSession = WebContextFactory.get().getSession();
+			Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			topPrivileges = this.getOnlineOF().getPrivilegeManager().getTopPrivilege(session);
+		}catch(Exception e){
+			log.error(e);
+			throw new AppException("",e.getMessage(),e);
+		}
+		return topPrivileges;
+	}
+	
+	/**
+	 * 获取所有子权限
+	 * @param parentId
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<PrivilegeVo> getChildPrivilege(String parentId) throws AppException{
+		log.debug("--->> begin getChildPrivilege");
+		List<PrivilegeVo> childPrivileges = null;
+		try{
+			HttpSession httpSession = WebContextFactory.get().getSession();
+			Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			childPrivileges = this.getOnlineOF().getPrivilegeManager().getChildPrivilege(session,parentId);
+		}catch(Exception e){
+			log.error(e);
+			throw new AppException("",e.getMessage(),e);
+		}
+		return childPrivileges;
+	}
+	
 	 /**
 	 * 根据当前用户加载权限树(初始化加载顶级模块)
 	 * @return
@@ -116,6 +157,22 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 			 throw new AppException("",e.getMessage(),e);
 		}
 		return privilegeVos;
+	}
+	
+	/**
+	 * 获取所有模块权限
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<PrivilegeVo> loadAllModelPrivilege() throws AppException {
+		try{
+			HttpSession httpSession = WebContextFactory.get().getSession();
+			Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			return this.getOnlineOF().getPrivilegeManager().loadAllModelPrivilege(session);
+		}catch(Exception e){
+			throw new AppException("",e.getMessage(),e);
+		}
 	}
 
 }
