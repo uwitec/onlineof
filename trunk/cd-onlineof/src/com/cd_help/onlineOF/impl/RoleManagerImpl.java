@@ -166,7 +166,7 @@ public class RoleManagerImpl implements RoleManager{
 				throw new AppException("0000000", "权限不够!");
 			}
 		}catch(Exception e){
-			throw new AppException("","",e);
+			throw new AppException("",e.getMessage(),e);
 		}
 	}
 }
