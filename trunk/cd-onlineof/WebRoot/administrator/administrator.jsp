@@ -20,7 +20,7 @@
           </td>
           <td style="width:85%;height:90%;">
             <table style="width:100%;font-size:10pt;border:1px solid #A9A9A9;height:5%;padding:0px;background: #E6EAE9;">
-               <tr><td><span style="white-space: nowrap;width:100%;height:100%;background: #CAE8EA;padding:0px;"><b>您的位置:</b><span id="position"></span></span></td></tr>
+               <tr style="width:100%;height:100%;"><td style="width:100%;height:100%;"><span style="white-space: nowrap;width:100%;height:100%;background: #CAE8EA;padding:0px;"><b>您的位置:</b><span id="position"></span></span></td></tr>
             </table>
             <div style="width:100%;height:95%;background: #E6EAE9;">
                <iframe id="contentFrame" name="contentFrame" style="width:100%;height:100%;" frameborder="0" src="${pageContext.request.contextPath}/administrator/welcom.jsp"></iframe>

@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       </s:if>
 	       <s:else>
 	          <tr>
-	            <td colspan="5"><span style="white-space: nowrap;"><font style="color:red;">暂无数据</font></span></td> 
+	            <td colspan="6"><span style="white-space: nowrap;"><font style="color:red;">暂无数据</font></span></td> 
 	          </tr>
 	       </s:else> 
          </tbody>
