@@ -175,11 +175,11 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.PrivilegeManager#addPrivilege(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.web.vo.PrivilegeVo)
 	 */
-	public void addPrivilege(Session session, PrivilegeVo privilegeVo)
+	public PrivilegeVo addPrivilege(Session session, PrivilegeVo privilegeVo)
 			throws Exception {
 		if(this.checkPrivilege(session)){
 			try{
-				privilegeDataDao.addPrivilege(privilegeVo);
+				return privilegeDataDao.addPrivilege(privilegeVo);
 			}catch(Exception e){
 				throw new AppException("0000014", "新建失败!");
 			}
@@ -217,6 +217,57 @@ public class PrivilegeManagerImpl implements PrivilegeManager{
 		}else{
 			throw new AppException("0000000", "权限不够!");
 		}
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadAllModelPrivilege(com.cd_help.onlineOF.data.Session)
+	 */
+	public List<PrivilegeVo> loadAllModelPrivilege(Session session) throws Exception {
+		if(this.checkPrivilege(session)){
+			try{
+				return privilegeDataDao.loadAllModelPrivilege();
+			}catch(Exception e){
+				throw new AppException("0000014", "系统错误!",e);
+			}
+		}else{
+			throw new AppException("0000000", "权限不够!");
+		}
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getChildPrivilege(java.lang.String)
+	 */
+	public List<PrivilegeVo> getChildPrivilege(Session session, String parentId)
+			throws Exception {
+		List<PrivilegeVo> privilegeVos = null;
+		try{
+			if(this.checkPrivilege(session)){
+				privilegeVos = privilegeDataDao.getChildPrivilege(parentId);
+			}else{
+				throw new AppException("0000000","权限不够!");
+			}
+		}catch(Exception e){
+			throw new AppException("0000015","获取模块子权限出错!");
+		}
+		return privilegeVos;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getTopPrivilege()
+	 */
+	public List<PrivilegeVo> getTopPrivilege(Session session) throws Exception {
+		List<PrivilegeVo> privilegeVos = null;
+		try{
+			if(this.checkPrivilege(session)){
+				privilegeVos = privilegeDataDao.getTopPrivilege();
+			}else{
+				throw new AppException("0000000","权限不够!");
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new AppException("0000015","获取顶级模块权限出错!");
+		}
+		return privilegeVos;
 	}
 
 }
