@@ -24,6 +24,8 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 public interface PrivilegeDataDao extends BaseDao{
 	
 	public List<PrivilegeVo> loadAllPrivilege() throws Exception;
+	
+	public List<PrivilegeVo> loadAllModelPrivilege() throws Exception;
 
 	public void updatePrivilege(PrivilegeVo privilegeVo) throws Exception;
 	
@@ -40,5 +42,9 @@ public interface PrivilegeDataDao extends BaseDao{
 	
 	public PrivilegeVo getPrivilegeById(String privilegeId) throws Exception;
 	
-	public void addPrivilege(PrivilegeVo privilegeVo) throws Exception;
+	public PrivilegeVo addPrivilege(PrivilegeVo privilegeVo) throws Exception;
+	
+	public List<PrivilegeVo> getTopPrivilege() throws Exception;
+	
+	public List<PrivilegeVo> getChildPrivilege(String parentId) throws Exception;
 }

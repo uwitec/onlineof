@@ -26,6 +26,8 @@ public interface PrivilegeManager {
 	
 	public List<PrivilegeVo> loadAllPrivilege(Session session) throws Exception;
 
+	public List<PrivilegeVo> loadAllModelPrivilege(Session session) throws Exception;
+	
 	public void updatePrivilege(Session session,PrivilegeVo privilegeVo) throws Exception;
 	
 	public void deletePrivilege(Session session,String id) throws Exception;
@@ -41,6 +43,10 @@ public interface PrivilegeManager {
 	
 	public PrivilegeVo getPrivilegeById(Session session, String privilegeId) throws Exception;
 	
-	public void addPrivilege(Session session, PrivilegeVo privilegeVo) throws Exception;
+	public PrivilegeVo addPrivilege(Session session, PrivilegeVo privilegeVo) throws Exception;
+	
+    public List<PrivilegeVo> getTopPrivilege(Session session) throws Exception;
+	
+	public List<PrivilegeVo> getChildPrivilege(Session session, String parentId) throws Exception;
 
 }
