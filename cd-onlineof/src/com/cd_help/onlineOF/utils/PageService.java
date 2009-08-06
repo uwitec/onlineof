@@ -7,7 +7,6 @@ package com.cd_help.onlineOF.utils;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
-import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,8 +69,6 @@ public class PageService {
 	public PageBean getPageBean(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, Session session)
 			throws AppException {
-			Transaction transaction = session.beginTransaction();
-			transaction.begin();
 			pageBean.setTotalRow(this.getCount(hqlName, paramName, condition,
 					session)); // 设置总记录数
 
@@ -109,7 +106,6 @@ public class PageService {
 			query.setMaxResults(pageBean.getPagesize());
 
 			pageBean.setArray(query.list());
-//			transaction.commit();
 			return pageBean;
 	}
 }
