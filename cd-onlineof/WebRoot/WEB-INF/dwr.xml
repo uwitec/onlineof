@@ -9,9 +9,11 @@
             <include method="loadChildModelPrivilegeTree" />
             <include method="loadAllPrivilege" />
             <include method="getPrivilegeByRoleId" />
+            <include method="getTopPrivilege" />
+            <include method="getChildPrivilege" />
         </create>
         <convert converter="bean" match="com.cd_help.onlineOF.web.vo.PrivilegeVo">
-			<param name="privilegeVo" value="privilegeId,privilegeName,parentId,parentName,hasChild,url,methodName"></param>
+			<param name="privilegeVo" value="privilegeId,privilegeName,parentId,parentName,hasChild,hasModelChild,url,methodName"></param>
 		</convert>
 		
 		<!-- 用户管理 -->
