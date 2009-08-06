@@ -43,10 +43,18 @@ import javax.persistence.Table;
 	@NamedQuery(name="getTopModelPrivilegeByRoleId",query="select DISTINCT p from PrivilegeData p join p.roleList r where p.kind = 'Model' and p.parent is null and r.roleId = :roleId"),
     /*获取子模块权限*/	
 	@NamedQuery(name="getChildModelPrivilegeByRoleId",query="select DISTINCT p from PrivilegeData p join p.roleList r where p.kind = 'Model' and p.parent.privilegeId = :parentId and r.roleId = :roleId"),
+	/*获取子模块权限*/	
+	@NamedQuery(name="getChildModelPrivilege",query="select DISTINCT p from PrivilegeData p where p.kind = 'Model' and p.parent.privilegeId = :parentId"),
 	/*获取所有权限*/
 	@NamedQuery(name="loadAllPrivilege",query="select DISTINCT p from PrivilegeData p"),
+	/*获取所有模块权限*/
+	@NamedQuery(name="loadAllModelPrivilege",query="select DISTINCT p from PrivilegeData p where p.kind = 'Model'"),
 	/*分页获取权限*/
 	@NamedQuery(name="searchPrivilegeByPage",query="from PrivilegeData p where p.privilegeName like :privilegeName order by p.kind"),
+	/*获取顶级权限*/
+	@NamedQuery(name="getTopPrivilege",query="select DISTINCT p from PrivilegeData p where p.parent is null"),
+	/*获取子权限*/
+	@NamedQuery(name="getChildPrivilege",query="select DISTINCT p from PrivilegeData p where p.parent.privilegeId = :parentId"),
 })
 public class PrivilegeData implements Serializable{
 	
@@ -89,6 +97,13 @@ public class PrivilegeData implements Serializable{
 	private Integer hasChild;
 	
 	/**
+	 * 是否有子模块
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "hasModelChild", nullable = true, length = 15)
+	private Integer hasModelChild;
+	
+	/**
 	 * 父权限
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
@@ -107,7 +122,7 @@ public class PrivilegeData implements Serializable{
 	 * 所属角色
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@ManyToMany(mappedBy = "privilegeList",fetch=FetchType.LAZY)
+	@ManyToMany(mappedBy = "privilegeList",fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
 	private List<RoleData> roleList = new ArrayList<RoleData>();
 
 	public String getPrivilegeId() {
@@ -180,5 +195,13 @@ public class PrivilegeData implements Serializable{
 
 	public void setHasChild(Integer hasChild) {
 		this.hasChild = hasChild;
+	}
+
+	public Integer getHasModelChild() {
+		return hasModelChild;
+	}
+
+	public void setHasModelChild(Integer hasModelChild) {
+		this.hasModelChild = hasModelChild;
 	}
 }
