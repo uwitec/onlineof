@@ -171,6 +171,7 @@ public class RoleAction extends BaseAction{
 				privileges = rolePrivileges.split(",");
 			}
 			this.getOnlineOF().getRoleManager().saveRolePrivileges(this.getSession(), privileges, roleId);
+			roleVo = this.getOnlineOF().getRoleManager().getRoleById(this.getSession(), roleId);
 		}catch(Exception e){
 			log.error(null,e);
 			throw new AppException("",e.getMessage(),e);
