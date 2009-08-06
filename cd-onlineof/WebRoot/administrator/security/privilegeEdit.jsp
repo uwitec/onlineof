@@ -62,6 +62,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <tr>
              <td style="text-align:right;">权限名称</td>
              <td style="text-align:left;">
+               <!-- 隐藏域(权限ID) -->
+               <input type="hidden" id="privilegeVo.privilegeId" name="privilegeVo.privilegeId" value="<s:property value='privilegeVo.privilegeId'/>"/>
                <input type="text" id="privilegeVo.methodName" name="privilegeVo.privilegeName" value="<s:property value='privilegeVo.privilegeName'/>" size="30"/>
              </td>
            </tr>
