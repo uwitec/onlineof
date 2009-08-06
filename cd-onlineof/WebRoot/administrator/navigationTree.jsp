@@ -33,9 +33,9 @@
               Id:topPrvileges[i]["privilegeId"],
               Text:topPrvileges[i]["privilegeName"],
               ParentId:-1,
-              Asyn:topPrvileges[i]["hasChild"]==0?false:true,
-              Icon:topPrvileges[i]["hasChild"]==0?2:0,
-              IconOpen:topPrvileges[i]["hasChild"]==0?3:1,
+              Asyn:topPrvileges[i]["hasModelChild"]==0?false:true,
+              Icon:topPrvileges[i]["hasModelChild"]==0?2:0,
+              IconOpen:topPrvileges[i]["hasModelChild"]==0?3:1,
               Expand:function(Node){ 
 			     LoadPrivilegeTreeAction.loadChildModelPrivilegeTree(Node.Id,{callback:loadChild,errorHandler:function(msg,exception){alert(exception.message);}});
 			  }
@@ -59,9 +59,9 @@
               Id:childPrivileges[i]["privilegeId"],
               Text:childPrivileges[i]["privilegeName"],
               ParentId:childPrivileges[i]["parentId"],
-              Asyn:childPrivileges[i]["hasChild"]==0?false:true,
-              Icon:childPrivileges[i]["hasChild"]==0?2:0,
-              IconOpen:childPrivileges[i]["hasChild"]==0?3:1,
+              Asyn:childPrivileges[i]["hasModelChild"]==0?false:true,
+              Icon:childPrivileges[i]["hasModelChild"]==0?2:0,
+              IconOpen:childPrivileges[i]["hasModelChild"]==0?3:1,
               Statu:childPrivileges[i]["url"],
               Expand:function(Node){ 
 			     LoadPrivilegeTreeAction.loadChildModelPrivilegeTree(Node.Id,{callback:loadChild,errorHandler:function(msg,exception){alert(exception.message);}});

@@ -5,7 +5,7 @@
     <title>编辑用户信息</title>
     <link href="administrator/css/table.css" rel="stylesheet" type="text/css" />
     <script language="javascript" src="${pageContext.request.contextPath}/common/js/My97DatePicker/WdatePicker.js"></script>
-    <script language="">
+    <script language="javascript">
        // 返回
        function back(){
           window.location.href="searchUsersByPage.do";

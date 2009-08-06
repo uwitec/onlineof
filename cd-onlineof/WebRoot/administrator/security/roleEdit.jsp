@@ -30,9 +30,7 @@
            <tr>
               <td style="text-align:right;">描述</td>
               <td style="text-align:left;">
-                 <textarea rows="4" cols="24" id="roleVo.description" name="roleVo.description" value="<s:property value='roleVo.description'/>">
-                    ${roleVo.description}
-                 </textarea>
+                 <input type="text" id="roleVo.description" name="roleVo.description" size=80 value="<s:property value='roleVo.description'/>">
               </td>
            </tr>
            <tr>
