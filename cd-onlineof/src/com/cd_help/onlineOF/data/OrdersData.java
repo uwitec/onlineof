@@ -17,6 +17,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -36,6 +38,16 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @Table(name = "orders")
+@NamedQueries( {
+	@NamedQuery(name = "searchTodayOrders", query = "from OrdersData o where o.memberData.name like :memberName and o.status like :status and o.contactName like :contactName and o.ordersDate > :odate"),
+	@NamedQuery(name = "adminSearchTodayOrders", query = "from OrdersData o where o.memberData.name like :memberName and o.status like :status and o.contactName like :contactName and o.restaurantName like :resName and o.ordersDate < :odate"),
+	
+	@NamedQuery(name = "searchHistoryOrders", query = "from OrdersData o where o.memberData.name like :memberName and o.status like :status and o.contactName like :contactName and o.ordersDate > :odate"),
+	@NamedQuery(name = "adminSearchHistoryOrders", query = "from OrdersData o where o.memberData.name like :memberName and o.status like :status and o.contactName like :contactName and o.restaurantName like :resName and o.ordersDate < :odate"),
+	
+	@NamedQuery(name = "searchOrdersByTimetamp", query = "from OrdersData o where o.memberData.name like :memberName and o.status like :status and o.contactName like :contactName and o.ordersDate between :start and :end"),
+	@NamedQuery(name = "adminSearchOrdersByTimetamp", query = "from OrdersData o where o.memberData.name like :memberName and o.status like :status and o.contactName like :contactName and o.restaurantName like :resName and o.ordersDate between :start and :end"),
+})
 public class OrdersData implements Serializable {
 
 	/**
@@ -129,6 +141,21 @@ public class OrdersData implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "memberId", referencedColumnName = "memberId", nullable = false, insertable = false, updatable = false)
 	private MemberData memberData;
+	/**
+	 * 订单所屬酒店
+	 * 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "restaurantName", nullable = true, length = 50)
+	private String restaurantName;
+
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
+	}
 
 	public MemberData getMemberData() {
 		return memberData;
