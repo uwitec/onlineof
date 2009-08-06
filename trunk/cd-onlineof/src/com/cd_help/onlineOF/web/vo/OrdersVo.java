@@ -6,7 +6,7 @@
 package com.cd_help.onlineOF.web.vo;
 
 import java.util.Date;
-import java.util.Map;
+import java.util.List;
 
 import com.cd_help.onlineOF.utils.ConvertUtils;
 
@@ -139,14 +139,29 @@ public class OrdersVo {
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private Map<String, FoodVo> foodMap;
+	private List<FoodVo> foodList;
 
-	public Map<String, FoodVo> getFoodMap() {
-		return foodMap;
+	/**
+	 * 訂單支付的價格
+	 * 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private double totalPrice;
+
+	public double getTotalPrice() {
+		return totalPrice;
 	}
 
-	public void setFoodMap(Map<String, FoodVo> foodMap) {
-		this.foodMap = foodMap;
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	public List<FoodVo> getFoodList() {
+		return foodList;
+	}
+
+	public void setFoodList(List<FoodVo> foodList) {
+		this.foodList = foodList;
 	}
 
 	public String getStatus() {

@@ -103,11 +103,12 @@ public class FoodVo {
 	 * @param isSigns
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public FoodVo(String foodId, String name, double price,
+	public FoodVo(String foodId, String name, double price,Integer number,
 			String introduction, Blob img, Integer isSigns) {
 		this.foodId = foodId;
 		this.name = name;
 		this.price = price;
+		this.number = number;
 		this.introduction = introduction;
 		this.img = img;
 		this.isSigns = isSigns;
