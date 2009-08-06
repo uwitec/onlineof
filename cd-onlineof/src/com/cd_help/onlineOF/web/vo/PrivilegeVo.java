@@ -63,6 +63,11 @@ public class PrivilegeVo implements Serializable{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private Integer hasChild;
+	/**
+	 * 是否有子模块
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private Integer hasModelChild;
 
 	/**
 	 * Constructs a <code>PrivilegeVo</code>
@@ -79,7 +84,7 @@ public class PrivilegeVo implements Serializable{
 	 */
 	public PrivilegeVo(String privilegeId, String privilegeName,
 			String parentId, String parentName, String kind, String url,
-			String methodName, Integer hasChild) {
+			String methodName, Integer hasChild,Integer hasModelChild) {
 		this.privilegeId = privilegeId;
 		this.privilegeName = privilegeName;
 		this.parentId = parentId;
@@ -88,6 +93,7 @@ public class PrivilegeVo implements Serializable{
 		this.url = url;
 		this.methodName = methodName;
 		this.hasChild = hasChild;
+		this.hasModelChild = hasModelChild;
 	}
 
 	public String getPrivilegeId() {
@@ -152,5 +158,13 @@ public class PrivilegeVo implements Serializable{
 
 	public void setHasChild(Integer hasChild) {
 		this.hasChild = hasChild;
+	}
+
+	public Integer getHasModelChild() {
+		return hasModelChild;
+	}
+
+	public void setHasModelChild(Integer hasModelChild) {
+		this.hasModelChild = hasModelChild;
 	}
 }
