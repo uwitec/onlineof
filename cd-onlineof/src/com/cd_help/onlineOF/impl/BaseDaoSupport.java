@@ -20,7 +20,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate3.HibernateCallback;
 import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.orm.hibernate3.SessionFactoryUtils;
-import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.BaseDao;
 import com.cd_help.onlineOF.utils.PageBean;
@@ -188,10 +187,9 @@ public class BaseDaoSupport implements BaseDao {
 		return total;
 	}
 	
-	@Transactional
 	public PageBean searchByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean) throws Exception{
 		return this.pageService.getPageBean(hqlName, paramName, condition,
-				pageBean, this.getHibernateTemplate().getSessionFactory().getCurrentSession());
+				pageBean, this.getHibernateTemplate().getSessionFactory().openSession());
 	}
 }

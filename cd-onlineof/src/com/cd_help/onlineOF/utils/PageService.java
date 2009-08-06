@@ -24,7 +24,6 @@ import org.springframework.transaction.annotation.Transactional;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("pageService")
-@Transactional
 public class PageService {
 
 	/**
@@ -71,8 +70,8 @@ public class PageService {
 	public PageBean getPageBean(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, Session session)
 			throws AppException {
-			Transaction transaction = session.beginTransaction();
-			transaction.begin();
+//			Transaction transaction = session.beginTransaction();
+//			transaction.begin();
 			pageBean.setTotalRow(this.getCount(hqlName, paramName, condition,
 					session)); // 设置总记录数
 
@@ -110,7 +109,7 @@ public class PageService {
 			query.setMaxResults(pageBean.getPagesize());
 
 			pageBean.setArray(query.list());
-			transaction.commit();
+//			transaction.commit();
 			return pageBean;
 	}
 }
