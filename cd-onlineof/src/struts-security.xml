@@ -83,9 +83,9 @@
 	
 	<!-- 权限管理 -->
 	<package name="privilegeManager" extends="common-default">
-		<action name="searchPrivilegesByPage" class="privilegeAction" method="searchPrivilegesByPage">
+		<action name="privilegeManager" class="privilegeAction" method="doPrivilegeManager">
 		     <result name="success">
-                /administrator/security/privilegeManager.jsp
+                /administrator/security/privilege.jsp
              </result>
 	    </action>
 	    <action name="editPrivilege" class="privilegeAction" method="editPrivilege">
@@ -95,7 +95,7 @@
 	    </action>
 	    <action name="updatePrivilege" class="privilegeAction" method="updatePrivilege">
 		     <result name="success">
-                /administrator/security/privilegeManager.jsp
+                /administrator/security/privilegeEdit.jsp
              </result>
 	    </action>
 	    <action name="forwardAddNewPrivilege" class="privilegeAction" method="forwardAddNewPrivilege">
@@ -105,12 +105,22 @@
 	    </action>
 	    <action name="addPrivilege" class="privilegeAction" method="addPrivilege">
 		     <result name="success">
-                /administrator/security/privilegeManager.jsp
+                /administrator/security/privilegeEdit.jsp
              </result>
 	    </action>
-	    <action name="deletePrivilege" class="privilegeAction" method="deletePrivilege">
+	    <action name="deletePrivilegeById" class="privilegeAction" method="deletePrivilegeById">
 		     <result name="success">
-                /administrator/security/privilegeManager.jsp
+                /administrator/security/privilegeEdit.jsp
+             </result>
+	    </action>
+	    <action name="getPrivilegeInfo" class="privilegeAction" method="getPrivilegeInfo">
+		     <result name="success">
+                /administrator/security/privilegeEdit.jsp
+             </result>
+	    </action>
+	    <action name="selectParentPrivilege" class="privilegeAction" method="selectParentPrivilege">
+		     <result name="success">
+                /administrator/security/privilegeTree.jsp
              </result>
 	    </action>
 	</package>
