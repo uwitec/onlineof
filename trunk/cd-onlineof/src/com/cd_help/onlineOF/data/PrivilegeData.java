@@ -122,7 +122,7 @@ public class PrivilegeData implements Serializable{
 	 * 所属角色
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@ManyToMany(mappedBy = "privilegeList",fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
+	@ManyToMany(mappedBy = "privilegeList",fetch=FetchType.LAZY)
 	private List<RoleData> roleList = new ArrayList<RoleData>();
 
 	public String getPrivilegeId() {

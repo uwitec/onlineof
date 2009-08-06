@@ -67,7 +67,7 @@ public class RoleData implements Serializable{
 	 * 拥有权限
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
+	@ManyToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	@JoinTable(name = "privileges_role", joinColumns = { @JoinColumn(name = "roleId") }, inverseJoinColumns = { @JoinColumn(name = "privilegeId") })
 	private List<PrivilegeData> privilegeList = new ArrayList<PrivilegeData>();
 
