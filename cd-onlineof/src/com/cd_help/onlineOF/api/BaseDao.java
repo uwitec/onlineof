@@ -66,6 +66,9 @@ public interface BaseDao {
 
 	public List loadAll(final Class entityClass) throws Exception;
 	
+	public List find(final String hql, final int start,
+			final int limit) throws Exception;
+	
 	public PageBean searchByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean) throws Exception;
 	

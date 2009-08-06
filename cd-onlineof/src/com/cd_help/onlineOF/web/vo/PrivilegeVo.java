@@ -5,6 +5,8 @@
  */
 package com.cd_help.onlineOF.web.vo;
 
+import java.io.Serializable;
+
 /**
  * <b><code></code></b>
  * <p/>
@@ -16,7 +18,8 @@ package com.cd_help.onlineOF.web.vo;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-public class PrivilegeVo {
+@SuppressWarnings("serial")
+public class PrivilegeVo implements Serializable{
 
 	/**
 	 * ID

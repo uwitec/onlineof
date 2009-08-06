@@ -7,8 +7,8 @@ package com.cd_help.onlineOF.utils;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -67,12 +67,11 @@ public class PageService {
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Transactional(propagation=Propagation.SUPPORTS)
 	public PageBean getPageBean(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, Session session)
 			throws AppException {
-//			Transaction transaction = session.beginTransaction();
-//			transaction.begin();
+			Transaction transaction = session.beginTransaction();
+			transaction.begin();
 			pageBean.setTotalRow(this.getCount(hqlName, paramName, condition,
 					session)); // 设置总记录数
 

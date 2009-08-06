@@ -34,6 +34,6 @@ public interface Restaurant_kindManager {
 	/*返回集合餐厅分类信息的集合*/
 	public List<Restaurant_kindVo> getRestaurantKindAll()throws Exception;
 	/*查询分页信息*/
-	public PageBean getRestaurantKindPage(String qhl,String[] params,Object[] objs,PageBean pageBean,Session session)throws Exception;
+	public PageBean seachRestaurantKindPage(String qhl,String[] params,Object[] objs,PageBean pageBean,Session session)throws Exception;
 	
 }

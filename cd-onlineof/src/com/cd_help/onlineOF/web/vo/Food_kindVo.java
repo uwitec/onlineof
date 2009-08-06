@@ -30,6 +30,21 @@ public class Food_kindVo {
 	private String name;
 	
 	/**
+	 * 菜类别描述
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String description;
+	/**
+	 * 所属餐厅ID
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String restaurantId;
+	/**
+	 * 所属餐厅名称
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String restaurantName;
+	/**
 	 * Constructs a <code>Food_kindVo</code>
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
@@ -41,10 +56,14 @@ public class Food_kindVo {
 	 * @param food_kind_Name
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public Food_kindVo(String food_kind_Id,String name){
+	public Food_kindVo(String food_kind_Id,String name,String description,String restaurantId,String restaurantName){
 		this.food_kind_Id = food_kind_Id;
 		this.name = name;
+		this.description = description;
+		this.restaurantId = restaurantId;
+		this.restaurantName = restaurantName;
 	}
+	
 	
 	public String getFood_kind_Id() {
 		return food_kind_Id;
@@ -57,5 +76,29 @@ public class Food_kindVo {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
+	}
+
+	public String getRestaurantName() {
+		return restaurantName;
+	}
+
+	public void setRestaurantName(String restaurantName) {
+		this.restaurantName = restaurantName;
 	}
 }
