@@ -110,7 +110,6 @@ public class PageService {
 			query.setMaxResults(pageBean.getPagesize());
 
 			pageBean.setArray(query.list());
-			//transaction.commit();
 //			transaction.commit();
 			return pageBean;
 	}
