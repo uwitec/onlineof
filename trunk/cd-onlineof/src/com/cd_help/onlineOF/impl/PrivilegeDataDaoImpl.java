@@ -40,7 +40,20 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 	 */
 	public void deletePrivilege(String id) throws Exception {
 		PrivilegeData privilegeData = (PrivilegeData)this.get(PrivilegeData.class, id);
-        this.delete(privilegeData);	
+		PrivilegeData parentData = (PrivilegeData)this.get(PrivilegeData.class, privilegeData.getParent().getPrivilegeId());
+		// 删除之后 如果没有字节点  修改hasChild属性和hasModelChild属性
+		List<PrivilegeVo> modelChilds = this.findByNamedQueryAndNamedParam("getChildModelPrivilege", "parentId", privilegeData.getParent().getPrivilegeId());
+		List<PrivilegeVo> childs = this.getChildPrivilege(privilegeData.getParent().getPrivilegeId());
+		if(null == childs){
+			parentData.setHasChild(0);
+			parentData.setHasModelChild(0);
+        }else if(null == modelChilds){
+        	parentData.setHasChild(0);
+			parentData.setHasModelChild(0);
+        }else{
+        	parentData.setHasChild(0);
+        }
+		this.delete(privilegeData);	
 	}
 
 	/**
@@ -75,15 +88,15 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getChildModelPrivilegeByRoleId", parameNames, values);
 		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
 		try{
-		for(Iterator iterator = privileges.iterator();iterator.hasNext();){
-			PrivilegeData p = (PrivilegeData)iterator.next();
-			PrivilegeVo pv = new PrivilegeVo();
-			BeanUtilsHelp.copyProperties(pv,p);
-			pv.setParentId(parentId);
-			privilegeVos.add(pv);
-		}
+			for(Iterator iterator = privileges.iterator();iterator.hasNext();){
+				PrivilegeData p = (PrivilegeData)iterator.next();
+				PrivilegeVo pv = new PrivilegeVo();
+				BeanUtilsHelp.copyProperties(pv,p);
+				pv.setParentId(parentId);
+				privilegeVos.add(pv);
+			}
 		}catch(Exception e){
-			e.printStackTrace();
+			throw new Exception(e);
 		}
 		return privilegeVos;
 	}
@@ -103,6 +116,21 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 		}
 		return privilegeVos;
 	}
+	
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#loadAllModelPrivilege()
+	 */
+	public List<PrivilegeVo> loadAllModelPrivilege() throws Exception {
+		List<PrivilegeData> privileges = this.findByNamedQuery("loadAllModelPrivilege");
+		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
+		for(Iterator iterator = privileges.iterator();iterator.hasNext();){
+			PrivilegeData p = (PrivilegeData)iterator.next();
+			PrivilegeVo pv = new PrivilegeVo();
+			BeanUtilsHelp.copyProperties(pv,p);
+			privilegeVos.add(pv);
+		}
+		return privilegeVos;
+	}
 
 	/**
 	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#update(java.lang.String)
@@ -110,6 +138,8 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 	public void updatePrivilege(PrivilegeVo privilegeVo) throws Exception {
 		PrivilegeData privilegeData = (PrivilegeData)this.get(PrivilegeData.class, privilegeVo.getPrivilegeId());
 		BeanUtilsHelp.copyProperties(privilegeData, privilegeVo);
+		PrivilegeData parent = (PrivilegeData)this.get(PrivilegeData.class, privilegeVo.getParentId());
+		privilegeData.setParent(parent);
 		this.update(privilegeData);
 	}
 
@@ -158,17 +188,72 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 		PrivilegeVo privilegeVo = new PrivilegeVo();
 		PrivilegeData privilegeData = (PrivilegeData)this.get(PrivilegeData.class, privilegeId);
 		BeanUtilsHelp.copyProperties(privilegeVo, privilegeData);
+		if(null != privilegeData.getParent()){
+			privilegeVo.setParentId(privilegeData.getParent().getPrivilegeId());
+			privilegeVo.setParentName(privilegeData.getParent().getPrivilegeName());
+		}
 		return privilegeVo;
 	}
 
 	/**
 	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#addPrivilege(com.cd_help.onlineOF.web.vo.PrivilegeVo)
 	 */
-	public void addPrivilege(PrivilegeVo privilegeVo) throws Exception {
+	public PrivilegeVo addPrivilege(PrivilegeVo privilegeVo) throws Exception {
 		PrivilegeData privilegeData = new PrivilegeData();
 		BeanUtilsHelp.copyProperties(privilegeData, privilegeVo);
 		privilegeData.setPrivilegeId(StringUtil.getUUID());
+		PrivilegeData parent = (PrivilegeData)this.get(PrivilegeData.class, privilegeVo.getParentId());
+		privilegeData.setParent(parent);
+		privilegeData.setHasChild(0);
+		privilegeData.setHasModelChild(0);
 		this.save(privilegeData); 
+		privilegeVo.setPrivilegeId(privilegeData.getPrivilegeId());
+		// 父权限不为空  就修改父权限的 hasChild 属性和 hasModelChild 属性
+		if(null != privilegeVo.getParentId() || "" != privilegeVo.getParentId()){
+		   PrivilegeData parentData = (PrivilegeData)this.get(PrivilegeData.class, privilegeVo.getParentId());
+		   parentData.setHasChild(1);
+		   if(privilegeVo.getKind() == "Model"){
+			   parentData.setHasModelChild(1);
+		   }else{
+			   parentData.setHasModelChild(0);
+		   }
+		}
+		return privilegeVo;
 	}
 
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#getChildPrivilege(java.lang.String)
+	 */
+	public List<PrivilegeVo> getChildPrivilege(String parentId)
+			throws Exception {
+		List<PrivilegeData> privileges = this.findByNamedQueryAndNamedParam("getChildPrivilege", "parentId", parentId);
+		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
+		try{
+			for(Iterator iterator = privileges.iterator();iterator.hasNext();){
+				PrivilegeData p = (PrivilegeData)iterator.next();
+				PrivilegeVo pv = new PrivilegeVo();
+				BeanUtilsHelp.copyProperties(pv,p);
+				pv.setParentId(parentId);
+				privilegeVos.add(pv);
+			}
+		}catch(Exception e){
+			throw new Exception(e);
+		}
+		return privilegeVos;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#getTopPrivilege()
+	 */
+	public List<PrivilegeVo> getTopPrivilege() throws Exception {
+		List<PrivilegeData> privileges = this.findByNamedQuery("getTopPrivilege");
+		List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
+		for(Iterator iterator = privileges.iterator();iterator.hasNext();){
+			PrivilegeData p = (PrivilegeData)iterator.next();
+			PrivilegeVo pv = new PrivilegeVo();
+			BeanUtilsHelp.copyProperties(pv,p);
+			privilegeVos.add(pv);
+		}
+		return privilegeVos;
+	}
 }
