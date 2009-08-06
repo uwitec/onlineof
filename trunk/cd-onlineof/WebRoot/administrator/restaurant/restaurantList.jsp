@@ -137,7 +137,7 @@
 										cssClass="button">删除</a> <a
 										href="editRestaurantAction.do?restaurantVo.restaurantId=${restaurantId}"
 										class="button">编辑</a>
-										 <a href="*.do?">设置餐厅菜系</a> </span>
+										 <a href="*.do?restaurantId=${restaurantId}">设置餐厅菜分类</a> </span>
 								</td>
 							</tr>
 						</s:iterator>
