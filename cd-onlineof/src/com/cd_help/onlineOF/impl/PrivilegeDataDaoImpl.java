@@ -14,6 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.PrivilegeDataDao;
 import com.cd_help.onlineOF.data.PrivilegeData;
+import com.cd_help.onlineOF.data.RoleData;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
@@ -41,19 +42,20 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 	public void deletePrivilege(String id) throws Exception {
 		PrivilegeData privilegeData = (PrivilegeData)this.get(PrivilegeData.class, id);
 		PrivilegeData parentData = (PrivilegeData)this.get(PrivilegeData.class, privilegeData.getParent().getPrivilegeId());
+		List<RoleData> pRoles = privilegeData.getRoleList();
+		for(RoleData rd : pRoles){
+			rd.getPrivilegeList().remove(privilegeData);
+		}
+		this.delete(privilegeData);	
 		// 删除之后 如果没有字节点  修改hasChild属性和hasModelChild属性
-		List<PrivilegeVo> modelChilds = this.findByNamedQueryAndNamedParam("getChildModelPrivilege", "parentId", privilegeData.getParent().getPrivilegeId());
-		List<PrivilegeVo> childs = this.getChildPrivilege(privilegeData.getParent().getPrivilegeId());
-		if(null == childs){
+		List<PrivilegeVo> modelChilds = this.findByNamedQueryAndNamedParam("getChildModelPrivilege", "parentId", parentData.getPrivilegeId());
+		List<PrivilegeVo> childs = this.getChildPrivilege(parentData.getPrivilegeId());
+		if(modelChilds.size() == 0){
 			parentData.setHasChild(0);
 			parentData.setHasModelChild(0);
-        }else if(null == modelChilds){
-        	parentData.setHasChild(0);
-			parentData.setHasModelChild(0);
-        }else{
+        }else if(childs.size() == 0){
         	parentData.setHasChild(0);
         }
-		this.delete(privilegeData);	
 	}
 
 	/**
@@ -136,10 +138,16 @@ public class PrivilegeDataDaoImpl extends BaseDaoSupport implements PrivilegeDat
 	 * @see com.cd_help.onlineOF.api.PrivilegeDataDao#update(java.lang.String)
 	 */
 	public void updatePrivilege(PrivilegeVo privilegeVo) throws Exception {
-		PrivilegeData privilegeData = (PrivilegeData)this.get(PrivilegeData.class, privilegeVo.getPrivilegeId());
+		String id = privilegeVo.getPrivilegeId();
+		PrivilegeData privilegeData = (PrivilegeData)this.get(PrivilegeData.class, id);
 		BeanUtilsHelp.copyProperties(privilegeData, privilegeVo);
 		PrivilegeData parent = (PrivilegeData)this.get(PrivilegeData.class, privilegeVo.getParentId());
 		privilegeData.setParent(parent);
+		if(privilegeVo.getKind() == "Model"){
+			parent.setHasModelChild(1);
+		}else if(privilegeVo.getKind() == "Operator"){
+			parent.setHasChild(1);
+		}
 		this.update(privilegeData);
 	}
 

@@ -118,13 +118,7 @@ public class RoleDataDaoImpl extends BaseDaoSupport implements RoleDataDao{
 			privilegeDatas.add(pd);
 		}
 		RoleData roleData = (RoleData)this.get(RoleData.class, roleId);
-		List<PrivilegeData> pdatas = roleData.getPrivilegeList();
-		for(PrivilegeData pd : privilegeDatas){
-			if(!pdatas.contains(pd)){
-				pdatas.add(pd);
-			}
-		}
-		roleData.setPrivilegeList(pdatas);
+		roleData.setPrivilegeList(privilegeDatas);
 	}
 
 }
