@@ -8,6 +8,7 @@ package com.cd_help.onlineOF.web.struts;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
@@ -27,6 +28,7 @@ import com.cd_help.onlineOF.web.vo.RoleVo;
  */
 @SuppressWarnings("serial")
 @Service("roleAction")
+@Scope("prototype")
 public class RoleAction extends BaseAction{
 	
 	private RoleVo roleVo;

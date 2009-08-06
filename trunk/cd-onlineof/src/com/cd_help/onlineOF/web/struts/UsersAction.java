@@ -11,6 +11,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
@@ -34,6 +35,7 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
  */
 @SuppressWarnings("serial")
 @Service("usersAction")
+@Scope("prototype")
 public class UsersAction extends BaseAction {
 
 	private String usersId;
