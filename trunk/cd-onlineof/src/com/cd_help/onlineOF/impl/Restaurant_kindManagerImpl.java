@@ -192,7 +192,7 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 *      java.lang.String[], java.lang.Object[],
 	 *      com.cd_help.onlineOF.data.Session)
 	 */
-	public PageBean getRestaurantKindPage(String qhl, String[] params,
+	public PageBean seachRestaurantKindPage(String qhl, String[] params,
 			Object[] objs, PageBean pageBean, Session session)
 			throws AppException {
 		PageBean page = null;

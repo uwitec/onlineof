@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cd_help.onlineOF.api.FoodDataDao;
 import com.cd_help.onlineOF.data.FoodData;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
 import com.cd_help.onlineOF.web.vo.FoodVo;
 
@@ -80,5 +81,10 @@ public class FoodDataDaoImpl extends BaseDaoSupport implements FoodDataDao{
         BeanUtilsHelp.copyProperties(foodData, foodVo);
 		this.update(foodData);  
 	}
-
+	
+	public PageBean seachFoodKindPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws Exception{
+	
+		return pageBean;
+	}
 }

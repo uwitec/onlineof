@@ -8,7 +8,6 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cd_help.onlineOF.api.Restaurant_kindManager;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
@@ -28,14 +27,6 @@ import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
 public class Restaurant_kindAction extends BaseAction {
 
 	@Autowired
-	@Resource(name = "restaurant_kindManager")
-	private Restaurant_kindManager restaurant_kindManager = null;
-
-	public void setRestaurant_kindManager(
-			Restaurant_kindManager restaurant_kindManager) {
-		this.restaurant_kindManager = restaurant_kindManager;
-	}
-
 	@Resource(name = "pageBean")
 	private PageBean pageBean = null;
 
@@ -77,7 +68,7 @@ public class Restaurant_kindAction extends BaseAction {
 				params = new String[] { "name" };
 				conditions = new Object[] { this.getKindName() };
 			}
-			this.pageBean = restaurant_kindManager.getRestaurantKindPage(
+			this.pageBean = this.getOnlineOF().getRestaurant_kindManager().seachRestaurantKindPage(
 					hqlName, params, conditions, pageBean, this
 							.getSession());
 		} catch (Exception ex) {
@@ -100,13 +91,13 @@ public class Restaurant_kindAction extends BaseAction {
 				&& restaurant_kindVo.getRestaurant_kind_Id() != null
 				&& restaurant_kindVo.getRestaurant_kind_Id().length() > 0) {
 			// 修改餐厅分类
-			restaurant_kindManager.updRestaurantKind(restaurant_kindVo);
+			this.getOnlineOF().getRestaurant_kindManager().updRestaurantKind(restaurant_kindVo);
 		} else {
 			// 新增餐厅分类
 			restaurant_kindVo.setRestaurant_kind_Id(StringUtil.getUUID());
 			Timestamp createTime = new Timestamp(System.currentTimeMillis());
 			restaurant_kindVo.setCreateTime(createTime);
-			restaurant_kindManager.addRestaurantKind(restaurant_kindVo);
+			this.getOnlineOF().getRestaurant_kindManager().addRestaurantKind(restaurant_kindVo);
 		}
 		return SUCCESS;
 	}
@@ -123,7 +114,7 @@ public class Restaurant_kindAction extends BaseAction {
 		if (restaurant_kindVo != null
 				&& restaurant_kindVo.getRestaurant_kind_Id() != null
 				&& restaurant_kindVo.getRestaurant_kind_Id().length() > 0) {
-			restaurant_kindVo = restaurant_kindManager
+			restaurant_kindVo = this.getOnlineOF().getRestaurant_kindManager()
 					.getRestaurantKindById(restaurant_kindVo
 							.getRestaurant_kind_Id());
 		} else {
@@ -144,11 +135,11 @@ public class Restaurant_kindAction extends BaseAction {
 		if (restaurant_kindVo != null
 				&& restaurant_kindVo.getRestaurant_kind_Id() != null
 				&& restaurant_kindVo.getRestaurant_kind_Id().length() > 0) {
-			restaurant_kindManager.delRestaurantKind(restaurant_kindVo
+			this.getOnlineOF().getRestaurant_kindManager().delRestaurantKind(restaurant_kindVo
 					.getRestaurant_kind_Id());
 		} else if (checksItem != null && checksItem.length > 0) {
 			for (String id : checksItem) {
-				restaurant_kindManager.delRestaurantKind(id);
+				this.getOnlineOF().getRestaurant_kindManager().delRestaurantKind(id);
 			}
 		} else {
 			throw new AppException("delete001", "删除餐厅分类错误!");

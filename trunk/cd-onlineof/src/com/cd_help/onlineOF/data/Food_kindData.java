@@ -14,6 +14,8 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
@@ -30,7 +32,10 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "food_kind")
-
+@NamedQueries({
+	@NamedQuery(name="getFoodkindAll",query="from Food_kindData"),
+	@NamedQuery(name="countFoodkindByName",query="from Food_kindData fk join fk.restaurant r where fk.name like :kindName and r.name like :restaurantName")
+})
 public class Food_kindData implements Serializable{
 
 	/**

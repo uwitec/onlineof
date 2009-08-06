@@ -5,9 +5,8 @@
  */
 package com.cd_help.onlineOF.api;
 
-import java.util.List;
 
-import com.cd_help.onlineOF.web.vo.Food_kindVo;
+import com.cd_help.onlineOF.utils.PageBean;
 
 /**
  * <b><code></code></b>
@@ -21,17 +20,18 @@ import com.cd_help.onlineOF.web.vo.Food_kindVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 public interface Food_kindDataDao extends BaseDao{
-	
-    public List<Food_kindVo> loadAll() throws Exception;
-	
-	public Food_kindVo get(String id) throws Exception;
-	
-	public Food_kindVo save(Food_kindVo food_kindVo) throws Exception;
-	
-	public boolean exist(String id) throws Exception;
-	
-	public void delete(String id) throws Exception;
-	
-	public void update(Food_kindVo food_kindVo) throws Exception;
+	/**
+	 * 取餐厅菜分类信息
+	 * comment here
+	 * @param hqlName
+	 * @param paramName
+	 * @param condition
+	 * @param pageBean
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public PageBean seachFoodKindPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws Exception ;
 
 }

@@ -107,6 +107,17 @@ public class BaseDaoSupport implements BaseDao {
 			}
 		});
 	}
+	
+	public List find(final String hql, final int start,
+			final int limit) throws Exception{
+		return (List) getHibernateTemplate().execute(new HibernateCallback() {
+			public Object doInHibernate(Session session)
+					throws HibernateException, SQLException {
+				return session.createQuery(hql).setFirstResult(start)
+						.setMaxResults(limit).list();
+			}
+		});
+	}
 
 	public List findByNamedQuery(String queryName, Object value) throws Exception{
 		return findByNamedQuery(queryName, new Object[] { value });

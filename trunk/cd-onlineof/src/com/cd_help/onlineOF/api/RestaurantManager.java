@@ -59,7 +59,7 @@ public interface RestaurantManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public PageBean getRestaurantPage(String hqlName, String[] paramName,
+	public PageBean seachRestaurantPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean) throws Exception;
 
 	/**

@@ -18,8 +18,6 @@ import org.hibernate.Hibernate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cd_help.onlineOF.api.RestaurantManager;
-import com.cd_help.onlineOF.api.Restaurant_kindManager;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
@@ -46,21 +44,6 @@ public class RestaurantAction extends BaseAction {
 	 */
 	protected static Log log = LogFactory.getLog(RestaurantAction.class);
 	@Autowired
-	@Resource(name = "restaurantManager")
-	private RestaurantManager restaurantManager = null;
-
-	public void setRestaurantManager(RestaurantManager restaurantManager) {
-		this.restaurantManager = restaurantManager;
-	}
-
-	@Resource(name = "restaurant_kindManager")
-	private Restaurant_kindManager restaurant_kindManager = null;
-
-	public void setRestaurant_kindManager(
-			Restaurant_kindManager restaurant_kindManager) {
-		this.restaurant_kindManager = restaurant_kindManager;
-	}
-
 	@Resource(name = "pageBean")
 	private PageBean pageBean = null;
 
@@ -121,7 +104,7 @@ public class RestaurantAction extends BaseAction {
 	 */
 	public String getRestaurantPage() throws Exception {
 		// TODO Auto-generated method stub
-		restaurant_kindVos = restaurant_kindManager.getRestaurantKindAll();
+		restaurant_kindVos = this.getOnlineOF().getRestaurant_kindManager().getRestaurantKindAll();
 		log.debug("load RestaurantPage...");
 		String[] params = null;
 		Object[] conditions = null;
@@ -136,7 +119,7 @@ public class RestaurantAction extends BaseAction {
 				params = new String[] { "rkindId" ,"rname"};
 				conditions = new Object[] { this.kindId,"%"+this.getRestaurantName()+"%" };
 			}
-			this.pageBean = restaurantManager.getRestaurantPage(hqlName,
+			this.pageBean = this.getOnlineOF().getRestaurantManager().seachRestaurantPage(hqlName,
 					params, conditions, pageBean);
 			log.debug("pageBean.array.size="
 					+ this.getPageBean().getArray().size());
@@ -157,10 +140,10 @@ public class RestaurantAction extends BaseAction {
 	public String editRestaurant() throws Exception {
 		// TODO Auto-generated method stub
 		log.debug("edit Restaurant...");
-		restaurant_kindVos = restaurant_kindManager.getRestaurantKindAll();
+		restaurant_kindVos = this.getOnlineOF().getRestaurant_kindManager().getRestaurantKindAll();
 		if (null != restaurantVo && null!= restaurantVo.getRestaurantId()
 				&& restaurantVo.getRestaurantId().length() > 0) {
-			restaurantVo = restaurantManager.getRestaurantById(restaurantVo
+			restaurantVo = this.getOnlineOF().getRestaurantManager().getRestaurantById(restaurantVo
 					.getRestaurantId());
 		} else {
 			restaurantVo = new RestaurantVo();
@@ -186,14 +169,14 @@ public class RestaurantAction extends BaseAction {
 				FileInputStream inputStream = new FileInputStream(this.resFile);
 				restaurantVo.setImg(Hibernate.createBlob(inputStream));
 			}
-			restaurantManager.updateRestaurant(restaurantVo);
+			this.getOnlineOF().getRestaurantManager().updateRestaurant(restaurantVo);
 		} else {
 			// 处理添加餐厅信息
 			log.debug("size="+this.resFile.length());
 			restaurantVo.setRestaurantId(StringUtil.getUUID());
 			FileInputStream inputStream = new FileInputStream(this.resFile);
 			restaurantVo.setImg(Hibernate.createBlob(inputStream));
-			restaurantManager.save(restaurantVo);
+			this.getOnlineOF().getRestaurantManager().save(restaurantVo);
 		}
 		return this.getRestaurantPage();
 	}
@@ -210,11 +193,11 @@ public class RestaurantAction extends BaseAction {
 		log.debug("delete restaurant...");
 		if (null != restaurantVo && null != restaurantVo.getRestaurantId()
 				&& restaurantVo.getRestaurantId().length() > 0) {
-			restaurantManager.delete(restaurantVo.getRestaurantId());
+			this.getOnlineOF().getRestaurantManager().delete(restaurantVo.getRestaurantId());
 		}
 		if(null != checksItem && checksItem.length > 0){
 			for(String str:checksItem){
-				restaurantManager.delete(str);
+				this.getOnlineOF().getRestaurantManager().delete(str);
 			}
 		}
 		return this.getRestaurantPage();
