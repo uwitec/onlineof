@@ -1,6 +1,6 @@
-//±íµ¥ÑéÖ¤
-//ĞèÒªÑéÖ¤¼ÓÉÏrequiredÊôĞÔ
-//ÊôĞÔµÄÑéÖ¤·½·¨ required="string"|"int"|"number"|"file"|"email" Ä¬ÈÏstring
+//è¡¨å•éªŒè¯
+//éœ€è¦éªŒè¯åŠ ä¸Šrequiredå±æ€§
+//å±æ€§çš„éªŒè¯æ–¹æ³• required="string"|"int"|"number"|"file"|"email" é»˜è®¤string
 function validate(form) {
 	for (i = 0; i < form.elements.length; i++) {
 		if (form.elements[i].required != "undefined") {
@@ -9,14 +9,14 @@ function validate(form) {
 			if (method == null && method == "") {
 				method = "string";
 			}
-			var reg = /string/i; //ÑéÖ¤²»Îª¿Õ
+			var reg = /string/i; //éªŒè¯ä¸ä¸ºç©º
 			if (reg.test(method) && data.value.replace(/(^\s*)|(\s*$)/g, "") == "") {
 				alert("\u5e26*\u53f7\u7684\u4e3a\u5fc5\u586b\uff01");
 				data.value = "";
 				data.focus();
 				return false;
 			}
-			reg = /int/i;   //ÑéÖ¤ÊÇÕûĞÍ
+			reg = /int/i;   //éªŒè¯æ˜¯æ•´å‹
 			var intReg = /^[0-9]+$/;
 			if (reg.test(method) && !(intReg.test(data.value))) {
 				alert("\u975e\u6cd5\u6574\u6570\uff01");
@@ -24,7 +24,7 @@ function validate(form) {
 				data.focus();
 				return false;
 			}
-			reg = /number/i; //ÑéÖ¤Ê±Êı×Ö
+			reg = /number/i; //éªŒè¯æ—¶æ•°å­—
 			var numberReg = /^([0-9]+\.?[0-9]+|[0-9]+)$/;
 			if (reg.test(method) && !numberReg.test(data.value)) {
 				alert("\u975e\u6cd5\u7684\u6570\u5b57\uff01");
@@ -32,7 +32,7 @@ function validate(form) {
 				data.focus();
 				return false;
 			}
-			reg = /file/i; //ÑéÖ¤×Ö·û
+			reg = /file/i; //éªŒè¯å­—ç¬¦
 			var fileReg = /^[a-zA-Z]:\\.+/;
 			if (reg.test(method) && !fileReg.test(data.value)) {
 				alert("\u975e\u6cd5\u7684\u6587\u4ef6\u8def\u5f84\uff01");
@@ -40,7 +40,7 @@ function validate(form) {
 				data.focus();
 				return false;
 			}
-			reg = /email/i; //ÑéÖ¤ÓÊÏä
+			reg = /email/i; //éªŒè¯é‚®ç®±
 			var emailReg = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+((\.[a-zA-Z0-9_-]{2,3}){1,2})$/;
 			if (reg.test(method) && !emailReg.test(data.value)) {
 				alert("\u90ae\u7bb1\u5730\u5740\u9519\u8bef!xx@xx.xxx");
@@ -52,4 +52,3 @@ function validate(form) {
 	}
 	return true;
 }
-
