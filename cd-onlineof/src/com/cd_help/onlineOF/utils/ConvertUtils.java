@@ -59,7 +59,7 @@ public class ConvertUtils {
 		return format2.format(date);
 	}
 	/**
-	 * 将Date转换为String yyyyMMdd
+	 * 将Date转换为String yyyy-MM-dd
 	 * @param date
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -104,7 +104,7 @@ public class ConvertUtils {
 		}
 	}
 	/**
-	 * 将String转换为Date yyyyMMdd
+	 * 将String转换为Date yyyy-MM-dd
 	 * @param strDate
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1

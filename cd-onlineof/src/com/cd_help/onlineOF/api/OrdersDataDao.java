@@ -5,6 +5,9 @@
  */
 package com.cd_help.onlineOF.api;
 
+import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.web.vo.OrdersVo;
 
 /**
  * <b><code></code></b>
@@ -12,11 +15,37 @@ package com.cd_help.onlineOF.api;
  * 订单数据处理接口
  * <p/>
  * <b>Creation Time:</b> Jul 2, 2009
+ * 
  * @author TanDong
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
-public interface OrdersDataDao extends BaseDao{
-	
+public interface OrdersDataDao extends BaseDao {
+
+	/**
+	 * 添加订单
+	 * 
+	 * @param ordersVo
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public boolean addOrder(OrdersVo ordersVo) throws Exception;
+
+	/**
+	 * 
+	 * 加载订单
+	 * 
+	 * @param hqlName
+	 * @param paramName
+	 * @param condition
+	 * @param pageBean
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public PageBean searchOrdersByPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws Exception;
+
 }

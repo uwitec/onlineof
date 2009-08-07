@@ -38,6 +38,22 @@ function checkedAll()
 	} 
 }
 
+function checkedJudge(box) {
+	var all = document.getElementById("checkAll");
+	if (!box.checked && all.checked) {
+		all.checked = false;
+		//
+	}else if(box.checked && !all.checked) {
+		for(var i=0; i<document.getElementsByName("checksItem").length; i++) 
+	    {
+		    if(!document.getElementsByName("checksItem")[i].checked){
+				return;
+		    }
+		}
+		all.checked = true;
+	}
+}
+
 function winOpen(sTitle, sUrl, iWidth, iHeight, iScroll, bCentre){
     var sFeatures;
     var iTop, iLeft;

@@ -1,14 +1,16 @@
 package com.cd_help.onlineOF.utils;
 
+import java.io.IOException;
+import java.security.MessageDigest;
+import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.io.*;
-import java.security.*;
-import java.sql.Timestamp;
 
-import org.apache.commons.logging.*;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 public class StringUtil {
 
@@ -26,10 +28,12 @@ public class StringUtil {
 	// 返回由系统当前时间组成的字符串
 	public static String getNowString() {
 		Calendar now = Calendar.getInstance();
-		return new String("" + now.get(Calendar.YEAR) + getDigit(2, (now.get(Calendar.MONTH) + 1))
+		return new String("" + now.get(Calendar.YEAR)
+				+ getDigit(2, (now.get(Calendar.MONTH) + 1))
 				+ getDigit(2, now.get(Calendar.DAY_OF_MONTH))
 				+ getDigit(2, now.get(Calendar.HOUR_OF_DAY))
-				+ getDigit(2, now.get(Calendar.MINUTE)) + getDigit(2, now.get(Calendar.SECOND))
+				+ getDigit(2, now.get(Calendar.MINUTE))
+				+ getDigit(2, now.get(Calendar.SECOND))
 				+ getDigit(3, now.get(Calendar.MILLISECOND)));
 
 	}
@@ -41,9 +45,11 @@ public class StringUtil {
 	 * resulting encrypted password. If exception, the plain credentials string
 	 * is returned
 	 * 
-	 * @param password Password or other credentials to use in authenticating
-	 *            this username
-	 * @param algorithm Algorithm used to do the digest. MD5 or SHA
+	 * @param password
+	 *            Password or other credentials to use in authenticating this
+	 *            username
+	 * @param algorithm
+	 *            Algorithm used to do the digest. MD5 or SHA
 	 * 
 	 * @return encypted password based on the algorithm.
 	 */
@@ -131,9 +137,10 @@ public class StringUtil {
 
 		return hourString + ":" + minuteString;
 	}
-	
+
 	/**
 	 * 将题干中的‘____’替换成题号
+	 * 
 	 * @param filecontent
 	 * @param num
 	 * @return
@@ -157,7 +164,7 @@ public class StringUtil {
 		m.appendTail(sb);
 		return sb.toString();
 	}
-	
+
 	public static String replace(String s, String sub, String with) {
 
 		if (s == null || s.equals("") || sub == null || sub.equals("")) {
@@ -182,5 +189,40 @@ public class StringUtil {
 		}
 
 		return buf.toString();
+	}
+
+	/**
+	 * 
+	 * 根据当前时间获取差距int天的整点日期
+	 * example:当前时间2008-9-25 12:33:25 day=1
+	 * return 2008-9-26 00:00:00
+	 * @param day
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public static Date getDateByInt(int day) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(new Date());
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		cal.add(Calendar.DATE, day);
+		return cal.getTime();
+	}
+	
+	/**
+	 * 
+	 * hql的like参数判断
+	 * @param str
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public static String hqlParamLike(String str) {
+		if (null == str || str.equals("")){
+			return "%";
+		}else {
+			return "%" + str + "%";
+		}
 	}
 }
