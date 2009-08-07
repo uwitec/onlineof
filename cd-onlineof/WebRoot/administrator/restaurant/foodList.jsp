@@ -13,7 +13,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>餐厅菜类别列表</title>
+		<title>菜信息列表</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -25,11 +25,11 @@
 		<SCRIPT type="text/javascript" src="common/js/common.js"></SCRIPT>
 		<script type="text/javascript">
 			/*跳转到添加页面*/
-			function addFoodKind(){
-				window.location.href = "editFoodKindAction.do?food_kindVo.food_kind_Id=";
+			function addFood(){
+				window.location.href = "editFoodAction.do?foodVo.foodId=";
 			}
 			/*删除选定菜类别*/
-			function delSelectedFoodKind(){
+			function delSelectedFood(){
 				var cks = document.getElementsByName("checksItem");
 				var tempCkValues = new Array();
 				for(var i=0;i<cks.length;i=i+1){
@@ -38,9 +38,9 @@
 					}
 				}
 				if(tempCkValues!=null&&tempCkValues.length>0){
-					window.location.href="delRestaurantKindAction.do?checksItem="+tempCkValues;
+					window.location.href="deleteFoodAction.do?checksItem="+tempCkValues;
 				}else{
-					alert("请选择要删除的分类!");
+					alert("请选择要删除的菜!");
 				}
 			}
 		</script>
@@ -50,20 +50,21 @@
 		<form action="getFoodKindPageAction.do" name="seachResKind"
 			method="post">
 			<div style="width: 100%; font-size: 10pt;">
-				<span style="white-space: nowrap;"> 
-				<span style="white-space: nowrap;">请选择餐厅</span>
-				<SELECT name="restaurantId">
-					<option value="">所有餐厅</option>
-					<s:iterator value="restaurantVos">
-						<option value="${restaurantId}">${name}</option>
-					</s:iterator>
-				</SELECT>
-				<span style="white-space: nowrap;">餐厅菜类别名称</span> 
-					 <input type="text" name="foodKindName"  /> 
-					 <input type="submit" value="搜 索" />
-					<input type="button" value="新增菜类别" onclick="addFoodKind();" />
-					<input type="button" value="删除选定菜类别"
-						onclick="delSelectedFoodKind();" /> </span>
+				<span style="white-space: nowrap;"> <span
+					style="white-space: nowrap;">请选择餐厅</span> <SELECT
+						name="restaurantId">
+						<option value="">
+							所有餐厅
+						</option>
+						<s:iterator value="restaurantVos">
+							<option value="${restaurantId}">
+								${name}
+							</option>
+						</s:iterator>
+					</SELECT> <span style="white-space: nowrap;">餐厅菜名称</span> <input type="text"
+						name="foodName" /> <input type="submit" value="搜 索" /> <input
+						type="button" value="新增菜信息" onclick="addFood();" /> <input
+						type="button" value="删除选定菜信息" onclick="delSelectedFood();" /> </span>
 			</div>
 			<table class="table" style="width: 100%;">
 				<thead>
@@ -74,15 +75,26 @@
 							</span>
 						</th>
 						<th>
-							<span style="white-space: nowrap;">餐厅菜类别名称</span>
+							<span style="white-space: nowrap;">餐厅菜名称</span>
 						</th>
 						<th>
 							<span style="white-space: nowrap;">所属餐厅</span>
 						</th>
 						<th>
-							<span style="white-space: nowrap;">餐厅菜类别描述</span>
+							<span style="white-space: nowrap;">所属类别</span>
 						</th>
-						<th>餐厅菜类型操作</th>
+						<th>
+							<span style="white-space: nowrap;">价格(元/份)</span>
+						</th>
+						<th>
+							<span style="white-space: nowrap;">是否是招牌菜</span>
+						</th>
+						<th>
+							<span style="white-space: nowrap;">菜简介</span>
+						</th>
+						<th>
+							餐厅菜信息操作
+						</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -93,7 +105,7 @@
 								<td>
 									<span style="white-space: nowrap;"><input
 											type="checkbox" id="checksItem" name="checksItem"
-											value="${food_kind_Id}" /> </span>
+											value="${foodId}" /> </span>
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property
@@ -105,15 +117,25 @@
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property
-											value="description" /> </span>
+											value="food_kind_Name" /> </span>
+								</td>
+								<td>
+									<span style="white-space: nowrap;"><s:property
+											value="price" /> </span>
+								</td>
+								<td>
+									<span style="white-space: nowrap;">${isSigns==1?"是":"否"}</span>
+								</td>
+								<td>
+									<span style="white-space: nowrap;"><s:property
+											value="introduction" /> </span>
 								</td>
 								<td>
 									<span style="white-space: nowrap;"> <a
-										href="deleteFoodKindAction.do?food_kindVo.food_kind_Id=${food_kind_Id}"
+										href="deleteFoodAction.do?foodVo.foodId=${foodId}"
 										class="button">删除</a> <a
-										href="editFoodKindAction.do?food_kindVo.food_kind_Id=${food_kind_Id}"
-										class="button">编辑</a>
-										 <a href="getFoodPageAction.do?foodKindId=${food_kind_Id}">设置餐厅菜信息</a> </span>
+										href="editFoodAction.do?foodVo.foodId=${foodId}"
+										class="button">编辑</a> </span>
 								</td>
 							</tr>
 						</s:iterator>
@@ -128,12 +150,13 @@
 					</s:else>
 				</tbody>
 			</table>
-				<!-- 分页start -->
+			<!-- 分页start -->
 			<div class="pagination">
 				<page:pages1 pagesize="${pageBean.pagesize}"
 					currentPage="${pageBean.currentPage}"
 					totalPage="${pageBean.totalPage}" totalRow="${pageBean.totalRow}"
-					liststep="10" dispalytext="条记录" url="getFoodKindPageAction.do?foodKindName=${foodKindName}&restaurantId=${restaurantId}" />
+					liststep="10" dispalytext="条记录"
+					url="getFoodPageAction.do?restaurantId=${restaurantId}&foodKindId=${foodKindId}&foodName=${foodName}" />
 			</div>
 			<!-- 分页end -->
 		</form>
