@@ -6,19 +6,12 @@
 package com.cd_help.onlineOF.data;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -37,8 +30,7 @@ import javax.persistence.Table;
 @Table(name = "food_kind")
 @NamedQueries({
 	@NamedQuery(name="getFoodkindAll",query="from Food_kindData"),
-	@NamedQuery(name="countFoodkindByName",query="from Food_kindData fk join fk.restaurant r where fk.name like :kindName and r.name like :restaurantName"),
-	@NamedQuery(name="countFoodkindByResId",query="from Food_kindData fk join fk.restaurant r where r.restaurantId = :restaurantId")
+	@NamedQuery(name="getFoodkindByResId",query="from Food_kindData fk where fk.restaurantId = :restaurantId and fk.name like :kindName")
 })
 public class Food_kindData implements Serializable{
 
@@ -62,26 +54,11 @@ public class Food_kindData implements Serializable{
 	 */
 	private String description;
 	/**
-	 * 关联餐厅
+	 * 餐厅ID
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@ManyToOne(cascade=CascadeType.REMOVE,fetch=FetchType.LAZY)
-	@JoinColumn(name="restaurantId")
-	private RestaurantData restaurant = null;
+	private String restaurantId;
 	
-	/**
-	 * 关联菜
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	@OneToMany(mappedBy="food_kindData",cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
-	private List<FoodData> foodList = new ArrayList<FoodData>();
-	
-	public List<FoodData> getFoodList() {
-		return foodList;
-	}
-	public void setFoodList(List<FoodData> foodList) {
-		this.foodList = foodList;
-	}
 	public String getFood_kind_Id() {
 		return food_kind_Id;
 	}
@@ -100,10 +77,10 @@ public class Food_kindData implements Serializable{
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	public RestaurantData getRestaurant() {
-		return restaurant;
+	public String getRestaurantId() {
+		return restaurantId;
 	}
-	public void setRestaurant(RestaurantData restaurant) {
-		this.restaurant = restaurant;
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
 	}
 }

@@ -171,20 +171,6 @@ public class RestaurantData implements Serializable {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String restaurant_kindId;
-	/**
-	 * 餐厅和菜分类一对多关联
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	@OneToMany(mappedBy="restaurant",cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
-	private List<Food_kindData> foodKindlist = new ArrayList<Food_kindData>();
-
-	public List<Food_kindData> getFoodKindlist() {
-		return foodKindlist;
-	}
-
-	public void setFoodKindlist(List<Food_kindData> foodKindlist) {
-		this.foodKindlist = foodKindlist;
-	}
 
 	public String getRestaurantId() {
 		return restaurantId;

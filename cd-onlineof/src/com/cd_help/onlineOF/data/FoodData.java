@@ -9,14 +9,11 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -38,8 +35,6 @@ import javax.persistence.Table;
 @NamedQueries( {
 		/* 获取所有饮食信息 */
 		@NamedQuery(name = "loadAllFood", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.number,f.introduction,f.img,f.isSigns) from FoodData f"),
-		/* 根据餐厅获取饮食信息 */
-		@NamedQuery(name = "getFoodByRestaurantId", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.number,f.introduction,f.img,f.isSigns) from FoodData f join f.food_kindData fk join fk.restaurant r where r.restaurantId = :restaurantId"),
 		/* 根据餐厅和类别获取饮食信息 */
 		@NamedQuery(name="getFoodAll",query="from FoodData"),
 		@NamedQuery(name="countFoodByKindId",query="from FoodData f join f.food_kindData fk where fk.food_kind_Id = :kindId and f.name like :foodName")
@@ -104,13 +99,11 @@ public class FoodData implements Serializable {
 	private Integer isSigns = 0;
 
 	/**
-	 * 类别
+	 * 类别ID
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@ManyToOne(cascade=CascadeType.REMOVE,fetch = FetchType.LAZY)
-	@JoinColumn(name = "food_kind_Id")
-	private Food_kindData food_kindData;
+	private String food_kindId;
 
 	/**
 	 * 訂單
@@ -184,11 +177,12 @@ public class FoodData implements Serializable {
 		this.isSigns = isSigns;
 	}
 
-	public Food_kindData getFood_kindData() {
-		return food_kindData;
+	public String getFood_kindId() {
+		return food_kindId;
 	}
 
-	public void setFood_kindData(Food_kindData food_kindData) {
-		this.food_kindData = food_kindData;
+	public void setFood_kindId(String food_kindId) {
+		this.food_kindId = food_kindId;
 	}
+
 }
