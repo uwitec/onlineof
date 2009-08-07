@@ -131,8 +131,7 @@ public class Food_kindManagerImpl implements Food_kindManager {
 		// TODO Auto-generated method stub
 		PageBean page = null;
 		try {
-				page = food_kindDao.seachFoodKindPage(qhl, params, objs,
-						pageBean);
+			page = food_kindDao.seachFoodKindPage(qhl, params, objs, pageBean);
 		} catch (Exception e) {
 			throw new AppException("0000014", "加载菜分类分类信息出错!");
 		}
@@ -149,10 +148,25 @@ public class Food_kindManagerImpl implements Food_kindManager {
 		Food_kindData food_kindData = (Food_kindData) food_kindDao.get(
 				Food_kindData.class, food_kindVo.getFood_kind_Id());
 		BeanUtilsHelp.copyProperties(food_kindData, food_kindVo);
-		if(null!=food_kindVo.getRestaurantId()){
+		if (null != food_kindVo.getRestaurantId()) {
 			RestaurantData restaurant = (RestaurantData) restaurantDataDao.get(
 					RestaurantData.class, food_kindVo.getRestaurantId());
 			food_kindData.setRestaurant(restaurant);
 		}
+	}
+
+	@Override
+	public PageBean seachFoodKindByRestaurantId(String hqlName,
+			String[] paramName, Object[] condition, PageBean pageBean,
+			Session sessio) throws Exception {
+		// TODO Auto-generated method stub
+		PageBean page = null;
+		try {
+			page = food_kindDao.seachFoodKindByRestaurantId(hqlName, paramName,
+					condition, pageBean);
+		} catch (Exception e) {
+			throw new AppException("0000014", "加载菜分类分类信息出错!");
+		}
+		return page;
 	}
 }

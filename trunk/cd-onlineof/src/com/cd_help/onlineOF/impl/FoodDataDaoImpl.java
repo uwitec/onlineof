@@ -87,4 +87,15 @@ public class FoodDataDaoImpl extends BaseDaoSupport implements FoodDataDao{
 	
 		return pageBean;
 	}
+
+	/**
+	 * 搜索菜信息
+	 * @param foodKindId foodName搜索
+	 * @see com.cd_help.onlineOF.api.FoodDataDao#seachFoodPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean)
+	 */
+	public PageBean seachFoodPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

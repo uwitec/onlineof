@@ -34,7 +34,8 @@ import javax.persistence.Table;
 @Table(name = "food_kind")
 @NamedQueries({
 	@NamedQuery(name="getFoodkindAll",query="from Food_kindData"),
-	@NamedQuery(name="countFoodkindByName",query="from Food_kindData fk join fk.restaurant r where fk.name like :kindName and r.name like :restaurantName")
+	@NamedQuery(name="countFoodkindByName",query="from Food_kindData fk join fk.restaurant r where fk.name like :kindName and r.name like :restaurantName"),
+	@NamedQuery(name="countFoodkindByResId",query="from Food_kindData fk join fk.restaurant r where r.restaurantId = :restaurantId")
 })
 public class Food_kindData implements Serializable{
 

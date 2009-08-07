@@ -3,9 +3,7 @@ package com.cd_help.onlineOF.web.struts;
 import java.sql.Timestamp;
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
@@ -24,11 +22,11 @@ import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
  */
 @SuppressWarnings("serial")
 @Service("restaurantKindAction")
+@Scope("prototype")
 public class Restaurant_kindAction extends BaseAction {
 
-	@Autowired
-	@Resource(name = "pageBean")
-	private PageBean pageBean = null;
+
+	private PageBean pageBean = new PageBean();
 
 	public void setPageBean(PageBean pageBean) {
 		this.pageBean = pageBean;

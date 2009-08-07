@@ -67,4 +67,18 @@ public interface Food_kindManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public Food_kindVo getFood_kindVoById(String foodKindId)throws Exception;
+	
+	/**
+	 * 根据餐厅ID查询菜类别
+	 * comment here
+	 * @param hqlName
+	 * @param paramName
+	 * @param condition
+	 * @param pageBean
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public PageBean seachFoodKindByRestaurantId(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean,Session session)throws Exception;
 }

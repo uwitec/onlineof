@@ -7,7 +7,9 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
+import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.FoodVo;
 
 /**
@@ -73,4 +75,20 @@ public interface FoodManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public void update(FoodVo foodVo) throws Exception;
+	
+	/**
+	 * 查询菜分页信息
+	 * comment here
+	 * @param hqlName
+	 * @param paramName
+	 * @param condition
+	 * @param pageBean
+	 * @param session
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public PageBean seachFoodPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean,Session session)throws Exception;
+	
 }

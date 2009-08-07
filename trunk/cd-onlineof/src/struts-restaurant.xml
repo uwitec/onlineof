@@ -27,57 +27,73 @@
 			</result>
 		</action>
 		<!-- 保存餐厅分类信息 -->
-		<action name="savaRestaurantKindAction" class="restaurantKindAction" method="savaRestaurantKind">
+		<action name="savaRestaurantKindAction"
+			class="restaurantKindAction" method="savaRestaurantKind">
 			<result name="success" type="redirect">
 				restaurantKindPageAction.do
 			</result>
 		</action>
 		<!-- 删除餐厅分类信息 -->
-		<action name="delRestaurantKindAction" class="restaurantKindAction" method="deleteRestaurantKind">
+		<action name="delRestaurantKindAction"
+			class="restaurantKindAction" method="deleteRestaurantKind">
 			<result name="success">
 				/administrator/restaurant/restaurant_kindList.jsp
 			</result>
 		</action>
 		<!-- 餐厅信息 -->
-		<action name="getRestaurantPageAction" class="restaurantAction" method="getRestaurantPage">
+		<action name="getRestaurantPageAction" class="restaurantAction"
+			method="getRestaurantPage">
 			<result name="success">
 				/administrator/restaurant/restaurantList.jsp
 			</result>
 		</action>
-		<action name="editRestaurantAction" class="restaurantAction" method="editRestaurant">
+		<action name="editRestaurantAction" class="restaurantAction"
+			method="editRestaurant">
 			<result name="success">
 				/administrator/restaurant/restaurantEdit.jsp
 			</result>
 		</action>
-		<action name="savaRestaurantAction" class="restaurantAction" method="savaRestaurant">
+		<action name="savaRestaurantAction" class="restaurantAction"
+			method="savaRestaurant">
 			<result name="success">
 				/administrator/restaurant/restaurantList.jsp
 			</result>
 			<interceptor-ref name="fileUpload"></interceptor-ref>
 			<interceptor-ref name="defaultStack"></interceptor-ref>
 		</action>
-		<action name="deleteRestaurantAction" class="restaurantAction" method="deleteRestaurant">
+		<action name="deleteRestaurantAction" class="restaurantAction"
+			method="deleteRestaurant">
 			<result name="success">
 				/administrator/restaurant/restaurantList.jsp
 			</result>
 		</action>
 		<!-- 餐厅菜类别处理 -->
-		<action name="getFoodKindPageAction" class="food_KindAction" method="getFoodKindPage">
+		<action name="getFoodKindPageAction" class="food_KindAction"
+			method="getFoodKindPage">
 			<result name="success">
 				/administrator/restaurant/food_kindList.jsp
 			</result>
 		</action>
-		<action name="editFoodKindAction" class="food_KindAction" method="editFoodKind">
+		<action name="editFoodKindAction" class="food_KindAction"
+			method="editFoodKind">
 			<result name="success">
 				/administrator/restaurant/food_kindEdit.jsp
 			</result>
 		</action>
-		<action name="savaFoodKindAction" class="food_KindAction" method="savaFoodKind">
+		<action name="savaFoodKindAction" class="food_KindAction"
+			method="savaFoodKind">
 			<result name="success">
 				/administrator/restaurant/food_kindList.jsp
 			</result>
 		</action>
-		<action name="deleteFoodKindAction" class="food_KindAction" method="deleteFoodKind">
+		<action name="deleteFoodKindAction" class="food_KindAction"
+			method="deleteFoodKind">
+			<result name="success">
+				/administrator/restaurant/food_kindList.jsp
+			</result>
+		</action>
+		<action name="getFoodKindByRestaurantIdAction"
+			class="food_KindAction" method="getFoodKindByRestaurantId">
 			<result name="success">
 				/administrator/restaurant/food_kindList.jsp
 			</result>

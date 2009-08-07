@@ -60,4 +60,20 @@ public class Food_kindDataDaoImpl extends BaseDaoSupport implements
 		return pageBean;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Transactional(propagation=Propagation.SUPPORTS,readOnly=true)
+	public PageBean seachFoodKindByRestaurantId(String hqlName,
+			String[] paramName, Object[] condition, PageBean pageBean)
+			throws Exception {
+		// TODO Auto-generated method stub
+		pageBean = this.searchByPage(hqlName, paramName, condition, pageBean);
+		String hql = "select new com.cd_help.onlineOF.web.vo.Food_kindVo(fk.food_kind_Id,fk.name,fk.description,r.restaurantId,r.name) from Food_kindData fk join fk.restaurant r where r.restaurantId='"+condition[0]+"'";
+		List<Food_kindVo> food_kindVos = super.find(hql,
+				(pageBean.getCurrentPage() - 1)
+						* pageBean.getPagesize(), pageBean
+						.getPagesize());
+		pageBean.setArray(food_kindVos);
+		return pageBean;
+	}
+	
 }
