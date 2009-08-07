@@ -13,6 +13,8 @@ import javax.annotation.Resource;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.Restaurant_kindDataDao;
 import com.cd_help.onlineOF.api.Restaurant_kindManager;
@@ -33,6 +35,7 @@ import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
  */
 @Service("restaurant_kindManager")
 @SuppressWarnings("unchecked")
+@Transactional(propagation=Propagation.REQUIRED)
 public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 
 	/**

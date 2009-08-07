@@ -9,15 +9,16 @@ import java.io.Serializable;
 import java.sql.Blob;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -38,12 +39,11 @@ import javax.persistence.Table;
 		/* 获取所有饮食信息 */
 		@NamedQuery(name = "loadAllFood", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.number,f.introduction,f.img,f.isSigns) from FoodData f"),
 		/* 根据餐厅获取饮食信息 */
-		@NamedQuery(name = "getFoodByRestaurantId", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.number,f.introduction,f.img,f.isSigns) from FoodData f join f.restaurantData r where r.restaurantId = :restaurantId"),
+		@NamedQuery(name = "getFoodByRestaurantId", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.number,f.introduction,f.img,f.isSigns) from FoodData f join f.food_kindData fk join fk.restaurant r where r.restaurantId = :restaurantId"),
 		/* 根据餐厅和类别获取饮食信息 */
-		@NamedQuery(name = "getFoodByKind", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.introduction,f.img,f.isSigns) from FoodData f join f.food_kindData k where k.food_kind_Id = :food_kind_Id"),
 		@NamedQuery(name="getFoodAll",query="from FoodData"),
-		@NamedQuery(name="countFoodByKindId",query="from FoodData f join f.food_kindData fk where fk.food_kind_Id = :kindId and f.name like :foodName"),
-		@NamedQuery(name = "getFoodByKindId", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.number,f.introduction,f.img,f.isSigns) from FoodData f join f.food_kindData k where k.food_kind_Id = :food_kind_Id") })
+		@NamedQuery(name="countFoodByKindId",query="from FoodData f join f.food_kindData fk where fk.food_kind_Id = :kindId and f.name like :foodName")
+		})
 public class FoodData implements Serializable {
 
 	/**
@@ -104,21 +104,12 @@ public class FoodData implements Serializable {
 	private Integer isSigns = 0;
 
 	/**
-	 * 所属餐厅
-	 * 
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "restaurantId", referencedColumnName = "restaurantId", nullable = false, insertable = false, updatable = false)
-	private RestaurantData restaurantData;
-
-	/**
 	 * 类别
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "food_kind_Id", referencedColumnName = "food_kind_Id", nullable = false, insertable = false, updatable = false)
+	@ManyToOne(cascade=CascadeType.REMOVE,fetch = FetchType.LAZY)
+	@JoinColumn(name = "food_kind_Id")
 	private Food_kindData food_kindData;
 
 	/**
@@ -191,14 +182,6 @@ public class FoodData implements Serializable {
 
 	public void setIsSigns(Integer isSigns) {
 		this.isSigns = isSigns;
-	}
-
-	public RestaurantData getRestaurantData() {
-		return restaurantData;
-	}
-
-	public void setRestaurantData(RestaurantData restaurantData) {
-		this.restaurantData = restaurantData;
 	}
 
 	public Food_kindData getFood_kindData() {

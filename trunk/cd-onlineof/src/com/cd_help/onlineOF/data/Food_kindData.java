@@ -6,6 +6,8 @@
 package com.cd_help.onlineOF.data;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -16,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -66,6 +69,19 @@ public class Food_kindData implements Serializable{
 	@JoinColumn(name="restaurantId")
 	private RestaurantData restaurant = null;
 	
+	/**
+	 * 关联菜
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@OneToMany(mappedBy="food_kindData",cascade=CascadeType.REFRESH,fetch=FetchType.LAZY)
+	private List<FoodData> foodList = new ArrayList<FoodData>();
+	
+	public List<FoodData> getFoodList() {
+		return foodList;
+	}
+	public void setFoodList(List<FoodData> foodList) {
+		this.foodList = foodList;
+	}
 	public String getFood_kind_Id() {
 		return food_kind_Id;
 	}

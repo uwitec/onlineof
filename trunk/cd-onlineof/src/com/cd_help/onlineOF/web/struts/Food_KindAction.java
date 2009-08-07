@@ -22,7 +22,7 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
  */
 @SuppressWarnings("serial")
 @Service("food_KindAction")
-@Scope("prototype")
+@Scope("prototype")  //配置Action的实例根据作用域来
 public class Food_KindAction extends BaseAction {
 	/* 餐厅菜分类值对象 */
 	private Food_kindVo food_kindVo = null;
@@ -152,6 +152,7 @@ public class Food_KindAction extends BaseAction {
 				&& this.getFood_kindVo().getFood_kind_Id().length() > 0) {
 			this.getOnlineOF().getFood_kindManager().deleteFoodKind(
 					this.getFood_kindVo().getFood_kind_Id());
+			this.setRestaurantId(null);
 		}
 		if (null != this.checksItem && this.getChecksItem().length > 0) {
 			for (String str : this.checksItem) {
