@@ -20,7 +20,8 @@
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-		<link href="administrator/css/table.css" rel="stylesheet" type="text/css" />
+		<link href="administrator/css/table.css" rel="stylesheet"
+			type="text/css" />
 		<SCRIPT type="text/javascript" src="common/js/common.js"></SCRIPT>
 		<script type="text/javascript">
 			//添加餐厅信息
@@ -52,19 +53,21 @@
 			method="post">
 			<div style="width: 100%; font-size: 10pt;">
 				<span style="white-space: nowrap;"> <span
-					style="white-space: nowrap;">餐厅分类名称</span> 
-					<select name="kindId">
-						<option value="">所有类型</option>
+					style="white-space: nowrap;">餐厅分类名称</span> <select name="kindId">
+						<option value="">
+							所有类型
+						</option>
 						<s:iterator value="restaurant_kindVos">
-							<option value="${restaurant_kind_Id}" <s:if test="kindId == restaurant_kind_Id">selected</s:if>>
+							<option value="${restaurant_kind_Id}"
+								<s:if test="kindId == restaurant_kind_Id">selected</s:if>>
 								${name}
 							</option>
 						</s:iterator>
-					</select>
-					餐厅名称:<input type="text" name="restaurantName" value="${restaurantName}"/>
-					<input type="submit" value="搜 索" /> 
-					<input type="button" value="新增餐厅" onclick="addRestaurantKind();" /> 
-					<input type="button" value="删除选定餐厅" onclick="delSelectedRestaurantKind();" /> </span>
+					</select> 餐厅名称:<input type="text" name="restaurantName"
+						value="${restaurantName}" /> <input type="submit" value="搜 索" />
+					<input type="button" value="新增餐厅" onclick="addRestaurantKind();" />
+					<input type="button" value="删除选定餐厅"
+						onclick="delSelectedRestaurantKind();" /> </span>
 			</div>
 			<table class="table" style="width: 100%;">
 				<thead>
@@ -134,10 +137,11 @@
 								<td>
 									<span style="white-space: nowrap;"> <a
 										href="deleteRestaurantAction.do?restaurantVo.restaurantId=${restaurantId}"
-										cssClass="button">删除</a> <a
+										class="button">删除</a> <a
 										href="editRestaurantAction.do?restaurantVo.restaurantId=${restaurantId}"
-										class="button">编辑</a>
-										 <a href="*.do?restaurantId=${restaurantId}">设置餐厅菜分类</a> </span>
+										class="button">编辑</a> <a
+										href="getFoodKindByRestaurantIdAction.do?restaurantId=${restaurantId}">设置餐厅菜分类</a>
+									</span>
 								</td>
 							</tr>
 						</s:iterator>

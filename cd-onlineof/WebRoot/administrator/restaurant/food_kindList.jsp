@@ -128,7 +128,7 @@
 				<page:pages1 pagesize="${pageBean.pagesize}"
 					currentPage="${pageBean.currentPage}"
 					totalPage="${pageBean.totalPage}" totalRow="${pageBean.totalRow}"
-					liststep="10" dispalytext="条记录" url="getFoodKindPageAction.do?foodKindName=${foodKindName}&restaruantName=${restaruantName}" />
+					liststep="10" dispalytext="条记录" url="getFoodKindPageAction.do?foodKindName=${foodKindName}&restaruantName=${restaruantName}&restaurantId=${restaurantId}" />
 			</div>
 			<!-- 分页end -->
 		</form>
