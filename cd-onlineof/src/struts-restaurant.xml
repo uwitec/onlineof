@@ -98,5 +98,27 @@
 				/administrator/restaurant/food_kindList.jsp
 			</result>
 		</action>
+		<!-- 菜信息管理 -->
+		<action name="getFoodPageAction" class="foodAction"
+			method="getFoodPage">
+			<result name="success">
+				/administrator/restaurant/foodList.jsp
+			</result>
+		</action>
+		<action name="editFoodAction" class="foodAction" method="editFood">
+			<result name="success">
+				/administrator/restaurant/foodEdit.jsp
+			</result>
+		</action>
+		<action name="savaFoodAction" class="foodAction" method="savaFood">
+			<result name="success">
+				/administrator/restaurant/foodList.jsp
+			</result>
+		</action>
+		<action name="deleteFoodAction" class="foodAction" method="deleteFood">
+			<result name="success">
+				/administrator/restaurant/foodList.jsp
+			</result>
+		</action>
 	</package>
 </struts>

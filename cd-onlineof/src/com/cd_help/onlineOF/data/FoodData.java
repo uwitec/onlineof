@@ -37,7 +37,8 @@ import javax.persistence.Table;
 		@NamedQuery(name = "loadAllFood", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.number,f.introduction,f.img,f.isSigns) from FoodData f"),
 		/* 根据餐厅和类别获取饮食信息 */
 		@NamedQuery(name="getFoodAll",query="from FoodData"),
-		@NamedQuery(name="countFoodByKindId",query="from FoodData f join f.food_kindData fk where fk.food_kind_Id = :kindId and f.name like :foodName")
+		@NamedQuery(name="getFoodByKindId",query="from FoodData f where f.food_kindId=:kindId"),
+		@NamedQuery(name="getFoodByresIdAndKindId",query="from FoodData f where f.restaurantId = :restaurantId and f.food_kindId = :kindId and f.name like :foodName")
 		})
 public class FoodData implements Serializable {
 
@@ -104,6 +105,12 @@ public class FoodData implements Serializable {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String food_kindId;
+	
+	/**
+	 * 餐厅ID
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String restaurantId;
 
 	/**
 	 * 訂單
@@ -183,6 +190,14 @@ public class FoodData implements Serializable {
 
 	public void setFood_kindId(String food_kindId) {
 		this.food_kindId = food_kindId;
+	}
+
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
 	}
 
 }
