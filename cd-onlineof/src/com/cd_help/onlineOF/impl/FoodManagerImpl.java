@@ -11,11 +11,14 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.FoodDataDao;
 import com.cd_help.onlineOF.api.FoodManager;
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.FoodVo;
 
 /**
@@ -30,6 +33,7 @@ import com.cd_help.onlineOF.web.vo.FoodVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("foodManager")
+@Transactional(propagation=Propagation.REQUIRED)
 public class FoodManagerImpl implements FoodManager{
 
 	@Autowired
@@ -124,5 +128,13 @@ public class FoodManagerImpl implements FoodManager{
 
 	public void setFoodDataDao(FoodDataDao foodDataDao) {
 		this.foodDataDao = foodDataDao;
+	}
+
+	@Override
+	public PageBean seachFoodPage(String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean, Session session)
+			throws Exception {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

@@ -80,4 +80,5 @@ public interface RestaurantManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public void updateRestaurant(RestaurantVo restaurantVo)throws Exception;
+	
 }

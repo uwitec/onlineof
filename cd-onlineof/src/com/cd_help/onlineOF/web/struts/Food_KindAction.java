@@ -2,9 +2,7 @@ package com.cd_help.onlineOF.web.struts;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
@@ -24,15 +22,8 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
  */
 @SuppressWarnings("serial")
 @Service("food_KindAction")
+@Scope("prototype")
 public class Food_KindAction extends BaseAction {
-	@Autowired
-	@Resource(name = "pageBean")
-	private PageBean pageBean = null;
-
-	public void setPageBean(PageBean pageBean) {
-		this.pageBean = pageBean;
-	}
-
 	/* 餐厅菜分类值对象 */
 	private Food_kindVo food_kindVo = null;
 	/* 餐厅菜分类值对象集合 */
@@ -47,6 +38,14 @@ public class Food_KindAction extends BaseAction {
 	private String restaruantName;
 	/* 餐厅集合 */
 	private List<RestaurantVo> restaurantVos = null;
+	/* 餐厅ID */
+	private String restaurantId;
+
+	private PageBean pageBean = new PageBean();
+
+	public void setPageBean(PageBean pageBean) {
+		this.pageBean = pageBean;
+	}
 
 	/**
 	 * 取餐厅菜分类的分页信息 comment here
@@ -64,7 +63,10 @@ public class Food_KindAction extends BaseAction {
 		try {
 			this.pageBean.setCurrentPage(page);
 			this.pageBean.setPagesize(2);
-			if (null == this.foodKindName || "".equals(this.foodKindName)) {
+			if(null!=this.restaurantId&&!"".equals(this.restaurantId)){
+				return this.getFoodKindByRestaurantId();
+			}
+			if (null == this.restaruantName || "".equals(this.restaruantName)) {
 				hqlName = "getFoodkindAll";
 			} else {
 				hqlName = "countFoodkindByName";
@@ -78,6 +80,36 @@ public class Food_KindAction extends BaseAction {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new AppException("loadFoodKindPException", "加载菜分类信息失败.");
+		}
+		return SUCCESS;
+	}
+
+	/**
+	 * 根据餐厅ID获取 comment here
+	 * 
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String getFoodKindByRestaurantId() throws Exception {
+		// TODO Auto-generated method stub
+		log.debug("load FoodKind By RestaurantId...");
+		String[] params = null;
+		Object[] conditions = null;
+		String hqlName = "";
+		try {
+			this.pageBean = new PageBean();
+			this.pageBean.setCurrentPage(page);
+			this.pageBean.setPagesize(2);
+			hqlName = "countFoodkindByResId";
+			params = new String[] { "restaurantId" };
+			conditions = new Object[] { this.restaurantId };
+			this.pageBean = this.getOnlineOF().getFood_kindManager()
+					.seachFoodKindByRestaurantId(hqlName, params, conditions,
+							pageBean, this.getSession());
+		} catch (Exception ex) {
+			ex.printStackTrace();
+			throw new AppException("", "加载菜类别出错!");
 		}
 		return SUCCESS;
 	}
@@ -198,6 +230,14 @@ public class Food_KindAction extends BaseAction {
 
 	public List<RestaurantVo> getRestaurantVos() {
 		return restaurantVos;
+	}
+
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
 	}
 
 	public void setRestaurantVos(List<RestaurantVo> restaurantVos) {

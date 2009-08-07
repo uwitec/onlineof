@@ -72,6 +72,7 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements
 		restaurantVo.setRestaurantId(StringUtil.getUUID());
 		RestaurantData restaurantData = new RestaurantData();
 		BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
+		restaurantData.setRestaurant_kindId(restaurantVo.getResKindId());
 		this.save(restaurantData);
 		restaurantVo.setRestaurantId(restaurantData.getRestaurantId());
 		return restaurantVo;
@@ -92,6 +93,7 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements
 			restaurantVo.setImg(restaurantData.getImg());
 		}
 		BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
+		restaurantData.setRestaurant_kindId(restaurantVo.getResKindId());
 		this.update(restaurantData);
 	}
 

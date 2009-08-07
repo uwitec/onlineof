@@ -60,13 +60,13 @@ public class FoodVo {
 	 */
 	private Integer isSigns;
 	/**
-	 * 所属菜系ID
+	 * 所属菜分类ID
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String food_kind_Id;
 	/**
-	 * 所属菜系名
+	 * 所属菜分类名称
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
@@ -112,6 +112,36 @@ public class FoodVo {
 		this.introduction = introduction;
 		this.img = img;
 		this.isSigns = isSigns;
+	}
+
+	/**
+	 * 
+	 * Constructs a <code>FoodVo</code>
+	 * @param foodId 菜ID
+	 * @param name   菜名称
+	 * @param price  菜价格
+	 * @param introduction 菜简介
+	 * @param img         菜图片
+	 * @param isSigns     是否招牌菜
+	 * @param kindId      菜分类ID
+	 * @param kindName    菜分类名称
+	 * @param restauantId 所属餐厅ID
+	 * @param restaurantName  所属餐厅名称
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public FoodVo(String foodId, String name, double price,
+			String introduction, Blob img, Integer isSigns, String kindId,
+			String kindName, String restauantId, String restaurantName) {
+		this.foodId = foodId;   
+		this.name = name;
+		this.price = price;
+		this.introduction = introduction;
+		this.img = img;
+		this.isSigns = isSigns;
+		this.food_kind_Id = kindId;
+		this.food_kind_Name = kindName;
+		this.restaurantId = restauantId;
+		this.restaurantName = restaurantName;
 	}
 
 	public String getFood_kind_Id() {

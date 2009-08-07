@@ -10,12 +10,10 @@ import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.Hibernate;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
@@ -35,6 +33,7 @@ import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
  */
 @SuppressWarnings("serial")
 @Service("restaurantAction")
+@Scope("prototype")
 public class RestaurantAction extends BaseAction {
 
 	/**
@@ -43,9 +42,8 @@ public class RestaurantAction extends BaseAction {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	protected static Log log = LogFactory.getLog(RestaurantAction.class);
-	@Autowired
-	@Resource(name = "pageBean")
-	private PageBean pageBean = null;
+
+	private PageBean pageBean = new PageBean();
 
 	public void setPageBean(PageBean pageBean) {
 		this.pageBean = pageBean;
