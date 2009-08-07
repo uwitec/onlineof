@@ -126,12 +126,12 @@ public class Food_kindManagerImpl implements Food_kindManager {
 	 *      com.cd_help.onlineOF.data.Session)
 	 */
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public PageBean seachFoodKindPage(String qhl, String[] params,
+	public PageBean seachFoodKindPage(String hql, String[] params,
 			Object[] objs, PageBean pageBean, Session session) throws Exception {
 		// TODO Auto-generated method stub
 		PageBean page = null;
 		try {
-			page = food_kindDao.seachFoodKindPage(qhl, params, objs, pageBean);
+			page = food_kindDao.seachFoodKindPage(hql, params, objs, pageBean);
 		} catch (Exception e) {
 			throw new AppException("0000014", "加载菜分类分类信息出错!");
 		}

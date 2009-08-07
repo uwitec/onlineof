@@ -11,6 +11,8 @@ import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.RestaurantDataDao;
 import com.cd_help.onlineOF.api.RestaurantManager;
@@ -32,6 +34,7 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("restaurantManager")
+@Transactional(propagation=Propagation.REQUIRED)
 public class RestaurantManagerImpl implements RestaurantManager{
 
 	@Autowired

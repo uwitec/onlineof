@@ -7,6 +7,7 @@ package com.cd_help.onlineOF.utils;
 
 import java.util.List;
 
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 /**
@@ -23,6 +24,7 @@ import org.springframework.stereotype.Service;
  */
 @Service("pageBean")
 @SuppressWarnings("unchecked")
+@Scope("prototype")
 public class PageBean {
 
 	private int pagesize = 10; // 每页数据的条数

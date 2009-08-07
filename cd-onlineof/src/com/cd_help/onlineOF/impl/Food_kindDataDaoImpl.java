@@ -14,7 +14,6 @@ import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.Food_kindVo;
 
 @Service("food_kindDao")
-@Transactional(propagation=Propagation.REQUIRED)
 public class Food_kindDataDaoImpl extends BaseDaoSupport implements
 		Food_kindDataDao {
 	/**
