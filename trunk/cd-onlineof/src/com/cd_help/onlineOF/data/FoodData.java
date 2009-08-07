@@ -40,7 +40,10 @@ import javax.persistence.Table;
 		/* 根据餐厅获取饮食信息 */
 		@NamedQuery(name = "getFoodByRestaurantId", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.number,f.introduction,f.img,f.isSigns) from FoodData f join f.restaurantData r where r.restaurantId = :restaurantId"),
 		/* 根据餐厅和类别获取饮食信息 */
-		@NamedQuery(name = "getFoodByKind", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.number,f.introduction,f.img,f.isSigns) from FoodData f join f.food_kindData k where k.food_kind_Id = :food_kind_Id"), })
+		@NamedQuery(name = "getFoodByKind", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.introduction,f.img,f.isSigns) from FoodData f join f.food_kindData k where k.food_kind_Id = :food_kind_Id"),
+		@NamedQuery(name="getFoodAll",query="from FoodData"),
+		@NamedQuery(name="countFoodByKindId",query="from FoodData f join f.food_kindData fk where fk.food_kind_Id = :kindId and f.name like :foodName"),
+		@NamedQuery(name = "getFoodByKindId", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.number,f.introduction,f.img,f.isSigns) from FoodData f join f.food_kindData k where k.food_kind_Id = :food_kind_Id") })
 public class FoodData implements Serializable {
 
 	/**
