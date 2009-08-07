@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -16,8 +17,14 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.FoodDataDao;
 import com.cd_help.onlineOF.api.FoodManager;
+import com.cd_help.onlineOF.api.Food_kindDataDao;
+import com.cd_help.onlineOF.api.RestaurantDataDao;
+import com.cd_help.onlineOF.data.FoodData;
+import com.cd_help.onlineOF.data.Food_kindData;
+import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.FoodVo;
 
@@ -39,6 +46,21 @@ public class FoodManagerImpl implements FoodManager{
 	@Autowired
 	@Resource(name = "foodDataDao")
 	private FoodDataDao foodDataDao;
+	public void setFoodDataDao(FoodDataDao foodDataDao) {
+		this.foodDataDao = foodDataDao;
+	}
+	@Resource(name = "food_kindDao")
+	private Food_kindDataDao food_kindDao = null;
+
+	public void setFood_kindDao(Food_kindDataDao food_kindDao) {
+		this.food_kindDao = food_kindDao;
+	}
+	@Resource(name = "restaurantDataDao")
+	private RestaurantDataDao restaurantDataDao;
+
+	public void setRestaurantDataDao(RestaurantDataDao restaurantDataDao) {
+		this.restaurantDataDao = restaurantDataDao;
+	}
 	
 	/**
 	 * @see com.cd_help.onlineOF.api.FoodManager#delete(java.lang.String)
@@ -126,15 +148,36 @@ public class FoodManagerImpl implements FoodManager{
 		return true;
 	}
 
-	public void setFoodDataDao(FoodDataDao foodDataDao) {
-		this.foodDataDao = foodDataDao;
-	}
-
-	@Override
+	/**
+	 * 获取菜的分页信息
+	 * @see com.cd_help.onlineOF.api.FoodManager#seachFoodPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.data.Session)
+	 */
 	public PageBean seachFoodPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, Session session)
 			throws Exception {
 		// TODO Auto-generated method stub
-		return null;
+		PageBean page = null;
+		page = foodDataDao.searchByPage(hqlName, paramName, condition, pageBean);
+		if(null!=page && null!=page.getArray()){
+			List<FoodVo> foodVos = new ArrayList<FoodVo>();
+			FoodVo foodVo = null;
+			FoodData food = null;
+			for(Object obj:page.getArray()){
+				foodVo = new FoodVo();
+				food = (FoodData)obj;
+				BeanUtilsHelp.copyProperties(foodVo, food);
+				if(food.getFood_kindId()!=null){
+					Food_kindData food_kindData = (Food_kindData) food_kindDao.get(Food_kindData.class, food.getFood_kindId());
+					foodVo.setFood_kind_Id(food_kindData.getFood_kind_Id());
+					foodVo.setFood_kind_Name(food_kindData.getName());
+					RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(RestaurantData.class, food_kindData.getRestaurantId());
+					foodVo.setRestaurantId(restaurantData.getRestaurantId());
+					foodVo.setRestaurantName(restaurantData.getName());
+				}
+				foodVos.add(foodVo);
+			}
+			page.setArray(foodVos);
+		}
+		return page;
 	}
 }

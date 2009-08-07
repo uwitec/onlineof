@@ -5,6 +5,9 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,9 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cd_help.onlineOF.api.FoodDataDao;
 import com.cd_help.onlineOF.api.Food_kindDataDao;
 import com.cd_help.onlineOF.api.Food_kindManager;
 import com.cd_help.onlineOF.api.RestaurantDataDao;
+import com.cd_help.onlineOF.data.FoodData;
 import com.cd_help.onlineOF.data.Food_kindData;
 import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.data.Session;
@@ -51,6 +56,12 @@ public class Food_kindManagerImpl implements Food_kindManager {
 		this.restaurantDataDao = restaurantDataDao;
 	}
 
+	private FoodDataDao foodDataDao;
+
+	public void setFoodDataDao(FoodDataDao foodDataDao) {
+		this.foodDataDao = foodDataDao;
+	}
+
 	/**
 	 * 检查权限
 	 * 
@@ -69,11 +80,20 @@ public class Food_kindManagerImpl implements Food_kindManager {
 	 * 
 	 * @see com.cd_help.onlineOF.api.Food_kindManager#deleteFoodKind(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public void deleteFoodKind(String foodKindId) throws Exception {
 		// TODO Auto-generated method stub
 		Food_kindData food_kindData = (Food_kindData) food_kindDao.get(
 				Food_kindData.class, foodKindId);
 		if (null != food_kindData) {
+			List<FoodData> foodDatas = foodDataDao
+					.findByNamedQueryAndNamedParam("getFoodByKindId", "kindId",
+							foodKindId);
+			if(null!=foodDatas && foodDatas.size() > 0){
+				for (FoodData food : foodDatas) {
+					foodDataDao.delete(food);
+				}
+			}
 			food_kindDao.delete(food_kindData);
 		} else {
 			throw new Exception("删除菜分类信息失败!");
@@ -91,11 +111,11 @@ public class Food_kindManagerImpl implements Food_kindManager {
 		Food_kindData food_kindData = (Food_kindData) food_kindDao.get(
 				Food_kindData.class, foodKindId);
 		BeanUtilsHelp.copyProperties(food_kindVo, food_kindData);
-		if (food_kindData.getRestaurant() != null) {
-			food_kindVo.setRestaurantId(food_kindData.getRestaurant()
-					.getRestaurantId());
-			food_kindVo.setRestaurantName(food_kindData.getRestaurant()
-					.getName());
+		if (food_kindData.getRestaurantId() != null) {
+			RestaurantData rstData = (RestaurantData) food_kindDao.get(
+					RestaurantData.class, food_kindData.getRestaurantId());
+			food_kindVo.setRestaurantId(rstData.getRestaurantId());
+			food_kindVo.setRestaurantName(rstData.getName());
 		}
 		return food_kindVo;
 	}
@@ -109,29 +129,49 @@ public class Food_kindManagerImpl implements Food_kindManager {
 		// TODO Auto-generated method stub
 		Food_kindData food_kindData = new Food_kindData();
 		BeanUtilsHelp.copyProperties(food_kindData, food_kindVo);
-		if (food_kindVo.getRestaurantId() != null) {
-			RestaurantData restaurantData = (RestaurantData) restaurantDataDao
-					.get(RestaurantData.class, food_kindVo.getRestaurantId());
-			food_kindData.setRestaurant(restaurantData);
-		}
 		food_kindDao.save(food_kindData);
 	}
 
 	/**
-	 * 取菜分类的分页信息
+	 * 查询菜分类(All|restaurantId)的分页信息
 	 * 
 	 * @see com.cd_help.onlineOF.api.Food_kindManager#seachFoodKindPage(java.lang.String,
 	 *      java.lang.String[], java.lang.Object[],
 	 *      com.cd_help.onlineOF.utils.PageBean,
 	 *      com.cd_help.onlineOF.data.Session)
 	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public PageBean seachFoodKindPage(String hql, String[] params,
+	@SuppressWarnings("unchecked")
+	public PageBean seachFoodKindPage(String hqlName, String[] params,
 			Object[] objs, PageBean pageBean, Session session) throws Exception {
 		// TODO Auto-generated method stub
 		PageBean page = null;
 		try {
-			page = food_kindDao.seachFoodKindPage(hql, params, objs, pageBean);
+			if (null != params && params.length > 0) {
+				page = food_kindDao.searchByPage(hqlName, params, objs,
+						pageBean);
+			} else {
+				page = food_kindDao.searchByPage(hqlName, params, objs,
+						pageBean);
+			}
+			if (null != page && null != page.getArray()) {
+				List<Food_kindVo> food_kindVos = new ArrayList<Food_kindVo>();
+				Food_kindData food_kind = null;
+				Food_kindVo food_kindVo = null;
+				for (Object obj : pageBean.getArray()) {
+					food_kind = (Food_kindData) obj;
+					food_kindVo = new Food_kindVo();
+					BeanUtilsHelp.copyProperties(food_kindVo, food_kind);
+					if (food_kind.getRestaurantId() != null) {
+						RestaurantData rstData = (RestaurantData) restaurantDataDao
+								.get(RestaurantData.class, food_kind
+										.getRestaurantId());
+						food_kindVo.setRestaurantId(rstData.getRestaurantId());
+						food_kindVo.setRestaurantName(rstData.getName());
+					}
+					food_kindVos.add(food_kindVo);
+				}
+				page.setArray(food_kindVos);
+			}
 		} catch (Exception e) {
 			throw new AppException("0000014", "加载菜分类分类信息出错!");
 		}
@@ -148,25 +188,5 @@ public class Food_kindManagerImpl implements Food_kindManager {
 		Food_kindData food_kindData = (Food_kindData) food_kindDao.get(
 				Food_kindData.class, food_kindVo.getFood_kind_Id());
 		BeanUtilsHelp.copyProperties(food_kindData, food_kindVo);
-		if (null != food_kindVo.getRestaurantId()) {
-			RestaurantData restaurant = (RestaurantData) restaurantDataDao.get(
-					RestaurantData.class, food_kindVo.getRestaurantId());
-			food_kindData.setRestaurant(restaurant);
-		}
-	}
-
-	@Override
-	public PageBean seachFoodKindByRestaurantId(String hqlName,
-			String[] paramName, Object[] condition, PageBean pageBean,
-			Session sessio) throws Exception {
-		// TODO Auto-generated method stub
-		PageBean page = null;
-		try {
-			page = food_kindDao.seachFoodKindByRestaurantId(hqlName, paramName,
-					condition, pageBean);
-		} catch (Exception e) {
-			throw new AppException("0000014", "加载菜分类分类信息出错!");
-		}
-		return page;
 	}
 }

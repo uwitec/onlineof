@@ -22,7 +22,8 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
  */
 @SuppressWarnings("serial")
 @Service("food_KindAction")
-@Scope("prototype")  //配置Action的实例根据作用域来
+@Scope("prototype")
+// 配置Action的实例根据作用域来
 public class Food_KindAction extends BaseAction {
 	/* 餐厅菜分类值对象 */
 	private Food_kindVo food_kindVo = null;
@@ -34,12 +35,11 @@ public class Food_KindAction extends BaseAction {
 	private String[] checksItem;
 	/* 当前页数 */
 	private int page = 1;
-	/* 餐厅名称 */
-	private String restaruantName;
 	/* 餐厅集合 */
 	private List<RestaurantVo> restaurantVos = null;
 	/* 餐厅ID */
 	private String restaurantId;
+	
 
 	private PageBean pageBean = new PageBean();
 
@@ -57,22 +57,23 @@ public class Food_KindAction extends BaseAction {
 	public String getFoodKindPage() throws Exception {
 		// TODO Auto-generated method stub
 		log.debug("load FoodKind Page...");
+		restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
 		String[] params = null;
 		Object[] conditions = null;
 		String hqlName = "";
 		try {
 			this.pageBean.setCurrentPage(page);
 			this.pageBean.setPagesize(2);
-			if(null!=this.restaurantId&&!"".equals(this.restaurantId)){
-				return this.getFoodKindByRestaurantId();
-			}
-			if (null == this.restaruantName || "".equals(this.restaruantName)) {
+			if ((null == this.getRestaurantId() || "".equals(this
+					.getRestaurantId()))
+					&& (null == this.getFoodKindName() || ""
+							.equals(this.foodKindName))) {
 				hqlName = "getFoodkindAll";
 			} else {
-				hqlName = "countFoodkindByName";
-				params = new String[] { "kindName", "restaurantName" };
-				conditions = new Object[] { "%" + this.getFoodKindName() + "%",
-						"%" + this.getRestaruantName() + "%" };
+				hqlName = "getFoodkindByResId";
+				params = new String[] { "restaurantId", "kindName" };
+				conditions = new Object[] { this.getRestaurantId(),
+						"%" + this.getFoodKindName() + "%" };
 			}
 			this.pageBean = this.getOnlineOF().getFood_kindManager()
 					.seachFoodKindPage(hqlName, params, conditions, pageBean,
@@ -80,36 +81,6 @@ public class Food_KindAction extends BaseAction {
 		} catch (Exception ex) {
 			ex.printStackTrace();
 			throw new AppException("loadFoodKindPException", "加载菜分类信息失败.");
-		}
-		return SUCCESS;
-	}
-
-	/**
-	 * 根据餐厅ID获取 comment here
-	 * 
-	 * @return
-	 * @throws Exception
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	public String getFoodKindByRestaurantId() throws Exception {
-		// TODO Auto-generated method stub
-		log.debug("load FoodKind By RestaurantId...");
-		String[] params = null;
-		Object[] conditions = null;
-		String hqlName = "";
-		try {
-			this.pageBean = new PageBean();
-			this.pageBean.setCurrentPage(page);
-			this.pageBean.setPagesize(2);
-			hqlName = "countFoodkindByResId";
-			params = new String[] { "restaurantId" };
-			conditions = new Object[] { this.restaurantId };
-			this.pageBean = this.getOnlineOF().getFood_kindManager()
-					.seachFoodKindByRestaurantId(hqlName, params, conditions,
-							pageBean, this.getSession());
-		} catch (Exception ex) {
-			ex.printStackTrace();
-			throw new AppException("", "加载菜类别出错!");
 		}
 		return SUCCESS;
 	}
@@ -219,14 +190,6 @@ public class Food_KindAction extends BaseAction {
 
 	public PageBean getPageBean() {
 		return pageBean;
-	}
-
-	public String getRestaruantName() {
-		return restaruantName;
-	}
-
-	public void setRestaruantName(String restaruantName) {
-		this.restaruantName = restaruantName;
 	}
 
 	public List<RestaurantVo> getRestaurantVos() {
