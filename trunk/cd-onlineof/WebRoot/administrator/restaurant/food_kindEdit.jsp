@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</td>
 						<td style="text-align: left;">
 							<span style="white-space: nowrap;"> <!-- 隐藏菜类别ID --> <input
-									type="hidden"
+									type="hidden" name="food_kindVo.food_kind_Id"
 									value="${food_kindVo.food_kind_Id}" />
 								<input type="text" name="food_kindVo.name" size=30
 									value="${food_kindVo.name }"

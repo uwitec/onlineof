@@ -22,6 +22,15 @@
             <include method="checkUsers" />
             <include method="login" />
         </create>
+        
+        <!-- 菜类别下拉选择框 -->
+        <create creator="spring" javascript="LoadFoodKindDwrAction"> 
+            <param name="beanName" value="loadFoodKindDwrAction" />
+            <include method="loadFoodKindByRestaurantId" />
+        </create>
+        <convert converter="bean" match="com.cd_help.onlineOF.web.vo.Food_kindVo">
+			<param name="food_kindVo" value="food_kind_Id,name"></param>
+		</convert>
 		
 		<!-- 异常处理 -->
 		<convert match="com.cd_help.onlineOF.utils.AppException" converter="exception"> 
