@@ -26,7 +26,8 @@
 		<script type="text/javascript">
 			/*跳转到添加页面*/
 			function addFood(){
-				window.location.href = "editFoodAction.do?foodVo.foodId=";
+				var foodKindId = document.getElementsByName("foodKindId")[0].value;
+				window.location.href = "editFoodAction.do?foodKindId="+foodKindId+"&foodVo.foodId=";
 			}
 			/*删除选定菜类别*/
 			function delSelectedFood(){
@@ -47,12 +48,13 @@
 	</head>
 
 	<body>
-		<form action="getFoodKindPageAction.do" name="seachResKind"
+		<form action="getFoodPageAction.do" name="seachResKind"
 			method="post">
 			<div style="width: 100%; font-size: 10pt;">
 				<span style="white-space: nowrap;"> <span
-					style="white-space: nowrap;">请选择餐厅</span> <SELECT
-						name="restaurantId">
+					style="white-space: nowrap;">请选择餐厅</span> <!-- 隐藏传递过来的fookKindId -->
+					<input type="hidden" name="foodKindId" value="${foodKindId}" />
+					 <SELECT name="restaurantId">
 						<option value="">
 							所有餐厅
 						</option>
@@ -132,9 +134,9 @@
 								</td>
 								<td>
 									<span style="white-space: nowrap;"> <a
-										href="deleteFoodAction.do?foodVo.foodId=${foodId}"
+										href="deleteFoodAction.do?foodVo.foodId=${foodId}&foodKindId=${foodKindId}"
 										class="button">删除</a> <a
-										href="editFoodAction.do?foodVo.foodId=${foodId}"
+										href="editFoodAction.do?foodVo.foodId=${foodId}&foodKindId=${foodKindId}"
 										class="button">编辑</a> </span>
 								</td>
 							</tr>
