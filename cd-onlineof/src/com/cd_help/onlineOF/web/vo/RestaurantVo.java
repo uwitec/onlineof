@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.web.vo;
 
+import java.io.Serializable;
 import java.sql.Blob;
 
 /**
@@ -15,7 +16,8 @@ import java.sql.Blob;
  * 
  * @since cd_help-onlineOF 0.0.0.1
  */
-public class RestaurantVo {
+@SuppressWarnings("serial")
+public class RestaurantVo implements Serializable{
 
 	/**
 	 * Constructs a <code>RestaurantVo</code>

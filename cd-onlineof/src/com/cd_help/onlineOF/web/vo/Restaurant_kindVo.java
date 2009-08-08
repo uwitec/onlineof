@@ -1,5 +1,6 @@
 package com.cd_help.onlineOF.web.vo;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 
 /**
@@ -13,7 +14,8 @@ import java.sql.Timestamp;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-public class Restaurant_kindVo {
+@SuppressWarnings("serial")
+public class Restaurant_kindVo implements Serializable{
 	/*餐厅分类ID*/
 	private String restaurant_kind_Id;
 	/*餐厅分类名称*/

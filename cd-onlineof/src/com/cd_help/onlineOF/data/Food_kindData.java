@@ -30,7 +30,8 @@ import javax.persistence.Table;
 @Table(name = "food_kind")
 @NamedQueries({
 	@NamedQuery(name="getFoodkindAll",query="from Food_kindData"),
-	@NamedQuery(name="getFoodkindByResId",query="from Food_kindData fk where fk.restaurantId = :restaurantId and fk.name like :kindName")
+	@NamedQuery(name="getFoodkindByResId",query="from Food_kindData fk where fk.restaurantId = :restaurantId and fk.name like :kindName"),
+	@NamedQuery(name="getFoodkindByRestaurantId",query="select new com.cd_help.onlineOF.web.vo.Food_kindVo(fk.food_kind_Id,fk.name) from Food_kindData fk where fk.restaurantId = :restaurantId")
 })
 public class Food_kindData implements Serializable{
 

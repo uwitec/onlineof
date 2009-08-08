@@ -168,7 +168,7 @@ public class FoodManagerImpl implements FoodManager{
 				BeanUtilsHelp.copyProperties(foodVo, food);
 				if(food.getFood_kindId()!=null){
 					Food_kindData food_kindData = (Food_kindData) food_kindDao.get(Food_kindData.class, food.getFood_kindId());
-					foodVo.setFood_kind_Id(food_kindData.getFood_kind_Id());
+					foodVo.setFood_kindId(food_kindData.getFood_kind_Id());
 					foodVo.setFood_kind_Name(food_kindData.getName());
 					RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(RestaurantData.class, food_kindData.getRestaurantId());
 					foodVo.setRestaurantId(restaurantData.getRestaurantId());

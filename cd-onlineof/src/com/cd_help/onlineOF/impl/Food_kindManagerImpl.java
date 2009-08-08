@@ -89,7 +89,7 @@ public class Food_kindManagerImpl implements Food_kindManager {
 			List<FoodData> foodDatas = foodDataDao
 					.findByNamedQueryAndNamedParam("getFoodByKindId", "kindId",
 							foodKindId);
-			if(null!=foodDatas && foodDatas.size() > 0){
+			if (null != foodDatas && foodDatas.size() > 0) {
 				for (FoodData food : foodDatas) {
 					foodDataDao.delete(food);
 				}
@@ -188,5 +188,24 @@ public class Food_kindManagerImpl implements Food_kindManager {
 		Food_kindData food_kindData = (Food_kindData) food_kindDao.get(
 				Food_kindData.class, food_kindVo.getFood_kind_Id());
 		BeanUtilsHelp.copyProperties(food_kindData, food_kindVo);
+	}
+
+	/**
+	 * 根据餐厅ID
+	 * 
+	 * @see com.cd_help.onlineOF.api.Food_kindManager#getFoodKindByRestaurantId(java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
+	public List<Food_kindVo> getFoodKindByRestaurantId(String restaurantId)
+			throws Exception {
+		// TODO Auto-generated method stub
+		List<Food_kindVo> food_kindVos =null;
+			food_kindVos=food_kindDao
+				.findByNamedQueryAndNamedParam("getFoodkindByRestaurantId",
+						"restaurantId", restaurantId);
+			if(null==food_kindVos){
+				food_kindVos = new ArrayList<Food_kindVo>();
+			}
+		return food_kindVos;
 	}
 }

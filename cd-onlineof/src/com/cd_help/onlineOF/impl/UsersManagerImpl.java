@@ -15,6 +15,7 @@ import com.cd_help.onlineOF.api.RestaurantDataDao;
 import com.cd_help.onlineOF.api.RoleDataDao;
 import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.api.UsersManager;
+import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.data.RoleData;
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
@@ -94,8 +95,9 @@ public class UsersManagerImpl implements UsersManager {
 			if(null != usersVo){
 				if (null != usersVo.getRestaurantId()
 						&& usersVo.getRestaurantId().length() > 0) {
-					usersVo.setRestaurantName(restaurantDataDao.get(
-							usersVo.getRestaurantId()).getName());
+					RestaurantData restaurantData= (RestaurantData)restaurantDataDao.get(RestaurantData.class,
+							usersVo.getRestaurantId());
+					usersVo.setRestaurantName(restaurantData.getName());
 				}
 				if (null != usersVo.getRoleId()
 						&& usersVo.getRoleId().length() > 0) {

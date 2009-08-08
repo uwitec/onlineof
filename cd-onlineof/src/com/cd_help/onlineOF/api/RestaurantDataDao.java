@@ -25,15 +25,9 @@ public interface RestaurantDataDao extends BaseDao{
 	
 	public List<RestaurantVo> loadAll() throws Exception;
 	
-	public RestaurantVo get(String id) throws Exception;
-	
-	public RestaurantVo save(RestaurantVo restaurantVo) throws Exception;
-	
 	public boolean exist(String id) throws Exception;
 	
 	public void delete(String id) throws Exception;
-	
-	public void update(RestaurantVo restaurantVo) throws Exception;
 	
 	public PageBean getRestaurantPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean) throws Exception;

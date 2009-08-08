@@ -5,6 +5,8 @@
  */
 package com.cd_help.onlineOF.api;
 
+import java.util.List;
+
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.Food_kindVo;
@@ -67,4 +69,14 @@ public interface Food_kindManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public Food_kindVo getFood_kindVoById(String foodKindId)throws Exception;
+	
+	/**
+	 * 根据餐厅ID返回菜分类集合
+	 * comment here
+	 * @param restaurantId
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<Food_kindVo> getFoodKindByRestaurantId(String restaurantId)throws Exception;
 }
