@@ -5,6 +5,8 @@
  */
 package com.cd_help.onlineOF.web.vo;
 
+import java.io.Serializable;
+
 /**
  * <b><code></code></b>
  * <p/>
@@ -16,7 +18,8 @@ package com.cd_help.onlineOF.web.vo;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
-public class Food_kindVo {
+@SuppressWarnings("serial")
+public class Food_kindVo implements Serializable{
 	
 	/**
 	 * 类别ID
@@ -62,6 +65,17 @@ public class Food_kindVo {
 		this.description = description;
 		this.restaurantId = restaurantId;
 		this.restaurantName = restaurantName;
+	}
+	/**
+	 * 
+	 * Constructs a <code>Food_kindVo</code>
+	 * @param food_kind_Id
+	 * @param name
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public Food_kindVo(String food_kind_Id,String name){
+		this.food_kind_Id = food_kind_Id;
+		this.name = name;
 	}
 	
 	

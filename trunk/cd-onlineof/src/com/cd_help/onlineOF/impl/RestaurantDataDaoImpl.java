@@ -17,7 +17,6 @@ import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.data.Restaurant_kindData;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
-import com.cd_help.onlineOF.utils.StringUtil;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
 /**
@@ -49,14 +48,6 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements
 		return restaurantVoList;
 	}
 
-	public RestaurantVo get(String id) throws Exception {
-		RestaurantData restaurantData = (RestaurantData) this.get(
-				RestaurantData.class, id);
-		RestaurantVo restaurantVo = new RestaurantVo();
-		BeanUtilsHelp.copyProperties(restaurantVo, restaurantData);
-		return restaurantVo;
-	}
-
 	/**
 	 * 
 	 * @see com.cd_help.onlineOF.api.RestaurantDataDao#exist(java.lang.String)
@@ -68,15 +59,6 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements
 		return restaurantData == null ? false : true;
 	}
 
-	public RestaurantVo save(RestaurantVo restaurantVo) throws Exception {
-		restaurantVo.setRestaurantId(StringUtil.getUUID());
-		RestaurantData restaurantData = new RestaurantData();
-		BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
-		restaurantData.setRestaurant_kindId(restaurantVo.getResKindId());
-		this.save(restaurantData);
-		restaurantVo.setRestaurantId(restaurantData.getRestaurantId());
-		return restaurantVo;
-	}
 
 	public void delete(String id) throws Exception {
 		if (!this.exist(id)) {
@@ -84,17 +66,6 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements
 		} else {
 			this.delete(this.get(RestaurantData.class, id));
 		}
-	}
-
-	public void update(RestaurantVo restaurantVo) throws Exception {
-		RestaurantData restaurantData = (RestaurantData) this.get(
-				RestaurantData.class, restaurantVo.getRestaurantId());
-		if (restaurantVo.getImg() == null) {
-			restaurantVo.setImg(restaurantData.getImg());
-		}
-		BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
-		restaurantData.setRestaurant_kindId(restaurantVo.getResKindId());
-		this.update(restaurantData);
 	}
 
 	/**

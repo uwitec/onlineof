@@ -19,6 +19,7 @@ import com.cd_help.onlineOF.api.RestaurantManager;
 import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
@@ -62,7 +63,12 @@ public class RestaurantManagerImpl implements RestaurantManager{
 	 */
 	public RestaurantVo save(RestaurantVo restaurantVo) throws AppException {
 		try{
-		  return restaurantDataDao.save(restaurantVo);
+			RestaurantData restaurantData = new RestaurantData();
+			BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
+			restaurantData.setRestaurant_kindId(restaurantVo.getResKindId());
+			restaurantDataDao.save(restaurantData);
+			restaurantVo.setRestaurantId(restaurantData.getRestaurantId());
+			return restaurantVo;
 		}catch(Exception e){
 			throw new AppException("","保存出错!");
 		}
@@ -107,7 +113,10 @@ public class RestaurantManagerImpl implements RestaurantManager{
 	public RestaurantVo getRestaurantById(String restaurantId) throws Exception {
 		// TODO Auto-generated method stub
 		if(restaurantId!=null && restaurantId.length() > 0){
-			RestaurantVo restaurantVo = restaurantDataDao.get(restaurantId);
+			RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(
+					RestaurantData.class, restaurantId);
+			RestaurantVo restaurantVo = new RestaurantVo();
+			BeanUtilsHelp.copyProperties(restaurantVo, restaurantData);
 			return restaurantVo;
 		}
 		return null;
@@ -115,7 +124,14 @@ public class RestaurantManagerImpl implements RestaurantManager{
 	@Override
 	public void updateRestaurant(RestaurantVo restaurantVo) throws Exception {
 		// TODO Auto-generated method stub
-		restaurantDataDao.update(restaurantVo);
+		RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(
+				RestaurantData.class, restaurantVo.getRestaurantId());
+		if (restaurantVo.getImg() == null) {
+			restaurantVo.setImg(restaurantData.getImg());
+		}
+		BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
+		restaurantData.setRestaurant_kindId(restaurantVo.getResKindId());
+		restaurantDataDao.update(restaurantData);
 	}
 	
 }

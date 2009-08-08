@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.web.vo;
 
+import java.io.Serializable;
 import java.sql.Blob;
 
 /**
@@ -15,7 +16,8 @@ import java.sql.Blob;
  * 
  * @since cd_help-onlineOF 0.0.0.1
  */
-public class FoodVo {
+@SuppressWarnings("serial")
+public class FoodVo implements Serializable{
 
 	/**
 	 * ID
@@ -64,7 +66,7 @@ public class FoodVo {
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private String food_kind_Id;
+	private String food_kindId;
 	/**
 	 * 所属菜分类名称
 	 * 
@@ -138,18 +140,20 @@ public class FoodVo {
 		this.introduction = introduction;
 		this.img = img;
 		this.isSigns = isSigns;
-		this.food_kind_Id = kindId;
+		this.food_kindId = kindId;
 		this.food_kind_Name = kindName;
 		this.restaurantId = restauantId;
 		this.restaurantName = restaurantName;
 	}
 
-	public String getFood_kind_Id() {
-		return food_kind_Id;
+
+
+	public String getFood_kindId() {
+		return food_kindId;
 	}
 
-	public void setFood_kind_Id(String food_kind_Id) {
-		this.food_kind_Id = food_kind_Id;
+	public void setFood_kindId(String food_kindId) {
+		this.food_kindId = food_kindId;
 	}
 
 	public String getRestaurantId() {

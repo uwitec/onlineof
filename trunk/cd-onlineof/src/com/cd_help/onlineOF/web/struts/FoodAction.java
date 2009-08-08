@@ -1,7 +1,10 @@
 package com.cd_help.onlineOF.web.struts;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.util.List;
 
+import org.hibernate.Hibernate;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -14,14 +17,12 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
 /**
  * 
- * <b><code>菜信息处理Action</code></b>
- * <p/>
- * Comment here
- * <p/>
- * <b>Creation Time:</b> Aug 7, 2009
+ * <b><code>菜信息处理Action</code></b> <p/> Comment here <p/> <b>Creation Time:</b>
+ * Aug 7, 2009
+ * 
  * @author ZhangZhen
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
 @SuppressWarnings("serial")
@@ -46,6 +47,10 @@ public class FoodAction extends BaseAction {
 	private int page = 1;
 	/* 删除餐厅分类的ID集合 */
 	private String[] checksItem;
+	/* 上传的菜图片 */
+	private File foodImg;
+	/* 菜图片名称 */
+	private String foodImgFileName;
 
 	/**
 	 * 取菜的分页信息 comment here
@@ -84,14 +89,15 @@ public class FoodAction extends BaseAction {
 	}
 
 	/**
-	 * 编辑菜信息
-	 * comment here
+	 * 编辑菜信息 comment here
+	 * 
 	 * @return
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public String editFood() throws Exception {
 		// TODO Auto-generated method stub
+		restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
 		if (null != this.getFoodVo() && null != this.getFoodVo().getFoodId()
 				&& this.getFoodVo().getFoodId().length() > 0) {
 			this.foodVo = this.getOnlineOF().getFoodManager().get(
@@ -101,9 +107,10 @@ public class FoodAction extends BaseAction {
 		}
 		return SUCCESS;
 	}
+
 	/**
-	 * 保存菜信息
-	 * comment here
+	 * 保存菜信息 comment here
+	 * 
 	 * @return
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -112,18 +119,25 @@ public class FoodAction extends BaseAction {
 		// TODO Auto-generated method stub
 		if (null != this.getFoodVo() && null != this.getFoodVo().getFoodId()
 				&& this.getFoodVo().getFoodId().length() > 0) {
-			//处理修改菜信息
+			// 处理修改菜信息
+			if (null != this.foodImg) {
+				FileInputStream inputStream = new FileInputStream(this.foodImg);
+				foodVo.setImg(Hibernate.createBlob(inputStream));
+			}
 			this.getOnlineOF().getFoodManager().update(foodVo);
-		}else{
-			//处理添加菜信息
+		} else {
+			// 处理添加菜信息
 			this.foodVo.setFoodId(StringUtil.getUUID());
+			FileInputStream inputStream = new FileInputStream(this.foodImg);
+			foodVo.setImg(Hibernate.createBlob(inputStream));
 			this.getOnlineOF().getFoodManager().save(foodVo);
 		}
 		return this.getFoodPage();
 	}
+
 	/**
-	 * 删除菜信息
-	 * comment here
+	 * 删除菜信息 comment here
+	 * 
 	 * @return
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -132,15 +146,17 @@ public class FoodAction extends BaseAction {
 		// TODO Auto-generated method stub
 		if (null != this.getFoodVo() && null != this.getFoodVo().getFoodId()
 				&& this.getFoodVo().getFoodId().length() > 0) {
-			this.getOnlineOF().getFoodManager().delete(this.getFoodVo().getFoodId());
+			this.getOnlineOF().getFoodManager().delete(
+					this.getFoodVo().getFoodId());
 		}
-		if(null!= this.checksItem && this.checksItem.length > 0){
-			for(String str:checksItem){
+		if (null != this.checksItem && this.checksItem.length > 0) {
+			for (String str : checksItem) {
 				this.getOnlineOF().getFoodManager().delete(str);
 			}
 		}
 		return this.getFoodPage();
 	}
+
 	public PageBean getPageBean() {
 		return pageBean;
 	}
@@ -211,5 +227,21 @@ public class FoodAction extends BaseAction {
 
 	public void setFoodName(String foodName) {
 		this.foodName = foodName;
+	}
+
+	public File getFoodImg() {
+		return foodImg;
+	}
+
+	public void setFoodImg(File foodImg) {
+		this.foodImg = foodImg;
+	}
+
+	public String getFoodImgFileName() {
+		return foodImgFileName;
+	}
+
+	public void setFoodImgFileName(String foodImgFileName) {
+		this.foodImgFileName = foodImgFileName;
 	}
 }
