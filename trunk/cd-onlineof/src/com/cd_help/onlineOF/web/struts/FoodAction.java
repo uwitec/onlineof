@@ -156,6 +156,30 @@ public class FoodAction extends BaseAction {
 		}
 		return this.getFoodPage();
 	}
+	
+	/**
+	 * 菜信息预览
+	 * comment here
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String foodPreView() throws Exception {
+		// TODO Auto-generated method stub
+		return SUCCESS;
+	}
+	/**
+	 * 响应流形成菜图片
+	 * comment here
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String foodImage() throws Exception {
+		// TODO Auto-generated method stub
+		
+		return null;
+	}
 
 	public PageBean getPageBean() {
 		return pageBean;

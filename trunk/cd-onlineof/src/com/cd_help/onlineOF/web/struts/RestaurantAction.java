@@ -7,8 +7,13 @@ package com.cd_help.onlineOF.web.struts;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.ServletOutputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -102,7 +107,8 @@ public class RestaurantAction extends BaseAction {
 	 */
 	public String getRestaurantPage() throws Exception {
 		// TODO Auto-generated method stub
-		restaurant_kindVos = this.getOnlineOF().getRestaurant_kindManager().getRestaurantKindAll();
+		restaurant_kindVos = this.getOnlineOF().getRestaurant_kindManager()
+				.getRestaurantKindAll();
 		log.debug("load RestaurantPage...");
 		String[] params = null;
 		Object[] conditions = null;
@@ -114,11 +120,12 @@ public class RestaurantAction extends BaseAction {
 				hqlName = "getRestaurantAllPage";
 			} else {
 				hqlName = "getRestaurantByKindName";
-				params = new String[] { "rkindId" ,"rname"};
-				conditions = new Object[] { this.kindId,"%"+this.getRestaurantName()+"%" };
+				params = new String[] { "rkindId", "rname" };
+				conditions = new Object[] { this.kindId,
+						"%" + this.getRestaurantName() + "%" };
 			}
-			this.pageBean = this.getOnlineOF().getRestaurantManager().seachRestaurantPage(hqlName,
-					params, conditions, pageBean);
+			this.pageBean = this.getOnlineOF().getRestaurantManager()
+					.seachRestaurantPage(hqlName, params, conditions, pageBean);
 			log.debug("pageBean.array.size="
 					+ this.getPageBean().getArray().size());
 		} catch (Exception ex) {
@@ -138,11 +145,12 @@ public class RestaurantAction extends BaseAction {
 	public String editRestaurant() throws Exception {
 		// TODO Auto-generated method stub
 		log.debug("edit Restaurant...");
-		restaurant_kindVos = this.getOnlineOF().getRestaurant_kindManager().getRestaurantKindAll();
-		if (null != restaurantVo && null!= restaurantVo.getRestaurantId()
+		restaurant_kindVos = this.getOnlineOF().getRestaurant_kindManager()
+				.getRestaurantKindAll();
+		if (null != restaurantVo && null != restaurantVo.getRestaurantId()
 				&& restaurantVo.getRestaurantId().length() > 0) {
-			restaurantVo = this.getOnlineOF().getRestaurantManager().getRestaurantById(restaurantVo
-					.getRestaurantId());
+			restaurantVo = this.getOnlineOF().getRestaurantManager()
+					.getRestaurantById(restaurantVo.getRestaurantId());
 		} else {
 			restaurantVo = new RestaurantVo();
 		}
@@ -167,10 +175,11 @@ public class RestaurantAction extends BaseAction {
 				FileInputStream inputStream = new FileInputStream(this.resFile);
 				restaurantVo.setImg(Hibernate.createBlob(inputStream));
 			}
-			this.getOnlineOF().getRestaurantManager().updateRestaurant(restaurantVo);
+			this.getOnlineOF().getRestaurantManager().updateRestaurant(
+					restaurantVo);
 		} else {
 			// 处理添加餐厅信息
-			log.debug("size="+this.resFile.length());
+			log.debug("size=" + this.resFile.length());
 			restaurantVo.setRestaurantId(StringUtil.getUUID());
 			FileInputStream inputStream = new FileInputStream(this.resFile);
 			restaurantVo.setImg(Hibernate.createBlob(inputStream));
@@ -191,14 +200,76 @@ public class RestaurantAction extends BaseAction {
 		log.debug("delete restaurant...");
 		if (null != restaurantVo && null != restaurantVo.getRestaurantId()
 				&& restaurantVo.getRestaurantId().length() > 0) {
-			this.getOnlineOF().getRestaurantManager().delete(restaurantVo.getRestaurantId());
+			this.getOnlineOF().getRestaurantManager().delete(
+					restaurantVo.getRestaurantId());
 		}
-		if(null != checksItem && checksItem.length > 0){
-			for(String str:checksItem){
+		if (null != checksItem && checksItem.length > 0) {
+			for (String str : checksItem) {
 				this.getOnlineOF().getRestaurantManager().delete(str);
 			}
 		}
 		return this.getRestaurantPage();
+	}
+
+	/**
+	 * 餐厅信息预览 comment here
+	 * 
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String restaurantPreView() throws Exception {
+		// TODO Auto-generated method stub
+		if (null != restaurantVo && null != restaurantVo.getRestaurantId()) {
+			restaurantVo = this.getOnlineOF().getRestaurantManager()
+					.getRestaurantById(restaurantVo.getRestaurantId());
+		}
+		return SUCCESS;
+	}
+
+	/**
+	 * 响应餐厅图片 comment here
+	 * 
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String restaurantImage() throws Exception {
+		// TODO Auto-generated method stub
+		this.getResponse().setContentType("image/jpeg;charset=GB2312");
+		ServletOutputStream out = null;
+		InputStream in = null;
+		byte[] bytes = null;
+		try {
+			if (null != restaurantVo && null != restaurantVo.getRestaurantId()) {
+				restaurantVo = this.getOnlineOF().getRestaurantManager()
+						.getRestaurantById(restaurantVo.getRestaurantId());
+				Blob blob = restaurantVo.getImg();
+				in = blob.getBinaryStream();
+				out = this.getResponse().getOutputStream();
+				bytes = new byte[1024];
+				while (in.read() != -1) {
+					out.write(bytes);
+				}
+				out.flush();
+			}
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+			if (out != null)
+				try {
+					out.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			bytes = null;
+		}
+		return null;
 	}
 
 	public List<RestaurantVo> getRestaurantList() {
