@@ -8,7 +8,6 @@ package com.cd_help.onlineOF.api;
 import java.util.List;
 
 import com.cd_help.onlineOF.data.Session;
-import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 
 /**
@@ -37,9 +36,6 @@ public interface PrivilegeManager {
 	public List<PrivilegeVo> loadChildModelPrivilegeByParent(Session session,String parentId) throws Exception;
 	
 	public List<PrivilegeVo> getPrivilegeByRoleId(Session session, String roleId) throws Exception;
-	
-	public PageBean searchPrivilegesByPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean, Session session) throws Exception;
 	
 	public PrivilegeVo getPrivilegeById(Session session, String privilegeId) throws Exception;
 	

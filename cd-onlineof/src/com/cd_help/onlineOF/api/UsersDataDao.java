@@ -5,11 +5,8 @@
  */
 package com.cd_help.onlineOF.api;
 
-import java.util.List;
-
+import com.cd_help.onlineOF.data.UsersData;
 import com.cd_help.onlineOF.utils.AppException;
-import com.cd_help.onlineOF.utils.PageBean;
-import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
  * <b><code></code></b>
@@ -25,8 +22,6 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
  */
 public interface UsersDataDao extends BaseDao {
 
-	public UsersVo get(String id) throws Exception;
-	
 	/**
 	 * 检测用户
 	 * @param usersname
@@ -36,17 +31,6 @@ public interface UsersDataDao extends BaseDao {
 	 */
 	public boolean checkUsersByName(String usersname) throws Exception;
 	
-	public void addUsers(UsersVo usersVo) throws Exception;
-
-	public List<UsersVo> loadAll() throws Exception;
-
-	public void update(UsersVo usersVo) throws Exception;
-
-	public void delete(String id) throws Exception;
-
-	public UsersVo login(String username, String password) throws Exception;
-	
-	public PageBean searchByPageBean(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws Exception;
+	public UsersData login(String username, String password) throws Exception;
 	
 }
