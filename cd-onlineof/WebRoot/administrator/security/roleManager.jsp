@@ -73,7 +73,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       </s:else> 
          </tbody>
       </table>
-      </form>
       <!-- 分页start -->
 	<div class="pagination" style="font-size:10pt;">
 		<page:pages1 pagesize="${pb.pagesize}"
@@ -82,5 +81,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			url="searchRolesByPage.do" />
 	</div>
 	<!-- 分页end -->
+      </form>
   </body>
 </html>
