@@ -50,14 +50,13 @@ public class UsersManagerDwrAction extends BaseAction{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public UsersVo login(String params[]) throws AppException{
-		log.debug("usersname: "+params[0]+"/password: "+params[1]);
+	public UsersVo login(String username, String password) throws AppException{
 		UsersVo usersVo = null; 
 		try {
-		    usersVo = this.getOnlineOF().getUsersManager().login(params[0], params[1]);
+		    usersVo = this.getOnlineOF().getUsersManager().login(username, password);
 		} catch (Exception e) {
-			log.error(null,e);
-			 throw new AppException("",e.getMessage());
+			 log.error(e);
+			 throw new AppException("",e.getMessage(),e);
 		}
 		return usersVo;
 	}

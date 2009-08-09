@@ -113,7 +113,7 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 			 Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			 childPrivileges = this.getOnlineOF().getPrivilegeManager().loadChildModelPrivilegeByParent(session, parentId);
 		 }catch(Exception e){
-			 log.error(null,e);
+			 log.error(e);
 			 throw new AppException("",e.getMessage(),e);
 		 }
 		 return childPrivileges;
