@@ -98,40 +98,46 @@ public class RestaurantManagerImpl implements RestaurantManager{
 	}
 	@Override
 	public PageBean seachRestaurantPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws Exception {
+			Object[] condition, PageBean pageBean) throws AppException {
 		// TODO Auto-generated method stub
 		PageBean page = null;
 		try {
 			page = restaurantDataDao.getRestaurantPage(hqlName, paramName,
 					condition, pageBean);
-		} catch (AppException e) {
+		} catch (Exception e) {
 			throw new AppException("0000014", "加载餐厅分类信息出错!");
 		}
 		return page;
 	}
 	@Override
-	public RestaurantVo getRestaurantById(String restaurantId) throws Exception {
-		// TODO Auto-generated method stub
-		if(restaurantId!=null && restaurantId.length() > 0){
-			RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(
-					RestaurantData.class, restaurantId);
-			RestaurantVo restaurantVo = new RestaurantVo();
-			BeanUtilsHelp.copyProperties(restaurantVo, restaurantData);
-			return restaurantVo;
+	public RestaurantVo getRestaurantById(String restaurantId) throws AppException {
+		try{
+			if(restaurantId!=null && restaurantId.length() > 0){
+				RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(
+						RestaurantData.class, restaurantId);
+				RestaurantVo restaurantVo = new RestaurantVo();
+				BeanUtilsHelp.copyProperties(restaurantVo, restaurantData);
+				return restaurantVo;
+			}
+			return null;
+		}catch(Exception e){
+			throw new AppException("",e.getMessage(),e);
 		}
-		return null;
 	}
 	@Override
-	public void updateRestaurant(RestaurantVo restaurantVo) throws Exception {
-		// TODO Auto-generated method stub
-		RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(
-				RestaurantData.class, restaurantVo.getRestaurantId());
-		if (restaurantVo.getImg() == null) {
-			restaurantVo.setImg(restaurantData.getImg());
+	public void updateRestaurant(RestaurantVo restaurantVo) throws AppException {
+		try{
+			RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(
+					RestaurantData.class, restaurantVo.getRestaurantId());
+			if (restaurantVo.getImg() == null) {
+				restaurantVo.setImg(restaurantData.getImg());
+			}
+			BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
+			restaurantData.setRestaurant_kindId(restaurantVo.getResKindId());
+			restaurantDataDao.update(restaurantData);
+		}catch(Exception e){
+			throw new AppException("",e.getMessage(),e);
 		}
-		BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
-		restaurantData.setRestaurant_kindId(restaurantVo.getResKindId());
-		restaurantDataDao.update(restaurantData);
 	}
 	
 }

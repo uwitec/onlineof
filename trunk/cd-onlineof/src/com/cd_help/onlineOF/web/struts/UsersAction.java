@@ -148,9 +148,13 @@ public class UsersAction extends BaseAction {
 		return SUCCESS;
 	}
 	
-	private void loadAllRestaurant() throws Exception{
+	private void loadAllRestaurant() throws AppException{
 		// 加载所有餐厅
-		restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
+		try{
+		   restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
+		}catch(AppException e){
+			throw new AppException("",e.getMessage(),e);
+		}
 	}
 
 	/**
@@ -169,8 +173,9 @@ public class UsersAction extends BaseAction {
 			// 加载所有角色
 			roleVos = this.getOnlineOF().getRoleManager().loadAllRole(this.getSession());
 			return SUCCESS;
-		} catch (Exception e) {
+		} catch (AppException e) {
 			this.setErrorMsg(e.getMessage());
+			this.setErrorCode(e.getError_code());
 			return ERROR;
 			// log.error(e);
 			// throw new AppException("",e.getMessage(),e);

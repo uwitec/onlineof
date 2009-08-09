@@ -32,7 +32,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public List<RoleVo> loadAllRole(UsersSession session) throws Exception;
+	public List<RoleVo> loadAllRole(UsersSession session) throws AppException;
 	
 	/**
 	 * 根据条件分页查询
@@ -47,7 +47,7 @@ public interface RoleManager {
 	 */
 	public PageBean searchRolesByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, UsersSession session)
-			throws Exception;
+			throws AppException;
 	
 	/**
 	 * 删除角色
@@ -56,7 +56,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void deleteRole(UsersSession session, String id) throws Exception;
+	public void deleteRole(UsersSession session, String id) throws AppException;
 	
 	/**
 	 * 新建角色
@@ -65,7 +65,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void addRole(UsersSession session,RoleVo roleVo) throws Exception;
+	public void addRole(UsersSession session,RoleVo roleVo) throws AppException;
 	
 	/**
 	 * 根据ID获取角色信息
@@ -75,7 +75,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public RoleVo getRoleById(UsersSession session, String roleId) throws Exception;
+	public RoleVo getRoleById(UsersSession session, String roleId) throws AppException;
 	
 	/**
 	 * 修改角色
@@ -84,7 +84,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void updateRole(UsersSession session, RoleVo roleVo) throws Exception;
+	public void updateRole(UsersSession session, RoleVo roleVo) throws AppException;
 	
 	/**
 	 * 保存角色权限
@@ -94,6 +94,6 @@ public interface RoleManager {
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void saveRolePrivileges(UsersSession session, String[] privileges, String roleId) throws Exception;
+	public void saveRolePrivileges(UsersSession session, String[] privileges, String roleId) throws AppException;
 
 }

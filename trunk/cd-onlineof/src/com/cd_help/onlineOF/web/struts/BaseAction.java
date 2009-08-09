@@ -47,6 +47,7 @@ public class BaseAction extends ActionSupport{
 	private UsersSession session;
 	
 	private String errorMsg;
+	private String errorCode;
 	
 	/**
 	 * 在线订餐系统
@@ -99,5 +100,13 @@ public class BaseAction extends ActionSupport{
 
 	public void setErrorMsg(String errorMsg) {
 		this.errorMsg = errorMsg;
+	}
+
+	public String getErrorCode() {
+		return errorCode;
+	}
+
+	public void setErrorCode(String errorCode) {
+		this.errorCode = errorCode;
 	}
 }
