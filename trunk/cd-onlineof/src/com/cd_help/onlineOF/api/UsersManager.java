@@ -26,7 +26,7 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 @SuppressWarnings("unchecked")
 public interface UsersManager {
 
-	public UsersVo get(Session session, String id) throws Exception;
+	public UsersVo getUsersById(Session session, String id) throws Exception;
 	
 	public boolean checkUsersByName(String usersname) throws Exception;
 	
@@ -38,9 +38,9 @@ public interface UsersManager {
 			Object[] condition, PageBean pageBean, Session session)
 			throws Exception;
 	
-	public void update(Session session, UsersVo usersVo) throws Exception;
+	public void updateUsers(Session session, UsersVo usersVo) throws Exception;
 
-	public void delete(Session session, String id) throws Exception;
+	public void deleteUsers(Session session, String id) throws Exception;
 
 	public UsersVo login(String username, String password) throws Exception;
 	
