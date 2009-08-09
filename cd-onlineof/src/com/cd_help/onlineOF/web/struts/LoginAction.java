@@ -51,7 +51,8 @@ public class LoginAction extends BaseAction{
 			System.out.println("用户名： "+usersname + "密码: "+password);
 			this.getRequest().getSession().setAttribute(WebConstants.ATTRIBUTE_SESSION,session);
 		} catch (Exception e) {
-			throw new AppException("",e.getMessage());
+			log.error(e);
+			throw new AppException("",e.getMessage(),e);
 		}
 		return SUCCESS;
 	}

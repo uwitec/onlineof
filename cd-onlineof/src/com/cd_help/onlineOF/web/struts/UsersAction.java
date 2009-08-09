@@ -136,7 +136,7 @@ public class UsersAction extends BaseAction {
 			if(null != this.checksItem){
 				for(int i=0; i<this.checksItem.length; i++){
 					log.debug(this.checksItem[i]);
-					this.getOnlineOF().getUsersManager().delete(this.getSession(),
+					this.getOnlineOF().getUsersManager().deleteUsers(this.getSession(),
 							this.checksItem[i]);
 				}
 			}
@@ -162,7 +162,7 @@ public class UsersAction extends BaseAction {
 	public String editUsres() throws AppException {
 		log.debug("--->> begin getUsersById : "+this.getRequest().getParameter("usersId"));
 		try {
-			usersVo = this.getOnlineOF().getUsersManager().get(
+			usersVo = this.getOnlineOF().getUsersManager().getUsersById(
 					this.getSession(), usersId);
 			// 加载所有餐厅
 			loadAllRestaurant(); 
@@ -184,7 +184,7 @@ public class UsersAction extends BaseAction {
 	public String updateUsers() throws AppException{
 		log.debug("--->> begin updateUsers");
 		try{
-			this.getOnlineOF().getUsersManager().update(this.getSession(), usersVo);
+			this.getOnlineOF().getUsersManager().updateUsers(this.getSession(), usersVo);
 			this.searchUsersByPage();
 		}catch(Exception e){
 			log.error(e);

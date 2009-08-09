@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.web.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.cd_help.onlineOF.utils.StringUtil;
@@ -21,7 +22,8 @@ import com.cd_help.onlineOF.utils.StringUtil;
  * 
  * @since cd_help-onlineOF 0.0.0.1
  */
-public class UsersVo {
+@SuppressWarnings("serial")
+public class UsersVo implements Serializable{
 
 	/**
 	 * 用户ID
