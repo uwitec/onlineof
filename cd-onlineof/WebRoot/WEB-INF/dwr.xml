@@ -21,6 +21,7 @@
             <param name="beanName" value="usersManagerDwrAction" />
             <include method="checkUsers" />
             <include method="login" />
+            <include method="resetPassword" />
         </create>
         
         <!-- 菜类别下拉选择框 -->
