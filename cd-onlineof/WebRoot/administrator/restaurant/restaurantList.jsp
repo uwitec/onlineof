@@ -111,8 +111,9 @@
 											value="${restaurantId}" /> </span>
 								</td>
 								<td>
-									<span style="white-space: nowrap;"><s:property
-											value="name" /> </span>
+									<span style="white-space: nowrap;">
+									<a href="viewRestaurantAction.do?restaurantVo.restaurantId=${restaurantId}"><s:property value="name" /></a>
+									 </span>
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property

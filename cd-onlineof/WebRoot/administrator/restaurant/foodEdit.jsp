@@ -104,12 +104,18 @@
 							<span style="white-space: nowrap;"> <select
 									id="restaurantId" name="foodVo.restaurantId"
 									onchange="getFoodKindByRestaurantId();" style="width: 150px">
+									<s:if test="restaurantVos!=null">
+									<option value="">--请选择--</option>
 									<s:iterator value="restaurantVos">
 										<option value="${restaurantId}"
 											<s:if test="foodVo.restaurantId == restaurantId">selected</s:if>>
 											${name}
 										</option>
 									</s:iterator>
+									</s:if>
+									<s:else>
+										<option value="">暂无数据</option>
+									</s:else>
 								</select> </span>
 						</td>
 						<td>

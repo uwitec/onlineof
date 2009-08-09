@@ -23,6 +23,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    This is my JSP page. <br>
+   		<div align="center">
+   			<div align="center">${restaurantVo.name}(图)</div><br>
+   			<div align="center"><img src="imgRestaurantAction.do?restaurantVo.restaurantId=${restaurantVo.restaurantId}" /></div>
+   			<div align="center">餐厅名称:${restaurantVo.name}</div>
+   			<div align="center">
+   				<span>餐厅开门时间:${restaurantVo.openTime}</span>&nbsp;&nbsp;&nbsp;&nbsp;
+   				<span>餐厅关门时间:${restaurantVo.closeTime}</span>
+   			</div>
+   			<div align="center">餐厅简介:${restaurantVo.introduction}</div>
+   			<div align="center">餐厅联系电话:${restaurantVo.contactPhone}</div>
+   			<div align="center">餐厅联系地址:${restaurantVo.address}</div>
+   		</div>
   </body>
 </html>
