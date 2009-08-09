@@ -20,7 +20,7 @@ import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.api.UsersManager;
 import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.data.RoleData;
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.data.UsersData;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
@@ -55,42 +55,42 @@ public class UsersManagerImpl implements UsersManager {
 	@Resource(name = "usersDataDao")
 	private UsersDataDao usersDataDao;
 
-	public void deleteUsers(Session session, String id) throws AppException {
+	public void deleteUsers(UsersSession session, String id) throws AppException {
 		if (this.checkPrivilege(session)) {
 			try {
 				usersDataDao.delete((UsersData)usersDataDao.get(UsersData.class, id));
 			} catch (Exception e) {
-				throw new AppException("0000012", "删除失败");
+				throw new AppException("0000012", "删除失败",e);
 			}
 		} else {
 			throw new AppException("0000000", "权限不够!");
 		}
 	}
 
-	public UsersVo getUsersById(Session session, String id) throws AppException {
-		try {
-			if (this.checkPrivilege(session)) {
+	public UsersVo getUsersById(UsersSession session, String id) throws AppException {
+		if (this.checkPrivilege(session)) {
+			try {
 				UsersData usersData = (UsersData)usersDataDao.get(UsersData.class,id);
 				return this.convertDataToVo(usersData);
-			} else {
-				throw new AppException("0000000", "权限不够!");
+			} catch (Exception e) {
+				throw new AppException("0000013", "获取用户信息出错!",e);
 			}
-		} catch (Exception e) {
-			throw new AppException("0000013", "获取用户信息出错!");
+		} else {
+			throw new AppException("0000000", "权限不够!");
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<UsersVo> loadAll(Session session) throws AppException {
-		try {
-			if (this.checkPrivilege(session)) {
+	public List<UsersVo> loadAll(UsersSession session) throws AppException {
+		if (this.checkPrivilege(session)) {
+			try {
 				List<UsersData> usersDatas = usersDataDao.findByNamedQuery("loadAllUsers");
 				return this.convertDataToVoList(usersDatas);
-			} else {
-				throw new AppException("0000000", "权限不够!");
+			} catch (Exception e) {
+				throw new AppException("0000014", "加载用户信息出错!",e);
 			}
-		} catch (Exception e) {
-			throw new AppException("0000014", "加载用户信息出错!");
+		} else {
+			throw new AppException("0000000", "权限不够!");
 		}
 	}
 
@@ -117,7 +117,6 @@ public class UsersManagerImpl implements UsersManager {
 				}else{
 					throw new AppException("0000011", "对不起,您没有足够权限!");
 				}
-				return usersVo;
 			}else{
 				throw new AppException("0000011", "用户名或密码错误!");
 			}
@@ -125,12 +124,13 @@ public class UsersManagerImpl implements UsersManager {
 			log.error(e);
 			throw new AppException("0000011", "系统错误!",e);
 		}
+		return usersVo;
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.UsersManager#update(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.web.vo.UsersVo)
+	 * @see com.cd_help.onlineOF.api.UsersManager#update(com.cd_help.onlineOF.data.UsersSession, com.cd_help.onlineOF.web.vo.UsersVo)
 	 */
-	public void updateUsers(Session session, UsersVo usersVo) throws AppException {
+	public void updateUsers(UsersSession session, UsersVo usersVo) throws AppException {
 		if (this.checkPrivilege(session)) {
 			try {
 				UsersData usersData = (UsersData)usersDataDao.get(UsersData.class, usersVo.getUsersId());
@@ -157,7 +157,7 @@ public class UsersManagerImpl implements UsersManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private boolean checkPrivilege(Session session) throws AppException {
+	private boolean checkPrivilege(UsersSession session) throws AppException {
 		return true;
 	}
 
@@ -167,7 +167,7 @@ public class UsersManagerImpl implements UsersManager {
 
 	@SuppressWarnings("unchecked")
 	public PageBean searchByPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean, Session session)
+			Object[] condition, PageBean pageBean, UsersSession session)
 			throws AppException {
 		if(this.checkPrivilege(session)){
 			PageBean page = null;
@@ -196,15 +196,16 @@ public class UsersManagerImpl implements UsersManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.UsersManager#addUsers(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.data.UsersData)
+	 * @see com.cd_help.onlineOF.api.UsersManager#addUsers(com.cd_help.onlineOF.data.UsersSession, com.cd_help.onlineOF.data.UsersData)
 	 */
-	public void addUsers(Session session, UsersVo usersVo)
+	public void addUsers(UsersSession session, UsersVo usersVo)
 			throws AppException {
 		if(this.checkPrivilege(session)){
 			try{
 				usersVo.setUsersId(StringUtil.getUUID());
 				UsersData usersData = new UsersData();
 				BeanUtilsHelp.copyProperties(usersData, usersVo);
+				usersData.setPassword(StringUtil.encodePassword(usersVo.getPassword(), "MD5"));
 				usersDataDao.save(usersData);
 			}catch(Exception e){
 				log.error(e);
@@ -250,12 +251,31 @@ public class UsersManagerImpl implements UsersManager {
 	private UsersVo convertDataToVo(UsersData usersData) throws Exception {
 		UsersVo usersVo = new UsersVo();
 		BeanUtilsHelp.copyProperties(usersVo, usersData);
-		if(usersVo.getRoleId().length() > 0){
+		if(null != usersVo.getRoleId() && usersVo.getRoleId().length() > 0){
 			usersVo.setRoleName(((RoleData)usersDataDao.get(RoleData.class,usersVo.getRoleId())).getRoleName());
 		}
-		if(usersVo.getRestaurantId().length() > 0){
+		if(null != usersVo.getRestaurantId() && usersVo.getRestaurantId().length() > 0){
 			usersVo.setRestaurantName(((RestaurantData)usersDataDao.get(RestaurantData.class, usersVo.getRestaurantId())).getName());
 		}
 		return usersVo;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.UsersManager#resetPassword(java.lang.String, java.lang.String, java.lang.String)
+	 */
+	public boolean resetPassword(String usersId, String oldPassword, String newPassword)
+			throws Exception {
+		try{
+			UsersData usersData = (UsersData)usersDataDao.get(UsersData.class, usersId);
+			if(usersData.getPassword().equals(StringUtil.encodePassword(oldPassword, "MD5"))){
+				usersData.setPassword(StringUtil.encodePassword(newPassword, "MD5"));
+				usersDataDao.update(usersData);
+				return true;
+			}else{
+				throw new AppException("","输入密码错误!");
+			}
+		}catch(Exception e){
+			throw new AppException("","重置密码出错!",e);
+		}
 	}
 }

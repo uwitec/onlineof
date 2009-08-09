@@ -8,7 +8,7 @@ package com.cd_help.onlineOF.impl;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.api.CuisineManager;
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 
 /**
@@ -33,7 +33,7 @@ public class CuisineManagerImpl implements CuisineManager{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@SuppressWarnings("unused")
-	private boolean checkPrivilege(Session session) throws Exception{
+	private boolean checkPrivilege(UsersSession session) throws Exception{
 		return true;
 	}
 }

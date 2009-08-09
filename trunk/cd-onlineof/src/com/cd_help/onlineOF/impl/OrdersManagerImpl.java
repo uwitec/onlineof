@@ -19,7 +19,7 @@ import com.cd_help.onlineOF.api.OrdersDataDao;
 import com.cd_help.onlineOF.api.OrdersManager;
 import com.cd_help.onlineOF.data.FoodData;
 import com.cd_help.onlineOF.data.OrdersData;
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.ConvertUtils;
@@ -67,7 +67,7 @@ public class OrdersManagerImpl implements OrdersManager {
 	 * @throws AppAppAppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private boolean checkPrivilege(Session session) throws AppException {
+	private boolean checkPrivilege(UsersSession session) throws AppException {
 		if (null == session.getUsersVo()) {
 			return false;
 		}
@@ -80,7 +80,7 @@ public class OrdersManagerImpl implements OrdersManager {
 
 	@Override
 	public PageBean searchHistoryOrdersByPage(OrdersVo ordersVo,
-			String endTime, PageBean pageBean, Session seesion)
+			String endTime, PageBean pageBean, UsersSession seesion)
 			throws AppException {
 		String hql = "";
 		String[] paramName = null;
@@ -137,7 +137,7 @@ public class OrdersManagerImpl implements OrdersManager {
 
 	@Override
 	public PageBean searchTodayOrdersByPage(OrdersVo ordersVo,
-			PageBean pageBean, Session seesion) throws AppException {
+			PageBean pageBean, UsersSession seesion) throws AppException {
 		String hql = "";
 		String[] paramName = null;
 		Object[] condition = null;

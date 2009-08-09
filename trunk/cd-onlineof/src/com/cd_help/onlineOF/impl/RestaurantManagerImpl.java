@@ -17,7 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cd_help.onlineOF.api.RestaurantDataDao;
 import com.cd_help.onlineOF.api.RestaurantManager;
 import com.cd_help.onlineOF.data.RestaurantData;
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
@@ -93,7 +93,7 @@ public class RestaurantManagerImpl implements RestaurantManager{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@SuppressWarnings("unused")
-	private boolean checkPrivilege(Session session) throws AppException{
+	private boolean checkPrivilege(UsersSession session) throws AppException{
 		return true;
 	}
 	@Override

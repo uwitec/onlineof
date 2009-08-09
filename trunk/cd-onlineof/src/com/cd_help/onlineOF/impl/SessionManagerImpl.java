@@ -20,7 +20,7 @@ import com.cd_help.onlineOF.api.PrivilegeDataDao;
 import com.cd_help.onlineOF.api.SessionManager;
 import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.data.PrivilegeData;
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
@@ -61,10 +61,10 @@ public class SessionManagerImpl implements SessionManager{
 	 * @see com.cd_help.onlineOF.api.SessionManager#createSession(com.cd_help.onlineOF.web.vo.UsersVo)
 	 */
 	@Transactional
-	public Session createSession(UsersVo usersVo) throws AppException {
+	public UsersSession createSession(UsersVo usersVo) throws AppException {
 		@SuppressWarnings("unused")
 		UsersVo vo = usersVo;
-		Session session = null;
+		UsersSession session = null;
 		try{
 			List<PrivilegeData> privileges = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByRoleId", "roleId", usersVo.getRoleId());
 			List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
@@ -79,7 +79,7 @@ public class SessionManagerImpl implements SessionManager{
 				}
 				privilegeVos.add(pv);
 			}
-		    session = new Session(usersVo,privilegeVos);
+		    session = new UsersSession(usersVo,privilegeVos);
 		}catch(Exception e){
 			log.error(e);
 			throw new AppException("","系统错误!");
