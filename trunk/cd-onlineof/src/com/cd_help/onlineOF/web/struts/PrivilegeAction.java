@@ -40,9 +40,7 @@ public class PrivilegeAction extends BaseAction{
 	private PrivilegeVo privilegeVo;
 	private String privilegeId;
 	private String action;
-	// 所有模块权限
-	private List<PrivilegeVo> allModelPrivileges;
-	
+
 	/**
 	 * 权限管理
 	 * @return
@@ -63,9 +61,8 @@ public class PrivilegeAction extends BaseAction{
 		try{
 			action="addPrivilege.do";
 			privilegeVo = null;
-			allModelPrivileges = this.getOnlineOF().getPrivilegeManager().loadAllModelPrivilege(this.getSession());
 		}catch(Exception e){
-			log.error(null,e);
+			log.error(e);
 			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
@@ -83,7 +80,7 @@ public class PrivilegeAction extends BaseAction{
 			privilegeVo = this.getOnlineOF().getPrivilegeManager().addPrivilege(this.getSession(), privilegeVo);
 			this.getRequest().setAttribute("addSuccess", "addSuccess");
 		}catch(Exception e){
-			log.error(null,e);
+			log.error(e);
 			throw new AppException("",e.getMessage());
 		}
 		return SUCCESS;
@@ -100,9 +97,8 @@ public class PrivilegeAction extends BaseAction{
 		try{
 		    privilegeVo = this.getOnlineOF().getPrivilegeManager().getPrivilegeById(this.getSession(), privilegeId);
 		    action="updatePrivilege.do";
-		    allModelPrivileges = this.getOnlineOF().getPrivilegeManager().loadAllModelPrivilege(this.getSession());
 		}catch(Exception e){
-			log.error(null,e);
+			log.error(e);
 			throw new AppException("",e.getMessage(),e);
 		}
 		return SUCCESS;
@@ -119,8 +115,8 @@ public class PrivilegeAction extends BaseAction{
 		    this.getOnlineOF().getPrivilegeManager().updatePrivilege(this.getSession(), privilegeVo);
 		    this.getRequest().setAttribute("updateSuccess", "updateSuccess");
 		}catch(Exception e){
-			log.error(null,e);
-			throw new AppException("",e.getMessage());
+			log.error(e);
+			throw new AppException("",e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
@@ -205,13 +201,4 @@ public class PrivilegeAction extends BaseAction{
 	public void setAction(String action) {
 		this.action = action;
 	}
-
-	public List<PrivilegeVo> getAllModelPrivileges() {
-		return allModelPrivileges;
-	}
-
-	public void setAllModelPrivileges(List<PrivilegeVo> allModelPrivileges) {
-		this.allModelPrivileges = allModelPrivileges;
-	}
-	
 }
