@@ -10,9 +10,10 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.PrivilegeDataDao;
@@ -38,8 +39,14 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
  */
 @SuppressWarnings("unchecked")
 @Service("sessionManager")
-@Transactional(propagation=Propagation.REQUIRED)
+@Transactional
 public class SessionManagerImpl implements SessionManager{
+	
+	/**
+	 * comment here
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	protected static Log log = LogFactory.getLog(SessionManagerImpl.class);
 	
 	@SuppressWarnings("unused")
 	@Autowired
@@ -53,6 +60,7 @@ public class SessionManagerImpl implements SessionManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.SessionManager#createSession(com.cd_help.onlineOF.web.vo.UsersVo)
 	 */
+	@Transactional
 	public Session createSession(UsersVo usersVo) throws AppException {
 		@SuppressWarnings("unused")
 		UsersVo vo = usersVo;
@@ -63,13 +71,17 @@ public class SessionManagerImpl implements SessionManager{
 			for(PrivilegeData p : privileges){
 				PrivilegeVo pv = new PrivilegeVo();
 				BeanUtilsHelp.copyProperties(pv,p);
-				if(null != p.getParent()){
+				if(p.getParent() != null){
 					pv.setParentId(p.getParent().getPrivilegeId());
+					pv.setParentName(p.getParent().getPrivilegeName());
+				}else{
+					pv.setParentId("-1");
 				}
 				privilegeVos.add(pv);
 			}
 		    session = new Session(usersVo,privilegeVos);
 		}catch(Exception e){
+			log.error(e);
 			throw new AppException("","系统错误!");
 		}
 		return session;

@@ -5,20 +5,13 @@
  */
 package com.cd_help.onlineOF.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.UsersDataDao;
-import com.cd_help.onlineOF.data.RestaurantData;
-import com.cd_help.onlineOF.data.RoleData;
 import com.cd_help.onlineOF.data.UsersData;
-import com.cd_help.onlineOF.utils.BeanUtilsHelp;
-import com.cd_help.onlineOF.utils.PageBean;
-import com.cd_help.onlineOF.utils.StringUtil;
-import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
  * <b><code></code></b>
@@ -36,80 +29,20 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 @SuppressWarnings("unchecked")
 public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 
-	public void delete(String id) throws Exception {
-	    this.delete(this.get(UsersData.class, id));
-	}
-
-	public UsersVo get(String id) throws Exception {
-		UsersData usersData = (UsersData)this.get(UsersData.class, id);
-		UsersVo usersVo = new UsersVo();
-		BeanUtilsHelp.copyProperties(usersVo, usersData);
-		return usersVo;
-	}
-
-	public List<UsersVo> loadAll() throws Exception {
-		List<UsersData> usersList = this.findByNamedQuery("loadAllUsers");
-		List<UsersVo> usersVos = new ArrayList<UsersVo>();
-		for(UsersData users : usersList){
-			UsersVo usersVo = new UsersVo();
-			BeanUtilsHelp.copyProperties(usersVo, users);
-			if(null != users.getRestaurantId() && users.getRestaurantId().length()>0){
-				usersVo.setRestaurantName(((RestaurantData)this.get(RestaurantData.class, users.getRestaurantId())).getName());
-			}
-			usersVos.add(usersVo);
-		}
-		return usersVos;
-	}
-
-	public void update(UsersVo usersVo) throws Exception {
-         UsersData usersData = new UsersData();
-         BeanUtilsHelp.copyProperties(usersData, usersVo);
-         this.update(usersData);
-	}
-
-	public UsersVo login(String usersname, String password)
+	public UsersData login(String usersname, String password)
 			throws Exception {
 		List<UsersData> usersList = this.findByNamedQueryAndNamedParam("getUsersByName", "usersname",usersname);
 		if(usersList.size() > 0){
-			UsersData users = usersList.get(0);
-			if(users.getPassword().equals(StringUtil.encodePassword(password, "MD5"))){
-				UsersVo usersVo = new UsersVo();
-				BeanUtilsHelp.copyProperties(usersVo,users);
-				usersVo.setRoleName(((RoleData)this.get(RoleData.class, users.getRoleId())).getRoleName());
-				return usersVo;
+			UsersData usersdata = usersList.get(0);
+			if(usersdata.getPassword().equals(password)){
+			//if(usersdata.getPassword().equals(StringUtil.encodePassword(password, "MD5"))){
+			   return usersdata;
 			}else{
-				return null;	
+				return null;
 			}
 		}else{
            return null;			
 		}
-	}
-
-	public PageBean searchByPageBean(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws Exception {
-		pageBean = this.searchByPage(hqlName, paramName,
-				condition, pageBean);
-		
-		List<UsersVo> list = new ArrayList<UsersVo>();
-		UsersData users = null;
-		UsersVo uservo = null;
-		for (Object obj : pageBean.getArray()) {
-			users = (UsersData) obj;
-			uservo = new UsersVo();
-			BeanUtilsHelp.copyProperties(uservo, users);
-			if (null != users.getRestaurantId()
-					&& users.getRestaurantId().length() > 0) {
-				uservo.setRestaurantName(((RestaurantData)this.get(RestaurantData.class,
-						users.getRestaurantId())).getName());
-			}
-			if (null != users.getRoleId()
-					&& users.getRoleId().length() > 0) {
-				uservo.setRoleName(((RoleData)this.get(RoleData.class, users.getRoleId())).getRoleName());
-			}
-			list.add(uservo);
-		}
-		pageBean.setArray(list);
-		return pageBean;
 	}
 
 	/**
@@ -122,16 +55,5 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 		}else{
 			return true;
 		}
-	}
-
-	/**
-	 * @see com.cd_help.onlineOF.api.UsersDataDao#addUsers(com.cd_help.onlineOF.web.vo.UsersVo, java.util.List)
-	 */
-	public void addUsers(UsersVo usersVo)
-			throws Exception {
-          UsersData usersData = new UsersData();
-          BeanUtilsHelp.copyProperties(usersData, usersVo);
-          usersData.setUsersId(StringUtil.getUUID());
-          this.save(usersData);
 	}
 }
