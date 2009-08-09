@@ -31,11 +31,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		         <table style="width:100%;">
 		            <tr>
 		              <td style="text-align:right;"><strong style="font-size:13pt;">错误编号:</strong></td>
-		              <td style="text-align:left;"><font style="font-size:13pt;color:red;">${errorCode}</font></td>
+		              <td style="text-align:left;"><font style="font-size:13pt;color:red;">${exception.error_code}</font></td>
 		            </tr>
 		            <tr>
 		              <td style="text-align:right;"><strong style="font-size:13pt;">错误信息:</strong></td>
-		              <td style="text-align:left;"><font style="font-size:13pt;color:red;">${errorMsg}</font></td>
+		              <td style="text-align:left;"><font style="font-size:13pt;color:red;">${exception.message}</font></td>
 		            </tr>
 		         </table>
 		      </div>
