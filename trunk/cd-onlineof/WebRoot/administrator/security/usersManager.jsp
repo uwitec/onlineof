@@ -18,7 +18,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         function search(){
             var usersname = document.getElementById("usersname").value;
             var restaurantId = document.getElementById("restaurantId").value;
-            window.location.href="searchUsersByPage.do?usersname="+usersname+"&restaurantId="+restaurantId;
+            document.getElementById("usersForm").action="searchUsersByPage.do?usersname="+usersname+"&restaurantId="+restaurantId;
+            document.getElementById("usersForm").submit();
         }
         // 添加新用户
         function forwardAddNewUsers(){
@@ -104,7 +105,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       </s:else> 
          </tbody>
       </table>
-      </form>
       <!-- 分页start -->
 	<div class="pagination" style="font-size:10pt;">
 		<page:pages1 pagesize="${pb.pagesize}"
@@ -113,5 +113,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			url="searchUsersByPage.do" />
 	</div>
 	<!-- 分页end -->
+      </form>
   </body>
 </html>
