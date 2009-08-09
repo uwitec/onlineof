@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.data.UsersData;
+import com.cd_help.onlineOF.utils.StringUtil;
 
 /**
  * <b><code></code></b>
@@ -34,11 +35,11 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 		List<UsersData> usersList = this.findByNamedQueryAndNamedParam("getUsersByName", "usersname",usersname);
 		if(usersList.size() > 0){
 			UsersData usersdata = usersList.get(0);
-			if(usersdata.getPassword().equals(password)){
-			//if(usersdata.getPassword().equals(StringUtil.encodePassword(password, "MD5"))){
+			System.out.println("---------"+StringUtil.encodePassword(password, "MD5"));
+			if(usersdata.getPassword().equals(StringUtil.encodePassword(password, "MD5"))){
 			   return usersdata;
 			}else{
-				return null;
+			   return null;
 			}
 		}else{
            return null;			
