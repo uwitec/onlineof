@@ -55,9 +55,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<td style="text-align: left;">
 							<span style="white-space: nowrap;"> 
 								<select name="food_kindVo.restaurantId">
+									<s:if test="restaurantVos == null">
+										<option value="">暂无数据</option>
+									</s:if>
+									<s:else>
+									<option value="">--请选择--</option>
 									<s:iterator value="restaurantVos">
 										<option value="${restaurantId}" <s:if test="food_kindVo.restaurantId == restaurantId">selected</s:if> >${name}</option>
 									</s:iterator>
+									</s:else>
 								</select>
 							</span>
 						</td>

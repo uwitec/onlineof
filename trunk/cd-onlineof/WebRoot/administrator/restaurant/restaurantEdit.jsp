@@ -95,12 +95,18 @@
 							<span style="white-space: nowrap;"> <select
 									name="restaurantVo.resKindId">
 									<!-- 绑定Action里面的数组 -->
+									<s:if test="restaurant_kindVos!=null">
+									<option value="">--请选择--</option>
 									<s:iterator value="restaurant_kindVos">
 										<option value="${restaurant_kind_Id}"
 											<s:if test="restaurantVo.resKindId == restaurant_kind_Id">selected</s:if>>
 											${name}
 										</option>
 									</s:iterator>
+									</s:if>
+									<s:else>
+										<option value="">暂无数据</option>										
+									</s:else>
 								</select> </span>
 						</td>
 						<td align="right">
