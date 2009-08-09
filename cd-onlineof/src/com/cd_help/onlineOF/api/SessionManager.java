@@ -29,6 +29,6 @@ public interface SessionManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public UsersSession createSession(UsersVo usersVo) throws Exception;
+	public UsersSession createSession(UsersVo usersVo) throws AppException;
 
 }

@@ -27,7 +27,7 @@ public interface RestaurantManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public List<RestaurantVo> loadAll() throws Exception;
+	public List<RestaurantVo> loadAll() throws AppException;
 
 	/**
 	 * 保存
@@ -37,7 +37,7 @@ public interface RestaurantManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public RestaurantVo save(RestaurantVo restaurantVo) throws Exception;
+	public RestaurantVo save(RestaurantVo restaurantVo) throws AppException;
 
 	/**
 	 * 删除
@@ -46,7 +46,7 @@ public interface RestaurantManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void delete(String id) throws Exception;
+	public void delete(String id) throws AppException;
 
 	/**
 	 * 餐厅的分页信息 comment here
@@ -60,7 +60,7 @@ public interface RestaurantManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public PageBean seachRestaurantPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws Exception;
+			Object[] condition, PageBean pageBean) throws AppException;
 
 	/**
 	 * 根据餐厅ID查询餐厅对象
@@ -70,7 +70,7 @@ public interface RestaurantManager {
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public RestaurantVo getRestaurantById(String restaurantId) throws Exception;
+	public RestaurantVo getRestaurantById(String restaurantId) throws AppException;
 	
 	/**
 	 * 修改餐厅信息
@@ -79,6 +79,6 @@ public interface RestaurantManager {
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void updateRestaurant(RestaurantVo restaurantVo)throws Exception;
+	public void updateRestaurant(RestaurantVo restaurantVo)throws AppException;
 	
 }

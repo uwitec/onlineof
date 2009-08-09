@@ -189,7 +189,7 @@ public class RoleManagerImpl implements RoleManager{
 	 * @see com.cd_help.onlineOF.api.RoleManager#saveRolePrivileges(com.cd_help.onlineOF.data.UsersSession, java.lang.String, java.lang.String)
 	 */
 	public void saveRolePrivileges(UsersSession session, String[] privileges,
-			String roleId) throws Exception {
+			String roleId) throws AppException {
 		try{
 			if(this.checkPrivilege(session)){
 			    roleDataDao.saveRolePrivileges(privileges, roleId);

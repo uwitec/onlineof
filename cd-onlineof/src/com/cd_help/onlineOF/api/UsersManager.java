@@ -8,6 +8,7 @@ package com.cd_help.onlineOF.api;
 import java.util.List;
 
 import com.cd_help.onlineOF.data.UsersSession;
+import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
@@ -26,24 +27,24 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
 @SuppressWarnings("unchecked")
 public interface UsersManager {
 
-	public UsersVo getUsersById(UsersSession session, String id) throws Exception;
+	public UsersVo getUsersById(UsersSession session, String id) throws AppException;
 	
-	public boolean checkUsersByName(String usersname) throws Exception;
+	public boolean checkUsersByName(String usersname) throws AppException;
 	
-	public void addUsers(UsersSession session,UsersVo usersVo) throws Exception;
+	public void addUsers(UsersSession session,UsersVo usersVo) throws AppException;
 	
-    public List<UsersVo> loadAll(UsersSession session) throws Exception;
+    public List<UsersVo> loadAll(UsersSession session) throws AppException;
 
 	public PageBean searchByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, UsersSession session)
 			throws Exception;
 	
-	public void updateUsers(UsersSession session, UsersVo usersVo) throws Exception;
+	public void updateUsers(UsersSession session, UsersVo usersVo) throws AppException;
 
-	public void deleteUsers(UsersSession session, String id) throws Exception;
+	public void deleteUsers(UsersSession session, String id) throws AppException;
 
-	public UsersVo login(String username, String password) throws Exception;
+	public UsersVo login(String username, String password) throws AppException;
 	
-	public boolean resetPassword(String usersId, String oldPassword, String newPassword) throws Exception; 
+	public boolean resetPassword(String usersId, String oldPassword, String newPassword) throws AppException; 
 	
 }

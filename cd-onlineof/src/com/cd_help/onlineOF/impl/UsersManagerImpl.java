@@ -191,8 +191,12 @@ public class UsersManagerImpl implements UsersManager {
 	/**
 	 * @see com.cd_help.onlineOF.api.UsersManager#checkUsersByName(java.lang.String)
 	 */
-	public boolean checkUsersByName(String usersname) throws Exception {
-	    return usersDataDao.checkUsersByName(usersname);
+	public boolean checkUsersByName(String usersname) throws AppException {
+		try{
+			return usersDataDao.checkUsersByName(usersname);
+		}catch(Exception e){
+			throw new AppException("00000000",e.getMessage(),e);
+		}
 	}
 
 	/**
@@ -264,7 +268,7 @@ public class UsersManagerImpl implements UsersManager {
 	 * @see com.cd_help.onlineOF.api.UsersManager#resetPassword(java.lang.String, java.lang.String, java.lang.String)
 	 */
 	public boolean resetPassword(String usersId, String oldPassword, String newPassword)
-			throws Exception {
+			throws AppException {
 		try{
 			UsersData usersData = (UsersData)usersDataDao.get(UsersData.class, usersId);
 			if(usersData.getPassword().equals(StringUtil.encodePassword(oldPassword, "MD5"))){
@@ -272,10 +276,10 @@ public class UsersManagerImpl implements UsersManager {
 				usersDataDao.update(usersData);
 				return true;
 			}else{
-				throw new AppException("","输入密码错误!");
+				throw new AppException("000000","输入密码错误!");
 			}
 		}catch(Exception e){
-			throw new AppException("","重置密码出错!",e);
+			throw new AppException("000000","重置密码出错!",e);
 		}
 	}
 }
