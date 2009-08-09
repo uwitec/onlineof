@@ -48,10 +48,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              alert("删除成功!");
           }
        }
+       // 保存
+       function clickSave(){
+         if(${not empty action}){
+            document.getElementById("editPrivilegeForm").action="${action}";
+         }
+         document.getElementById("editPrivilegeForm").submit();
+       }
     </script>
   </head>
   <body style="margin-top:1px;margin-bottom:0px;margin-left:0px;margin-right:0px;" onload="afterOperator()">
-    <form id="editPrivilegeForm" name="editPrivilegeForm" action="<s:property value='action'/>" method="post">
+    <form id="editPrivilegeForm" name="editPrivilegeForm" action="addPrivilege.do" method="post">
      <input type="button" value="添加新权限" onclick="forwarAddNewPrivilege()"/>
      <input type="button" value="删除此权限" onclick="deleteThisPrivilege('<s:property value='privilegeVo.privilegeId'/>')"/>
      <table style="width:100%;">
@@ -71,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <td style="text-align:right;">类型</td>
              <td style="text-align:left;">
                <select id="privilegeVo.kind" name="privilegeVo.kind">
-                 <s:if test="privilegeVo.kind == Model">
+                 <s:if test="privilegeVo.kind == 'Model'">
                    <option value="Model" selected>模块</option>
                    <option value="Operator">操作</option>
                  </s:if>
@@ -86,8 +93,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <td style="text-align:right;">上级</td>
              <td style="text-align:left;">
                 <input type="hidden" id="privilegeVo.parentId" name="privilegeVo.parentId" value="<s:property value='privilegeVo.parentId'/>"/>
-                <input type="text" id="privilegeVo.parentName" name="privilegeVo.parentName" value="<s:property value='privilegeVo.parentName'/>"  size="30"/>
-                <input type="button" value="选择上级权限" onclick="selectParentPrivilege()"/>
+                <input type="text" id="privilegeVo.parentName" name="privilegeVo.parentName" value="<s:property value='privilegeVo.parentName'/>"  size="30" disabled="disabled"/>
+                <s:if test="action == 'updatePrivilege.do'">
+	                <s:if test="privilegeVo.parentId != null">
+	                  <input type="button" value="选择上级权限" onclick="selectParentPrivilege()"/>
+	                </s:if>
+                </s:if>
+                <s:else>
+                   <input type="button" value="选择上级权限" onclick="selectParentPrivilege()"/>
+                </s:else>
              </td>
            </tr>
            <tr>
@@ -103,8 +117,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              </td>
            </tr>
            <tr>
+             <td style="text-align:right;">是否有子模块</td>
+             <td style="text-align:left;">
+                <select id="privilegeVo.hasModelChild" name="privilegeVo.hasModelChild">
+	                 <s:if test="privilegeVo.hasModelChild == 1">
+	                   <option value="1" selected>是</option>
+	                   <option value="0">否</option>
+	                 </s:if>
+	                 <s:else>
+	                   <option value="1">是</option>
+	                   <option value="0" selected>否</option>
+	                 </s:else>
+	            </select>
+             </td>
+           </tr>
+           <tr>
               <td align="center" colspan="2">
-                <input type="submit" value="保存">
+                <input type="button" value="保存" onclick="clickSave()">
                 <input type="reset" value="重置">
                 <input type="button" value="返回" onclick="back()">
               </td>
