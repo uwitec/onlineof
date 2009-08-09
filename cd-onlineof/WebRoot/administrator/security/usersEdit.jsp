@@ -24,7 +24,7 @@
 	           <td style="text-align:left;">
 	              <span style="white-space: nowrap;">
 	                <!-- 隐藏域用户ID -->
-	                <input type="hidden" value="<s:property value='usersVo.usersId'/>"/>
+	                <input type="hidden" id="usersVo.usersId" name="usersVo.usersId" value="<s:property value='usersVo.usersId'/>"/>
 	           		<input type="text" id="usersVo.usersname" name="usersVo.usersname" size=30 value="<s:property value='usersVo.usersname'/>"/>
 	           	  </span>
 	           </td>
@@ -46,7 +46,7 @@
 	         </tr>
 	         <tr>
 	           <td style="text-align:right;"><span style="white-space: nowrap;">出生日期</span></td>
-	           <td style="text-align:left;"><input type="text" id="usersVo.birthdayStr" name="usersVo.birthdayStr" size=30 onFocus="new WdatePicker(this,'%Y%M%D',false)" class="Wdate" value="<s:property value='usersVo.birthday'/>"></td>
+	           <td style="text-align:left;"><input type="text" id="usersVo.birthdayStr" name="usersVo.birthdayStr" size=30 onFocus="new WdatePicker(this,'%Y-%M-%D',false)" class="Wdate" value="<s:property value='usersVo.birthday'/>"></td>
 	         </tr>
 	         <tr>
 	           <td style="text-align:right;"><span style="white-space: nowrap;">所属餐厅</span></td>
