@@ -22,7 +22,7 @@ import com.cd_help.onlineOF.api.RestaurantDataDao;
 import com.cd_help.onlineOF.data.FoodData;
 import com.cd_help.onlineOF.data.Food_kindData;
 import com.cd_help.onlineOF.data.RestaurantData;
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
@@ -71,7 +71,7 @@ public class Food_kindManagerImpl implements Food_kindManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@SuppressWarnings("unused")
-	private boolean checkPrivilege(Session session) throws AppException {
+	private boolean checkPrivilege(UsersSession session) throws AppException {
 		return true;
 	}
 
@@ -138,11 +138,11 @@ public class Food_kindManagerImpl implements Food_kindManager {
 	 * @see com.cd_help.onlineOF.api.Food_kindManager#seachFoodKindPage(java.lang.String,
 	 *      java.lang.String[], java.lang.Object[],
 	 *      com.cd_help.onlineOF.utils.PageBean,
-	 *      com.cd_help.onlineOF.data.Session)
+	 *      com.cd_help.onlineOF.data.UsersSession)
 	 */
 	@SuppressWarnings("unchecked")
 	public PageBean seachFoodKindPage(String hqlName, String[] params,
-			Object[] objs, PageBean pageBean, Session session) throws Exception {
+			Object[] objs, PageBean pageBean, UsersSession session) throws Exception {
 		// TODO Auto-generated method stub
 		PageBean page = null;
 		try {

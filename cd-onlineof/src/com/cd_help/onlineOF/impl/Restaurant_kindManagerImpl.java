@@ -19,7 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cd_help.onlineOF.api.Restaurant_kindDataDao;
 import com.cd_help.onlineOF.api.Restaurant_kindManager;
 import com.cd_help.onlineOF.data.Restaurant_kindData;
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
@@ -47,7 +47,7 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@SuppressWarnings("unused")
-	private boolean checkPrivilege(Session session) throws Exception {
+	private boolean checkPrivilege(UsersSession session) throws Exception {
 		return true;
 	}
 
@@ -193,10 +193,10 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 * 
 	 * @see com.cd_help.onlineOF.api.Restaurant_kindManager#getRestaurantKindPage(java.lang.String,
 	 *      java.lang.String[], java.lang.Object[],
-	 *      com.cd_help.onlineOF.data.Session)
+	 *      com.cd_help.onlineOF.data.UsersSession)
 	 */
 	public PageBean seachRestaurantKindPage(String qhl, String[] params,
-			Object[] objs, PageBean pageBean, Session session)
+			Object[] objs, PageBean pageBean, UsersSession session)
 			throws AppException {
 		PageBean page = null;
 		try {

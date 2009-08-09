@@ -20,7 +20,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cd_help.onlineOF.api.PrivilegeDataDao;
 import com.cd_help.onlineOF.api.PrivilegeManager;
 import com.cd_help.onlineOF.data.PrivilegeData;
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.RoleData;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.StringUtil;
@@ -57,9 +58,9 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadAll(com.cd_help.onlineOF.data.Session)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadAll(com.cd_help.onlineOF.data.UsersSession)
 	 */
-	public List<PrivilegeVo> loadAllPrivilege(Session session)
+	public List<PrivilegeVo> loadAllPrivilege(UsersSession session)
 			throws AppException {
 		if (this.checkPrivilege(session)) {
 			try {
@@ -89,9 +90,9 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadChildModelPrivilegeByParent(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadChildModelPrivilegeByParent(com.cd_help.onlineOF.data.UsersSession, java.lang.String)
 	 */
-	public List<PrivilegeVo> loadChildModelPrivilegeByParent(Session session,
+	public List<PrivilegeVo> loadChildModelPrivilegeByParent(UsersSession session,
 			String parentId) throws AppException {
 		if (this.checkPrivilege(session)) {
 			try {
@@ -120,9 +121,9 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadTopModelPrivilege(com.cd_help.onlineOF.data.Session)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadTopModelPrivilege(com.cd_help.onlineOF.data.UsersSession)
 	 */
-	public List<PrivilegeVo> loadTopModelPrivilege(Session session)
+	public List<PrivilegeVo> loadTopModelPrivilege(UsersSession session)
 			throws AppException {
 		if (this.checkPrivilege(session)) {
 			try {
@@ -155,14 +156,14 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private boolean checkPrivilege(Session session) throws AppException {
+	private boolean checkPrivilege(UsersSession session) throws AppException {
 		return true;
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getPrivilegeByRoleId(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getPrivilegeByRoleId(com.cd_help.onlineOF.data.UsersSession, java.lang.String)
 	 */
-	public List<PrivilegeVo> getPrivilegeByRoleId(Session session, String roleId)
+	public List<PrivilegeVo> getPrivilegeByRoleId(UsersSession session, String roleId)
 			throws AppException {
 		if (this.checkPrivilege(session)) {
 			try {
@@ -192,9 +193,9 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getPrivilegeById(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getPrivilegeById(com.cd_help.onlineOF.data.UsersSession, java.lang.String)
 	 */
-	public PrivilegeVo getPrivilegeById(Session session, String privilegeId)
+	public PrivilegeVo getPrivilegeById(UsersSession session, String privilegeId)
 			throws Exception {
 		if (this.checkPrivilege(session)) {
 			try {
@@ -221,9 +222,9 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#addPrivilege(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.web.vo.PrivilegeVo)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#addPrivilege(com.cd_help.onlineOF.data.UsersSession, com.cd_help.onlineOF.web.vo.PrivilegeVo)
 	 */
-	public PrivilegeVo addPrivilege(Session session, PrivilegeVo privilegeVo)
+	public PrivilegeVo addPrivilege(UsersSession session, PrivilegeVo privilegeVo)
 			throws Exception {
 		if (this.checkPrivilege(session)) {
 			try {
@@ -259,13 +260,18 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#deletePrivilege(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#deletePrivilege(com.cd_help.onlineOF.data.UsersSession, java.lang.String)
 	 */
-	public void deletePrivilege(Session session, String id) throws Exception {
+	public void deletePrivilege(UsersSession session, String id) throws Exception {
 		if (this.checkPrivilege(session)) {
 			try {
 				PrivilegeData privilegeData = (PrivilegeData) privilegeDataDao
 						.get(PrivilegeData.class, id);
+				List<RoleData> roleDatas = privilegeData.getRoleList();
+				for(RoleData rd : roleDatas){
+					rd.getPrivilegeList().remove(privilegeData);
+				}
+				
 				String parentId = privilegeData.getParent().getPrivilegeId();
 				privilegeDataDao.delete(privilegeData);
 				PrivilegeData parentData = (PrivilegeData) privilegeDataDao
@@ -295,9 +301,9 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#updatePrivilege(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.web.vo.PrivilegeVo)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#updatePrivilege(com.cd_help.onlineOF.data.UsersSession, com.cd_help.onlineOF.web.vo.PrivilegeVo)
 	 */
-	public void updatePrivilege(Session session, PrivilegeVo privilegeVo)
+	public void updatePrivilege(UsersSession session, PrivilegeVo privilegeVo)
 			throws Exception {
 		if (this.checkPrivilege(session)) {
 			try {
@@ -331,9 +337,9 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadAllModelPrivilege(com.cd_help.onlineOF.data.Session)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadAllModelPrivilege(com.cd_help.onlineOF.data.UsersSession)
 	 */
-	public List<PrivilegeVo> loadAllModelPrivilege(Session session)
+	public List<PrivilegeVo> loadAllModelPrivilege(UsersSession session)
 			throws Exception {
 		if (this.checkPrivilege(session)) {
 			try {
@@ -364,7 +370,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	/**
 	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getChildPrivilege(java.lang.String)
 	 */
-	public List<PrivilegeVo> getChildPrivilege(Session session, String parentId)
+	public List<PrivilegeVo> getChildPrivilege(UsersSession session, String parentId)
 			throws Exception {
 		if (this.checkPrivilege(session)) {
 			try {
@@ -392,7 +398,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	/**
 	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getTopPrivilege()
 	 */
-	public List<PrivilegeVo> getTopPrivilege(Session session) throws Exception {
+	public List<PrivilegeVo> getTopPrivilege(UsersSession session) throws Exception {
 		if (this.checkPrivilege(session)) {
 			try {
 				List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();

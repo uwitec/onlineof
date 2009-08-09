@@ -18,7 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cd_help.onlineOF.api.RoleDataDao;
 import com.cd_help.onlineOF.api.RoleManager;
 import com.cd_help.onlineOF.data.RoleData;
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersData;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
@@ -46,10 +47,10 @@ public class RoleManagerImpl implements RoleManager{
 	private RoleDataDao roleDataDao;
 	
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#loadAll(com.cd_help.onlineOF.data.Session)
+	 * @see com.cd_help.onlineOF.api.RoleManager#loadAll(com.cd_help.onlineOF.data.UsersSession)
 	 */
 	@SuppressWarnings("unchecked")
-	public List<RoleVo> loadAllRole(Session session) throws AppException {
+	public List<RoleVo> loadAllRole(UsersSession session) throws AppException {
 		List<RoleData> roleDatas = null;
 		List<RoleVo> roleVos = null;
 		if(this.checkPrivilege(session)){
@@ -73,7 +74,7 @@ public class RoleManagerImpl implements RoleManager{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private boolean checkPrivilege(Session session) throws AppException {
+	private boolean checkPrivilege(UsersSession session) throws AppException {
 		return true;
 	}
 
@@ -82,11 +83,11 @@ public class RoleManagerImpl implements RoleManager{
 	}
 	
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#searchByPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.data.Session)
+	 * @see com.cd_help.onlineOF.api.RoleManager#searchByPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.data.UsersSession)
 	 */
 	@SuppressWarnings("unchecked")
 	public PageBean searchRolesByPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean, Session session)
+			Object[] condition, PageBean pageBean, UsersSession session)
 			throws AppException {
 		if(this.checkPrivilege(session)){
 			PageBean page = null;
@@ -108,12 +109,18 @@ public class RoleManagerImpl implements RoleManager{
 	}
 	
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#delete(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.RoleManager#delete(com.cd_help.onlineOF.data.UsersSession, java.lang.String)
 	 */
-	public void deleteRole(Session session, String id) throws AppException {
+	@SuppressWarnings("unchecked")
+	public void deleteRole(UsersSession session, String id) throws AppException {
 		if(this.checkPrivilege(session)){
 			try{
 				RoleData roleData = (RoleData)roleDataDao.get(RoleData.class, id);
+				List<UsersData> usersDatas = roleDataDao.findByNamedQueryAndNamedParam("getUsersByRoleId", "roleId", id);
+				for(UsersData usersData : usersDatas){
+					usersData.setRoleId(null);
+					roleDataDao.update(usersData);
+				}
 				roleDataDao.delete(roleData);
 			}catch(Exception e){
 				e.printStackTrace();
@@ -125,9 +132,9 @@ public class RoleManagerImpl implements RoleManager{
 	}
 	
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#addRole(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.web.vo.RoleVo)
+	 * @see com.cd_help.onlineOF.api.RoleManager#addRole(com.cd_help.onlineOF.data.UsersSession, com.cd_help.onlineOF.web.vo.RoleVo)
 	 */
-	public void addRole(Session session, RoleVo roleVo) throws AppException{
+	public void addRole(UsersSession session, RoleVo roleVo) throws AppException{
 		if(this.checkPrivilege(session)){
             RoleData roleData = null;
 			try{
@@ -143,9 +150,9 @@ public class RoleManagerImpl implements RoleManager{
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#getRoleById(com.cd_help.onlineOF.data.Session, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.RoleManager#getRoleById(com.cd_help.onlineOF.data.UsersSession, java.lang.String)
 	 */
-	public RoleVo getRoleById(Session session, String roleId)
+	public RoleVo getRoleById(UsersSession session, String roleId)
 			throws AppException {
 		RoleData roleData = null;
 		RoleVo roleVo = null;
@@ -163,9 +170,9 @@ public class RoleManagerImpl implements RoleManager{
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#updateRole(com.cd_help.onlineOF.data.Session, com.cd_help.onlineOF.web.vo.RoleVo)
+	 * @see com.cd_help.onlineOF.api.RoleManager#updateRole(com.cd_help.onlineOF.data.UsersSession, com.cd_help.onlineOF.web.vo.RoleVo)
 	 */
-	public void updateRole(Session session, RoleVo roleVo) throws AppException {
+	public void updateRole(UsersSession session, RoleVo roleVo) throws AppException {
 		if(this.checkPrivilege(session)){
 			try{
 				RoleData roleData = this.convertVoToData(roleVo);
@@ -179,9 +186,9 @@ public class RoleManagerImpl implements RoleManager{
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#saveRolePrivileges(com.cd_help.onlineOF.data.Session, java.lang.String, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.RoleManager#saveRolePrivileges(com.cd_help.onlineOF.data.UsersSession, java.lang.String, java.lang.String)
 	 */
-	public void saveRolePrivileges(Session session, String[] privileges,
+	public void saveRolePrivileges(UsersSession session, String[] privileges,
 			String roleId) throws Exception {
 		try{
 			if(this.checkPrivilege(session)){
