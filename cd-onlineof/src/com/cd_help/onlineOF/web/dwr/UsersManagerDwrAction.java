@@ -50,14 +50,35 @@ public class UsersManagerDwrAction extends BaseAction{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public UsersVo login(String username, String password) throws AppException{
-		UsersVo usersVo = null; 
+	public boolean login(String username, String password) throws AppException{
 		try {
-		    usersVo = this.getOnlineOF().getUsersManager().login(username, password);
+			UsersVo usersVo = this.getOnlineOF().getUsersManager().login(username, password);
+			if(null != usersVo){
+				return true;
+			}else{
+				return false;
+			}
 		} catch (Exception e) {
 			 log.error(e);
 			 throw new AppException("",e.getMessage(),e);
 		}
-		return usersVo;
+	}
+	
+	/**
+	 * 重置密码
+	 * @param usersId
+	 * @param oldPassword
+	 * @param newPassword
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public boolean resetPassword(String usersId,String oldPassword, String newPassword) throws AppException{
+	    try{
+	    	return this.getOnlineOF().getUsersManager().resetPassword(usersId, oldPassword, newPassword);
+	    }catch(Exception e){
+	    	log.error(e);
+			throw new AppException("",e.getMessage(),e);
+	    }
 	}
 }

@@ -43,6 +43,15 @@
 	     </action>
 	</package>
 	
+	<package name="exception" extends="common-default">
+		<global-results> 
+         	 <result name="appexception">/administrator/error.jsp</result> 
+     	</global-results> 	
+		<global-exception-mappings>
+		   <exception-mapping result="appexception" exception="java.lang.Exception"></exception-mapping>
+		</global-exception-mappings>		
+	</package>
+	
 	<!-- 导入 -->
 	<include file="struts-security.xml"/>
 	<include file="struts-orders.xml"></include>

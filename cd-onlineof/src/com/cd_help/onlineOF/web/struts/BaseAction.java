@@ -16,7 +16,7 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cd_help.onlineOF.api.OnlineOF;
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.web.WebConstants;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -44,7 +44,9 @@ public class BaseAction extends ActionSupport{
 	 * 用户Session
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private Session session;
+	private UsersSession session;
+	
+	private String errorMsg;
 	
 	/**
 	 * 在线订餐系统
@@ -73,12 +75,12 @@ public class BaseAction extends ActionSupport{
 	/**
 	 * 返回用户Session
 	 */
-	public Session getSession(){
-		session = (Session)getRequest().getSession().getAttribute(WebConstants.ATTRIBUTE_SESSION);
+	public UsersSession getSession(){
+		session = (UsersSession)getRequest().getSession().getAttribute(WebConstants.ATTRIBUTE_SESSION);
 		return session;
 	}
 	
-	public void setSession(Session session) {
+	public void setSession(UsersSession session) {
 		this.session = session;
 	}
 
@@ -89,5 +91,13 @@ public class BaseAction extends ActionSupport{
 	 */
 	public ServletContext getServletContext() {
 		return ServletActionContext.getServletContext();
+	}
+
+	public String getErrorMsg() {
+		return errorMsg;
+	}
+
+	public void setErrorMsg(String errorMsg) {
+		this.errorMsg = errorMsg;
 	}
 }
