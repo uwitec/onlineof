@@ -22,6 +22,7 @@ import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.utils.StringUtil;
 import com.cd_help.onlineOF.web.vo.RoleVo;
 
 /**
@@ -130,6 +131,7 @@ public class RoleManagerImpl implements RoleManager{
 		if(this.checkPrivilege(session)){
             RoleData roleData = null;
 			try{
+				roleVo.setRoleId(StringUtil.getUUID());
 				roleData = this.convertVoToData(roleVo);
 				roleDataDao.save(roleData);
 			}catch(Exception e){

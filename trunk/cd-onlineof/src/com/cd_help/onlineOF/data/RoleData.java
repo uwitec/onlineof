@@ -60,7 +60,7 @@ public class RoleData implements Serializable{
 	 * 描述
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "description", nullable = true, length = 20)
+	@Column(name = "description", nullable = true, length = 100)
 	private String description;
 	
 	/**
