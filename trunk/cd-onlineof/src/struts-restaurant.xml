@@ -67,6 +67,16 @@
 				/administrator/restaurant/restaurantList.jsp
 			</result>
 		</action>
+		<!-- 餐厅预览 -->
+		<action name="viewRestaurantAction" class="restaurantAction"
+			method="restaurantPreView">
+			<result name="success">
+				/administrator/restaurant/restaurantPreview.jsp
+			</result>
+		</action>
+		<!-- 餐厅图片响应 -->
+		<action name="imgRestaurantAction" class="restaurantAction" method="restaurantImage">
+		</action>
 		<!-- 餐厅菜类别处理 -->
 		<action name="getFoodKindPageAction" class="food_KindAction"
 			method="getFoodKindPage">
@@ -105,17 +115,20 @@
 				/administrator/restaurant/foodList.jsp
 			</result>
 		</action>
-		<action name="editFoodAction" class="foodAction" method="editFood">
+		<action name="editFoodAction" class="foodAction"
+			method="editFood">
 			<result name="success">
 				/administrator/restaurant/foodEdit.jsp
 			</result>
 		</action>
-		<action name="savaFoodAction" class="foodAction" method="savaFood">
+		<action name="savaFoodAction" class="foodAction"
+			method="savaFood">
 			<result name="success">
 				/administrator/restaurant/foodList.jsp
 			</result>
 		</action>
-		<action name="deleteFoodAction" class="foodAction" method="deleteFood">
+		<action name="deleteFoodAction" class="foodAction"
+			method="deleteFood">
 			<result name="success">
 				/administrator/restaurant/foodList.jsp
 			</result>
