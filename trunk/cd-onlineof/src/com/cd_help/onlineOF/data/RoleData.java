@@ -37,7 +37,7 @@ import javax.persistence.Table;
 @Table(name="role")
 @NamedQueries( {
 	/*获取所有角色*/
-	@NamedQuery(name="loadAllRole",query="select new com.cd_help.onlineOF.web.vo.RoleVo(r.roleId,r.roleName,r.description) from RoleData r"),
+	@NamedQuery(name="loadAllRole",query="select DISTINCT r from RoleData r"),
 	/**/
 	@NamedQuery(name="searchRolesByPage",query="from RoleData r where r.roleName like :roleName"),
 })

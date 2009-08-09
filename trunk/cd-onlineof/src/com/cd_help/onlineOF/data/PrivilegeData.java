@@ -108,7 +108,7 @@ public class PrivilegeData implements Serializable{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@ManyToOne(cascade = CascadeType.REFRESH, optional = true, fetch = FetchType.LAZY)
-	@JoinColumn(name = "parentId",referencedColumnName="privilegeId")
+	@JoinColumn(name = "parentId")
 	private PrivilegeData parent;
 	
 	/**
@@ -149,14 +149,6 @@ public class PrivilegeData implements Serializable{
 		this.roleList = roleList;
 	}
 
-	public PrivilegeData getParent() {
-		return parent;
-	}
-
-	public void setParent(PrivilegeData parent) {
-		this.parent = parent;
-	}
-
 	public List<PrivilegeData> getChildPrivileges() {
 		return childPrivileges;
 	}
@@ -183,6 +175,14 @@ public class PrivilegeData implements Serializable{
 
 	public String getUrl() {
 		return url;
+	}
+    
+	public PrivilegeData getParent() {
+		return parent;
+	}
+
+	public void setParent(PrivilegeData parent) {
+		this.parent = parent;
 	}
 
 	public void setUrl(String url) {
