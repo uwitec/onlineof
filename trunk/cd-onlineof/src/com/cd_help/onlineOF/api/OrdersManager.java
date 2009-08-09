@@ -5,7 +5,7 @@
  */
 package com.cd_help.onlineOF.api;
 
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.OrdersVo;
@@ -56,7 +56,7 @@ public interface OrdersManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public PageBean searchTodayOrdersByPage(OrdersVo ordersVo, PageBean pageBean,
-			Session seesion) throws AppException;
+			UsersSession seesion) throws AppException;
 
 	/**
 	 * 歷史訂單
@@ -71,5 +71,5 @@ public interface OrdersManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public PageBean searchHistoryOrdersByPage(OrdersVo ordersVo, String endTime,
-			PageBean pageBean, Session seesion) throws AppException;
+			PageBean pageBean, UsersSession seesion) throws AppException;
 }

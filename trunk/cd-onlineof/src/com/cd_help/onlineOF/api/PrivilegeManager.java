@@ -7,7 +7,7 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 
 /**
@@ -23,26 +23,26 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
  */
 public interface PrivilegeManager {
 	
-	public List<PrivilegeVo> loadAllPrivilege(Session session) throws Exception;
+	public List<PrivilegeVo> loadAllPrivilege(UsersSession session) throws Exception;
 
-	public List<PrivilegeVo> loadAllModelPrivilege(Session session) throws Exception;
+	public List<PrivilegeVo> loadAllModelPrivilege(UsersSession session) throws Exception;
 	
-	public void updatePrivilege(Session session,PrivilegeVo privilegeVo) throws Exception;
+	public void updatePrivilege(UsersSession session,PrivilegeVo privilegeVo) throws Exception;
 	
-	public void deletePrivilege(Session session,String id) throws Exception;
+	public void deletePrivilege(UsersSession session,String id) throws Exception;
 	
-	public List<PrivilegeVo> loadTopModelPrivilege(Session session) throws Exception;
+	public List<PrivilegeVo> loadTopModelPrivilege(UsersSession session) throws Exception;
     
-	public List<PrivilegeVo> loadChildModelPrivilegeByParent(Session session,String parentId) throws Exception;
+	public List<PrivilegeVo> loadChildModelPrivilegeByParent(UsersSession session,String parentId) throws Exception;
 	
-	public List<PrivilegeVo> getPrivilegeByRoleId(Session session, String roleId) throws Exception;
+	public List<PrivilegeVo> getPrivilegeByRoleId(UsersSession session, String roleId) throws Exception;
 	
-	public PrivilegeVo getPrivilegeById(Session session, String privilegeId) throws Exception;
+	public PrivilegeVo getPrivilegeById(UsersSession session, String privilegeId) throws Exception;
 	
-	public PrivilegeVo addPrivilege(Session session, PrivilegeVo privilegeVo) throws Exception;
+	public PrivilegeVo addPrivilege(UsersSession session, PrivilegeVo privilegeVo) throws Exception;
 	
-    public List<PrivilegeVo> getTopPrivilege(Session session) throws Exception;
+    public List<PrivilegeVo> getTopPrivilege(UsersSession session) throws Exception;
 	
-	public List<PrivilegeVo> getChildPrivilege(Session session, String parentId) throws Exception;
+	public List<PrivilegeVo> getChildPrivilege(UsersSession session, String parentId) throws Exception;
 
 }

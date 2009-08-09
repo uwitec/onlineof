@@ -7,7 +7,7 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RoleVo;
@@ -32,7 +32,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public List<RoleVo> loadAllRole(Session session) throws Exception;
+	public List<RoleVo> loadAllRole(UsersSession session) throws Exception;
 	
 	/**
 	 * 根据条件分页查询
@@ -46,7 +46,7 @@ public interface RoleManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public PageBean searchRolesByPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean, Session session)
+			Object[] condition, PageBean pageBean, UsersSession session)
 			throws Exception;
 	
 	/**
@@ -56,7 +56,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void deleteRole(Session session, String id) throws Exception;
+	public void deleteRole(UsersSession session, String id) throws Exception;
 	
 	/**
 	 * 新建角色
@@ -65,7 +65,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void addRole(Session session,RoleVo roleVo) throws Exception;
+	public void addRole(UsersSession session,RoleVo roleVo) throws Exception;
 	
 	/**
 	 * 根据ID获取角色信息
@@ -75,7 +75,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public RoleVo getRoleById(Session session, String roleId) throws Exception;
+	public RoleVo getRoleById(UsersSession session, String roleId) throws Exception;
 	
 	/**
 	 * 修改角色
@@ -84,7 +84,7 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void updateRole(Session session, RoleVo roleVo) throws Exception;
+	public void updateRole(UsersSession session, RoleVo roleVo) throws Exception;
 	
 	/**
 	 * 保存角色权限
@@ -94,6 +94,6 @@ public interface RoleManager {
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void saveRolePrivileges(Session session, String[] privileges, String roleId) throws Exception;
+	public void saveRolePrivileges(UsersSession session, String[] privileges, String roleId) throws Exception;
 
 }

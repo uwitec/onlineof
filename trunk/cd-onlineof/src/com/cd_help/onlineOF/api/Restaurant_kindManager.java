@@ -7,7 +7,7 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
 
@@ -34,6 +34,6 @@ public interface Restaurant_kindManager {
 	/*返回集合餐厅分类信息的集合*/
 	public List<Restaurant_kindVo> getRestaurantKindAll()throws Exception;
 	/*查询分页信息*/
-	public PageBean seachRestaurantKindPage(String qhl,String[] params,Object[] objs,PageBean pageBean,Session session)throws Exception;
+	public PageBean seachRestaurantKindPage(String qhl,String[] params,Object[] objs,PageBean pageBean,UsersSession session)throws Exception;
 	
 }

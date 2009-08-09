@@ -5,7 +5,7 @@
  */
 package com.cd_help.onlineOF.api;
 
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
@@ -29,6 +29,6 @@ public interface SessionManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public Session createSession(UsersVo usersVo) throws Exception;
+	public UsersSession createSession(UsersVo usersVo) throws Exception;
 
 }

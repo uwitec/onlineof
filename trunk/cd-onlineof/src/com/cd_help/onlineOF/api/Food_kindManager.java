@@ -7,7 +7,7 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.Food_kindVo;
 
@@ -35,7 +35,7 @@ public interface Food_kindManager {
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public PageBean seachFoodKindPage(String qhl,String[] params,Object[] objs,PageBean pageBean,Session session)throws Exception;
+	public PageBean seachFoodKindPage(String qhl,String[] params,Object[] objs,PageBean pageBean,UsersSession session)throws Exception;
 	/**
 	 * 添加菜分类信息
 	 * comment here
