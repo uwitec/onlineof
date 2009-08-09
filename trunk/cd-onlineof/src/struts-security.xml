@@ -29,12 +29,18 @@
 		     <result name="success">
                 /administrator/security/usersEdit.jsp
              </result>
+             <result name="error">/administrator/error.jsp</result> 
 	     </action>
 	     <action name="updateUsers" class="usersAction" method="updateUsers">
 		     <result name="success">
                 /administrator/security/usersManager.jsp
              </result>
 	     </action>
+	     <action name="forwardPasswordSet" class="usersAction" method="forwardPasswordSet">
+		     <result name="success">
+                /administrator/security/passwordSet.jsp
+             </result>
+	    </action>
 	</package>
 	
 	<!-- 角色管理 -->

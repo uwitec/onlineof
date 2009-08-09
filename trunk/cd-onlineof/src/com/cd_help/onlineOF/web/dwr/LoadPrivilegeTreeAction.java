@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.directwebremoting.WebContextFactory;
 import org.springframework.stereotype.Service;
 
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.WebConstants;
 import com.cd_help.onlineOF.web.struts.BaseAction;
@@ -44,7 +44,7 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 		List<PrivilegeVo> topPrivileges = null;
 		try{
 			HttpSession httpSession = WebContextFactory.get().getSession();
-			Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			UsersSession session = (UsersSession)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			topPrivileges = this.getOnlineOF().getPrivilegeManager().getTopPrivilege(session);
 		}catch(Exception e){
 			log.error(e);
@@ -65,7 +65,7 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 		List<PrivilegeVo> childPrivileges = null;
 		try{
 			HttpSession httpSession = WebContextFactory.get().getSession();
-			Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			UsersSession session = (UsersSession)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			childPrivileges = this.getOnlineOF().getPrivilegeManager().getChildPrivilege(session,parentId);
 		}catch(Exception e){
 			log.error(e);
@@ -86,7 +86,7 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 		 try{
 			 // Session session = this.getSession();
 			 HttpSession httpSession = WebContextFactory.get().getSession();
-			 Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			 UsersSession session = (UsersSession)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			 System.out.println("用户ID: "+session.getUsersVo().getUsersId());
 			 privileges = this.getOnlineOF().getPrivilegeManager().loadTopModelPrivilege(session);
 			 for(PrivilegeVo pv : privileges){
@@ -110,7 +110,7 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 		 List<PrivilegeVo> childPrivileges = null;
 		 try{
 			 HttpSession httpSession = WebContextFactory.get().getSession();
-			 Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			 UsersSession session = (UsersSession)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			 childPrivileges = this.getOnlineOF().getPrivilegeManager().loadChildModelPrivilegeByParent(session, parentId);
 		 }catch(Exception e){
 			 log.error(e);
@@ -129,7 +129,7 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 		List<PrivilegeVo> privilegeVos = null;
 		try{
 			 HttpSession httpSession = WebContextFactory.get().getSession();
-			 Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			 UsersSession session = (UsersSession)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			 privilegeVos = this.getOnlineOF().getPrivilegeManager().loadAllPrivilege(session);
 		}catch(Exception e){
 			 log.error(null,e);
@@ -150,7 +150,7 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 		List<PrivilegeVo> privilegeVos = null;
 		try{
 			HttpSession httpSession = WebContextFactory.get().getSession();
-			Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			UsersSession session = (UsersSession)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			privilegeVos = this.getOnlineOF().getPrivilegeManager().getPrivilegeByRoleId(session, roleId);
 		}catch(Exception e){
 			 log.error(null,e);
@@ -168,7 +168,7 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 	public List<PrivilegeVo> loadAllModelPrivilege() throws AppException {
 		try{
 			HttpSession httpSession = WebContextFactory.get().getSession();
-			Session session = (Session)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+			UsersSession session = (UsersSession)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			return this.getOnlineOF().getPrivilegeManager().loadAllModelPrivilege(session);
 		}catch(Exception e){
 			throw new AppException("",e.getMessage(),e);

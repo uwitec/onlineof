@@ -7,7 +7,7 @@ package com.cd_help.onlineOF.web.struts;
 
 import org.springframework.stereotype.Service;
 
-import com.cd_help.onlineOF.data.Session;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.WebConstants;
 
@@ -45,7 +45,7 @@ public class LoginAction extends BaseAction{
 	 */
 	public String doLogin() throws AppException{
 		log.debug("--->> begin doLogin");
-		Session session = null;
+		UsersSession session = null;
 		try {
 			session = this.getOnlineOF().login(usersname, password);
 			System.out.println("用户名： "+usersname + "密码: "+password);

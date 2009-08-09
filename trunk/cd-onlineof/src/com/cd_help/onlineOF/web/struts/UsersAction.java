@@ -98,8 +98,8 @@ public class UsersAction extends BaseAction {
 			// 加载所有角色
 			roleVos = this.getOnlineOF().getRoleManager().loadAllRole(this.getSession());
 		}catch(Exception e){
-			log.error(null,e);
-			throw new AppException("",e.getMessage());
+			log.error(e);
+			throw new AppException("",e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
@@ -117,8 +117,8 @@ public class UsersAction extends BaseAction {
 			this.getOnlineOF().getUsersManager().addUsers(this.getSession(), usersVo);
 			this.searchUsersByPage();
 		}catch(Exception e){
-			log.error(null,e);
-			throw new AppException("",e.getMessage());
+			log.error(e);
+			throw new AppException("",e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
@@ -142,8 +142,8 @@ public class UsersAction extends BaseAction {
 			}
 			this.searchUsersByPage();
 		} catch (Exception e) {
-			log.error(null,e);
-			throw new AppException("",e.getMessage());
+			log.error(e);
+			throw new AppException("",e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
@@ -160,7 +160,7 @@ public class UsersAction extends BaseAction {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public String editUsres() throws AppException {
-		log.debug("--->> begin getUsersById : "+this.getRequest().getParameter("usersId"));
+		log.debug("--->> begin editUsres");
 		try {
 			usersVo = this.getOnlineOF().getUsersManager().getUsersById(
 					this.getSession(), usersId);
@@ -168,11 +168,13 @@ public class UsersAction extends BaseAction {
 			loadAllRestaurant(); 
 			// 加载所有角色
 			roleVos = this.getOnlineOF().getRoleManager().loadAllRole(this.getSession());
+			return SUCCESS;
 		} catch (Exception e) {
-			log.error(null,e);
-			throw new AppException("",e.getMessage());
+			this.setErrorMsg(e.getMessage());
+			return ERROR;
+			// log.error(e);
+			// throw new AppException("",e.getMessage(),e);
 		}
-		return SUCCESS;
 	}
 	
 	/**
@@ -188,8 +190,17 @@ public class UsersAction extends BaseAction {
 			this.searchUsersByPage();
 		}catch(Exception e){
 			log.error(e);
-			throw new AppException("",e.getMessage());
+			throw new AppException("",e.getMessage(),e);
 		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 跳转到重置密码页面 
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String forwardPasswordSet(){
 		return SUCCESS;
 	}
 	
