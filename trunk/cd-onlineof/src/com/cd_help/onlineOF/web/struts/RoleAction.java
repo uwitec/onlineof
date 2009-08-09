@@ -116,7 +116,7 @@ public class RoleAction extends BaseAction{
 			this.searchRolesByPage();
 		}catch(Exception e){
 			log.error(null,e);
-			throw new AppException("",e.getMessage());
+			throw new AppException("",e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
@@ -134,7 +134,7 @@ public class RoleAction extends BaseAction{
 		    action="updateRole.do";
 		}catch(Exception e){
 			log.error(null,e);
-			throw new AppException("",e.getMessage());
+			throw new AppException("",e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
