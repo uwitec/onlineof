@@ -5,17 +5,22 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.RoleDataDao;
 import com.cd_help.onlineOF.api.RoleManager;
+import com.cd_help.onlineOF.data.RoleData;
 import com.cd_help.onlineOF.data.Session;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RoleVo;
 
@@ -31,6 +36,7 @@ import com.cd_help.onlineOF.web.vo.RoleVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("roleManager")
+@Transactional
 public class RoleManagerImpl implements RoleManager{
 
 	@SuppressWarnings("unused")
@@ -41,11 +47,14 @@ public class RoleManagerImpl implements RoleManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.RoleManager#loadAll(com.cd_help.onlineOF.data.Session)
 	 */
+	@SuppressWarnings("unchecked")
 	public List<RoleVo> loadAllRole(Session session) throws AppException {
+		List<RoleData> roleDatas = null;
 		List<RoleVo> roleVos = null;
 		if(this.checkPrivilege(session)){
 			try{
-				roleVos = roleDataDao.loadAllRole();
+				roleDatas = roleDataDao.findByNamedQuery("loadAllRole");
+				roleVos = convertDataToVoList(roleDatas);
 			}catch(Exception e){
 				throw new AppException("000000","系统出错!请联系系统管理员.");
 			}
@@ -74,13 +83,20 @@ public class RoleManagerImpl implements RoleManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.RoleManager#searchByPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.data.Session)
 	 */
+	@SuppressWarnings("unchecked")
 	public PageBean searchRolesByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, Session session)
 			throws AppException {
 		if(this.checkPrivilege(session)){
 			PageBean page = null;
+			List<RoleVo> roleVos = new ArrayList<RoleVo>();
 			try{
-				page = roleDataDao.searchRolesByPageBean(hqlName, paramName, condition, pageBean);
+				page = roleDataDao.searchByPage(hqlName, paramName, condition, pageBean);
+				for(Iterator i = page.getArray().iterator(); i.hasNext();){
+					RoleData roleData = (RoleData)i.next();
+					roleVos.add(this.convertDataToVo(roleData));
+				}
+				page.setArray(roleVos);
 			}catch(Exception e){
 				throw new AppException("0000014", "加载角色信息出错!");
 			}
@@ -96,7 +112,8 @@ public class RoleManagerImpl implements RoleManager{
 	public void deleteRole(Session session, String id) throws AppException {
 		if(this.checkPrivilege(session)){
 			try{
-				roleDataDao.deleteRole(id);
+				RoleData roleData = (RoleData)roleDataDao.get(RoleData.class, id);
+				roleDataDao.delete(roleData);
 			}catch(Exception e){
 				e.printStackTrace();
 				throw new AppException("0000014", "删除失败!");
@@ -111,8 +128,10 @@ public class RoleManagerImpl implements RoleManager{
 	 */
 	public void addRole(Session session, RoleVo roleVo) throws AppException{
 		if(this.checkPrivilege(session)){
+            RoleData roleData = null;
 			try{
-				roleDataDao.addRole(roleVo);
+				roleData = this.convertVoToData(roleVo);
+				roleDataDao.save(roleData);
 			}catch(Exception e){
 				throw new AppException("0000014", "新建失败!");
 			}
@@ -126,10 +145,12 @@ public class RoleManagerImpl implements RoleManager{
 	 */
 	public RoleVo getRoleById(Session session, String roleId)
 			throws AppException {
+		RoleData roleData = null;
 		RoleVo roleVo = null;
 		if(this.checkPrivilege(session)){
 			try{
-				roleVo = roleDataDao.getRoleById(roleId);
+				roleData = (RoleData)roleDataDao.get(RoleData.class, roleId);
+				roleVo = this.convertDataToVo(roleData);
 			}catch(Exception e){
 				throw new AppException("0000014", "系统错误!");
 			}
@@ -145,7 +166,8 @@ public class RoleManagerImpl implements RoleManager{
 	public void updateRole(Session session, RoleVo roleVo) throws AppException {
 		if(this.checkPrivilege(session)){
 			try{
-				roleDataDao.updateRole(roleVo);
+				RoleData roleData = this.convertVoToData(roleVo);
+				roleDataDao.update(roleData);
 			}catch(Exception e){
 				throw new AppException("0000014", "修改失败!",e);
 			}
@@ -168,5 +190,50 @@ public class RoleManagerImpl implements RoleManager{
 		}catch(Exception e){
 			throw new AppException("",e.getMessage(),e);
 		}
+	}
+	
+	/**
+	 * 将data集合转成DTO(VO)集合
+	 * @param roleDatas
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@SuppressWarnings("unchecked")
+	private List<RoleVo> convertDataToVoList(List<RoleData> roleDatas) throws Exception{
+		List<RoleVo> roleVos = new ArrayList<RoleVo>();
+		for(Iterator i = roleDatas.iterator(); i.hasNext();){
+			RoleData rd = (RoleData)i.next();
+			RoleVo rv = new RoleVo();
+			BeanUtilsHelp.copyProperties(rv, rd);
+			roleVos.add(rv);
+		}
+		return roleVos;
+	}
+	
+	/**
+	 * 将data转成DTO(VO)
+	 * @param roleData
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private RoleVo convertDataToVo(RoleData roleData) throws Exception {
+		RoleVo roleVo = new RoleVo();
+		BeanUtilsHelp.copyProperties(roleVo, roleData);
+		return roleVo;
+	}
+	
+	/**
+	 * 将DTO(VO)转成data
+	 * @param roleData
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private RoleData convertVoToData(RoleVo roleVo) throws Exception {
+		RoleData roleData = new RoleData();
+		BeanUtilsHelp.copyProperties(roleData, roleVo);
+		return roleData;
 	}
 }
