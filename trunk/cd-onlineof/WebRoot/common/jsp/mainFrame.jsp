@@ -4,126 +4,13 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <base href="<%=basePath%>">
     
 	<link href="images/css.css" rel="stylesheet" type="text/css" />
-	<style type="text/css">
-	<!--
-	body {
-		margin-top: 0px;
-		margin-bottom: 0px;
-	}
-	.xmenu td{font-size:12px;font-family:verdana,arial;color:#F09029;border:1px solid #ffffff;background:#ffffff;filter:blendtrans(duration=0.5);cursor:hand;text-align:center;}
-	.bj1 {
-		background-image: url(images/cdsy_47.jpg);
-		background-repeat: no-repeat;
-		background-position: center center;
-		font-size: 14px;
-		font-weight: bold;
-		color: #FFFFFF;
-	}
-	.bj2 {
-		background-image: url(images/cdsy_49.jpg);
-		background-repeat: no-repeat;
-		background-position: center center;
-		font-size: 14px;
-		font-weight: bold;
-		color: #000000;
-	}
-	.xw1 {
-		font-size: 14px;
-		font-weight: bold;
-		color: #ff0000;
-	}
-	.xw2 {
-		font-size: 14px;
-		font-weight: normal;
-		color: #000000;
-	}
-	.dg1 {
-		font-size: 14px;
-		font-weight: bold;
-		color: #d19406;
-	}
-	.dg2 {
-		font-size: 12px;
-		font-weight: normal;
-		color: #000000;
-	}
-	body {
-		background-image: url(images/beijing.jpg);
-	}
-	.bj3 {
-		border-top-width: 1px;
-		border-right-width: 1px;
-		border-top-style: solid;
-		border-right-style: solid;
-		border-bottom-style: none;
-		border-left-style: none;
-		border-top-color: #EACEA7;
-		border-right-color: #EACEA7;
-		font-size: 14px;
-		font-weight: bold;
-		color: #FD6001;
-		background-image: url(images/cdsy_163.jpg);
-		background-repeat: repeat-x;
-	}
-	.bj4 {
-		font-size: 14px;
-		font-weight: bold;
-		color: #000000;
-		border-top-width: 1px;
-		border-right-width: 1px;
-		border-bottom-width: 1px;
-		border-top-style: solid;
-		border-right-style: solid;
-		border-bottom-style: solid;
-		border-left-style: none;
-		border-top-color: #EACEA7;
-		border-right-color: #EACEA7;
-		border-bottom-color: #EACEA7;
-		background-image: url(images/cdsy_165.jpg);
-		background-repeat: repeat-x;
-	}
-	.bj5 {
-		font-size: 12px;
-		font-weight: bold;
-		color: #FF5C01;
-		background-image: url(images/cdsy_220.jpg);
-		background-repeat: repeat-x;
-		border-top-width: 1px;
-		border-right-width: 1px;
-		border-left-width: 1px;
-		border-top-style: solid;
-		border-right-style: solid;
-		border-bottom-style: none;
-		border-left-style: solid;
-		border-top-color: #EACEA7;
-		border-right-color: #EACEA7;
-		border-left-color: #EACEA7;
-	}
-	.bj6 {
-		font-size: 12px;
-		color: #000000;
-		border-bottom-width: 1px;
-		border-bottom-style: solid;
-		border-bottom-color: #EACEA7;
-	}
-	.zt1 {
-		font-size: 12px;
-		color: #0063C8;
-		border-bottom:1px solid #D4D6D5;
-	}
-	.zt2 {
-		font-size: 12px;
-		color: #000000;
-		border-bottom:1px solid #D4D6D5;
-	}
-	-->
-	</style>
+
 	<script>
 	function correctPNG() 
 	   {
@@ -416,5 +303,141 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <td></td>
 	  </tr>
 	</table>
+	
+<div style="border:1px solid #A9A9A9;width:1140;height:60px;">
+	<div class="rollBox">
+     <div class="LeftBotton" onmousedown="ISL_GoUp()" onmouseup="ISL_StopUp()" onmouseout="ISL_StopUp()"></div>
+     <div class="Cont" id="ISL_Cont">
+      <div class="ScrCont">
+       <div id="List1">
+       
+        <!-- 图片列表 begin -->
+         <div class="pic">
+          <a href="/" target="_blank"><img src="images/wall_s1.jpg" width="109" height="87" /></a>
+         </div>       
+        
+		 <div class="pic">
+          <a href="/" target="_blank"><img src="images/wall_s2.jpg" width="109" height="87"  /></a>
+         </div>
+         <div class="pic">
+          <a href="/" target="_blank"><img src="images/wall_s3.jpg" width="109" height="87" /></a>
+         </div>
+         <div class="pic">
+          <a href="/" target="_blank"><img src="images/wall_s4.jpg" width="109" height="87" /></a>
+         </div>
+         <div class="pic">
+          <a href="/" target="_blank"><img src="images/wall_s5.jpg" width="109" height="87" /></a>
+         </div>
+		 <div class="pic">
+          <a href="/" target="_blank"><img src="images/wall_s6.jpg" width="109" height="87" /></a>
+         </div>      
+         <div class="pic">
+          <a href="/" target="_blank"><img src="images/wall_s7.jpg" width="109" height="87" /></a>
+         </div>
+        <!-- 图片列表 end -->
+        
+       </div>
+       <div id="List2"></div>
+      </div>
+     </div>
+     <div class="RightBotton" onmousedown="ISL_GoDown()" onmouseup="ISL_StopDown()" onmouseout="ISL_StopDown()"></div>
+     <div style="border:1px solid #A9A9A9;">
+     	<embed height="100" src="images/banner.swf"/>
+     	<img src="images/dzw-02.jpg" />
+     </div>
+    </div>
+	
+
+	<script language="javascript" type="text/javascript">
+	<!--//--><![CDATA[//><!--
+	//图片滚动列表 mengjia 070816
+	var Speed = 1; //速度(毫秒)
+	var Space = 5; //每次移动(px)
+	var PageWidth = 528; //翻页宽度
+	var fill = 0; //整体移位
+	var MoveLock = false;
+	var MoveTimeObj;
+	var Comp = 0;
+	var AutoPlayObj = null;
+	GetObj("List2").innerHTML = GetObj("List1").innerHTML;
+	GetObj('ISL_Cont').scrollLeft = fill;
+	GetObj("ISL_Cont").onmouseover = function(){clearInterval(AutoPlayObj);}
+	GetObj("ISL_Cont").onmouseout = function(){AutoPlay();}
+	AutoPlay();
+	function GetObj(objName){if(document.getElementById){return eval('document.getElementById("'+objName+'")')}else{return eval('document.all.'+objName)}}
+	function AutoPlay(){ //自动滚动
+	 clearInterval(AutoPlayObj);
+	 AutoPlayObj = setInterval('ISL_GoDown();ISL_StopDown();',3000); //间隔时间
+	}
+	function ISL_GoUp(){ //上翻开始
+	 if(MoveLock) return;
+	 clearInterval(AutoPlayObj);
+	 MoveLock = true;
+	 MoveTimeObj = setInterval('ISL_ScrUp();',Speed);
+	}
+	function ISL_StopUp(){ //上翻停止
+	 clearInterval(MoveTimeObj);
+	 if(GetObj('ISL_Cont').scrollLeft % PageWidth - fill != 0){
+	  Comp = fill - (GetObj('ISL_Cont').scrollLeft % PageWidth);
+	  CompScr();
+	 }else{
+	  MoveLock = false;
+	 }
+	 AutoPlay();
+	}
+	function ISL_ScrUp(){ //上翻动作
+	 if(GetObj('ISL_Cont').scrollLeft <= 0){GetObj('ISL_Cont').scrollLeft = GetObj('ISL_Cont').scrollLeft + GetObj('List1').offsetWidth}
+	 GetObj('ISL_Cont').scrollLeft -= Space ;
+	}
+	function ISL_GoDown(){ //下翻
+	 clearInterval(MoveTimeObj);
+	 if(MoveLock) return;
+	 clearInterval(AutoPlayObj);
+	 MoveLock = true;
+	 ISL_ScrDown();
+	 MoveTimeObj = setInterval('ISL_ScrDown()',Speed);
+	}
+	function ISL_StopDown(){ //下翻停止
+	 clearInterval(MoveTimeObj);
+	 if(GetObj('ISL_Cont').scrollLeft % PageWidth - fill != 0 ){
+	  Comp = PageWidth - GetObj('ISL_Cont').scrollLeft % PageWidth + fill;
+	  CompScr();
+	 }else{
+	  MoveLock = false;
+	 }
+	 AutoPlay();
+	}
+	function ISL_ScrDown(){ //下翻动作
+	 if(GetObj('ISL_Cont').scrollLeft >= GetObj('List1').scrollWidth){GetObj('ISL_Cont').scrollLeft = GetObj('ISL_Cont').scrollLeft - GetObj('List1').scrollWidth;}
+	 GetObj('ISL_Cont').scrollLeft += Space ;
+	}
+	function CompScr(){
+	 var num;
+	 if(Comp == 0){MoveLock = false;return;}
+	 if(Comp < 0){ //上翻
+	  if(Comp < -Space){
+	   Comp += Space;
+	   num = Space;
+	  }else{
+	   num = -Comp;
+	   Comp = 0;
+	  }
+	  GetObj('ISL_Cont').scrollLeft -= num;
+	  setTimeout('CompScr()',Speed);
+	 }else{ //下翻
+	  if(Comp > Space){
+	   Comp -= Space;
+	   num = Space;
+	  }else{
+	   num = Comp;
+	   Comp = 0;
+	  }
+	  GetObj('ISL_Cont').scrollLeft += num;
+	  setTimeout('CompScr()',Speed);
+	 }
+	}
+	//--><!]]>
+	</script>
+</div>
   </body>
 </html>
