@@ -274,3 +274,126 @@ a:hover { color:#ff0000;text-decoration:none;}
 .all {
 	border: 1px solid EACEA7;
 }
+
+.rollBox{border:1px solid #A9A9A9;width:1140px;overflow:hidden;padding:12px 0 5px 6px;}
+.rollBox .LeftBotton{height:52px;width:19px;background:url(http://i3.sinaimg.cn/edu/deco/2007/0924/career/job_mj_069.gif) no-repeat 11px 0;overflow:hidden;float:left;display:inline;margin:25px 0 0 0;cursor:pointer;}
+.rollBox .RightBotton{height:52px;width:20px;background:url(http://i3.sinaimg.cn/edu/deco/2007/0924/career/job_mj_069.gif) no-repeat -8px 0;overflow:hidden;float:left;display:inline;margin:25px 0 0 0;cursor:pointer;}
+.rollBox .Cont{width:800px;overflow:hidden;float:left;}
+.rollBox .ScrCont{width:10000000px;}
+.rollBox .Cont .pic{width:132px;float:left;text-align:center;}
+.rollBox .Cont .pic img{padding:4px;background:#fff;border:1px solid #ccc;display:block;margin:0 auto;}
+.rollBox .Cont .pic p{line-height:26px;color:#505050;}
+.rollBox .Cont a:link,.rollBox .Cont a:visited{color:#626466;text-decoration:none;}
+.rollBox .Cont a:hover{color:#f00;text-decoration:underline;}
+.rollBox #List1,.rollBox #List2{float:left;}
+
+body {
+	margin-top: 0px;
+	margin-bottom: 0px;
+}
+.xmenu td{font-size:12px;font-family:verdana,arial;color:#F09029;border:1px solid #ffffff;background:#ffffff;filter:blendtrans(duration=0.5);cursor:hand;text-align:center;}
+.bj1 {
+	background-image: url(images/cdsy_47.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	font-size: 14px;
+	font-weight: bold;
+	color: #FFFFFF;
+}
+.bj2 {
+	background-image: url(images/cdsy_49.jpg);
+	background-repeat: no-repeat;
+	background-position: center center;
+	font-size: 14px;
+	font-weight: bold;
+	color: #000000;
+}
+.xw1 {
+	font-size: 14px;
+	font-weight: bold;
+	color: #ff0000;
+}
+.xw2 {
+	font-size: 14px;
+	font-weight: normal;
+	color: #000000;
+}
+.dg1 {
+	font-size: 14px;
+	font-weight: bold;
+	color: #d19406;
+}
+.dg2 {
+	font-size: 12px;
+	font-weight: normal;
+	color: #000000;
+}
+body {
+	background-image: url(images/beijing.jpg);
+}
+.bj3 {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: none;
+	border-top-color: #EACEA7;
+	border-right-color: #EACEA7;
+	font-size: 14px;
+	font-weight: bold;
+	color: #FD6001;
+	background-image: url(images/cdsy_163.jpg);
+	background-repeat: repeat-x;
+}
+.bj4 {
+	font-size: 14px;
+	font-weight: bold;
+	color: #000000;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #EACEA7;
+	border-right-color: #EACEA7;
+	border-bottom-color: #EACEA7;
+	background-image: url(images/cdsy_165.jpg);
+	background-repeat: repeat-x;
+}
+.bj5 {
+	font-size: 12px;
+	font-weight: bold;
+	color: #FF5C01;
+	background-image: url(images/cdsy_220.jpg);
+	background-repeat: repeat-x;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: solid;
+	border-top-color: #EACEA7;
+	border-right-color: #EACEA7;
+	border-left-color: #EACEA7;
+}
+.bj6 {
+	font-size: 12px;
+	color: #000000;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #EACEA7;
+}
+.zt1 {
+	font-size: 12px;
+	color: #0063C8;
+	border-bottom:1px solid #D4D6D5;
+}
+.zt2 {
+	font-size: 12px;
+	color: #000000;
+	border-bottom:1px solid #D4D6D5;
+}
