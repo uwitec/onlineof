@@ -4,7 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
     <!-- 系统用户管理 -->
-	<package name="usersManager" extends="exception-default">
+	<package name="usersManager" extends="interceptor-default">
 		<action name="searchUsersByPage" class="usersAction" method="searchUsersByPage">
 		     <result name="success">
                 /administrator/security/usersManager.jsp
@@ -44,7 +44,7 @@
 	</package>
 	
 	<!-- 角色管理 -->
-	<package name="roleManager" extends="common-default">
+	<package name="roleManager" extends="interceptor-default">
 		<action name="searchRolesByPage" class="roleAction" method="searchRolesByPage">
 		     <result name="success">
                 /administrator/security/roleManager.jsp
@@ -88,7 +88,7 @@
 	</package>
 	
 	<!-- 权限管理 -->
-	<package name="privilegeManager" extends="common-default">
+	<package name="privilegeManager" extends="interceptor-default">
 		<action name="privilegeManager" class="privilegeAction" method="doPrivilegeManager">
 		     <result name="success">
                 /administrator/security/privilege.jsp
