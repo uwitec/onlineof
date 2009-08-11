@@ -143,10 +143,15 @@ body {
                }
             }
         }
+        function afterLoginError(){
+           if(${not empty errorMsg}){
+             alert('${errorMsg}');
+           }
+        }
     </script>
 </head>
 
-<body style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;">
+<body style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;" onload="afterLoginError()">
 <table width="80%" border="0" cellpadding="0" cellspacing="0" align="center">
   <tr>
     <td height="117">&nbsp;</td>

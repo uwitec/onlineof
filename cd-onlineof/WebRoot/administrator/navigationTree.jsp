@@ -6,7 +6,7 @@
 <html>
 <head><title></title></head>
 <body>
-<div style="width:100%;float:left;font-size:10pt;text-align:left;overflow:auto; height: 500px;"
+<div style="width:100%;float:left;font-size:10pt;text-align:left;overflow:auto; height: 470px;"
 	id="navigationTreeDiv" name="navigationTreeDiv">
 </div>
 </body>
