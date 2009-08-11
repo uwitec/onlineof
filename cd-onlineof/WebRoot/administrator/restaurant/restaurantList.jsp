@@ -141,7 +141,7 @@
 										class="button">删除</a> <a
 										href="editRestaurantAction.do?restaurantVo.restaurantId=${restaurantId}"
 										class="button">编辑</a> <a
-										href="getFoodKindByRestaurantIdAction.do?restaurantId=${restaurantId}">设置餐厅菜分类</a>
+										href="getFoodKindPageAction.do?restaurantId=${restaurantId}">设置餐厅菜分类</a>
 									</span>
 								</td>
 							</tr>

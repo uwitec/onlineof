@@ -77,5 +77,13 @@
         <servlet-name>dwr-invoker</servlet-name>
         <url-pattern>/dwr/*</url-pattern>
     </servlet-mapping>
-    
+    <!-- 响应图片的Servlet -->
+    <servlet>
+    	<servlet-name>imageServlet</servlet-name>
+    	<servlet-class>com.cd_help.onlineOF.web.servlet.ImageServlet</servlet-class>
+    </servlet>
+	<servlet-mapping>
+		<servlet-name>imageServlet</servlet-name>
+		<url-pattern>/image</url-pattern>
+	</servlet-mapping>
 </web-app>

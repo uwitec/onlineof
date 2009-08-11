@@ -110,8 +110,7 @@
 											value="${foodId}" /> </span>
 								</td>
 								<td>
-									<span style="white-space: nowrap;"><s:property
-											value="name" /> </span>
+									<span style="white-space: nowrap;"><a href="foodPreViewAction.do?foodVo.foodId=${foodId}">${name}</a></span>
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property

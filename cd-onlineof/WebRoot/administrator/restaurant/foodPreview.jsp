@@ -16,13 +16,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	 <link href="administrator/css/table.css" rel="stylesheet" type="text/css" />
+    <script language="javascript">
+        // 返回
+        function back(){
+            window.location.href="getFoodPageAction.do";
+        }
+    </script>
 
   </head>
   
   <body>
-    This is my JSP page. <br>
+    <div align="center">
+   			<div align="center">${foodVo.name}(图)</div><br>
+   			<div align="center"><img src="image?resId=${foodVo.foodId}&typeId=2" style="width:400px;height:250px;"/></div>
+   			<div align="center">餐厅菜名称:${foodVo.name}</div>
+   			<div align="center">菜价格￥:${foodVo.price}元/份</div>
+   			<div align="center">菜简介:${foodVo.introduction}</div>
+   			<div align="center">所属菜类别:${foodVo.food_kind_Name}</div>
+   			<div align="center">所属餐厅:${foodVo.restaurantName}</div>
+   		</div>
+   		<div align="center"><input type="button" value="返回" onclick="back()"/></div>
   </body>
 </html>

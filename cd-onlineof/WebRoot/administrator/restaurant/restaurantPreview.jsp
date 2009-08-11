@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
    		<div align="center">
    			<div align="center">${restaurantVo.name}(图)</div><br>
-   			<div align="center"><img src="imgRestaurantAction.do?restaurantVo.restaurantId=${restaurantVo.restaurantId}" style="width:400px;height:250px;"/></div>
+   			<div align="center"><img src="image?resId=${restaurantVo.restaurantId}&typeId=1" style="width:400px;height:250px;"/></div>
    			<div align="center">餐厅名称:${restaurantVo.name}</div>
    			<div align="center">
    				<span>餐厅开门时间:${restaurantVo.openTime}</span>&nbsp;&nbsp;&nbsp;&nbsp;
