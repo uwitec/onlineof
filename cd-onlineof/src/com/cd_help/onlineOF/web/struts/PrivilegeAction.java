@@ -58,13 +58,8 @@ public class PrivilegeAction extends BaseAction{
 	 */
 	public String forwardAddNewPrivilege() throws AppException{
 		log.debug("--->> begin forwardAddNewPrivilege");
-		try{
-			action="addPrivilege.do";
-			privilegeVo = null;
-		}catch(Exception e){
-			log.error(e);
-			throw new AppException("",e.getMessage());
-		}
+		action="addPrivilege.do";
+		privilegeVo = null;
 		return SUCCESS;
 	}
 	
@@ -79,9 +74,9 @@ public class PrivilegeAction extends BaseAction{
 		try{
 			privilegeVo = this.getOnlineOF().getPrivilegeManager().addPrivilege(this.getSession(), privilegeVo);
 			this.getRequest().setAttribute("addSuccess", "addSuccess");
-		}catch(Exception e){
+		}catch(AppException e){
 			log.error(e);
-			throw new AppException("",e.getMessage());
+			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
@@ -97,9 +92,9 @@ public class PrivilegeAction extends BaseAction{
 		try{
 		    privilegeVo = this.getOnlineOF().getPrivilegeManager().getPrivilegeById(this.getSession(), privilegeId);
 		    action="updatePrivilege.do";
-		}catch(Exception e){
+		}catch(AppException e){
 			log.error(e);
-			throw new AppException("",e.getMessage(),e);
+			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
@@ -114,9 +109,9 @@ public class PrivilegeAction extends BaseAction{
 		try{
 		    this.getOnlineOF().getPrivilegeManager().updatePrivilege(this.getSession(), privilegeVo);
 		    this.getRequest().setAttribute("updateSuccess", "updateSuccess");
-		}catch(Exception e){
+		}catch(AppException e){
 			log.error(e);
-			throw new AppException("",e.getMessage(),e);
+			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
@@ -133,9 +128,9 @@ public class PrivilegeAction extends BaseAction{
 			this.getOnlineOF().getPrivilegeManager().deletePrivilege(this.getSession(),privilegeId);
 			privilegeVo = null;
 			this.getRequest().setAttribute("deleteSuccess", "deleteSuccess");
-		}catch(Exception e){
+		}catch(AppException e){
 			log.error(e);
-			throw new AppException("",e.getMessage());
+			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
