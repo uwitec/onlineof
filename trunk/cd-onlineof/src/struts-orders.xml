@@ -3,7 +3,7 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="orders" extends="exception-default">
+	<package name="orders" extends="interceptor-default">
 		<action name="searchOrders" class="ordersAction" method="searchOrders">
 			<result name="success">/administrator/order/ordersManager.jsp</result>
 		</action>
