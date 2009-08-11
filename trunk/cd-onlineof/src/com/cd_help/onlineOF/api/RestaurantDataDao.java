@@ -7,7 +7,6 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
-import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
 /**
@@ -28,7 +27,4 @@ public interface RestaurantDataDao extends BaseDao{
 	public boolean exist(String id) throws Exception;
 	
 	public void delete(String id) throws Exception;
-	
-	public PageBean getRestaurantPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws Exception;
 }

@@ -5,18 +5,13 @@
  */
 package com.cd_help.onlineOF.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.RestaurantDataDao;
 import com.cd_help.onlineOF.data.RestaurantData;
-import com.cd_help.onlineOF.data.Restaurant_kindData;
-import com.cd_help.onlineOF.utils.BeanUtilsHelp;
-import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
 /**
@@ -41,10 +36,10 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements
 	public List<RestaurantVo> loadAll() throws Exception {
 		List<RestaurantVo> restaurantVoList = this
 				.findByNamedQuery("loadAllRestaurant");
-		System.out.println(restaurantVoList.size());
-		for (RestaurantVo rv : restaurantVoList) {
-			System.out.println(rv.getName());
-		}
+//		System.out.println(restaurantVoList.size());
+//		for (RestaurantVo rv : restaurantVoList) {
+//			System.out.println(rv.getName());
+//		}
 		return restaurantVoList;
 	}
 
@@ -66,41 +61,5 @@ public class RestaurantDataDaoImpl extends BaseDaoSupport implements
 		} else {
 			this.delete(this.get(RestaurantData.class, id));
 		}
-	}
-
-	/**
-	 * 取餐厅的分页信息
-	 * 
-	 * @see com.cd_help.onlineOF.api.RestaurantDataDao#getRestaurantPage(java.lang.String,
-	 *      java.lang.String[], java.lang.Object[],
-	 *      com.cd_help.onlineOF.utils.PageBean)
-	 */
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public PageBean getRestaurantPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws Exception {
-		// TODO Auto-generated method stub
-		pageBean = this.searchByPage(hqlName, paramName, condition, pageBean);
-		List<RestaurantVo> restaurantVos = null;
-		RestaurantVo restaurantVo = null;
-		RestaurantData restaurantData = null;
-		if (pageBean.getArray() != null && pageBean.getArray().size() > 0) {
-			restaurantVos = new ArrayList<RestaurantVo>();
-			for (Object obj : pageBean.getArray()) {
-				restaurantData = (RestaurantData) obj;
-				restaurantVo = new RestaurantVo();
-				BeanUtilsHelp.copyProperties(restaurantVo, restaurantData);
-				if (restaurantData.getRestaurant_kindId() != null) {
-					restaurantVo.setResKindId(restaurantData
-							.getRestaurant_kindId());
-					Restaurant_kindData restaurant_kindData = (Restaurant_kindData) super
-							.get(Restaurant_kindData.class, restaurantData
-									.getRestaurant_kindId());
-					restaurantVo.setResKindName(restaurant_kindData.getName());
-				}
-				restaurantVos.add(restaurantVo);
-			}
-			pageBean.setArray(restaurantVos);
-		}
-		return pageBean;
 	}
 }
