@@ -63,7 +63,7 @@
 		
 		<global-results>
 			<result name="appexception">/administrator/error.jsp</result>
-			<result name="global.login">/administrator/login.jsp</result>
+			<result name="global.login" type="redirect">/administrator/login.jsp</result>
 		</global-results>
 		
 		<global-exception-mappings>
