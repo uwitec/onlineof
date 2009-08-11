@@ -78,7 +78,7 @@ public class FoodAction extends BaseAction {
 				hqlName = "getFoodByresIdAndKindId";
 				params = new String[] { "restaurantId", "kindId", "foodName" };
 				conditions = new Object[] { this.getRestaurantId(),
-						this.getFoodKindId(), "%" + this.foodName + "%" };
+						this.getFoodKindId(), this.foodName==null?"%":"%" + this.foodName + "%" };
 			}
 			pageBean = this.getOnlineOF().getFoodManager().seachFoodPage(
 					hqlName, params, conditions, pageBean, this.getSession());
@@ -166,19 +166,10 @@ public class FoodAction extends BaseAction {
 	 */
 	public String foodPreView() throws Exception {
 		// TODO Auto-generated method stub
+		if(null!=foodVo && null!=foodVo.getFoodId()){
+			foodVo =this.getOnlineOF().getFoodManager().get(foodVo.getFoodId());
+		}
 		return SUCCESS;
-	}
-	/**
-	 * 响应流形成菜图片
-	 * comment here
-	 * @return
-	 * @throws Exception
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	public String foodImage() throws Exception {
-		// TODO Auto-generated method stub
-		
-		return null;
 	}
 
 	public PageBean getPageBean() {
