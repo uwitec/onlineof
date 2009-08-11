@@ -78,9 +78,9 @@ public class UsersAction extends BaseAction {
 			loadAllRestaurant();
 			this.pb = this.getOnlineOF().getUsersManager().searchByPage(hql,
 					params, conditions, this.pb, this.getSession());
-		} catch (Exception e) {
-			log.error(null,e);
-			throw new AppException("",e.getMessage());
+		} catch (AppException e) {
+			log.error(e);
+			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
@@ -97,9 +97,9 @@ public class UsersAction extends BaseAction {
 			loadAllRestaurant(); 
 			// 加载所有角色
 			roleVos = this.getOnlineOF().getRoleManager().loadAllRole(this.getSession());
-		}catch(Exception e){
+		}catch(AppException e){
 			log.error(e);
-			throw new AppException("",e.getMessage(),e);
+			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
@@ -116,9 +116,9 @@ public class UsersAction extends BaseAction {
 			usersVo.setPassword(StringUtil.encodePassword(usersVo.getPassword(), "MD5"));
 			this.getOnlineOF().getUsersManager().addUsers(this.getSession(), usersVo);
 			this.searchUsersByPage();
-		}catch(Exception e){
+		}catch(AppException e){
 			log.error(e);
-			throw new AppException("",e.getMessage(),e);
+			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
@@ -141,9 +141,9 @@ public class UsersAction extends BaseAction {
 				}
 			}
 			this.searchUsersByPage();
-		} catch (Exception e) {
+		} catch (AppException e) {
 			log.error(e);
-			throw new AppException("",e.getMessage(),e);
+			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
 		return SUCCESS;
 	}
@@ -153,7 +153,8 @@ public class UsersAction extends BaseAction {
 		try{
 		   restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
 		}catch(AppException e){
-			throw new AppException("",e.getMessage(),e);
+			log.error(e);
+			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
 	}
 
@@ -174,11 +175,8 @@ public class UsersAction extends BaseAction {
 			roleVos = this.getOnlineOF().getRoleManager().loadAllRole(this.getSession());
 			return SUCCESS;
 		} catch (AppException e) {
-			this.setErrorMsg(e.getMessage());
-			this.setErrorCode(e.getError_code());
-			return ERROR;
-			// log.error(e);
-			// throw new AppException("",e.getMessage(),e);
+			log.error(e);
+			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
 	}
 	
@@ -193,9 +191,9 @@ public class UsersAction extends BaseAction {
 		try{
 			this.getOnlineOF().getUsersManager().updateUsers(this.getSession(), usersVo);
 			this.searchUsersByPage();
-		}catch(Exception e){
+		}catch(AppException e){
 			log.error(e);
-			throw new AppException("",e.getMessage(),e);
+			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
 		return SUCCESS;
 	}

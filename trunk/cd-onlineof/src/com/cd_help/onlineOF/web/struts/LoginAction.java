@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.WebConstants;
+import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
  * <b><code></code></b>
@@ -43,17 +44,28 @@ public class LoginAction extends BaseAction{
 	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String doLogin() throws AppException{
+	public String doLogin() {
 		log.debug("--->> begin doLogin");
 		UsersSession session = null;
+		UsersVo usersVo = null;
 		try {
-			session = this.getOnlineOF().login(usersname, password);
-			System.out.println("用户名： "+usersname + "密码: "+password);
+			usersVo = this.getOnlineOF().login(usersname, password);
+			session = this.getOnlineOF().getSessionManager().createSession(usersVo);
 			this.getRequest().getSession().setAttribute(WebConstants.ATTRIBUTE_SESSION,session);
-		} catch (Exception e) {
-			log.error(e);
-			throw new AppException("",e.getMessage(),e);
+			return SUCCESS;
+		} catch (AppException e) {
+			log.debug("异常信息: "+e.getError_code()+"----"+e.getMessage());
+			this.setErrorMsg(e.getMessage());
+			return ERROR;
 		}
+	}
+	
+	/**
+	 * 注销
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String loginOut(){
 		return SUCCESS;
 	}
 
