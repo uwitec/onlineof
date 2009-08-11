@@ -73,7 +73,7 @@ public class Food_KindAction extends BaseAction {
 				hqlName = "getFoodkindByResId";
 				params = new String[] { "restaurantId", "kindName" };
 				conditions = new Object[] { this.getRestaurantId(),
-						"%" + this.getFoodKindName() + "%" };
+						this.getFoodKindName()==null?"%":("%"+this.getFoodKindName()+ "%")};
 			}
 			this.pageBean = this.getOnlineOF().getFood_kindManager()
 					.seachFoodKindPage(hqlName, params, conditions, pageBean,

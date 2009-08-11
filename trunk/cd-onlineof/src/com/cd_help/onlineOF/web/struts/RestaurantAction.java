@@ -7,13 +7,9 @@ package com.cd_help.onlineOF.web.struts;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.ServletOutputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -225,51 +221,6 @@ public class RestaurantAction extends BaseAction {
 					.getRestaurantById(restaurantVo.getRestaurantId());
 		}
 		return SUCCESS;
-	}
-
-	/**
-	 * 响应餐厅图片 comment here
-	 * 
-	 * @return
-	 * @throws Exception
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	public String restaurantImage() throws Exception {
-		// TODO Auto-generated method stub
-		this.getResponse().setContentType("image/jpeg;charset=GB2312");
-		ServletOutputStream out = null;
-		InputStream in = null;
-		byte[] bytes = null;
-		try {
-			if (null != restaurantVo && null != restaurantVo.getRestaurantId()) {
-				restaurantVo = this.getOnlineOF().getRestaurantManager()
-						.getRestaurantById(restaurantVo.getRestaurantId());
-				Blob blob = restaurantVo.getImg();
-				in = blob.getBinaryStream();
-				out = this.getResponse().getOutputStream();
-				bytes = new byte[1024];
-				while (in.read() != -1) {
-					out.write(bytes);
-				}
-				out.flush();
-			}
-		} finally {
-			if (in != null) {
-				try {
-					in.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			}
-			if (out != null)
-				try {
-					out.close();
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			bytes = null;
-		}
-		return null;
 	}
 
 	public List<RestaurantVo> getRestaurantList() {

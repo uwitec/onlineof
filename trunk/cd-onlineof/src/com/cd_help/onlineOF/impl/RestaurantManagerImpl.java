@@ -79,7 +79,9 @@ public class RestaurantManagerImpl implements RestaurantManager{
 	 */
 	public void delete(String id) throws AppException {
 		try{
-			restaurantDataDao.delete(restaurantDataDao.get(RestaurantData.class, id));
+			RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(RestaurantData.class, id);
+			
+			restaurantDataDao.delete(restaurantData);
 		}catch(Exception e){
 			throw new AppException("","删除出错!");
 		}

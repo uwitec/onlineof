@@ -12,6 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.FoodDataDao;
 import com.cd_help.onlineOF.data.FoodData;
+import com.cd_help.onlineOF.data.Food_kindData;
+import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.StringUtil;
 import com.cd_help.onlineOF.web.vo.FoodVo;
@@ -54,6 +56,15 @@ public class FoodDataDaoImpl extends BaseDaoSupport implements FoodDataDao{
 		FoodData foodData = (FoodData)this.get(FoodData.class,id);
 		FoodVo foodVo = new FoodVo();
 		BeanUtilsHelp.copyProperties(foodVo,foodData);
+		if(null!=foodData.getRestaurantId()){
+			RestaurantData restaurant = (RestaurantData) super.get(RestaurantData.class, foodData.getRestaurantId());
+			foodVo.setRestaurantId(restaurant.getRestaurantId());
+		}
+		if(null!=foodData.getFood_kindId()){
+			Food_kindData food_kind = (Food_kindData) super.get(Food_kindData.class, foodData.getFood_kindId());
+			foodVo.setFood_kindId(food_kind.getFood_kind_Id());
+			foodVo.setFood_kind_Name(food_kind.getName());
+		}
 		return foodVo;
 	}
 

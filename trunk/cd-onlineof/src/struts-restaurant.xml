@@ -74,9 +74,6 @@
 				/administrator/restaurant/restaurantPreview.jsp
 			</result>
 		</action>
-		<!-- 餐厅图片响应 -->
-		<action name="imgRestaurantAction" class="restaurantAction" method="restaurantImage">
-		</action>
 		<!-- 餐厅菜类别处理 -->
 		<action name="getFoodKindPageAction" class="food_KindAction"
 			method="getFoodKindPage">
@@ -98,12 +95,6 @@
 		</action>
 		<action name="deleteFoodKindAction" class="food_KindAction"
 			method="deleteFoodKind">
-			<result name="success">
-				/administrator/restaurant/food_kindList.jsp
-			</result>
-		</action>
-		<action name="getFoodKindByRestaurantIdAction"
-			class="food_KindAction" method="getFoodKindByRestaurantId">
 			<result name="success">
 				/administrator/restaurant/food_kindList.jsp
 			</result>
@@ -131,6 +122,11 @@
 			method="deleteFood">
 			<result name="success">
 				/administrator/restaurant/foodList.jsp
+			</result>
+		</action>
+		<action name="foodPreViewAction" class="foodAction" method="foodPreView">
+			<result name="success">
+				/administrator/restaurant/foodPreview.jsp
 			</result>
 		</action>
 	</package>
