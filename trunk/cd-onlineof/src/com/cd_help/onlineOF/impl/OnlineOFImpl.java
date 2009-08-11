@@ -22,7 +22,6 @@ import com.cd_help.onlineOF.api.Restaurant_kindManager;
 import com.cd_help.onlineOF.api.RoleManager;
 import com.cd_help.onlineOF.api.SessionManager;
 import com.cd_help.onlineOF.api.UsersManager;
-import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
@@ -220,9 +219,8 @@ public class OnlineOFImpl implements OnlineOF{
 	/**
 	 * @see com.cd_help.onlineOF.api.OnlineOF#login(java.lang.String, java.lang.String)
 	 */
-	public UsersSession login(String username, String password) throws AppException {
+	public UsersVo login(String username, String password) throws AppException {
 		UsersVo usersVo = usersManager.login(username, password);
-		UsersSession session = sessionManager.createSession(usersVo);
-		return session;
+		return usersVo;
 	}
 }
