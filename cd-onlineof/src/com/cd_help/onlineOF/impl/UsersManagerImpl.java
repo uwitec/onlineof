@@ -122,7 +122,7 @@ public class UsersManagerImpl implements UsersManager {
 			}
 		} catch (Exception e) {
 			log.error(e);
-			throw new AppException("0000011", "系统错误!",e);
+			throw new AppException("0000011", e.getMessage(),e);
 		}
 		return usersVo;
 	}
