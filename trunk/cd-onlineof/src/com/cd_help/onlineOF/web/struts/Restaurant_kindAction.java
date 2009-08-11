@@ -58,7 +58,7 @@ public class Restaurant_kindAction extends BaseAction {
 		String hqlName = "";
 		try {
 			this.pageBean.setCurrentPage(page);
-			this.pageBean.setPagesize(2);
+			this.pageBean.setPagesize(10);
 			if (null == this.getKindName() || "".equals(this.kindName)) {
 				hqlName = "getResKindAllPage";
 			} else {

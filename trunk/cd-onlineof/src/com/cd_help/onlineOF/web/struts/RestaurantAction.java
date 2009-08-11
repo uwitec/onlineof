@@ -111,7 +111,7 @@ public class RestaurantAction extends BaseAction {
 		String hqlName = "";
 		try {
 			this.pageBean.setCurrentPage(page);
-			this.pageBean.setPagesize(2);
+			this.pageBean.setPagesize(10);
 			if (null == kindId || "".endsWith(kindId)) {
 				hqlName = "getRestaurantAllPage";
 			} else {

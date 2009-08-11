@@ -69,7 +69,7 @@ public class FoodAction extends BaseAction {
 		try {
 			pageBean = new PageBean();
 			pageBean.setCurrentPage(page);
-			pageBean.setPagesize(2);
+			pageBean.setPagesize(10);
 			if (null == this.restaurantId || "".equals(this.restaurantId)) {
 				hqlName = "getFoodByKindId";
 				params = new String[] { "kindId" };
