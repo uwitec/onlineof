@@ -5,8 +5,8 @@
  */
 package com.cd_help.onlineOF.api;
 
-import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
  * <b><code></code></b>
@@ -116,6 +116,6 @@ public interface OnlineOF {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public UsersSession login(String username,String password) throws AppException;
+	public UsersVo login(String username,String password) throws AppException;
 	
 }

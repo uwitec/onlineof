@@ -37,7 +37,7 @@ public interface UsersManager {
 
 	public PageBean searchByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, UsersSession session)
-			throws Exception;
+			throws AppException;
 	
 	public void updateUsers(UsersSession session, UsersVo usersVo) throws AppException;
 
