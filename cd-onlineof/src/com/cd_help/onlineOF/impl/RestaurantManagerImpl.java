@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.cd_help.onlineOF.api.RestaurantDataDao;
 import com.cd_help.onlineOF.api.RestaurantManager;
 import com.cd_help.onlineOF.data.RestaurantData;
+import com.cd_help.onlineOF.data.Restaurant_kindData;
 import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
@@ -24,122 +26,153 @@ import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
 /**
- * <b><code></code></b>
- * <p/>
- * 餐厅管理实现类
- * <p/>
- * <b>Creation Time:</b> Jul 4, 2009
+ * <b><code></code></b> <p/> 餐厅管理实现类 <p/> <b>Creation Time:</b> Jul 4, 2009
+ * 
  * @author TanDong
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
 @Service("restaurantManager")
-@Transactional(propagation=Propagation.REQUIRED)
-public class RestaurantManagerImpl implements RestaurantManager{
+@Transactional(propagation = Propagation.REQUIRED)
+public class RestaurantManagerImpl implements RestaurantManager {
 
 	@Autowired
 	@Resource(name = "restaurantDataDao")
 	private RestaurantDataDao restaurantDataDao;
+
 	public void setRestaurantDataDao(RestaurantDataDao restaurantDataDao) {
 		this.restaurantDataDao = restaurantDataDao;
 	}
+
 	/**
-	 * @throws AppException 
+	 * @throws AppException
 	 * @see com.cd_help.onlineOF.api.RestaurantManager#loadAll()
 	 */
-	public List<RestaurantVo> loadAll() throws AppException{
+	public List<RestaurantVo> loadAll() throws AppException {
 		List<RestaurantVo> restaurantList = null;
-		try{
-		    restaurantList = restaurantDataDao.loadAll();
-		}catch(Exception e){
-			throw new AppException("","加载出错!");
+		try {
+			restaurantList = restaurantDataDao.loadAll();
+		} catch (Exception e) {
+			throw new AppException("", "加载出错!");
 		}
 		return restaurantList;
 	}
-	
+
 	/**
 	 * @see com.cd_help.onlineOF.api.RestaurantManager#save(com.cd_help.onlineOF.web.vo.RestaurantVo)
 	 */
 	public RestaurantVo save(RestaurantVo restaurantVo) throws AppException {
-		try{
+		try {
 			RestaurantData restaurantData = new RestaurantData();
 			BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
 			restaurantData.setRestaurant_kindId(restaurantVo.getResKindId());
 			restaurantDataDao.save(restaurantData);
 			restaurantVo.setRestaurantId(restaurantData.getRestaurantId());
 			return restaurantVo;
-		}catch(Exception e){
-			throw new AppException("","保存出错!");
+		} catch (Exception e) {
+			throw new AppException("", "保存出错!");
 		}
 	}
-	
+
 	/**
 	 * @see com.cd_help.onlineOF.api.RestaurantManager#delete(java.lang.String)
 	 */
 	public void delete(String id) throws AppException {
-		try{
-			RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(RestaurantData.class, id);
-			
+		try {
+			RestaurantData restaurantData = (RestaurantData) restaurantDataDao
+					.get(RestaurantData.class, id);
 			restaurantDataDao.delete(restaurantData);
-		}catch(Exception e){
-			throw new AppException("","删除出错!");
+		} catch (Exception e) {
+			throw new AppException("", "删除出错!");
 		}
 	}
-	
+
 	/**
 	 * 检查权限
+	 * 
 	 * @param session
 	 * @return
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@SuppressWarnings("unused")
-	private boolean checkPrivilege(UsersSession session) throws AppException{
+	private boolean checkPrivilege(UsersSession session) throws AppException {
 		return true;
 	}
+
 	@Override
 	public PageBean seachRestaurantPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean) throws AppException {
 		// TODO Auto-generated method stub
 		PageBean page = null;
 		try {
-			page = restaurantDataDao.getRestaurantPage(hqlName, paramName,
+			page = restaurantDataDao.searchByPage(hqlName, paramName,
 					condition, pageBean);
+			List<RestaurantVo> restaurantVos = null;
+			RestaurantVo restaurantVo = null;
+			RestaurantData restaurantData = null;
+			if (page.getArray() != null && page.getArray().size() > 0) {
+				restaurantVos = new ArrayList<RestaurantVo>();
+				for (Object obj : page.getArray()) {
+					restaurantData = (RestaurantData) obj;
+					restaurantVo = new RestaurantVo();
+					BeanUtilsHelp.copyProperties(restaurantVo, restaurantData);
+					if (null != restaurantData.getRestaurant_kindId()
+							&& !""
+									.equals(restaurantData
+											.getRestaurant_kindId())) {
+						restaurantVo.setResKindId(restaurantData
+								.getRestaurant_kindId());
+						Restaurant_kindData restaurant_kindData = (Restaurant_kindData) restaurantDataDao
+								.get(Restaurant_kindData.class, restaurantData
+										.getRestaurant_kindId());
+						restaurantVo.setResKindName(restaurant_kindData
+								.getName());
+					}
+					restaurantVos.add(restaurantVo);
+				}
+				page.setArray(restaurantVos);
+			}
 		} catch (Exception e) {
 			throw new AppException("0000014", "加载餐厅分类信息出错!");
 		}
 		return page;
 	}
+
 	@Override
-	public RestaurantVo getRestaurantById(String restaurantId) throws AppException {
-		try{
-			if(restaurantId!=null && restaurantId.length() > 0){
-				RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(
-						RestaurantData.class, restaurantId);
+	public RestaurantVo getRestaurantById(String restaurantId)
+			throws AppException {
+		try {
+			if (restaurantId != null && restaurantId.length() > 0) {
+				RestaurantData restaurantData = (RestaurantData) restaurantDataDao
+						.get(RestaurantData.class, restaurantId);
 				RestaurantVo restaurantVo = new RestaurantVo();
 				BeanUtilsHelp.copyProperties(restaurantVo, restaurantData);
+				restaurantVo
+						.setResKindId(restaurantData.getRestaurant_kindId());
 				return restaurantVo;
 			}
 			return null;
-		}catch(Exception e){
-			throw new AppException("",e.getMessage(),e);
+		} catch (Exception e) {
+			throw new AppException("", e.getMessage(), e);
 		}
 	}
+
 	@Override
 	public void updateRestaurant(RestaurantVo restaurantVo) throws AppException {
-		try{
-			RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(
-					RestaurantData.class, restaurantVo.getRestaurantId());
+		try {
+			RestaurantData restaurantData = (RestaurantData) restaurantDataDao
+					.get(RestaurantData.class, restaurantVo.getRestaurantId());
 			if (restaurantVo.getImg() == null) {
 				restaurantVo.setImg(restaurantData.getImg());
 			}
 			BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
 			restaurantData.setRestaurant_kindId(restaurantVo.getResKindId());
 			restaurantDataDao.update(restaurantData);
-		}catch(Exception e){
-			throw new AppException("",e.getMessage(),e);
+		} catch (Exception e) {
+			throw new AppException("", e.getMessage(), e);
 		}
 	}
-	
+
 }

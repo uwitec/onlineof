@@ -126,7 +126,7 @@ public class RestaurantAction extends BaseAction {
 					+ this.getPageBean().getArray().size());
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			throw new AppException("loadRestaurantPage", "加载餐厅信息失败!");
+			throw new AppException("restaurant0001", "加载餐厅信息失败!");
 		}
 		return SUCCESS;
 	}
