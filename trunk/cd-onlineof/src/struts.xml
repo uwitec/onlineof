@@ -33,30 +33,39 @@
 	<package name="common-default" extends="struts-default"></package>
 
 	<!-- 登陆 -->
-	<package name="login" extends="exception-default">
+	<package name="login" extends="struts-default">
 		<action name="login" class="loginAction" method="doLogin">
 			<result name="success">
 				/administrator/administrator.jsp
 			</result>
+			<result name="error">
+				/administrator/login.jsp
+			</result>
 		</action>
 	</package>
-
-	<package name="exception-default" extends="common-default">
+	
+    <!-- 拦截器 -->
+	<package name="interceptor-default" extends="common-default">
 		<interceptors>
-			<interceptor name="exceptionMapping"
-				class="com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor">
-			</interceptor>
-			<interceptor-stack name="exceptionDefaultStack">
+		    <!-- 异常拦截 -->
+			<interceptor name="exceptionMapping" class="com.opensymphony.xwork2.interceptor.ExceptionMappingInterceptor"/>
+		    <!-- 登陆session拦截 -->
+			<interceptor name="userSessionInterceptor" class="com.cd_help.onlineOF.utils.CheckUserSessionInterceptor"/>
+			
+			<interceptor-stack name="interceptor-defaultStack">
+				<interceptor-ref name="userSessionInterceptor"/>
 				<interceptor-ref name="exceptionMapping" />
 				<interceptor-ref name="defaultStack" />
 			</interceptor-stack>
 		</interceptors>
-		<default-action-ref name="exceptionMapping"></default-action-ref>
+		
+		<default-interceptor-ref name="interceptor-defaultStack"/>
+		
 		<global-results>
-			<result name="appexception">
-				/administrator/error.jsp
-			</result>
+			<result name="appexception">/administrator/error.jsp</result>
+			<result name="global.login">/administrator/login.jsp</result>
 		</global-results>
+		
 		<global-exception-mappings>
 			<exception-mapping result="appexception"
 				exception="com.cd_help.onlineOF.utils.AppException">
