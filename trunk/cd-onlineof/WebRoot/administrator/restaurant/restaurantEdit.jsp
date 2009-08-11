@@ -43,7 +43,7 @@
 						</td>
 						<td colspan="3" style="text-align: left;">
 							<span style="white-space: nowrap;"> <!-- 隐藏域餐厅分类ID --> <input
-									type="hidden" value="${restaurantVo.restaurantId}" /> <input
+									type="hidden" name="restaurantVo.restaurantId" value="${restaurantVo.restaurantId}" /> <input
 									type="text" name="restaurantVo.name" size=30
 									value="${restaurantVo.name}" required="string" /><font
 								size="+1" color="red">*</font> </span>
@@ -89,7 +89,7 @@
 					</tr>
 					<tr>
 						<td align="right">
-							<span style="white-space: nowrap;">餐厅分类名称</span>
+							<span style="white-space: nowrap;">餐厅分类名称${restaurantVo.resKindId}</span>
 						</td>
 						<td style="text-align: left;">
 							<span style="white-space: nowrap;"> <select
@@ -99,7 +99,7 @@
 									<option value="">--请选择--</option>
 									<s:iterator value="restaurant_kindVos">
 										<option value="${restaurant_kind_Id}"
-											<s:if test="restaurantVo.resKindId == restaurant_kind_Id">selected</s:if>>
+											<s:if test="restaurantVo.resKindId==restaurant_kind_Id">selected</s:if>>
 											${name}
 										</option>
 									</s:iterator>
