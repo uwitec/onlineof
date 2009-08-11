@@ -4,7 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<!-- 餐厅信息管理 -->
-	<package name="restaurantManager" extends="exception-default">
+	<package name="restaurantManager" extends="interceptor-default">
 		<action name="loadAllRestaurant" class="usersAction"
 			method="loadAllRestaurant">
 			<result name="success">/bookRestaurant.jsp</result>
