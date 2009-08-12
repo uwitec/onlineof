@@ -78,7 +78,7 @@
 				</thead>
 				<tbody>
 					<s:set name="data" value="pageBean.array" />
-					<s:if test="#data != null">
+					<s:if test="#data!=null&&#data.size!=0">
 						<s:iterator value="pageBean.array">
 							<tr>
 								<td>

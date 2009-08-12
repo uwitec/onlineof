@@ -17,12 +17,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	 <link href="administrator/css/table.css" rel="stylesheet" type="text/css" />
-    <script language="javascript">
-        // 返回
-        function back(){
-            window.location.href="getFoodPageAction.do";
-        }
-    </script>
 
   </head>
   
@@ -36,6 +30,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			<div align="center">所属菜类别:${foodVo.food_kind_Name}</div>
    			<div align="center">所属餐厅:${foodVo.restaurantName}</div>
    		</div>
-   		<div align="center"><input type="button" value="返回" onclick="back()"/></div>
+   		<div align="center"><input type="button" value="返回" onclick="window.history.back()"/></div>
   </body>
 </html>
