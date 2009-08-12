@@ -44,12 +44,6 @@ public class FoodVo implements Serializable{
 	 */
 	private String introduction;
 	/**
-	 * 数量
-	 * 
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	private Integer number;
-	/**
 	 * 图片
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -105,12 +99,11 @@ public class FoodVo implements Serializable{
 	 * @param isSigns
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public FoodVo(String foodId, String name, double price,Integer number,
+	public FoodVo(String foodId, String name, double price,
 			String introduction, Blob img, Integer isSigns) {
 		this.foodId = foodId;
 		this.name = name;
 		this.price = price;
-		this.number = number;
 		this.introduction = introduction;
 		this.img = img;
 		this.isSigns = isSigns;
@@ -178,14 +171,6 @@ public class FoodVo implements Serializable{
 
 	public void setPrice(double price) {
 		this.price = price;
-	}
-
-	public Integer getNumber() {
-		return number;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
 	}
 
 	public String getFoodId() {

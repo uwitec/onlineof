@@ -15,8 +15,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cd_help.onlineOF.api.FoodDataDao;
+import com.cd_help.onlineOF.api.Food_kindDataDao;
 import com.cd_help.onlineOF.api.RestaurantDataDao;
 import com.cd_help.onlineOF.api.RestaurantManager;
+import com.cd_help.onlineOF.data.FoodData;
+import com.cd_help.onlineOF.data.Food_kindData;
 import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.data.Restaurant_kindData;
 import com.cd_help.onlineOF.data.UsersSession;
@@ -43,6 +47,20 @@ public class RestaurantManagerImpl implements RestaurantManager {
 
 	public void setRestaurantDataDao(RestaurantDataDao restaurantDataDao) {
 		this.restaurantDataDao = restaurantDataDao;
+	}
+
+	@Resource(name = "foodDataDao")
+	private FoodDataDao foodDataDao;
+
+	public void setFoodDataDao(FoodDataDao foodDataDao) {
+		this.foodDataDao = foodDataDao;
+	}
+
+	@Resource(name = "food_kindDao")
+	private Food_kindDataDao food_kindDao = null;
+
+	public void setFood_kindDao(Food_kindDataDao food_kindDao) {
+		this.food_kindDao = food_kindDao;
 	}
 
 	/**
@@ -78,10 +96,33 @@ public class RestaurantManagerImpl implements RestaurantManager {
 	/**
 	 * @see com.cd_help.onlineOF.api.RestaurantManager#delete(java.lang.String)
 	 */
+	@SuppressWarnings("unchecked")
 	public void delete(String id) throws AppException {
 		try {
 			RestaurantData restaurantData = (RestaurantData) restaurantDataDao
 					.get(RestaurantData.class, id);
+			List<Food_kindData> food_kinds = food_kindDao
+					.findByNamedQueryAndNamedParam("getFoodkindByRestaurantId",
+							"restaurantId", id);
+			//删除餐厅下的所有菜分类
+			if (null != food_kinds && food_kinds.size() > 0) {
+				for (Food_kindData fk : food_kinds) {
+					if (fk != null) {
+						List<FoodData> foodDatas = foodDataDao
+								.findByNamedQueryAndNamedParam(
+										"getFoodByKindId", "kindId", fk
+												.getFood_kind_Id());
+						//删除分类下的所有菜
+						if (null != foodDatas && foodDatas.size() > 0) {
+							for (FoodData food : foodDatas) {
+								foodDataDao.delete(food);
+							}
+						}
+						food_kindDao.delete(fk);
+					}
+				}
+			}
+			
 			restaurantDataDao.delete(restaurantData);
 		} catch (Exception e) {
 			throw new AppException("", "删除出错!");

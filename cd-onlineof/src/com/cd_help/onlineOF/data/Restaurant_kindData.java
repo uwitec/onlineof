@@ -29,7 +29,7 @@ import javax.persistence.Table;
 @Table(name = "restaurant_kind")
 @NamedQueries( {
 		@NamedQuery(name = "getResKindAllPage", query = "from Restaurant_kindData r"),
-		@NamedQuery(name = "getResKindByNamePage", query = "from Restaurant_kindData r where r.name = :name") })
+		@NamedQuery(name = "getResKindByNamePage", query = "from Restaurant_kindData r where r.name like :name") })
 public class Restaurant_kindData implements Serializable {
 	/**
 	 * 餐厅类别ID
