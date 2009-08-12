@@ -77,18 +77,10 @@
 						</td>
 					</tr>
 					<tr>
-						<td align="right">
-							<span style="white-space: nowrap;">餐厅菜数量</span>
-						</td>
-						<td style="text-align: left;">
-							<span style="white-space: nowrap;"> <input type="text"
-									name="foodVo.number" size=30 value="${foodVo.number }"
-									required="int" /><font size="+1" color="red">*</font> </span>
-						</td>
 						<td>
 							<span style="white-space: nowrap;">是否招牌菜</span>
 						</td>
-						<td style="text-align: left;">
+						<td style="text-align: left;" colspan="3">
 							<span style="white-space: nowrap;"> <input type="checkbox"
 									name="foodVo.isSigns"
 									<s:if test="foodVo.isSigns==1">checked</s:if> value="1" /> </span>

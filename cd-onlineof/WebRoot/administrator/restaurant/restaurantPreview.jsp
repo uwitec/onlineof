@@ -9,12 +9,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     <title>餐厅信息预览</title>
     <link href="administrator/css/table.css" rel="stylesheet" type="text/css" />
-    <script language="javascript">
-        // 返回
-        function back(){
-            window.location.href="getRestaurantPageAction.do";
-        }
-    </script>
   </head>
   
   <body>
@@ -30,6 +24,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    			<div align="center">餐厅联系电话:${restaurantVo.contactPhone}</div>
    			<div align="center">餐厅联系地址:${restaurantVo.address}</div>
    		</div>
-   		<div align="center"><input type="button" value="返回" onclick="back()"/></div>
+   		<div align="center"><input type="button" value="返回" onclick="window.history.back()"/></div>
   </body>
 </html>
