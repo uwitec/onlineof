@@ -52,7 +52,7 @@ public class UsersData implements Serializable{
 	 * 用户名
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "usersname", nullable = true, length = 15)
+	@Column(name = "usersname", nullable = true, length = 20)
 	private String usersname;
 	
 	/**
@@ -96,6 +96,34 @@ public class UsersData implements Serializable{
 	 */
     @Column(name = "roleId", nullable = true, length = 32)
 	private String roleId;
+    
+    /**
+	 * QQ
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+    @Column(name = "QQ", nullable = true, length = 20)
+    private String QQ;
+    
+    /**
+	 * 电子邮箱
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+    @Column(name = "email", nullable = true, length = 100)
+    private String email;
+    
+    /**
+	 * 电话
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+    @Column(name = "phone", nullable = true, length = 20)
+    private String phone;
+    
+    /**
+	 * 手机
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+    @Column(name = "movebile", nullable = true, length = 20)
+    private String movebile;
 
 	public String getUsersId() {
 		return usersId;
@@ -144,5 +172,29 @@ public class UsersData implements Serializable{
 	}
 	public void setRoleId(String roleId) {
 		this.roleId = roleId;
+	}
+	public String getQQ() {
+		return QQ;
+	}
+	public void setQQ(String qq) {
+		QQ = qq;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+	public String getMovebile() {
+		return movebile;
+	}
+	public void setMovebile(String movebile) {
+		this.movebile = movebile;
 	}
 }

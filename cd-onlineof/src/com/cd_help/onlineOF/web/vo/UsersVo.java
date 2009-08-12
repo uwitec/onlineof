@@ -88,6 +88,30 @@ public class UsersVo implements Serializable{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String roleName;
+	
+	/**
+	 * QQ
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+    private String QQ;
+    
+    /**
+	 * 电子邮箱
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+    private String email;
+    
+    /**
+	 * 电话
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+    private String phone;
+    
+    /**
+	 * 手机
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+    private String movebile;
 
 	/**
 	 * Constructs a <code>UsersVo</code>
@@ -108,7 +132,7 @@ public class UsersVo implements Serializable{
 	public UsersVo(String usersId, String usersname, String password,
 			Date birthday, Integer gender, String restaurantId,
 			String restaurantName, Integer isSuper, String roleId,
-			String roleName) {
+			String roleName,String QQ, String email, String phone, String movebile) {
 		this.usersId = usersId;
 		this.usersname = usersname;
 		this.password = password;
@@ -120,6 +144,10 @@ public class UsersVo implements Serializable{
 		this.isSuper = isSuper;
 		this.roleId = roleId;
 		this.roleName = roleName;
+		this.QQ = QQ;
+		this.email = email;
+		this.phone = phone;
+		this.movebile = movebile;
 	}
 
 	public String getUsersId() {
@@ -208,5 +236,37 @@ public class UsersVo implements Serializable{
 
 	public void setRoleName(String roleName) {
 		this.roleName = roleName;
+	}
+
+	public String getQQ() {
+		return QQ;
+	}
+
+	public void setQQ(String qq) {
+		QQ = qq;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getMovebile() {
+		return movebile;
+	}
+
+	public void setMovebile(String movebile) {
+		this.movebile = movebile;
 	}
 }
