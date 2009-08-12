@@ -139,6 +139,10 @@ public class UsersManagerImpl implements UsersManager {
 				usersData.setRestaurantId(usersVo.getRestaurantId());
 				usersData.setGender(usersVo.getGender());
 				usersData.setRoleId(usersVo.getRoleId());
+				usersData.setEmail(usersVo.getEmail());
+				usersData.setQQ(usersVo.getQQ());
+				usersData.setPhone(usersVo.getPhone());
+				usersData.setMovebile(usersVo.getMovebile());
 				usersDataDao.update(usersData);
 			} catch (Exception e) {
 				log.error(e);
