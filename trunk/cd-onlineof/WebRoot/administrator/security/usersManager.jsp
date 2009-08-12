@@ -69,9 +69,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <tr>
                <th><input type="checkbox" id="checkAll" name="checkAll" onclick="checkedAll()"/></th>
 	           <th><span style="white-space: nowrap;">用户名</span></th>
-	           <th><span style="white-space: nowrap;">密码</span></th>
 	           <th><span style="white-space: nowrap;">性别</span></th>
 	           <th><span style="white-space: nowrap;">出生日期</span></th>
+	           <th><span style="white-space: nowrap;">QQ</span></th>
+	           <th><span style="white-space: nowrap;">E-mail</span></th>
+	           <th><span style="white-space: nowrap;">联系电话</span></th>
+	           <th><span style="white-space: nowrap;">手机</span></th>
 	           <th><span style="white-space: nowrap;">所属餐厅/酒店</span></th>
 	           <th><span style="white-space: nowrap;">所属角色</span></th>
 	           <th><span style="white-space: nowrap;">操作</span></th>
@@ -83,7 +86,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	           <tr>
 	             <td><input type="checkbox" id="checksItem" name="checksItem" value="<s:property value='usersId'/>"/></td>
 	           	 <td><span style="white-space: nowrap;"><s:property value="usersname"/></span></td>
-	             <td><span style="white-space: nowrap;"><s:property value="password"/></span></td>
 	             <td>
 	               <span style="white-space: nowrap;"> 
 	                <s:set name="genderStr" value="gender"/>
@@ -92,6 +94,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			       </span>
 	             </td>
 	             <td><span style="white-space: nowrap;"><s:property value="birthday"/></span></td>
+	             <td><span style="white-space: nowrap;"><s:property value="QQ"/></span></td>
+	             <td><span style="white-space: nowrap;"><s:property value="email"/></span></td>
+	             <td><span style="white-space: nowrap;"><s:property value="phone"/></span></td>
+	             <td><span style="white-space: nowrap;"><s:property value="movebile"/></span></td>
 	             <td><span style="white-space: nowrap;"><s:property value="restaurantName"/></span></td>
 	             <td><span style="white-space: nowrap;"><s:property value="roleName"/></span></td>
 	             <td><a href="editUsres.do?usersId=<s:property value='usersId'/>">编辑</a></td>
@@ -100,7 +106,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       </s:if>
 	       <s:else>
 	          <tr>
-	            <td colspan="8"><span style="white-space: nowrap;"><font style="color:red;">暂无数据</font></span></td> 
+	            <td colspan="11"><span style="white-space: nowrap;"><font style="color:red;">暂无数据</font></span></td> 
 	          </tr>
 	       </s:else> 
          </tbody>

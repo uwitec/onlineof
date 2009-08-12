@@ -89,7 +89,7 @@
 					</tr>
 					<tr>
 						<td align="right">
-							<span style="white-space: nowrap;">餐厅分类名称${restaurantVo.resKindId}</span>
+							<span style="white-space: nowrap;">餐厅分类名称</span>
 						</td>
 						<td style="text-align: left;">
 							<span style="white-space: nowrap;"> <select

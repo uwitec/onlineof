@@ -26,6 +26,7 @@
 	                <!-- 隐藏域用户ID -->
 	                <input type="hidden" id="usersVo.usersId" name="usersVo.usersId" value="<s:property value='usersVo.usersId'/>"/>
 	           		<input type="text" id="usersVo.usersname" name="usersVo.usersname" size=30 value="<s:property value='usersVo.usersname'/>"/>
+	           		<font size="+1" color="red">*</font>
 	           	  </span>
 	           </td>
 	         </tr>
@@ -47,6 +48,22 @@
 	         <tr>
 	           <td style="text-align:right;"><span style="white-space: nowrap;">出生日期</span></td>
 	           <td style="text-align:left;"><input type="text" id="usersVo.birthdayStr" name="usersVo.birthdayStr" size=30 onFocus="new WdatePicker(this,'%Y-%M-%D',false)" class="Wdate" value="<s:property value='usersVo.birthday'/>"></td>
+	         </tr>
+	         <tr>
+	           <td style="text-align:right;"><span style="white-space: nowrap;">QQ</span></td>
+	           <td style="text-align:left;"><input type="text" id="usersVo.QQ" name="usersVo.QQ" size=30 value="<s:property value='usersVo.QQ'/>"></td>
+	         </tr>
+	         <tr>
+	           <td style="text-align:right;"><span style="white-space: nowrap;">E-mail</span></td>
+	           <td style="text-align:left;"><input type="text" id="usersVo.email" name="usersVo.email" size=30 value="<s:property value='usersVo.email'/>"></td>
+	         </tr>
+	         <tr>
+	           <td style="text-align:right;"><span style="white-space: nowrap;">联系电话</span></td>
+	           <td style="text-align:left;"><input type="text" id="usersVo.phone" name="usersVo.phone" size=30 value="<s:property value='usersVo.phone'/>"></td>
+	         </tr>
+	         <tr>
+	           <td style="text-align:right;"><span style="white-space: nowrap;">手机</span></td>
+	           <td style="text-align:left;"><input type="text" id="usersVo.movebile" name="usersVo.movebile" size=30 value="<s:property value='usersVo.movebile'/>"></td>
 	         </tr>
 	         <tr>
 	           <td style="text-align:right;"><span style="white-space: nowrap;">所属餐厅</span></td>
