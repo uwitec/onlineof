@@ -113,7 +113,7 @@
 										class="button">删除</a> <a
 										href="editFoodKindAction.do?food_kindVo.food_kind_Id=${food_kind_Id}"
 										class="button">编辑</a>
-										 <a href="getFoodPageAction.do?foodKindId=${food_kind_Id}">设置餐厅菜信息</a> </span>
+										 <a href="getFoodPageAction.do?foodKindId=${food_kind_Id}">该类下所有饮食</a> </span>
 								</td>
 							</tr>
 						</s:iterator>

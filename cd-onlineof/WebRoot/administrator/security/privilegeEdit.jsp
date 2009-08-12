@@ -72,6 +72,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                <!-- 隐藏域(权限ID) -->
                <input type="hidden" id="privilegeVo.privilegeId" name="privilegeVo.privilegeId" value="<s:property value='privilegeVo.privilegeId'/>"/>
                <input type="text" id="privilegeVo.methodName" name="privilegeVo.privilegeName" value="<s:property value='privilegeVo.privilegeName'/>" size="30"/>
+               <font size="+1" color="red">*</font>
              </td>
            </tr>
            <tr>
@@ -108,12 +109,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              <td style="text-align:right;"t>对应方法名</td>
              <td style="text-align:left;">
              	<input type="text" id="privilegeVo.methodName" name="privilegeVo.methodName" value="<s:property value='privilegeVo.methodName'/>"  size="30"/>
+             	(如果是操作,请输入对应方法名!)
              </td>
            </tr>
            <tr>
              <td style="text-align:right;">请求URL</td>
              <td style="text-align:left;">
              	<input type="text" id="privilegeVo.url" name="privilegeVo.url" value="<s:property value='privilegeVo.url'/>"  size="30"/>
+             	(如果是模块,请输入对应请求URL!)
              </td>
            </tr>
            <tr>

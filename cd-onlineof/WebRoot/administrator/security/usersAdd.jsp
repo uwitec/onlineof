@@ -69,6 +69,7 @@
            <td style="text-align:left;">
               <span style="white-space: nowrap;">
            		<input type="text" id="usersVo.usersname" name="usersVo.usersname" size=30/>
+           		<font size="+1" color="red">*</font>
            		<input type="button" value="检测用户" onclick="checkUsers()">
            		<span id="checkUsers"></span>
            	  </span>
@@ -76,11 +77,17 @@
          </tr>
          <tr>
            <td style="text-align:right;"><span style="white-space: nowrap;">密码</span></td>
-           <td style="text-align:left;"><input type="password" id="usersVo.password" name="usersVo.password" size=30></td>
+           <td style="text-align:left;">
+	           <input type="password" id="usersVo.password" name="usersVo.password" size=30/>
+	           <font size="+1" color="red">*</font>
+           </td>
          </tr>
          <tr>
            <td style="text-align:right;"><span style="white-space: nowrap;">确认密码</span></td>
-           <td style="text-align:left;"><input type="password" id="surePassword" name="surePassword" size=30></td>
+           <td style="text-align:left;">
+           		<input type="password" id="surePassword" name="surePassword" size=30/>
+           		<font size="+1" color="red">*</font>
+           </td>
          </tr>
          <tr>
            <td style="text-align:right;"><span style="white-space: nowrap;">性别</span></td>
@@ -93,7 +100,33 @@
          </tr>
          <tr>
            <td style="text-align:right;"><span style="white-space: nowrap;">出生日期</span></td>
-           <td style="text-align:left;"><input type="text" id="usersVo.birthdayStr" name="usersVo.birthdayStr" size=30 onFocus="new WdatePicker(this,'%Y%M%D',false)" class="Wdate"></td>
+           <td style="text-align:left;">
+	           <input type="text" id="usersVo.birthdayStr" name="usersVo.birthdayStr" size=30 onFocus="new WdatePicker(this,'%Y%M%D',false)" class="Wdate"/>
+           </td>
+         </tr>
+         <tr>
+           <td style="text-align:right;"><span style="white-space: nowrap;">QQ</span></td>
+           <td style="text-align:left;">
+           		<input type="text" id="usersVo.QQ" name="usersVo.QQ" size=30/>
+           </td>
+         </tr>
+         <tr>
+           <td style="text-align:right;"><span style="white-space: nowrap;">E-mail</span></td>
+           <td style="text-align:left;">
+           		<input type="text" id="usersVo.email" name="usersVo.email" size=30/>
+           </td>
+         </tr>
+         <tr>
+           <td style="text-align:right;"><span style="white-space: nowrap;">联系电话</span></td>
+           <td style="text-align:left;">
+           		<input type="text" id="usersVo.phone" name="usersVo.phone" size=30/>
+           </td>
+         </tr>
+         <tr>
+           <td style="text-align:right;"><span style="white-space: nowrap;">手机</span></td>
+           <td style="text-align:left;">
+           		<input type="text" id="usersVo.movebile" name="usersVo.movebile" size=30/>
+           </td>
          </tr>
          <tr>
            <td style="text-align:right;"><span style="white-space: nowrap;">所属餐厅</span></td>
@@ -109,6 +142,7 @@
 	      	      	</s:iterator>
       	      	</s:else>
       	      </select>
+      	      (酒店/餐厅用户,请选择一个餐厅!)
            </td>
          </tr>
          <tr>
@@ -125,6 +159,7 @@
       	           <option>暂无数据</option>
       	      	</s:else>
       	      </select>
+      	      (请选择一个角色,否则没有权限!)
            </td>
          </tr>
          <tr>

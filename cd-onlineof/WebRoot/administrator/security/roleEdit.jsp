@@ -25,6 +25,7 @@
                 <!-- 隐藏域 roleId -->
                 <input type="hidden" id="roleVo.roleId" name="roleVo.roleId" value="<s:property value='roleVo.roleId'/>"/>
               	<input type="text" id="roleVo.roleName" name="roleVo.roleName" size=30 value="<s:property value='roleVo.roleName'/>">
+              	<font size="+1" color="red">*</font>
               </td>
            </tr>
            <tr>
