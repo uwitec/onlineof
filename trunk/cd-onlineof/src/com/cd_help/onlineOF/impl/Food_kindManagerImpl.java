@@ -55,7 +55,8 @@ public class Food_kindManagerImpl implements Food_kindManager {
 	public void setRestaurantDataDao(RestaurantDataDao restaurantDataDao) {
 		this.restaurantDataDao = restaurantDataDao;
 	}
-
+	
+	@Resource(name="foodDataDao")
 	private FoodDataDao foodDataDao;
 
 	public void setFoodDataDao(FoodDataDao foodDataDao) {

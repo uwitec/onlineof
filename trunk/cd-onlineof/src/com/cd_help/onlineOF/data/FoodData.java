@@ -34,7 +34,7 @@ import javax.persistence.Table;
 @Table(name = "food")
 @NamedQueries( {
 		/* 获取所有饮食信息 */
-		@NamedQuery(name = "loadAllFood", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.number,f.introduction,f.img,f.isSigns) from FoodData f"),
+		@NamedQuery(name = "loadAllFood", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.introduction,f.img,f.isSigns) from FoodData f"),
 		/* 根据餐厅和类别获取饮食信息 */
 		@NamedQuery(name="getFoodAll",query="from FoodData"),
 		@NamedQuery(name="getFoodByKindId",query="from FoodData f where f.food_kindId=:kindId"),
@@ -70,13 +70,6 @@ public class FoodData implements Serializable {
 	 */
 	@Column(name = "price", nullable = true, length = 15)
 	private double price;
-	/**
-	 * 数量
-	 * 
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	@Column(name = "number", nullable = true, length = 15)
-	private Integer number;
 	/**
 	 * 介绍
 	 * 
@@ -119,14 +112,6 @@ public class FoodData implements Serializable {
 	 */
 	@ManyToMany(mappedBy = "foodList", fetch = FetchType.LAZY)
 	private List<OrdersData> ordersList;
-
-	public int getNumber() {
-		return number;
-	}
-
-	public void setNumber(int number) {
-		this.number = number;
-	}
 
 	public List<OrdersData> getOrdersList() {
 		return ordersList;

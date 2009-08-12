@@ -64,14 +64,14 @@ public class Restaurant_kindAction extends BaseAction {
 			} else {
 				hqlName = "getResKindByNamePage";
 				params = new String[] { "name" };
-				conditions = new Object[] { this.getKindName() };
+				conditions = new Object[] { null==this.getKindName()?"%":("%"+this.getKindName()+"%") };
 			}
 			this.pageBean = this.getOnlineOF().getRestaurant_kindManager().seachRestaurantKindPage(
 					hqlName, params, conditions, pageBean, this
 							.getSession());
 		} catch (Exception ex) {
 			ex.printStackTrace();
-			throw new AppException("loadRestaurantKindPException","加载餐厅分类信息失败.");
+			throw new AppException("restaurantKind0001","加载餐厅分类信息失败.");
 		}
 		return SUCCESS;
 	}
