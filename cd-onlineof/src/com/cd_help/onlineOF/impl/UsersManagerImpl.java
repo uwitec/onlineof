@@ -20,13 +20,14 @@ import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.api.UsersManager;
 import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.data.RoleData;
-import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.data.UsersData;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.ConvertUtils;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
+import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -162,6 +163,8 @@ public class UsersManagerImpl implements UsersManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private boolean checkPrivilege(UsersSession session) throws AppException {
+		@SuppressWarnings("unused")
+		List<PrivilegeVo> ownerPrivileges = session.getPrivileges();
 		return true;
 	}
 
