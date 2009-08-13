@@ -39,8 +39,7 @@ import javax.persistence.Table;
 	/*获取所有角色*/
 	@NamedQuery(name="loadAllRole",query="select DISTINCT r from RoleData r"),
 	/**/
-	@NamedQuery(name="searchRolesByPage",query="from RoleData r where r.roleName like :roleName"),
-})
+	@NamedQuery(name="searchRolesByPage",query="from RoleData r where r.roleName like :roleName")})
 public class RoleData implements Serializable{
 	/**
 	 * 角色ID

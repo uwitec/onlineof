@@ -55,7 +55,8 @@ import javax.persistence.Table;
 	@NamedQuery(name="getTopPrivilege",query="select DISTINCT p from PrivilegeData p where p.parent is null"),
 	/*获取子权限*/
 	@NamedQuery(name="getChildPrivilege",query="select DISTINCT p from PrivilegeData p where p.parent.privilegeId = :parentId"),
-})
+	
+	@NamedQuery(name="getPrivilegeByMethodName",query="select DISTINCT p from PrivilegeData p where p.methodName = :methodName")})
 public class PrivilegeData implements Serializable{
 	
 	/**

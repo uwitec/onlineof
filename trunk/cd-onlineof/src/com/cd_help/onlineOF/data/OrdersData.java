@@ -46,8 +46,7 @@ import javax.persistence.TemporalType;
 	@NamedQuery(name = "adminSearchHistoryOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantName like :resName and o.ordersDate < :odate"),
 	
 	@NamedQuery(name = "searchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate between :start and :end"),
-	@NamedQuery(name = "adminSearchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantName like :resName and o.ordersDate between :start and :end"),
-})
+	@NamedQuery(name = "adminSearchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantName like :resName and o.ordersDate between :start and :end")})
 public class OrdersData implements Serializable {
 
 	/**
