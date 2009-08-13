@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<application xmlns="http://java.sun.com/xml/ns/javaee"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/application_5.xsd"
+             version="5">
+	<display-name>JSF and Struts and EJB3 Sample Application</display-name>
+	<module>
+		<web>
+			<web-uri>strutscms.war</web-uri>
+			<context-root>strutscms</context-root>
+		</web>
+	</module>
+	<module>
+		<web>
+			<web-uri>jsfcms.war</web-uri>
+			<context-root>jsfcms</context-root>
+		</web>
+	</module>	
+	<module>
+	    <ejb>cms.jar</ejb>
+	</module>	
+</application>
