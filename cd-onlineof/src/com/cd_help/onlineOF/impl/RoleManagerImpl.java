@@ -86,8 +86,8 @@ public class RoleManagerImpl implements RoleManager{
 	 * @see com.cd_help.onlineOF.api.RoleManager#searchByPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.data.UsersSession)
 	 */
 	@SuppressWarnings("unchecked")
-	public PageBean searchRolesByPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean, UsersSession session)
+	public PageBean searchRolesByPage(UsersSession session,String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean)
 			throws AppException {
 		if(this.checkPrivilege(session)){
 			PageBean page = null;

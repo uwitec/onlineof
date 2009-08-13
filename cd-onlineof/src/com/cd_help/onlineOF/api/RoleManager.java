@@ -45,8 +45,8 @@ public interface RoleManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public PageBean searchRolesByPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean, UsersSession session)
+	public PageBean searchRolesByPage(UsersSession session,String hqlName, String[] paramName,
+			Object[] condition, PageBean pageBean)
 			throws AppException;
 	
 	/**

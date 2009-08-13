@@ -48,7 +48,7 @@ public class ConcurrentOperationExecutor {
 	private PrivilegeDataDao privilegeDataDao;
 	
 	@SuppressWarnings("unused")
-	@Pointcut("this(com.cd_help.onlineOF.api.*Manager)")
+	@Pointcut("this(com.cd_help.onlineOF.api.RoleManager)")
 	private void allMethod() {
 	};
 
@@ -61,46 +61,70 @@ public class ConcurrentOperationExecutor {
 		System.out.println("环绕通知--->strat");
 		String methodName = pjp.getSignature().getName();
 		System.out.println("执行的方法名:���"+methodName);
-		Object o = null; // �
-		UsersSession userSession = (UsersSession)pjp.getArgs()[pjp.getArgs().length-1];
+		Object o = null; // 
+		List<String> privilegeCodes = null;
 		try{
-			List<String> privilegeCodes = this.getPrivilegeByRoleId(userSession.getUsersVo().getRoleId());
-			if(this.havaPrivilegeMethod(methodName, privilegeCodes)){
-				try {
-					o = (Object) pjp.proceed();
-				} catch (Throwable e) {
-					throw new AppException("000000","系统错误!请联系管理员",e);
-				}
-			}else{
-				throw new AppException("0000011","对不起!您没有足够权限!");
-			}
+			UsersSession userSession = (UsersSession)pjp.getArgs()[0];
+			privilegeCodes = this.getPrivilegeByRoleId(userSession.getUsersVo().getRoleId());
 		}catch(Exception e){
 			throw new AppException("000000","系统错误!请联系管理员",e);
+		}
+		if(this.havaPrivilegeMethod(methodName, privilegeCodes)){
+			try {
+				o = (Object) pjp.proceed();
+			} catch (Throwable e) {
+				throw new AppException("000000","系统错误!请联系管理员",e);
+			}
+		}else{
+			throw new AppException("0000011","对不起!您没有足够权限!");
 		}
 		return o;
 	}
 	
-	private List<String> getPrivilegeByRoleId(String roleId) throws Exception{
-		List<PrivilegeData> plist = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByRoleId", "roleId", roleId);
-		Iterator iterator = plist.iterator();
+	/**
+	 * 获取当前登陆用户的权限
+	 * @param roleId
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private List<String> getPrivilegeByRoleId(String roleId) throws AppException{
 		List<String> privilegeCodes = new ArrayList<String>();
-		while(iterator.hasNext()){
-			PrivilegeData p = (PrivilegeData)iterator.next();
-			privilegeCodes.add(p.getMethodName());
+		try{
+			List<PrivilegeData> plist = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByRoleId", "roleId", roleId);
+			Iterator iterator = plist.iterator();
+			while(iterator.hasNext()){
+				PrivilegeData p = (PrivilegeData)iterator.next();
+				privilegeCodes.add(p.getMethodName());
+			}
+		}catch(Exception e){
+			throw new AppException("0000012","系统错误,请联系系统管理员!",e);
 		}
 		return privilegeCodes;
 	}
 	
-	public boolean havaPrivilegeMethod(String methodName,List<String> privilegeCodes) throws Exception{
-		List<PrivilegeData> plist = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByMethodName", "methodName", methodName);
-		PrivilegeData p = null;
-		if(plist.size() > 0){
-			p = (PrivilegeData)plist.get(0);
-		}
-		if(privilegeCodes.contains(p.getMethodName())){
-			return true;
-		}else{
-			return false;
+	/**
+	 * 判断是否有执行此方法的权限
+	 * @param methodName
+	 * @param privilegeCodes
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public boolean havaPrivilegeMethod(String methodName,List<String> privilegeCodes) throws AppException{
+		try{
+			List<PrivilegeData> plist = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByMethodName", "methodName", methodName);
+			PrivilegeData p = null;
+			if(plist.size() > 0){
+				p = (PrivilegeData)plist.get(0);
+			}
+			if(privilegeCodes.contains(p.getMethodName())){
+				return true;
+			}else{
+				return false;
+			}
+		}catch(Exception e){
+			throw new AppException("0000012","系统错误,请联系系统管理员!",e);
 		}
 	}
 
