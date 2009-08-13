@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="onlineOF" default="earjar" basedir=".">
+	<property name="jboss.home" value="E:\jboss-4.2.0.GA" />	
+	<property name="onlineof-web.jar" value="onlineof-web.jar" />
+	<property name="onlineof.jar" value="onlineOF.jar" />
+	
+	<property name="war" value="onlineof.war" />
+	<property name="ear" value="onlineof.ear" />
+	
+	<property name="config" value="${basedir}/config" />
+	
+	<property name="src.dir" value="${basedir}/src" />	
+	<property name="web.dir" value="${basedir}/WebRoot" />
+	
+	
+	
+	<property name="web.lib" value="${web.dir}/WEB-INF/lib" />
+	<property name="build.dir" value="${basedir}/build" />
+	<property name="build.onlineof.dir" value="${build.dir}/src" />
+	<property name="build.onlineof-web.dir" value="${build.dir}/WebRoot" />
+	<property name="packages" value="com.cd_help.onlineOF.*" />
+	<property name="name" value="onlineOF" />
+
+	<path id="classpath">
+		<fileset dir="${jboss.home}/server/default/lib">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${jboss.home}/server/default/deploy/ejb3.deployer">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${jboss.home}/server/default/deploy/jboss-aop-jdk50.deployer">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${jboss.home}/lib">
+			<include name="*.jar" />
+		</fileset>
+		<fileset dir="${web.lib}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<target name="clean">
+		<delete dir="${build.dir}" />
+		<delete file="${jboss.home}/server/default/deploy/${onlineof.jar}" />
+	</target>
+
+	<target name="prepare" depends="clean">
+		<mkdir dir="${build.dir}" />
+		<mkdir dir="${build.onlineof-web.dir}" />
+		<mkdir dir="${build.onlineof.dir}" />
+	</target>
+
+	<target name="onliofjar" depends="prepare">
+		<javac srcdir="${src.dir}" destdir="${build.onlineof.dir}" debug="on" deprecation="on" optimize="off">
+			<include name="com/**/api/**/*.java"/>
+			<include name="com/**/impl/**/*.java"/>
+			<include name="com/**/data/**/*.java"/>
+			<include name="com/**/utils/*.java"/>
+			<include name="com/**/web/*.java"/>
+			<compilerarg line="-encoding UTF-8 "/>
+			<classpath refid="classpath" />
+		</javac>		
+		<jar jarfile="${build.dir}/${onlineof.jar}">
+			<fileset dir="${build.onlineof.dir}">
+				<include name="**/*.class" />
+			</fileset>
+			<fileset dir="${config}/">
+				<include name="META-INF/ejb-jar.xml" />
+				<include name="META-INF/jboss.xml" />
+				<include name="META-INF/persistence.xml" />
+			</fileset>
+		</jar>
+		<copy file="${build.dir}/${onlineof.jar}" todir="${jboss.home}/server/default/deploy" />
+	</target>
+
+	<target name="webjar" depends="prepare">
+		<javac srcdir="${src.dir}" destdir="${build.onlineof-web.dir}" debug="on" deprecation="on" optimize="off">
+			<include name="com/**/web/**/*.java"/>
+			<include name="com/**/api/**/*.java"/>
+			<include name="com/**/data/*.java"/>
+			<include name="com/**/utils/*.java"/>
+			<compilerarg line="-encoding UTF-8 "/>
+			<classpath refid="classpath" />
+		</javac>
+		<!-- 
+		<copy todir="${build.onlineof-web.dir}" preservelastmodified="true">
+			<fileset dir="${src.dir}">
+				<include name="**/*.xml" />
+			</fileset>
+		</copy>	
+		-->
+		 
+		<native2ascii encoding="UTF-8" src="${src.dir}" dest="${build.onlineof-web.dir}" includes="**/*.properties" />
+		
+		<jar jarfile="${build.dir}/${onlineof-web.jar}">
+			<fileset dir="${build.onlineof-web.dir}">
+				<include name="**" />
+			</fileset>
+		</jar>		
+		<copy file="${build.dir}/${onlineof-web.jar}" todir="${web.lib}" />
+		<war warfile="${build.dir}/${war}" webxml="${web.dir}/WEB-INF/web.xml">
+			<fileset dir="${web.dir}"/>
+		</war>
+		<copy file="${build.dir}/${war}" todir="${jboss.home}/server/default/deploy" />
+	</target>
+	
+	<!-- 生成javadoc文档 
+	<target name="javadoc" depends="webjar,onliofjar">
+	   <mkdir dir="${build.javadocs}" />
+	   <javadoc packagenames="${packages}" sourcepath="${src.dir}" destdir="${build.javadocs}" author="true" version="true" use="true" splitindex="true" windowtitle="${name} API" doctitle="${name}">
+	     <classpath refid="classpath" />
+	   </javadoc>
+	</target>
+	-->
+
+	<target name="earjar" depends="webjar,onliofjar">
+		<!--  <java classname="com.titan.clients.Client" fork="yes" dir=".">
+			<classpath refid="classpath" />
+		</java> -->
+	</target>
+</project>
+
