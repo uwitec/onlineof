@@ -88,6 +88,9 @@ public class FoodDataDaoImpl extends BaseDaoSupport implements FoodDataDao{
 
 	public void update(FoodVo foodVo) throws Exception {
 	    FoodData foodData = (FoodData)this.get(FoodData.class,foodVo.getFoodId());
+	    if(null==foodVo.getImg()){
+	    	foodVo.setImg(foodData.getImg());
+	    }
         BeanUtilsHelp.copyProperties(foodData, foodVo);
 		this.update(foodData);  
 	}
