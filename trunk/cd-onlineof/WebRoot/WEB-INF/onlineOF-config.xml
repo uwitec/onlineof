@@ -28,7 +28,11 @@
 	
 	<!-- Spring注解配置 -->
 	<context:annotation-config/>
+	
     <!-- 切面配置 --> 	
 	<aop:aspectj-autoproxy />
+	<bean id="concurrentOperationExecutor"
+		class="com.cd_help.onlineOF.utils.ConcurrentOperationExecutor">
+	</bean>
 	
 </beans>
