@@ -58,8 +58,8 @@ public class RoleAction extends BaseAction{
 			params = new String[] { "roleName"};
 			conditions = new Object[] {
 					null == this.roleName ? "%" : "%" + this.roleName + "%"};
-			this.pb = this.getOnlineOF().getRoleManager().searchRolesByPage(hql,
-					params, conditions, this.pb, this.getSession());
+			this.pb = this.getOnlineOF().getRoleManager().searchRolesByPage(this.getSession(),hql,
+					params, conditions, this.pb);
 		}catch(AppException e){
 			log.error(e);
 			throw new AppException(e.getError_code(),e.getMessage(),e);
