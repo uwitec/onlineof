@@ -37,8 +37,7 @@ import javax.persistence.TemporalType;
 	@NamedQuery(name = "getUsersByRoleId", query = "select DISTINCT u from UsersData u where u.roleId = :roleId"), 
 	@NamedQuery(name = "searchUsersByPage", query = "from UsersData u where u.isSuper=0 and u.usersname like :usersname and u.restaurantId like :restaurantId"),
 	@NamedQuery(name = "countByUsersname", query = "select count(*) from UsersData u where u.usersname=:usersname"),
-	@NamedQuery(name = "countByUsersnameAndRestaurantId", query = "select count(*) from UsersData u where u.usersname=:usersname and u.restaurantId = :restaurantId"),
-})
+	@NamedQuery(name = "countByUsersnameAndRestaurantId", query = "select count(*) from UsersData u where u.usersname=:usersname and u.restaurantId = :restaurantId")})
 public class UsersData implements Serializable{
 	
 	/**
