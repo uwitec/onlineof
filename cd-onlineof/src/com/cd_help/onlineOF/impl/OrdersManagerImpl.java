@@ -15,16 +15,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cd_help.onlineOF.api.Food_kindDataDao;
 import com.cd_help.onlineOF.api.OrdersDataDao;
 import com.cd_help.onlineOF.api.OrdersManager;
 import com.cd_help.onlineOF.data.FoodData;
+import com.cd_help.onlineOF.data.Food_kindData;
 import com.cd_help.onlineOF.data.OrdersData;
+import com.cd_help.onlineOF.data.OrdersItemData;
 import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.ConvertUtils;
 import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.utils.PropertiesFinalValue;
 import com.cd_help.onlineOF.utils.StringUtil;
+import com.cd_help.onlineOF.web.vo.OrdersItemVo;
 import com.cd_help.onlineOF.web.vo.OrdersVo;
 
 /**
@@ -46,6 +51,9 @@ public class OrdersManagerImpl implements OrdersManager {
 	@Autowired
 	@Resource(name = "ordersDataDao")
 	private OrdersDataDao ordersDataDao;
+	@Autowired
+	@Resource(name = "food_kindDao")
+	private Food_kindDataDao food_kindDataDao;
 
 	public void create(OrdersVo ordersVo) throws AppException {
 		try {
@@ -55,32 +63,112 @@ public class OrdersManagerImpl implements OrdersManager {
 		}
 	}
 
-	public OrdersVo get(Integer id) throws AppException {
-		return null;
+	/**
+	 * 删除订单
+	 * 
+	 * @see com.cd_help.onlineOF.api.OrdersManager#delte(java.lang.String)
+	 */
+	public void delte(UsersSession session, String id) throws AppException {
+		OrdersData ordersData = null;
+		if (checkPrivilege(session)) {
+			try {
+				ordersData = (OrdersData) this.ordersDataDao.get(
+						OrdersData.class, id);
+				this.ordersDataDao.delete(ordersData);
+			} catch (Exception e) {
+				throw new AppException("", "系统错误");
+			}
+		}
 	}
 
 	/**
-	 * 检查权限
+	 * 更新订单
 	 * 
-	 * @param session
-	 * @return
-	 * @throws AppAppAppException
-	 * @since cd_help-onlineOF 0.0.0.1
+	 * @see com.cd_help.onlineOF.api.OrdersManager#update(com.cd_help.onlineOF.web.vo.OrdersVo)
 	 */
-	private boolean checkPrivilege(UsersSession session) throws AppException {
-		if (null == session.getUsersVo()) {
-			return false;
+	public void update(UsersSession seesion, OrdersVo ordersVo)
+			throws AppException {
+		OrdersData ordersData;
+		try {
+			ordersData = (OrdersData) ordersDataDao.get(OrdersData.class,
+					ordersVo.getOrdersId());
+		} catch (Exception e1) {
+			throw new AppException("", "系统错误");
 		}
-		return true;
+		if (!ordersData.getStatus().equals(ordersVo.getStatus())) {
+			ordersData.setStatus(ordersVo.getStatus());
+			try {
+				ordersDataDao.update(ordersData);
+			} catch (Exception e) {
+				throw new AppException("", "系统错误!");
+			}
+		}
 	}
 
-	public void setOrdersDataDao(OrdersDataDao ordersDataDao) {
-		this.ordersDataDao = ordersDataDao;
+	/**
+	 * 获取订单
+	 * 
+	 * @see com.cd_help.onlineOF.api.OrdersManager#get(java.lang.String)
+	 */
+	public OrdersVo get(UsersSession seesion, String id) throws AppException {
+		OrdersData ordersData = null;
+		try {
+			ordersData = (OrdersData) ordersDataDao.get(OrdersData.class, id);
+		} catch (Exception e) {
+			throw new AppException("", "系统错误");
+		}
+		return ordersDataSwitchVo(ordersData);
 	}
 
+	/**
+	 * 根据订单ID获取foodList
+	 * 
+	 * @see com.cd_help.onlineOF.api.OrdersManager#searchFoodListByOrderId(java.lang.String)
+	 */
 	@Override
-	public PageBean searchHistoryOrdersByPage(OrdersVo ordersVo,
-			String endTime, PageBean pageBean, UsersSession seesion)
+	public List<OrdersItemVo> searchFoodListByOrderId(UsersSession seesion,
+			String ordersId) throws Exception {
+		OrdersData ordersData = null;
+		try {
+			ordersData = (OrdersData) ordersDataDao.get(OrdersData.class,
+					ordersId);
+		} catch (Exception e) {
+			throw new AppException("", "系统错误");
+		}
+		if (null == ordersData.getItemData()
+				|| ordersData.getItemData().size() == 0) {
+			return null;
+		}
+		List<OrdersItemVo> oitemVOs = new ArrayList<OrdersItemVo>();
+		OrdersItemData oitemData = null;
+		OrdersItemVo oItemVo = null;
+		FoodData foodData = null;
+		for (Iterator<OrdersItemData> iterator = ordersData.getItemData()
+				.iterator(); iterator.hasNext();) {
+			oitemData = (OrdersItemData) iterator.next();
+			foodData = oitemData.getFoodData();
+			oItemVo = new OrdersItemVo();
+			BeanUtilsHelp.copyProperties(oItemVo, oitemData);
+			oItemVo.setFoodId(foodData.getFoodId());
+			oItemVo.setName(foodData.getName());
+			oItemVo.setPrice(foodData.getPrice());
+			oItemVo.setKindName(((Food_kindData) food_kindDataDao.get(
+					Food_kindData.class, foodData.getFood_kindId())).getName());
+			oitemVOs.add(oItemVo);
+		}
+		return oitemVOs;
+	}
+
+	/**
+	 * 查询历史订单
+	 * 
+	 * @see com.cd_help.onlineOF.api.OrdersManager#searchHistoryOrdersByPage(com.cd_help.onlineOF.web.vo.OrdersVo,
+	 *      java.lang.String, com.cd_help.onlineOF.utils.PageBean,
+	 *      com.cd_help.onlineOF.data.Session)
+	 */
+	@Override
+	public PageBean searchHistoryOrdersByPage(UsersSession seesion,
+			OrdersVo ordersVo, String endTime, PageBean pageBean)
 			throws AppException {
 		String hql = "";
 		String[] paramName = null;
@@ -132,12 +220,19 @@ public class OrdersManagerImpl implements OrdersManager {
 		} catch (Exception e) {
 			throw new AppException("", "系统错误！");
 		}
-		return ordersDataSwitchVo(pageBean);
+		return getOrdersVoPageBean(pageBean);
 	}
 
+	/**
+	 * 查询今日订单
+	 * 
+	 * @see com.cd_help.onlineOF.api.OrdersManager#searchTodayOrdersByPage(com.cd_help.onlineOF.web.vo.OrdersVo,
+	 *      com.cd_help.onlineOF.utils.PageBean,
+	 *      com.cd_help.onlineOF.data.Session)
+	 */
 	@Override
-	public PageBean searchTodayOrdersByPage(OrdersVo ordersVo,
-			PageBean pageBean, UsersSession seesion) throws AppException {
+	public PageBean searchTodayOrdersByPage(UsersSession seesion,
+			OrdersVo ordersVo, PageBean pageBean) throws AppException {
 		String hql = "";
 		String[] paramName = null;
 		Object[] condition = null;
@@ -164,43 +259,84 @@ public class OrdersManagerImpl implements OrdersManager {
 		} catch (Exception e) {
 			throw new AppException("", "系统错误！");
 		}
-		return ordersDataSwitchVo(pageBean);
+		return getOrdersVoPageBean(pageBean);
 	}
 
 	/**
 	 * 
-	 * data转vo
+	 * pageBean.array data转vo
 	 * 
 	 * @param pageBean
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private PageBean ordersDataSwitchVo(PageBean pageBean) {
+	@SuppressWarnings("unchecked")
+	private PageBean getOrdersVoPageBean(PageBean pageBean) {
 		List<OrdersVo> ordersList = new ArrayList<OrdersVo>();
 		OrdersData orderData = null;
-		OrdersVo orders = null;
-		for (Object obj : pageBean.getArray()) {
-			orderData = (OrdersData) obj;
-			orders = new OrdersVo();
-			try {
-				System.out.println(orderData.getOrdersDate().toString());
-				BeanUtilsHelp.copyProperties(orders, orderData);
-			} catch (AppException e) {
-			}
-			if (null != orderData.getFoodList()
-					&& orderData.getFoodList().size() > 0) {
-				double total = 0D;
-				for (Iterator<FoodData> iterator = orderData.getFoodList()
-						.iterator(); iterator.hasNext();) {
-					FoodData foodData = (FoodData) iterator.next();
-					total += foodData.getPrice();
-				}
-				orders.setTotalPrice(total);
-			}
-			orders.setLoginName(orderData.getMemberData().getLoginname());
-			ordersList.add(orders);
+		for (Iterator iterator = pageBean.getArray().iterator(); iterator
+				.hasNext();) {
+			orderData = (OrdersData) iterator.next();
+			ordersList.add(ordersDataSwitchVo(orderData));
 		}
 		pageBean.setArray(ordersList);
 		return pageBean;
+	}
+
+	/**
+	 * 
+	 * OrdersData 转 OrdersVo
+	 * 
+	 * @param ordersData
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private OrdersVo ordersDataSwitchVo(OrdersData ordersData) {
+		if (null == ordersData) {
+			return null;
+		}
+		OrdersVo ordersVo = new OrdersVo();
+		try {
+			BeanUtilsHelp.copyProperties(ordersVo, ordersData);
+		} catch (AppException e) {
+		}
+		if (null != ordersData.getItemData()
+				&& ordersData.getItemData().size() > 0) {
+			double total = 0D;
+			OrdersItemData ordersItemData = null;
+			for (Iterator<OrdersItemData> iterator = ordersData.getItemData()
+					.iterator(); iterator.hasNext();) {
+				ordersItemData = (OrdersItemData) iterator.next();
+				total = total
+						+ (ordersItemData.getFoodData().getPrice() * ordersItemData
+								.getNum()) + PropertiesFinalValue.TIP;
+			}
+			ordersVo.setTotalPrice(total);
+		}
+		ordersVo.setLoginName(ordersData.getMemberData().getLoginname());
+		return ordersVo;
+	}
+
+	/**
+	 * 检查权限
+	 * 
+	 * @param session
+	 * @return
+	 * @throws AppAppAppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private boolean checkPrivilege(UsersSession session) throws AppException {
+		if (null == session.getUsersVo()) {
+			return false;
+		}
+		return true;
+	}
+
+	public void setOrdersDataDao(OrdersDataDao ordersDataDao) {
+		this.ordersDataDao = ordersDataDao;
+	}
+
+	public void setFood_kindDataDao(Food_kindDataDao food_kindDataDao) {
+		this.food_kindDataDao = food_kindDataDao;
 	}
 }

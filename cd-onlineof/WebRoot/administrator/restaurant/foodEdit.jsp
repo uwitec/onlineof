@@ -62,7 +62,7 @@
 									type="hidden" name="foodVo.foodId"
 									value="${foodVo.foodId}" /> <input type="hidden"
 									name="foodKindId" value="${foodKindId}" /> <input type="text"
-									name="foodVo.name" size=30 value="${foodVo.name}"
+									name="foodVo.name" size="30" value="${foodVo.name}"
 									required="string" /><font size="+1" color="red">*</font> </span>
 						</td>
 					</tr>
@@ -72,7 +72,7 @@
 						</td>
 						<td style="text-align: left;" colspan="3">
 							<span style="white-space: nowrap;"> <input type="text"
-									name="foodVo.price" size=30 value="${foodVo.price}"
+									name="foodVo.price" size="30" value="${foodVo.price}"
 									required="string" /><font size="+1" color="red">*</font> </span>
 						</td>
 					</tr>

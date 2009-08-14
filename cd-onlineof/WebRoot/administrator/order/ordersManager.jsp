@@ -15,15 +15,43 @@
 			type="text/css" />
 		<script type="text/javascript" src="${pageContext.request.contextPath}/common/js/common.js"></script>
 		<script language="javascript" src="${pageContext.request.contextPath}/common/js/My97DatePicker/WdatePicker.js"></script>
+		<script type="text/javascript">
+			function hasChecked() {
+				var cks = document.getElementsByName("checksItem");
+				for (var i = 0; i < cks.length; i++){
+					if (cks[i].checked) {
+						return true;
+					}
+				}
+				return false;
+			}
+			function chang() {
+				var sele = document.getElementById("status");
+				var cks = document.getElementsByName("checksItem");
+				if (sele.value != "" && hasChecked()){
+					var fo = document.getElementById("ordersForm");
+					fo.action = "updateMany.do";
+					fo.submit();
+				}
+			}
+			function del() {
+				var cks = document.getElementsByName("checksItem");
+				if (cks.length > 0){
+					var f = document.getElementById("ordersForm");
+					f.action = "del.do";
+					f.submit();
+				}
+			}
+		</script>
 	</head>
 	<body
 		style="margin-top: 0px; margin-bottom: 0px; margin-left: 0px; margin-right: 0px;">
-		<form action="searchOrders.do" method="post">
-			<input type="hidden" name="o" value="${0}">
+		<form id="ordersForm" action="searchOrders.do" method="post">
+			<input type="hidden" name="o" value="${o}">
 			<div style="width: 100%; font-size: 10pt;">
 				<span style="white-space: nowrap;">
 				<span style="white-space: nowrap;">用户名</span>
-					<input type="text" id="usersname" name="ordersVo.loginName" value="${ordersVo.loginName}" size="12"/>
+					<input type="text" id="usersname" name="ordersVo.loginName" size="12"/>
 					<s:if test="#session.session.usersVo.isSuper == 1">
 						<span style="white-space: nowrap;">所属餐厅/酒店</span>
 						<span style="white-space: nowrap;">
@@ -70,11 +98,16 @@
 					<span style="white-space: nowrap;">
 						<input type="submit" value="查询"/>
 					</span>
-					<s:if test="#session.session.usersVo.isSuper == 1">
-						<span style="white-space: nowrap;">
-							<input type="button" value="删除"/>
-						</span>
-					</s:if>
+					<span style="white-space: nowrap;">
+						<select id="status" name="status" onchange="javascript:chang();">
+							<option value="">订单操作</option>
+							<option value="配送中">确认订单</option>
+							<option value="完成">完成订单</option>
+						</select>
+					</span>
+					<span style="white-space: nowrap;">
+						<input type="button" value="删除" onclick="javascript:del();"/>
+					</span>
 				</span>
 			</div>
 			<table style="width: 100%;">
@@ -115,8 +148,8 @@
 									<input type="checkbox" id="checksItem" name="checksItem"
 										value="<s:property value='ordersId'/>"
 										onclick="checkedJudge(this)" />
-									<span style="white-space: nowrap;"><s:property
-											value="ordersCode" /> </span>
+									<span style="white-space: nowrap;"><a href="getInfo.do?ordersVo.ordersId=${ordersId}"><s:property
+											value="ordersCode" /></a></span>
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property
@@ -124,13 +157,13 @@
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property
-											value="contactName" /> <s:if test="contactGender == 0">(女士)</s:if>
+											value="contactName" />&nbsp;<s:if test="contactGender == 0">(女士)</s:if>
 										<s:else>(先生)</s:else> </span>
 
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property
-											value="totalPrice" />(元)</span>
+											value="totalPrice" />&nbsp;(元)</span>
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property
@@ -165,8 +198,8 @@
 			<div class="pagination" style="font-size: 10pt;">
 				<page:pages1 pagesize="${pb.pagesize}"
 					currentPage="${pb.currentPage}" totalPage="${pb.totalPage}"
-					totalRow="${pb.totalRow}" liststep="10" dispalytext="个订单"
-					url="searchOrders.do?o=${o}&ordersVo.loginName=${ordersVo.loginName}&ordersVo.restaurantName=${ordersVo.restaurantName}&ordersVo.ordersDate=${ordersVo.ordersDate}&endTime=${endTime}" />
+					totalRow="${pb.totalRow}" liststep="10" dispalytext="笔订单"
+					url="searchOrders.do?o=${o}&ordersVo.loginName=${ordersVo.loginName}&ordersVo.restaurantName=${ordersVo.restaurantName}&ordersVo.ordersDate=${ordersVo.ordersDate}&endTime=${endTime}&ordersVo.status=${ordersVo.status}" />
 			</div>
 		</s:if>
 		<!-- 分页end -->

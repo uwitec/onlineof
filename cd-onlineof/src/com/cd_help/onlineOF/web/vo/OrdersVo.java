@@ -6,7 +6,6 @@
 package com.cd_help.onlineOF.web.vo;
 
 import java.util.Date;
-import java.util.List;
 
 import com.cd_help.onlineOF.utils.ConvertUtils;
 
@@ -49,7 +48,7 @@ public class OrdersVo {
 	 */
 	public OrdersVo(String ordersId, String ordersCode, String remark,
 			String contactPhone, String contactName, Integer contactGender,
-			String requestAddress, Date ordersDate) {
+			String requestAddress, Date ordersDate, String restaurantName,String status) {
 		this.ordersId = ordersId;
 		this.ordersCode = ordersCode;
 		this.remark = remark;
@@ -58,6 +57,8 @@ public class OrdersVo {
 		this.contactGender = contactGender;
 		this.requestAddress = requestAddress;
 		this.ordersDate = ConvertUtils.toString1(ordersDate);
+		this.restaurantName = restaurantName;
+		this.status = status;
 	}
 
 	/**
@@ -110,13 +111,6 @@ public class OrdersVo {
 	private String requestAddress;
 
 	/**
-	 * 餐厅ID
-	 * 
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	private String restaurantId;
-
-	/**
 	 * 餐厅名
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -135,13 +129,6 @@ public class OrdersVo {
 	 */
 	private String loginName;
 	/**
-	 * 訂單飯菜
-	 * 
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	private List<FoodVo> foodList;
-
-	/**
 	 * 訂單支付的價格
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -154,14 +141,6 @@ public class OrdersVo {
 
 	public void setTotalPrice(double totalPrice) {
 		this.totalPrice = totalPrice;
-	}
-
-	public List<FoodVo> getFoodList() {
-		return foodList;
-	}
-
-	public void setFoodList(List<FoodVo> foodList) {
-		this.foodList = foodList;
 	}
 
 	public String getStatus() {
@@ -242,14 +221,6 @@ public class OrdersVo {
 
 	public void setContactGender(Integer contactGender) {
 		this.contactGender = contactGender;
-	}
-
-	public String getRestaurantId() {
-		return restaurantId;
-	}
-
-	public void setRestaurantId(String restaurantId) {
-		this.restaurantId = restaurantId;
 	}
 
 	public String getRestaurantName() {

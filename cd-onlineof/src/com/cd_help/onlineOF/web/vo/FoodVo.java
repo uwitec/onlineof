@@ -9,7 +9,11 @@ import java.io.Serializable;
 import java.sql.Blob;
 
 /**
- * <b><code></code></b> <p/> 饮食VO <p/> <b>Creation Time:</b> Jul 18, 2009
+ * <b><code></code></b>
+ * <p/>
+ * 饮食VO
+ * <p/>
+ * <b>Creation Time:</b> Jul 18, 2009
  * 
  * @author TanDong
  * @version 0.0.0.1
@@ -17,7 +21,7 @@ import java.sql.Blob;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @SuppressWarnings("serial")
-public class FoodVo implements Serializable{
+public class FoodVo implements Serializable {
 
 	/**
 	 * ID
@@ -112,22 +116,33 @@ public class FoodVo implements Serializable{
 	/**
 	 * 
 	 * Constructs a <code>FoodVo</code>
-	 * @param foodId 菜ID
-	 * @param name   菜名称
-	 * @param price  菜价格
-	 * @param introduction 菜简介
-	 * @param img         菜图片
-	 * @param isSigns     是否招牌菜
-	 * @param kindId      菜分类ID
-	 * @param kindName    菜分类名称
-	 * @param restauantId 所属餐厅ID
-	 * @param restaurantName  所属餐厅名称
+	 * 
+	 * @param foodId
+	 *            菜ID
+	 * @param name
+	 *            菜名称
+	 * @param price
+	 *            菜价格
+	 * @param introduction
+	 *            菜简介
+	 * @param img
+	 *            菜图片
+	 * @param isSigns
+	 *            是否招牌菜
+	 * @param kindId
+	 *            菜分类ID
+	 * @param kindName
+	 *            菜分类名称
+	 * @param restauantId
+	 *            所属餐厅ID
+	 * @param restaurantName
+	 *            所属餐厅名称
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public FoodVo(String foodId, String name, double price,
 			String introduction, Blob img, Integer isSigns, String kindId,
 			String kindName, String restauantId, String restaurantName) {
-		this.foodId = foodId;   
+		this.foodId = foodId;
 		this.name = name;
 		this.price = price;
 		this.introduction = introduction;
@@ -138,8 +153,6 @@ public class FoodVo implements Serializable{
 		this.restaurantId = restauantId;
 		this.restaurantName = restaurantName;
 	}
-
-
 
 	public String getFood_kindId() {
 		return food_kindId;
