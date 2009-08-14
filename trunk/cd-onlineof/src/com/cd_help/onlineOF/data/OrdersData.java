@@ -15,10 +15,9 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -39,14 +38,14 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "orders")
 @NamedQueries( {
-	@NamedQuery(name = "searchTodayOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate > :odate"),
-	@NamedQuery(name = "adminSearchTodayOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantName like :resName and o.ordersDate > :odate"),
+	@NamedQuery(name = "searchTodayOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate > :odate order by o.ordersDate"),
+	@NamedQuery(name = "adminSearchTodayOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantName like :resName and o.ordersDate > :odate order by o.ordersDate"),
 	
-	@NamedQuery(name = "searchHistoryOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate < :odate"),
-	@NamedQuery(name = "adminSearchHistoryOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantName like :resName and o.ordersDate < :odate"),
+	@NamedQuery(name = "searchHistoryOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate < :odate order by o.ordersDate"),
+	@NamedQuery(name = "adminSearchHistoryOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantName like :resName and o.ordersDate < :odate order by o.ordersDate"),
 	
-	@NamedQuery(name = "searchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate between :start and :end"),
-	@NamedQuery(name = "adminSearchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantName like :resName and o.ordersDate between :start and :end")})
+	@NamedQuery(name = "searchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate between :start and :end order by o.ordersDate"),
+	@NamedQuery(name = "adminSearchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantName like :resName and o.ordersDate between :start and :end order by o.ordersDate")})
 public class OrdersData implements Serializable {
 
 	/**
@@ -125,13 +124,12 @@ public class OrdersData implements Serializable {
 	@Column(name = "status", nullable = true, length = 20)
 	private String status;
 	/**
-	 * 所订饮食
+	 * 订单项列表
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.REFRESH }, fetch = FetchType.LAZY)
-	@JoinTable(name = "orders_food", joinColumns = { @JoinColumn(name = "foodId") }, inverseJoinColumns = { @JoinColumn(name = "ordersId") })
-	private List<FoodData> foodList;
+	@OneToMany(mappedBy = "ordersData", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	private List<OrdersItemData> itemData;
 	/**
 	 * 订单用户
 	 * 
@@ -147,6 +145,14 @@ public class OrdersData implements Serializable {
 	 */
 	@Column(name = "restaurantName", nullable = true, length = 50)
 	private String restaurantName;
+
+	public List<OrdersItemData> getItemData() {
+		return itemData;
+	}
+
+	public void setItemData(List<OrdersItemData> itemData) {
+		this.itemData = itemData;
+	}
 
 	public String getRestaurantName() {
 		return restaurantName;
@@ -170,14 +176,6 @@ public class OrdersData implements Serializable {
 
 	public void setStatus(String status) {
 		this.status = status;
-	}
-
-	public List<FoodData> getFoodList() {
-		return foodList;
-	}
-
-	public void setFoodList(List<FoodData> foodList) {
-		this.foodList = foodList;
 	}
 
 	public String getOrdersId() {

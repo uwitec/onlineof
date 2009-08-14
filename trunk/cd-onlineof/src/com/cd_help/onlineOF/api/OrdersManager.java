@@ -5,9 +5,12 @@
  */
 package com.cd_help.onlineOF.api;
 
+import java.util.List;
+
 import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.web.vo.OrdersItemVo;
 import com.cd_help.onlineOF.web.vo.OrdersVo;
 
 /**
@@ -25,6 +28,27 @@ import com.cd_help.onlineOF.web.vo.OrdersVo;
 public interface OrdersManager {
 
 	/**
+	 * 
+	 * 删除订单
+	 * 
+	 * @param id
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void delte(UsersSession session, String id) throws AppException;
+
+	/**
+	 * 更新订单
+	 * 
+	 * @param ordersVo
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public void update(UsersSession seesion, OrdersVo ordersVo)
+			throws Exception;
+
+	/**
 	 * 根据ID获取订单
 	 * 
 	 * @param id
@@ -32,7 +56,19 @@ public interface OrdersManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public OrdersVo get(Integer id) throws Exception;
+	public OrdersVo get(UsersSession seesion, String id) throws Exception;
+
+	/**
+	 * 
+	 * 根据订单ID获取訂單項List
+	 * 
+	 * @param ordersId
+	 * @return
+	 * @throws Exception
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<OrdersItemVo> searchFoodListByOrderId(UsersSession seesion,
+			String ordersId) throws Exception;
 
 	/**
 	 * 生成订单
@@ -55,8 +91,8 @@ public interface OrdersManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public PageBean searchTodayOrdersByPage(OrdersVo ordersVo, PageBean pageBean,
-			UsersSession seesion) throws AppException;
+	public PageBean searchTodayOrdersByPage(UsersSession seesion,
+			OrdersVo ordersVo, PageBean pageBean) throws AppException;
 
 	/**
 	 * 歷史訂單
@@ -70,6 +106,7 @@ public interface OrdersManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public PageBean searchHistoryOrdersByPage(OrdersVo ordersVo, String endTime,
-			PageBean pageBean, UsersSession seesion) throws AppException;
+	public PageBean searchHistoryOrdersByPage(UsersSession seesion,
+			OrdersVo ordersVo, String endTime, PageBean pageBean)
+			throws AppException;
 }

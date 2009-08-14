@@ -7,13 +7,10 @@ package com.cd_help.onlineOF.data;
 
 import java.io.Serializable;
 import java.sql.Blob;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -104,22 +101,6 @@ public class FoodData implements Serializable {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String restaurantId;
-
-	/**
-	 * 訂單
-	 * 
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	@ManyToMany(mappedBy = "foodList", fetch = FetchType.LAZY)
-	private List<OrdersData> ordersList;
-
-	public List<OrdersData> getOrdersList() {
-		return ordersList;
-	}
-
-	public void setOrdersList(List<OrdersData> ordersList) {
-		this.ordersList = ordersList;
-	}
 
 	public String getFoodId() {
 		return foodId;

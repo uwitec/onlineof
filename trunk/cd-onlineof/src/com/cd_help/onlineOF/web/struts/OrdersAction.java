@@ -5,8 +5,6 @@
  */
 package com.cd_help.onlineOF.web.struts;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.springframework.context.annotation.Scope;
@@ -14,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.utils.PropertiesFinalValue;
+import com.cd_help.onlineOF.web.vo.OrdersItemVo;
 import com.cd_help.onlineOF.web.vo.OrdersVo;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
@@ -35,6 +35,7 @@ public class OrdersAction extends BaseAction {
 	private PageBean pb = new PageBean();
 	private OrdersVo ordersVo = new OrdersVo();
 	private List<RestaurantVo> restaurantVos;
+	private List<OrdersItemVo> itemVoList;
 	private int page = 1;
 	private String o = "";
 	private String endTime = "";
@@ -50,23 +51,110 @@ public class OrdersAction extends BaseAction {
 		return SUCCESS;
 	}
 
+	/**
+	 * 删除订单
+	 * 
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String delOrders() throws AppException {
+		String[] checkItems = this.getRequest()
+				.getParameterValues("checksItem");
+		for (String str : checkItems) {
+			try {
+				this.getOnlineOF().getOrdersManager().delte(this.getSession(),
+						str);
+			} catch (Exception e) {
+				throw new AppException("", "Failure to update more");
+			}
+		}
+		searchOrders();
+		return SUCCESS;
+	}
+
+	/**
+	 * 批量更新订单
+	 * 
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String updateManyOrders() throws AppException {
+		String[] checkItems = this.getRequest()
+				.getParameterValues("checksItem");
+		for (String str : checkItems) {
+			ordersVo.setOrdersId(str);
+			ordersVo.setStatus(this.getRequest().getParameter("status"));
+			try {
+				this.getOnlineOF().getOrdersManager().update(this.getSession(),
+						ordersVo);
+			} catch (Exception e) {
+				throw new AppException("", "Failure to update more");
+			}
+		}
+		ordersVo.setStatus("");
+		searchOrders();
+		return SUCCESS;
+	}
+
+	/**
+	 * 更新订单
+	 * 
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String updateOrders() throws AppException {
+		try {
+			this.getOnlineOF().getOrdersManager().update(this.getSession(),
+					ordersVo);
+		} catch (Exception e) {
+			throw new AppException("", "Updating the order error!");
+		}
+		searchOrderInfo();
+		this.getRequest().setAttribute("upd", true);
+		return SUCCESS;
+	}
+
+	/**
+	 * 
+	 * 订单详细
+	 * 
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String searchOrderInfo() throws AppException {
+		try {
+			ordersVo = this.getOnlineOF().getOrdersManager().get(
+					this.getSession(), ordersVo.getOrdersId());
+			itemVoList = this.getOnlineOF().getOrdersManager()
+					.searchFoodListByOrderId(this.getSession(),
+							ordersVo.getOrdersId());
+		} catch (Exception e) {
+			throw new AppException("", "Loading the order deatil info error!");
+		}
+		this.getRequest().setAttribute("tip", PropertiesFinalValue.TIP);
+		return SUCCESS;
+	}
+
+	/**
+	 * 
+	 * 查询订单列表
+	 * 
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
 	public String searchOrders() throws AppException {
-//		if (!endTime.equals("")){
-//			SimpleDateFormat simpleDateFormat = new SimpleDateFormat();
-//			System.out.println(endTime);
-//			try {
-//				simpleDateFormat.parse(endTime);
-//			} catch (ParseException e) {
-//				e.printStackTrace();
-//			}
-//		}
-		pb.setPagesize(2);
+		pb.setPagesize(PropertiesFinalValue.PAGE_SIZE);
 		pb.setCurrentPage(page);
 		if (o.equals("tod")) {
 			try {
 				pb = this.getOnlineOF().getOrdersManager()
-						.searchTodayOrdersByPage(ordersVo, pb,
-								this.getSession());
+						.searchTodayOrdersByPage(this.getSession(), ordersVo,
+								pb);
 			} catch (Exception e) {
 				log.error("", e);
 				throw new AppException("", "Loading the orders error！");
@@ -74,8 +162,8 @@ public class OrdersAction extends BaseAction {
 		} else {
 			try {
 				pb = this.getOnlineOF().getOrdersManager()
-						.searchHistoryOrdersByPage(ordersVo, endTime, pb,
-								this.getSession());
+						.searchHistoryOrdersByPage(this.getSession(), ordersVo,
+								endTime, pb);
 			} catch (Exception e) {
 				log.error("", e);
 				throw new AppException("", "Loading the orders error！");
@@ -83,9 +171,10 @@ public class OrdersAction extends BaseAction {
 		}
 		if (this.getSession().getUsersVo().getIsSuper().equals(1)) {
 			try {
-				restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
+				restaurantVos = this.getOnlineOF().getRestaurantManager()
+						.loadAll();
 			} catch (Exception e) {
-				throw new AppException("","Error");
+				throw new AppException("", "Error");
 			}
 		}
 		return SUCCESS;
@@ -137,5 +226,13 @@ public class OrdersAction extends BaseAction {
 
 	public void setRestaurantVos(List<RestaurantVo> restaurantVos) {
 		this.restaurantVos = restaurantVos;
+	}
+
+	public List<OrdersItemVo> getItemVoList() {
+		return itemVoList;
+	}
+
+	public void setItemVoList(List<OrdersItemVo> itemVoList) {
+		this.itemVoList = itemVoList;
 	}
 }

@@ -7,5 +7,17 @@
 		<action name="searchOrders" class="ordersAction" method="searchOrders">
 			<result name="success">/administrator/order/ordersManager.jsp</result>
 		</action>
+		<action name="getInfo" class="ordersAction" method="searchOrderInfo">
+			<result name="success">/administrator/order/ordersEdit.jsp</result>
+		</action>
+		<action name="update" class="ordersAction" method="updateOrders">
+			<result name="success">/administrator/order/ordersEdit.jsp</result>
+		</action>
+		<action name="updateMany" class="ordersAction" method="updateManyOrders">
+			<result name="success">/administrator/order/ordersManager.jsp</result>
+		</action>
+		<action name="del" class="ordersAction" method="delOrders">
+			<result name="success">/administrator/order/ordersManager.jsp</result>
+		</action>
 	</package>
 </struts>

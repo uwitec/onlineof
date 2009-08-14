@@ -30,9 +30,7 @@ public final class PropertiesFinalValue {
 		return PropertiesFinalValue.pfv;
 	}
 	
-	public static final String ORDER_UNSET = PropertiesFinalValue.pu.getProperty("order.unset");
+	public static final Integer PAGE_SIZE = new Integer(PropertiesFinalValue.pu.getProperty("pagesize"));
 	
-	public static final String ORDER_GIVING = PropertiesFinalValue.pu.getProperty("order.giving");
-	
-	public static final String ORDER_OVER = PropertiesFinalValue.pu.getProperty("order.over");
+	public static final Integer TIP = new Integer(PropertiesFinalValue.pu.getProperty("tip"));
 }

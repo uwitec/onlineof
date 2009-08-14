@@ -44,5 +44,4 @@ public class OrdersDataDaoImpl extends BaseDaoSupport implements OrdersDataDao {
 		this.save(ordersData);
 		return true;
 	}
-
 }
