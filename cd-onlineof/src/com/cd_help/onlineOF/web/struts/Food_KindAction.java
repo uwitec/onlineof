@@ -57,7 +57,7 @@ public class Food_KindAction extends BaseAction {
 	public String getFoodKindPage() throws Exception {
 		// TODO Auto-generated method stub
 		log.debug("load FoodKind Page...");
-		restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
+		restaurantVos = this.getOnlineOF().getRestaurantManager().loadARestaurantAll();
 		String[] params = null;
 		Object[] conditions = null;
 		String hqlName = "";
@@ -142,7 +142,7 @@ public class Food_KindAction extends BaseAction {
 	 */
 	public String editFoodKind() throws Exception {
 		// TODO Auto-generated method stub
-		restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
+		restaurantVos = this.getOnlineOF().getRestaurantManager().loadARestaurantAll();
 		if (null != this.getFood_kindVo()
 				&& null != this.getFood_kindVo().getFood_kind_Id()
 				&& this.getFood_kindVo().getFood_kind_Id().length() > 0) {

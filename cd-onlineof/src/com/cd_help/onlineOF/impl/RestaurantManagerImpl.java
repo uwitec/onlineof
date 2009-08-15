@@ -67,7 +67,7 @@ public class RestaurantManagerImpl implements RestaurantManager {
 	 * @throws AppException
 	 * @see com.cd_help.onlineOF.api.RestaurantManager#loadAll()
 	 */
-	public List<RestaurantVo> loadAll() throws AppException {
+	public List<RestaurantVo> loadARestaurantAll() throws AppException {
 		List<RestaurantVo> restaurantList = null;
 		try {
 			restaurantList = restaurantDataDao.loadAll();
@@ -80,7 +80,7 @@ public class RestaurantManagerImpl implements RestaurantManager {
 	/**
 	 * @see com.cd_help.onlineOF.api.RestaurantManager#save(com.cd_help.onlineOF.web.vo.RestaurantVo)
 	 */
-	public RestaurantVo save(RestaurantVo restaurantVo) throws AppException {
+	public RestaurantVo saveRestaurant(RestaurantVo restaurantVo) throws AppException {
 		try {
 			RestaurantData restaurantData = new RestaurantData();
 			BeanUtilsHelp.copyProperties(restaurantData, restaurantVo);
@@ -97,7 +97,7 @@ public class RestaurantManagerImpl implements RestaurantManager {
 	 * @see com.cd_help.onlineOF.api.RestaurantManager#delete(java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
-	public void delete(String id) throws AppException {
+	public void deleteRestaurant(String id) throws AppException {
 		try {
 			RestaurantData restaurantData = (RestaurantData) restaurantDataDao
 					.get(RestaurantData.class, id);

@@ -62,7 +62,7 @@ public class FoodAction extends BaseAction {
 	public String getFoodPage() throws Exception {
 		// TODO Auto-generated method stub
 		log.debug("load FoodKind Page...");
-		restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
+		restaurantVos = this.getOnlineOF().getRestaurantManager().loadARestaurantAll();
 		String[] params = null;
 		Object[] conditions = null;
 		String hqlName = "";
@@ -97,10 +97,10 @@ public class FoodAction extends BaseAction {
 	 */
 	public String editFood() throws Exception {
 		// TODO Auto-generated method stub
-		restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
+		restaurantVos = this.getOnlineOF().getRestaurantManager().loadARestaurantAll();
 		if (null != this.getFoodVo() && null != this.getFoodVo().getFoodId()
 				&& this.getFoodVo().getFoodId().length() > 0) {
-			this.foodVo = this.getOnlineOF().getFoodManager().get(
+			this.foodVo = this.getOnlineOF().getFoodManager().getFoodById(
 					this.getFoodVo().getFoodId());
 		} else {
 			this.foodVo = new FoodVo();
@@ -124,13 +124,13 @@ public class FoodAction extends BaseAction {
 				FileInputStream inputStream = new FileInputStream(this.foodImg);
 				foodVo.setImg(Hibernate.createBlob(inputStream));
 			}
-			this.getOnlineOF().getFoodManager().update(foodVo);
+			this.getOnlineOF().getFoodManager().updateFood(foodVo);
 		} else {
 			// 处理添加菜信息
 			this.foodVo.setFoodId(StringUtil.getUUID());
 			FileInputStream inputStream = new FileInputStream(this.foodImg);
 			foodVo.setImg(Hibernate.createBlob(inputStream));
-			this.getOnlineOF().getFoodManager().save(foodVo);
+			this.getOnlineOF().getFoodManager().saveFood(foodVo);
 		}
 		return this.getFoodPage();
 	}
@@ -146,12 +146,12 @@ public class FoodAction extends BaseAction {
 		// TODO Auto-generated method stub
 		if (null != this.getFoodVo() && null != this.getFoodVo().getFoodId()
 				&& this.getFoodVo().getFoodId().length() > 0) {
-			this.getOnlineOF().getFoodManager().delete(
+			this.getOnlineOF().getFoodManager().deleteFood(
 					this.getFoodVo().getFoodId());
 		}
 		if (null != this.checksItem && this.checksItem.length > 0) {
 			for (String str : checksItem) {
-				this.getOnlineOF().getFoodManager().delete(str);
+				this.getOnlineOF().getFoodManager().deleteFood(str);
 			}
 		}
 		return this.getFoodPage();
@@ -167,7 +167,7 @@ public class FoodAction extends BaseAction {
 	public String foodPreView() throws Exception {
 		// TODO Auto-generated method stub
 		if(null!=foodVo && null!=foodVo.getFoodId()){
-			foodVo =this.getOnlineOF().getFoodManager().get(foodVo.getFoodId());
+			foodVo =this.getOnlineOF().getFoodManager().getFoodById(foodVo.getFoodId());
 		}
 		return SUCCESS;
 	}

@@ -65,7 +65,7 @@ public class FoodManagerImpl implements FoodManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.FoodManager#delete(java.lang.String)
 	 */
-	public void delete(String id) throws AppException {
+	public void deleteFood(String id) throws AppException {
 		try{
 			foodDataDao.delete(id);
 		}catch(Exception e){
@@ -76,7 +76,7 @@ public class FoodManagerImpl implements FoodManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.FoodManager#exist(java.lang.String)
 	 */
-	public boolean exist(String id) throws AppException {
+	public boolean existFood(String id) throws AppException {
 		boolean bool = false;
 		try{
 			bool = foodDataDao.exist(id);
@@ -89,7 +89,7 @@ public class FoodManagerImpl implements FoodManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.FoodManager#get(java.lang.String)
 	 */
-	public FoodVo get(String id) throws AppException {
+	public FoodVo getFoodById(String id) throws AppException {
 		FoodVo foodVo = null;
 		try{
 			foodVo = foodDataDao.get(id);
@@ -102,7 +102,7 @@ public class FoodManagerImpl implements FoodManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.FoodManager#loadAll()
 	 */
-	public List<FoodVo> loadAll() throws AppException {
+	public List<FoodVo> loadFoodAll() throws AppException {
 		List<FoodVo> foodVos = null;
 		try{
 			foodVos = foodDataDao.loadAll();
@@ -115,7 +115,7 @@ public class FoodManagerImpl implements FoodManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.FoodManager#save(com.cd_help.onlineOF.web.vo.FoodVo)
 	 */
-	public FoodVo save(FoodVo foodVo) throws AppException {
+	public FoodVo saveFood(FoodVo foodVo) throws AppException {
 		FoodVo fv = null;
 		try{
 			fv = foodDataDao.save(foodVo);
@@ -128,7 +128,7 @@ public class FoodManagerImpl implements FoodManager{
 	/**
 	 * @see com.cd_help.onlineOF.api.FoodManager#update(com.cd_help.onlineOF.web.vo.FoodVo)
 	 */
-	public void update(FoodVo foodVo) throws AppException {
+	public void updateFood(FoodVo foodVo) throws AppException {
 		try{
 			foodDataDao.update(foodVo);
 		}catch(Exception e){

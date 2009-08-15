@@ -151,7 +151,7 @@ public class UsersAction extends BaseAction {
 	private void loadAllRestaurant() throws AppException{
 		// 加载所有餐厅
 		try{
-		   restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
+		   restaurantVos = this.getOnlineOF().getRestaurantManager().loadARestaurantAll();
 		}catch(AppException e){
 			log.error(e);
 			throw new AppException(e.getError_code(),e.getMessage(),e);

@@ -47,7 +47,7 @@ public class ImageServlet extends HttpServlet {
 					image = this.getOnlineOF().getRestaurantManager()
 							.getRestaurantById(resId).getImg();
 				} else if (typeId == 2) {
-					image = this.getOnlineOF().getFoodManager().get(resId)
+					image = this.getOnlineOF().getFoodManager().getFoodById(resId)
 							.getImg();
 				} else {
 					throw new AppException("img0002", "数据库读取图片出错!");
