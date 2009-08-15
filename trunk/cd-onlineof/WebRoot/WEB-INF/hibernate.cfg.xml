@@ -31,6 +31,8 @@
 		<mapping class="com.cd_help.onlineOF.data.PrivilegeData"/>
 		<mapping class="com.cd_help.onlineOF.data.MemberData"/>
 		<mapping class="com.cd_help.onlineOF.data.OrdersItemData"/>
+		<mapping class="com.cd_help.onlineOF.data.InfoData"/>
+		<mapping class="com.cd_help.onlineOF.data.InfoKindData"/>
 	</session-factory>
 	
 </hibernate-configuration>

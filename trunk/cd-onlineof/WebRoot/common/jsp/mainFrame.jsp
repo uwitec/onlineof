@@ -53,24 +53,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-	
-	<table width="1140" height="1" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
-	  <tr>
-	    <td></td>
-	  </tr>
-	</table>
-	<table width="1140" height="1" border="0" align="center" cellpadding="0" cellspacing="0">
-	  <tr>
-	    <td width="769" align="center" valign="middle">&nbsp;</td>
-	    <td width="4" bgcolor="#FFFFFF"></td>
-	    <td width="229" align="center" valign="middle">&nbsp;</td>
-	  </tr>
-	</table>
-	<table width="1140" height="1" border="0" align="center" cellpadding="0" cellspacing="0" bgcolor="#FFFFFF">
-	  <tr>
-	    <td></td>
-	  </tr>
-	</table>
 	<table width="1140" height="29" border="0" align="center" cellpadding="0" cellspacing="0" style="border:solid 1px #ddd1b7;">
 	  <tr>
 	    <td width="1" bgcolor="#FFFFFF"></td>
