@@ -87,7 +87,7 @@ public class RestaurantAction extends BaseAction {
 		log.debug("--->> begin loadAll");
 		try {
 			restaurantList = this.getOnlineOF().getRestaurantManager()
-					.loadAll();
+					.loadARestaurantAll();
 		} catch (Exception e) {
 			throw new AppException("", e.getMessage());
 		}
@@ -179,7 +179,7 @@ public class RestaurantAction extends BaseAction {
 			restaurantVo.setRestaurantId(StringUtil.getUUID());
 			FileInputStream inputStream = new FileInputStream(this.resFile);
 			restaurantVo.setImg(Hibernate.createBlob(inputStream));
-			this.getOnlineOF().getRestaurantManager().save(restaurantVo);
+			this.getOnlineOF().getRestaurantManager().saveRestaurant(restaurantVo);
 		}
 		return this.getRestaurantPage();
 	}
@@ -196,12 +196,12 @@ public class RestaurantAction extends BaseAction {
 		log.debug("delete restaurant...");
 		if (null != restaurantVo && null != restaurantVo.getRestaurantId()
 				&& restaurantVo.getRestaurantId().length() > 0) {
-			this.getOnlineOF().getRestaurantManager().delete(
+			this.getOnlineOF().getRestaurantManager().deleteRestaurant(
 					restaurantVo.getRestaurantId());
 		}
 		if (null != checksItem && checksItem.length > 0) {
 			for (String str : checksItem) {
-				this.getOnlineOF().getRestaurantManager().delete(str);
+				this.getOnlineOF().getRestaurantManager().deleteRestaurant(str);
 			}
 		}
 		return this.getRestaurantPage();

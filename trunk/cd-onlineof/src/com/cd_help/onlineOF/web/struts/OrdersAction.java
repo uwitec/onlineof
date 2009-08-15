@@ -193,7 +193,7 @@ public class OrdersAction extends BaseAction {
 		if (this.getSession().getUsersVo().getIsSuper().equals(1)) {
 			try {
 				restaurantVos = this.getOnlineOF().getRestaurantManager()
-						.loadAll();
+						.loadARestaurantAll();
 			} catch (Exception e) {
 				throw new AppException("", "Loading the order of restaurant error！");
 			}
