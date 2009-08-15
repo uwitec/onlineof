@@ -5,8 +5,14 @@
  */
 package com.cd_help.onlineOF.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,13 +22,18 @@ import com.cd_help.onlineOF.api.FoodManager;
 import com.cd_help.onlineOF.api.Food_kindManager;
 import com.cd_help.onlineOF.api.OnlineOF;
 import com.cd_help.onlineOF.api.OrdersManager;
+import com.cd_help.onlineOF.api.PrivilegeDataDao;
 import com.cd_help.onlineOF.api.PrivilegeManager;
 import com.cd_help.onlineOF.api.RestaurantManager;
 import com.cd_help.onlineOF.api.Restaurant_kindManager;
 import com.cd_help.onlineOF.api.RoleManager;
 import com.cd_help.onlineOF.api.SessionManager;
+import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.api.UsersManager;
+import com.cd_help.onlineOF.data.PrivilegeData;
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -38,6 +49,12 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
  */
 @Service("onlineOF")
 public class OnlineOFImpl implements OnlineOF{
+	
+	/**
+	 * comment here
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	protected static Log log = LogFactory.getLog(OnlineOFImpl.class);
 	
 	/**
 	 * 系统用户管理
@@ -126,6 +143,16 @@ public class OnlineOFImpl implements OnlineOF{
 	@Autowired
 	@Resource(name = "roleManager")
 	private RoleManager roleManager = null;
+	
+	@SuppressWarnings("unused")
+	@Autowired
+	@Resource(name="usersDataDao")
+	private UsersDataDao usersDataDao;
+	
+	@SuppressWarnings("unused")
+	@Autowired
+	@Resource(name="privilegeDataDao")
+	private PrivilegeDataDao privilegeDataDao;
 	
 	public UsersManager getUsersManager() {
 		return usersManager;
@@ -216,11 +243,47 @@ public class OnlineOFImpl implements OnlineOF{
 		this.roleManager = roleManager;
 	}
 
+	public void setUsersDataDao(UsersDataDao usersDataDao) {
+		this.usersDataDao = usersDataDao;
+	}
+
+	public void setPrivilegeDataDao(PrivilegeDataDao privilegeDataDao) {
+		this.privilegeDataDao = privilegeDataDao;
+	}
+
 	/**
 	 * @see com.cd_help.onlineOF.api.OnlineOF#login(java.lang.String, java.lang.String)
 	 */
 	public UsersVo login(String username, String password) throws AppException {
 		UsersVo usersVo = usersManager.login(username, password);
 		return usersVo;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.OnlineOF#checkPrivilege(com.cd_help.onlineOF.data.UsersSession, java.lang.String)
+	 */
+	@SuppressWarnings("unchecked")
+	public boolean checkPrivilege(UsersSession userssession, String methodName)
+			throws AppException {
+		try{
+			List<PrivilegeVo> privilegeVos = userssession.getPrivileges();
+			List<String> ownerPrivilegeMethods = new ArrayList<String>();
+			for(Iterator i = privilegeVos.iterator(); i.hasNext();){
+				ownerPrivilegeMethods.add(((PrivilegeVo)i.next()).getMethodName());
+			}
+			List<PrivilegeData> plist = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByMethodName", "methodName", methodName);
+			PrivilegeData p = null;
+			if(plist.size() > 0){
+				p = (PrivilegeData)plist.get(0);
+			}
+			if(ownerPrivilegeMethods.contains(p.getMethodName())){
+				return true;
+			}else{
+				return false;
+			}
+		}catch(Exception e){
+			log.error(e);
+			throw new AppException("0000012","系统错误,请联系系统管理员!",e);
+		}
 	}
 }
