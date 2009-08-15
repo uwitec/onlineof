@@ -7,7 +7,6 @@ package com.cd_help.onlineOF.api;
 
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
-import com.cd_help.onlineOF.web.vo.OrdersVo;
 
 /**
  * <b><code></code></b>
@@ -22,16 +21,6 @@ import com.cd_help.onlineOF.web.vo.OrdersVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 public interface OrdersDataDao extends BaseDao {
-
-	/**
-	 * 添加订单
-	 * 
-	 * @param ordersVo
-	 * @return
-	 * @throws Exception
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	public boolean addOrder(OrdersVo ordersVo) throws Exception;
 
 	/**
 	 * 

@@ -30,6 +30,8 @@ public final class PropertiesFinalValue {
 		return PropertiesFinalValue.pfv;
 	}
 	
+	public static final String ORDER_WAIT = PropertiesFinalValue.pu.getProperty("order.wait");
+	
 	public static final Integer PAGE_SIZE = new Integer(PropertiesFinalValue.pu.getProperty("pagesize"));
 	
 	public static final Integer TIP = new Integer(PropertiesFinalValue.pu.getProperty("tip"));

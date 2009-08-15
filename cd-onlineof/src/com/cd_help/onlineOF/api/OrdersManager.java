@@ -77,7 +77,9 @@ public interface OrdersManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void create(OrdersVo ordersVo) throws Exception;
+	public void create(UsersSession session, OrdersVo ordersVo,
+			String memberId, String restaurantId, String[] foodIds,
+			String[] nums) throws Exception;
 
 	/**
 	 * 今日訂單

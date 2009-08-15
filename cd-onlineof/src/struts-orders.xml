@@ -14,10 +14,19 @@
 			<result name="success">/administrator/order/ordersEdit.jsp</result>
 		</action>
 		<action name="updateMany" class="ordersAction" method="updateManyOrders">
-			<result name="success">/administrator/order/ordersManager.jsp</result>
+			<result name="success" type="redirect">
+				searchOrders.do?o=${o}
+			</result>
 		</action>
 		<action name="del" class="ordersAction" method="delOrders">
-			<result name="success">/administrator/order/ordersManager.jsp</result>
+			<result name="success" type="redirect">
+				searchOrders.do?o=${o}
+			</result>
+		</action>
+		<action name="add" class="ordersAction" method="addOrders">
+			<result name="success" type="redirect">
+				searchOrders.do?o=${o}
+			</result>
 		</action>
 	</package>
 </struts>

@@ -39,7 +39,8 @@ public class OrdersAction extends BaseAction {
 	private int page = 1;
 	private String o = "";
 	private String endTime = "";
-
+	private String memberId = "";
+	private String restaurantId = "";
 	/**
 	 * comment here
 	 * 
@@ -47,7 +48,30 @@ public class OrdersAction extends BaseAction {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public String addOrders() {
+	public String addOrders() throws AppException {
+		memberId = "member123";
+		restaurantId = "a8b6815d108a4f35a7f00d27eabd49d3";
+		OrdersVo ordersVo = new OrdersVo();
+		ordersVo.setContactGender(1);
+		ordersVo.setContactName("冬瓜");
+		ordersVo.setContactPhone("7788120");
+		ordersVo.setOrdersCode("5432452453");
+		ordersVo.setRemark("快餐送到楼下， 到后给我电话");
+		ordersVo.setRequestAddress("西苑露12号5楼333室");
+		ordersVo.setStatus(PropertiesFinalValue.ORDER_WAIT);
+		try {
+			this.getOnlineOF().getOrdersManager().create(
+					this.getSession(),
+					ordersVo,
+					memberId,
+					restaurantId,
+					new String[] { "0c8159ba1acb4aefb057ecae9b7f7586",
+							"1eb3e180face4b4fbaeed024cfbd770d",
+							"45a63e044ab0400e91f5b4846406cfa3" },
+					new String[] { "5", "8", "3" });
+		} catch (Exception e) {
+			throw new AppException("", "Adding the new order error!");
+		}
 		return SUCCESS;
 	}
 
@@ -69,7 +93,6 @@ public class OrdersAction extends BaseAction {
 				throw new AppException("", "Failure to update more");
 			}
 		}
-		searchOrders();
 		return SUCCESS;
 	}
 
@@ -94,7 +117,6 @@ public class OrdersAction extends BaseAction {
 			}
 		}
 		ordersVo.setStatus("");
-		searchOrders();
 		return SUCCESS;
 	}
 
@@ -112,7 +134,6 @@ public class OrdersAction extends BaseAction {
 		} catch (Exception e) {
 			throw new AppException("", "Updating the order error!");
 		}
-		searchOrderInfo();
 		this.getRequest().setAttribute("upd", true);
 		return SUCCESS;
 	}
@@ -234,5 +255,21 @@ public class OrdersAction extends BaseAction {
 
 	public void setItemVoList(List<OrdersItemVo> itemVoList) {
 		this.itemVoList = itemVoList;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+
+	public String getRestaurantId() {
+		return restaurantId;
+	}
+
+	public void setRestaurantId(String restaurantId) {
+		this.restaurantId = restaurantId;
 	}
 }
