@@ -100,7 +100,7 @@
 					</span>
 					<s:if test="o == 'tod'">
 					<span style="white-space: nowrap;">
-						<input type="button" value="新增订单" onclick="window.location = 'add.do'"/>
+						<input type="button" value="新增订单" onclick="window.location = 'add.do?o=${o}'"/>
 					</span>
 					</s:if>
 					<span style="white-space: nowrap;">
