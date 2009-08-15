@@ -91,43 +91,6 @@
 					</td>
 				</tr>
 			</table>
-		<div style="border: 1px solid #A9A9A9; width: 1140; height: 30px;">
-			<table style="width: 100%; height: 100%; font-size: 10pt; background-color: #FDF5E6;">
-				<tr>
-					<td style="width: 60%;">
-						<span style="white-space: nowrap;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;2009年7月3日</span>
-					</td>
-					<td style="width: 20%;">
-						<span style="white-space: nowrap;"> 
-							<select>
-								<option>
-									餐厅分类
-								<option>
-									餐厅分类
-								<option>
-									餐厅分类
-								<option>
-									餐厅分类
-								<option>
-									餐厅分类
-								<option>
-									餐厅分类
-							</select> 
-							<input type="text" value="请输入餐厅名称" size="20" /> 
-							<input type="button" value="搜索"
-								style="border: 1px solid #A9A9A9; background-color: #FFFFFF; width: 50px;" />
-						</span>
-					</td>
-					<td style="width: 20%;">
-						<marquee scrollamount="3" style="boder: 1px solid #A9A9A9; width: 160px;">
-							<font color="blue"><strong>紫航海鲜酒店 除酒水、烟、珍品 95折</strong></font>
-						</marquee>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<div style="border: 1px solid #A9A9A9; width: 1140; height: 100px;">
-			广告
-		</div>
+	     </div>
 	</body>
 </html>
