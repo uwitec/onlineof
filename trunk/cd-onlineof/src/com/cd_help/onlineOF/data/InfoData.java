@@ -44,7 +44,7 @@ public class InfoData implements Serializable {
 	 * 标题
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "name", nullable = true, length = 15)
+	@Column(name = "name", nullable = true, length = 20)
 	private String title;
 	
 	/**
