@@ -179,7 +179,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 */
 	public PrivilegeVo getPrivilegeById(UsersSession session, String privilegeId)
 			throws AppException {
-		if (this.onlineOF.checkPrivilege(session,"getPrivilegeById")) {
 			try {
 				PrivilegeData privilegeData = (PrivilegeData) privilegeDataDao
 						.get(PrivilegeData.class, privilegeId);
@@ -198,9 +197,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 				log.error(e);
 				throw new AppException("0000014", "系统错误,请联系系统管理员!", e);
 			}
-		} else {
-			throw new AppException("0000000", "权限不够!");
-		}
 	}
 
 	/**

@@ -58,17 +58,13 @@ public class RoleManagerImpl implements RoleManager{
 	public List<RoleVo> loadAllRole(UsersSession session) throws AppException {
 		List<RoleData> roleDatas = null;
 		List<RoleVo> roleVos = null;
-		if(this.onlineOF.checkPrivilege(session,"loadAllRole")){
-			try{
-				roleDatas = roleDataDao.findByNamedQuery("loadAllRole");
-				roleVos = convertDataToVoList(roleDatas);
-			}catch(Exception e){
-				throw new AppException("000000","系统出错!请联系系统管理员.");
-			}
-			return roleVos;
-		}else{
-			throw new AppException("000000","没有权限!");
+		try{
+			roleDatas = roleDataDao.findByNamedQuery("loadAllRole");
+			roleVos = convertDataToVoList(roleDatas);
+		}catch(Exception e){
+			throw new AppException("000000","系统出错!请联系系统管理员.");
 		}
+		return roleVos;
 	}
 	
 	public void setRoleDataDao(RoleDataDao roleDataDao) {
