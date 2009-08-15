@@ -38,14 +38,14 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "orders")
 @NamedQueries( {
-		@NamedQuery(name = "searchTodayOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate > :odate order by o.ordersDate"),
-		@NamedQuery(name = "adminSearchTodayOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantData.name like :resName and o.ordersDate > :odate order by o.ordersDate"),
+		@NamedQuery(name = "searchTodayOrders", query = "from OrdersData o where o.status like :status and o.ordersDate > :odate order by o.ordersDate"),
+		@NamedQuery(name = "adminSearchTodayOrders", query = "from OrdersData o where o.status like :status and o.ownerRestaurantData.name like :resName and o.ordersDate > :odate order by o.ordersDate"),
 
-		@NamedQuery(name = "searchHistoryOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate < :odate order by o.ordersDate"),
-		@NamedQuery(name = "adminSearchHistoryOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantData.name like :resName and o.ordersDate < :odate order by o.ordersDate"),
+		@NamedQuery(name = "searchHistoryOrders", query = "from OrdersData o where o.status like :status and o.ordersDate < :odate order by o.ordersDate"),
+		@NamedQuery(name = "adminSearchHistoryOrders", query = "from OrdersData o where o.status like :status and o.ownerRestaurantData.name like :resName and o.ordersDate < :odate order by o.ordersDate"),
 
-		@NamedQuery(name = "searchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate between :start and :end order by o.ordersDate"),
-		@NamedQuery(name = "adminSearchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantData.name like :resName and o.ordersDate between :start and :end order by o.ordersDate") })
+		@NamedQuery(name = "searchOrdersByTimetamp", query = "from OrdersData o where o.status like :status and o.ordersDate between :start and :end order by o.ordersDate"),
+		@NamedQuery(name = "adminSearchOrdersByTimetamp", query = "from OrdersData o where o.status like :status and o.ownerRestaurantData.name like :resName and o.ordersDate between :start and :end order by o.ordersDate") })
 public class OrdersData implements Serializable {
 
 	/**

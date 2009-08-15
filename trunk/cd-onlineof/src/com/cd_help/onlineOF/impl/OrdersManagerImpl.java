@@ -73,8 +73,7 @@ public class OrdersManagerImpl implements OrdersManager {
 			ordersItemData.setOrders_itemId(StringUtil.getUUID());
 			ordersItemData.setNum(new Integer(nums[i]));
 			try {
-				ordersItemData.setFoodData((FoodData) ordersDataDao.get(
-						FoodData.class, foodIds[i]));
+				ordersItemData.setFoodId(foodIds[i]);
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new AppException("", "系统错误!");
@@ -86,10 +85,9 @@ public class OrdersManagerImpl implements OrdersManager {
 		ordersData.setItemData(oitemList);
 		ordersData.setOrdersId(StringUtil.getUUID());
 		try {
-			ordersData.setRestaurantData((RestaurantData) ordersDataDao.get(
+			ordersData.setOwnerRestaurantData((RestaurantData) ordersDataDao.get(
 					RestaurantData.class, restaurantId));
-			ordersData.setMemberData((MemberData) ordersDataDao.get(
-					MemberData.class, memberId));
+			ordersData.setMemberId(memberId);
 			ordersDataDao.save(ordersData);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -180,10 +178,8 @@ public class OrdersManagerImpl implements OrdersManager {
 		for (Iterator<OrdersItemData> iterator = ordersData.getItemData()
 				.iterator(); iterator.hasNext();) {
 			oitemData = (OrdersItemData) iterator.next();
-			foodData = oitemData.getFoodData();
 			oItemVo = new OrdersItemVo();
 			BeanUtilsHelp.copyProperties(oItemVo, oitemData);
-			oItemVo.setFoodId(foodData.getFoodId());
 			oItemVo.setName(foodData.getName());
 			oItemVo.setPrice(foodData.getPrice());
 			oItemVo.setKindName(((Food_kindData) ordersDataDao.get(
@@ -210,20 +206,18 @@ public class OrdersManagerImpl implements OrdersManager {
 		if (seesion.getUsersVo().getIsSuper().equals(1)) {
 			if (null != endTime && (!endTime.equals(""))) {
 				hql = "adminSearchOrdersByTimetamp";
-				paramName = new String[] { "memberName", "status", "resName",
+				paramName = new String[] {"status", "resName",
 						"start", "end" };
 				condition = new Object[] {
-						StringUtil.hqlParamLike(ordersVo.getLoginName()),
 						StringUtil.hqlParamLike(ordersVo.getStatus()),
 						StringUtil.hqlParamLike(ordersVo.getRestaurantName()),
 						ConvertUtils.toDate3(ordersVo.getOrdersDate()),
 						ConvertUtils.toDate3(endTime) };
 			} else {
 				hql = "adminSearchHistoryOrders";
-				paramName = new String[] { "memberName", "status", "resName",
+				paramName = new String[] {"status", "resName",
 						"odate" };
 				condition = new Object[] {
-						StringUtil.hqlParamLike(ordersVo.getLoginName()),
 						StringUtil.hqlParamLike(ordersVo.getStatus()),
 						StringUtil.hqlParamLike(ordersVo.getRestaurantName()),
 						StringUtil.getDateByInt(0) };
@@ -231,18 +225,16 @@ public class OrdersManagerImpl implements OrdersManager {
 		} else {
 			if (null != endTime && (!endTime.equals(""))) {
 				hql = "searchOrdersByTimetamp";
-				paramName = new String[] { "memberName", "status", "start",
+				paramName = new String[] {"status", "start",
 						"end" };
 				condition = new Object[] {
-						StringUtil.hqlParamLike(ordersVo.getLoginName()),
 						StringUtil.hqlParamLike(ordersVo.getStatus()),
 						ConvertUtils.toDate3(ordersVo.getOrdersDate()),
 						ConvertUtils.toDate3(endTime) };
 			} else {
 				hql = "searchHistoryOrders";
-				paramName = new String[] { "memberName", "status", "odate" };
+				paramName = new String[] {"status", "odate" };
 				condition = new Object[] {
-						StringUtil.hqlParamLike(ordersVo.getLoginName()),
 						StringUtil.hqlParamLike(ordersVo.getStatus()),
 						StringUtil.getDateByInt(0) };
 			}
@@ -272,18 +264,16 @@ public class OrdersManagerImpl implements OrdersManager {
 		Object[] condition = null;
 		if (seesion.getUsersVo().getIsSuper().equals(1)) {
 			hql = "adminSearchTodayOrders";
-			paramName = new String[] { "memberName", "status", "resName",
+			paramName = new String[] {"status", "resName",
 					"odate" };
 			condition = new Object[] {
-					StringUtil.hqlParamLike(ordersVo.getLoginName()),
 					StringUtil.hqlParamLike(ordersVo.getStatus()),
 					StringUtil.hqlParamLike(ordersVo.getRestaurantName()),
 					StringUtil.getDateByInt(-1) };
 		} else {
 			hql = "searchTodayOrders";
-			paramName = new String[] { "memberName", "status", "odate" };
+			paramName = new String[] {"status", "odate" };
 			condition = new Object[] {
-					StringUtil.hqlParamLike(ordersVo.getLoginName()),
 					StringUtil.hqlParamLike(ordersVo.getStatus()),
 					StringUtil.getDateByInt(-1) };
 		}
@@ -302,10 +292,11 @@ public class OrdersManagerImpl implements OrdersManager {
 	 * 
 	 * @param pageBean
 	 * @return
+	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@SuppressWarnings("unchecked")
-	private PageBean getOrdersVoPageBean(PageBean pageBean) {
+	private PageBean getOrdersVoPageBean(PageBean pageBean) throws AppException {
 		List<OrdersVo> ordersList = new ArrayList<OrdersVo>();
 		OrdersData orderData = null;
 		for (Iterator iterator = pageBean.getArray().iterator(); iterator
@@ -323,33 +314,38 @@ public class OrdersManagerImpl implements OrdersManager {
 	 * 
 	 * @param ordersData
 	 * @return
+	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private OrdersVo ordersDataSwitchVo(OrdersData ordersData) {
+	private OrdersVo ordersDataSwitchVo(OrdersData ordersData) throws AppException {
 		if (null == ordersData) {
 			return null;
 		}
 		OrdersVo ordersVo = new OrdersVo();
 		try {
 			BeanUtilsHelp.copyProperties(ordersVo, ordersData);
-		} catch (AppException e) {
-		}
-		if (null != ordersData.getItemData()
-				&& ordersData.getItemData().size() > 0) {
-			double total = 0D;
-			OrdersItemData ordersItemData = null;
-			for (Iterator<OrdersItemData> iterator = ordersData.getItemData()
-					.iterator(); iterator.hasNext();) {
-				ordersItemData = (OrdersItemData) iterator.next();
-				total = total
-						+ (ordersItemData.getFoodData().getPrice() * ordersItemData
-								.getNum()) + PropertiesFinalValue.TIP;
+			if (null != ordersData.getItemData()
+					&& ordersData.getItemData().size() > 0) {
+				double total = 0D;
+				OrdersItemData ordersItemData = null;
+				for (Iterator<OrdersItemData> iterator = ordersData.getItemData()
+						.iterator(); iterator.hasNext();) {
+					ordersItemData = (OrdersItemData) iterator.next();
+					FoodData fData = (FoodData)ordersDataDao.get(FoodData.class, ordersItemData.getFoodId());
+					total = total
+							+ (fData.getPrice() * ordersItemData
+									.getNum()) + PropertiesFinalValue.TIP;
+				}
+				ordersVo.setTotalPrice(total);
 			}
-			ordersVo.setTotalPrice(total);
+			MemberData mData = (MemberData)ordersDataDao.get(MemberData.class,ordersData.getMemberId());
+			ordersVo.setRestaurantName(ordersData.getOwnerRestaurantData().getName());
+			ordersVo.setLoginName(mData.getLoginname());
+			return ordersVo;
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw new AppException("0000000","系统错误",e);
 		}
-		ordersVo.setRestaurantName(ordersData.getRestaurantData().getName());
-		ordersVo.setLoginName(ordersData.getMemberData().getLoginname());
-		return ordersVo;
 	}
 
 	/**
