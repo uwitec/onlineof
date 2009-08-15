@@ -33,9 +33,9 @@ public interface UsersManager {
 	
 	public void addUsers(UsersSession session,UsersVo usersVo) throws AppException;
 	
-    public List<UsersVo> loadAll(UsersSession session) throws AppException;
+    public List<UsersVo> loadAllUsers(UsersSession session) throws AppException;
 
-	public PageBean searchByPage(String hqlName, String[] paramName,
+	public PageBean searchUsersByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, UsersSession session)
 			throws AppException;
 	
@@ -45,6 +45,6 @@ public interface UsersManager {
 
 	public UsersVo login(String username, String password) throws AppException;
 	
-	public boolean resetPassword(String usersId, String oldPassword, String newPassword) throws AppException; 
+	public boolean resetUsersPassword(String usersId, String oldPassword, String newPassword) throws AppException; 
 	
 }

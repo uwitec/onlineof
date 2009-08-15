@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.api;
 
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
@@ -117,5 +118,15 @@ public interface OnlineOF {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public UsersVo login(String username,String password) throws AppException;
+	
+	/**
+	 * 检查权限
+	 * @param userssession
+	 * @param methodName
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public boolean checkPrivilege(UsersSession userssession,String methodName) throws AppException;
 	
 }
