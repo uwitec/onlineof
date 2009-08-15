@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                if(newPassword != sureNewPassword){
 	              alert("确认密码不匹配!");
 	           }else{
-	              usersManagerDwrAction.resetPassword('${session.usersId}', oldPassword, newPassword,{callback:returnReset,errorHandler:function(msg,exception){alert(exception.message);}});
+	              usersManagerDwrAction.resetUsersPassword('${session.usersId}', oldPassword, newPassword,{callback:returnReset,errorHandler:function(msg,exception){alert(exception.message);}});
 	              function returnReset(bool){
 	                 if(bool){
 	                    alert("重置成功!");

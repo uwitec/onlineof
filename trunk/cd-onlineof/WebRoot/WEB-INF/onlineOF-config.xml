@@ -31,8 +31,5 @@
 	
     <!-- 切面配置 --> 	
 	<aop:aspectj-autoproxy />
-	<bean id="concurrentOperationExecutor"
-		class="com.cd_help.onlineOF.utils.ConcurrentOperationExecutor">
-	</bean>
 	
 </beans>
