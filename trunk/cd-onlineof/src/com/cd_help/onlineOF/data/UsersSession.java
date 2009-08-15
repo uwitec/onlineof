@@ -54,6 +54,16 @@ public class UsersSession implements Serializable{
     	this.usersId = usersVo.getUsersId();
     	this.usersName = usersVo.getUsersname();
     }
+    
+    public boolean isAdministrator(){
+    	
+    	return true;
+    }
+    
+    public boolean isRestaurantAdmin(){
+    	
+    	return true;
+    }
 
 	public UsersVo getUsersVo() {
 		return usersVo;

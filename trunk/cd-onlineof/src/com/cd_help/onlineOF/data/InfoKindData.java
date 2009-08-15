@@ -53,7 +53,7 @@ public class InfoKindData implements Serializable {
 	 * 描述
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "name", nullable = true, length = 200)
+	@Column(name = "description", nullable = true, length = 200)
 	private String description;
 	
 	/**
