@@ -50,7 +50,7 @@ public class OrdersAction extends BaseAction {
 
 	public String addOrders() throws AppException {
 		memberId = "member123";
-		restaurantId = "a8b6815d108a4f35a7f00d27eabd49d3";
+		restaurantId = "6da2856881b947ec9c06db947988920e";
 		OrdersVo ordersVo = new OrdersVo();
 		ordersVo.setContactGender(1);
 		ordersVo.setContactName("冬瓜");
@@ -65,10 +65,9 @@ public class OrdersAction extends BaseAction {
 					ordersVo,
 					memberId,
 					restaurantId,
-					new String[] { "0c8159ba1acb4aefb057ecae9b7f7586",
-							"1eb3e180face4b4fbaeed024cfbd770d",
-							"45a63e044ab0400e91f5b4846406cfa3" },
-					new String[] { "5", "8", "3" });
+					new String[] { "506a14f4c3394da4b7dae6addb511480",
+							"98ca3cf5070243ea9cbed85b8e9425f9"},
+					new String[] { "5", "8"});
 		} catch (Exception e) {
 			throw new AppException("", "Adding the new order error!");
 		}
