@@ -98,6 +98,11 @@
 					<span style="white-space: nowrap;">
 						<input type="submit" value="查询"/>
 					</span>
+					<s:if test="o == 'tod'">
+					<span style="white-space: nowrap;">
+						<input type="button" value="新增订单" onclick="window.location = 'add.do'"/>
+					</span>
+					</s:if>
 					<span style="white-space: nowrap;">
 						<select id="status" name="status" onchange="javascript:chang();">
 							<option value="">订单操作</option>

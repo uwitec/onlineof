@@ -8,11 +8,7 @@ package com.cd_help.onlineOF.impl;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.api.OrdersDataDao;
-import com.cd_help.onlineOF.data.OrdersData;
-import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
-import com.cd_help.onlineOF.utils.StringUtil;
-import com.cd_help.onlineOF.web.vo.OrdersVo;
 
 /**
  * <b><code></code></b>
@@ -34,14 +30,5 @@ public class OrdersDataDaoImpl extends BaseDaoSupport implements OrdersDataDao {
 			Object[] condition, PageBean pageBean) throws Exception {
 		pageBean = this.searchByPage(hqlName, paramName, condition, pageBean);
 		return pageBean;
-	}
-
-	@Override
-	public boolean addOrder(OrdersVo ordersVo) throws Exception {
-		OrdersData ordersData = new OrdersData();
-		BeanUtilsHelp.copyProperties(ordersData, ordersVo);
-		ordersData.setOrdersId(StringUtil.getUUID());
-		this.save(ordersData);
-		return true;
 	}
 }

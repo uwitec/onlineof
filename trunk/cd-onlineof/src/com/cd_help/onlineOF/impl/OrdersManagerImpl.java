@@ -6,6 +6,7 @@
 package com.cd_help.onlineOF.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,13 +16,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.cd_help.onlineOF.api.Food_kindDataDao;
 import com.cd_help.onlineOF.api.OrdersDataDao;
 import com.cd_help.onlineOF.api.OrdersManager;
 import com.cd_help.onlineOF.data.FoodData;
 import com.cd_help.onlineOF.data.Food_kindData;
+import com.cd_help.onlineOF.data.MemberData;
 import com.cd_help.onlineOF.data.OrdersData;
 import com.cd_help.onlineOF.data.OrdersItemData;
+import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
@@ -35,7 +37,7 @@ import com.cd_help.onlineOF.web.vo.OrdersVo;
 /**
  * <b><code></code></b>
  * <p/>
- * 订单管理实现类 超級管理員：查詢所有訂單， 酒店管理員：查詢自家酒店訂單， 訂單查詢附加：按酒店名、用戶名、訂餐人、訂單狀態、時間段查詢
+ * 订单管理实现类
  * <p/>
  * <b>Creation Time:</b> Jul 3, 2009
  * 
@@ -51,14 +53,46 @@ public class OrdersManagerImpl implements OrdersManager {
 	@Autowired
 	@Resource(name = "ordersDataDao")
 	private OrdersDataDao ordersDataDao;
-	@Autowired
-	@Resource(name = "food_kindDao")
-	private Food_kindDataDao food_kindDataDao;
 
-	public void create(OrdersVo ordersVo) throws AppException {
+	/**
+	 * 添加订单
+	 * 
+	 * @see com.cd_help.onlineOF.api.OrdersManager#create(com.cd_help.onlineOF.data.UsersSession,
+	 *      com.cd_help.onlineOF.web.vo.OrdersVo, java.lang.String,
+	 *      java.lang.String, java.lang.String[], java.lang.String[])
+	 */
+	public void create(UsersSession session, OrdersVo ordersVo,
+			String memberId, String restaurantId, String[] foodIds,
+			String[] nums) throws AppException {
+		List<OrdersItemData> oitemList = new ArrayList<OrdersItemData>();
+		OrdersItemData ordersItemData = null;
+		OrdersData ordersData = new OrdersData();
+		// 生成订单项集合
+		for (int i = 0; i < foodIds.length; i++) {
+			ordersItemData = new OrdersItemData();
+			ordersItemData.setOrders_itemId(StringUtil.getUUID());
+			ordersItemData.setNum(new Integer(nums[i]));
+			try {
+				ordersItemData.setFoodData((FoodData) ordersDataDao.get(
+						FoodData.class, foodIds[i]));
+			} catch (Exception e) {
+				e.printStackTrace();
+				throw new AppException("", "系统错误!");
+			}
+			oitemList.add(ordersItemData);
+		}
+		BeanUtilsHelp.copyProperties(ordersData, ordersVo);
+		ordersData.setOrdersDate(new Date());
+		ordersData.setItemData(oitemList);
+		ordersData.setOrdersId(StringUtil.getUUID());
 		try {
-			ordersDataDao.addOrder(ordersVo);
+			ordersData.setRestaurantData((RestaurantData) ordersDataDao.get(
+					RestaurantData.class, restaurantId));
+			ordersData.setMemberData((MemberData) ordersDataDao.get(
+					MemberData.class, memberId));
+			ordersDataDao.save(ordersData);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new AppException("", "系统错误!");
 		}
 	}
@@ -152,7 +186,7 @@ public class OrdersManagerImpl implements OrdersManager {
 			oItemVo.setFoodId(foodData.getFoodId());
 			oItemVo.setName(foodData.getName());
 			oItemVo.setPrice(foodData.getPrice());
-			oItemVo.setKindName(((Food_kindData) food_kindDataDao.get(
+			oItemVo.setKindName(((Food_kindData) ordersDataDao.get(
 					Food_kindData.class, foodData.getFood_kindId())).getName());
 			oitemVOs.add(oItemVo);
 		}
@@ -313,6 +347,7 @@ public class OrdersManagerImpl implements OrdersManager {
 			}
 			ordersVo.setTotalPrice(total);
 		}
+		ordersVo.setRestaurantName(ordersData.getRestaurantData().getName());
 		ordersVo.setLoginName(ordersData.getMemberData().getLoginname());
 		return ordersVo;
 	}
@@ -334,9 +369,5 @@ public class OrdersManagerImpl implements OrdersManager {
 
 	public void setOrdersDataDao(OrdersDataDao ordersDataDao) {
 		this.ordersDataDao = ordersDataDao;
-	}
-
-	public void setFood_kindDataDao(Food_kindDataDao food_kindDataDao) {
-		this.food_kindDataDao = food_kindDataDao;
 	}
 }

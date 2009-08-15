@@ -38,14 +38,14 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "orders")
 @NamedQueries( {
-	@NamedQuery(name = "searchTodayOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate > :odate order by o.ordersDate"),
-	@NamedQuery(name = "adminSearchTodayOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantName like :resName and o.ordersDate > :odate order by o.ordersDate"),
-	
-	@NamedQuery(name = "searchHistoryOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate < :odate order by o.ordersDate"),
-	@NamedQuery(name = "adminSearchHistoryOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantName like :resName and o.ordersDate < :odate order by o.ordersDate"),
-	
-	@NamedQuery(name = "searchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate between :start and :end order by o.ordersDate"),
-	@NamedQuery(name = "adminSearchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantName like :resName and o.ordersDate between :start and :end order by o.ordersDate")})
+		@NamedQuery(name = "searchTodayOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate > :odate order by o.ordersDate"),
+		@NamedQuery(name = "adminSearchTodayOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantData.name like :resName and o.ordersDate > :odate order by o.ordersDate"),
+
+		@NamedQuery(name = "searchHistoryOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate < :odate order by o.ordersDate"),
+		@NamedQuery(name = "adminSearchHistoryOrders", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantData.name like :resName and o.ordersDate < :odate order by o.ordersDate"),
+
+		@NamedQuery(name = "searchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.ordersDate between :start and :end order by o.ordersDate"),
+		@NamedQuery(name = "adminSearchOrdersByTimetamp", query = "from OrdersData o where o.memberData.loginname like :memberName and o.status like :status and o.restaurantData.name like :resName and o.ordersDate between :start and :end order by o.ordersDate") })
 public class OrdersData implements Serializable {
 
 	/**
@@ -128,7 +128,7 @@ public class OrdersData implements Serializable {
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@OneToMany(mappedBy = "ordersData", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy = "ordersData", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private List<OrdersItemData> itemData;
 	/**
 	 * 订单用户
@@ -143,8 +143,9 @@ public class OrdersData implements Serializable {
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "restaurantName", nullable = true, length = 50)
-	private String restaurantName;
+	@OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "restaurantId", referencedColumnName = "restaurantId", nullable = false, insertable = false, updatable = false)
+	private RestaurantData restaurantData;
 
 	public List<OrdersItemData> getItemData() {
 		return itemData;
@@ -154,12 +155,12 @@ public class OrdersData implements Serializable {
 		this.itemData = itemData;
 	}
 
-	public String getRestaurantName() {
-		return restaurantName;
+	public RestaurantData getRestaurantData() {
+		return restaurantData;
 	}
 
-	public void setRestaurantName(String restaurantName) {
-		this.restaurantName = restaurantName;
+	public void setRestaurantData(RestaurantData restaurantData) {
+		this.restaurantData = restaurantData;
 	}
 
 	public MemberData getMemberData() {
