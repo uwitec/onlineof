@@ -8,6 +8,7 @@ package com.cd_help.onlineOF.utils;
 import java.util.Map;
 
 import com.cd_help.onlineOF.data.UsersSession;
+import com.cd_help.onlineOF.web.WebConstants;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 
@@ -25,7 +26,6 @@ import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 @SuppressWarnings("serial")
 public class CheckUserSessionInterceptor extends AbstractInterceptor{
 
-	public static final String LOGIN_KEY = "session";
     public static final String LOGIN_PAGE = "global.login";
     
 	@SuppressWarnings("unchecked")
@@ -37,7 +37,7 @@ public class CheckUserSessionInterceptor extends AbstractInterceptor{
         System.out.println("拦截 :"+action.getClass().getSimpleName());
         // 确认Session中是否存在LOGIN
         Map session = actionInvocation.getInvocationContext().getSession();
-        UsersSession userSession = (UsersSession) session.get(LOGIN_KEY);
+        UsersSession userSession = (UsersSession) session.get(WebConstants.ATTRIBUTE_SESSION);
         if (userSession != null) {
         	System.out.println("loginUser is not null");
             return actionInvocation.invoke();

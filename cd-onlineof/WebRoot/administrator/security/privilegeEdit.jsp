@@ -12,10 +12,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="administrator/css/table.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="common/js/common.js"></script>
     <script language="javascript">
-       // 返回
-       function back(){
-          window.location.href="searchPrivilegesByPage.do";
-       }
        // 选择父权限
        function selectParentPrivilege(){
           winOpen("选择父权限","selectParentPrivilege.do",400,490,"no",true);
@@ -138,7 +134,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <td align="center" colspan="2">
                 <input type="button" value="保存" onclick="clickSave()">
                 <input type="reset" value="重置">
-                <input type="button" value="返回" onclick="back()">
               </td>
            </tr>
         </tbody>
