@@ -7,7 +7,13 @@ package com.cd_help.onlineOF.data;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 /**
@@ -26,12 +32,34 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 public class InfoData implements Serializable {
 	
+	/**
+	 * 信息ID
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Id
+	@Column(length = 32)
 	private String infoId;
 	
+	/**
+	 * 标题
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "name", nullable = true, length = 15)
 	private String title;
 	
+	/**
+	 * 内容
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "name", nullable = true, length = 500)
 	private String content;
 	
+	/**
+	 * 类别
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@ManyToOne(cascade = CascadeType.REFRESH, optional = true, fetch = FetchType.LAZY)
+	@JoinColumn(name = "infokindId")
 	private InfoKindData infokind;
 
 	public String getInfoId() {
