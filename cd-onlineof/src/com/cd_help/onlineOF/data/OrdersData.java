@@ -15,10 +15,10 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -135,17 +135,15 @@ public class OrdersData implements Serializable {
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "memberId", referencedColumnName = "memberId", nullable = false, insertable = false, updatable = false)
-	private MemberData memberData;
+	@Column(name = "memberId", nullable = true, length = 32)
+	private String memberId;
+	
 	/**
-	 * 订单所屬酒店
-	 * 
-	 * @since cd_help-onlineOF 0.0.0.1
+	 * 所属餐厅酒店
 	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "restaurantId", referencedColumnName = "restaurantId", nullable = false, insertable = false, updatable = false)
-	private RestaurantData restaurantData;
+	@ManyToOne(cascade = CascadeType.REFRESH, optional = true, fetch = FetchType.LAZY)
+	@JoinColumn(name = "restaurantId")
+	private RestaurantData ownerRestaurantData;
 
 	public List<OrdersItemData> getItemData() {
 		return itemData;
@@ -155,20 +153,20 @@ public class OrdersData implements Serializable {
 		this.itemData = itemData;
 	}
 
-	public RestaurantData getRestaurantData() {
-		return restaurantData;
+	public RestaurantData getOwnerRestaurantData() {
+		return ownerRestaurantData;
 	}
 
-	public void setRestaurantData(RestaurantData restaurantData) {
-		this.restaurantData = restaurantData;
+	public void setOwnerRestaurantData(RestaurantData ownerRestaurantData) {
+		this.ownerRestaurantData = ownerRestaurantData;
+	}
+    
+	public String getMemberId() {
+		return memberId;
 	}
 
-	public MemberData getMemberData() {
-		return memberData;
-	}
-
-	public void setMemberData(MemberData memberData) {
-		this.memberData = memberData;
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
 	}
 
 	public String getStatus() {
