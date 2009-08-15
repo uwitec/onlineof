@@ -89,6 +89,10 @@ public class OrdersManagerImpl implements OrdersManager {
 					RestaurantData.class, restaurantId));
 			ordersData.setMemberId(memberId);
 			ordersDataDao.save(ordersData);
+			for(OrdersItemData oi :oitemList){
+				oi.setOrdersData(ordersData);
+				ordersDataDao.save(oi);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("", "系统错误!");
@@ -147,6 +151,7 @@ public class OrdersManagerImpl implements OrdersManager {
 		try {
 			ordersData = (OrdersData) ordersDataDao.get(OrdersData.class, id);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new AppException("", "系统错误");
 		}
 		return ordersDataSwitchVo(ordersData);
@@ -165,6 +170,7 @@ public class OrdersManagerImpl implements OrdersManager {
 			ordersData = (OrdersData) ordersDataDao.get(OrdersData.class,
 					ordersId);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new AppException("", "系统错误");
 		}
 		if (null == ordersData.getItemData()
@@ -179,6 +185,7 @@ public class OrdersManagerImpl implements OrdersManager {
 				.iterator(); iterator.hasNext();) {
 			oitemData = (OrdersItemData) iterator.next();
 			oItemVo = new OrdersItemVo();
+			foodData = (FoodData)ordersDataDao.get(FoodData.class, oitemData.getFoodId());
 			BeanUtilsHelp.copyProperties(oItemVo, oitemData);
 			oItemVo.setName(foodData.getName());
 			oItemVo.setPrice(foodData.getPrice());
@@ -244,6 +251,7 @@ public class OrdersManagerImpl implements OrdersManager {
 			pageBean = ordersDataDao.searchOrdersByPage(hql, paramName,
 					condition, pageBean);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new AppException("", "系统错误！");
 		}
 		return getOrdersVoPageBean(pageBean);
@@ -281,6 +289,7 @@ public class OrdersManagerImpl implements OrdersManager {
 			pageBean = ordersDataDao.searchOrdersByPage(hql, paramName,
 					condition, pageBean);
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new AppException("", "系统错误！");
 		}
 		return getOrdersVoPageBean(pageBean);

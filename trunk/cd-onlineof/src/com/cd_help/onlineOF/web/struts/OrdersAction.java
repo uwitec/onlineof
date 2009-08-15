@@ -153,6 +153,7 @@ public class OrdersAction extends BaseAction {
 					.searchFoodListByOrderId(this.getSession(),
 							ordersVo.getOrdersId());
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new AppException("", "Loading the order deatil info error!");
 		}
 		this.getRequest().setAttribute("tip", PropertiesFinalValue.TIP);
