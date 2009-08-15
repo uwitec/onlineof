@@ -76,7 +76,7 @@ public class UsersAction extends BaseAction {
 			}
 			// 加载所有餐厅
 			loadAllRestaurant();
-			this.pb = this.getOnlineOF().getUsersManager().searchByPage(hql,
+			this.pb = this.getOnlineOF().getUsersManager().searchUsersByPage(hql,
 					params, conditions, this.pb, this.getSession());
 		} catch (AppException e) {
 			log.error(e);
