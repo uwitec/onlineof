@@ -66,7 +66,7 @@ public class RestaurantData implements Serializable {
 	@OneToMany(mappedBy = "restaurant", cascade = { CascadeType.REFRESH,
 			CascadeType.MERGE }, fetch = FetchType.LAZY)
 	private List<CuisineData> cuisineDataList = new ArrayList<CuisineData>();
-
+	
 	/**
 	 * 餐厅名称
 	 * 
@@ -171,6 +171,14 @@ public class RestaurantData implements Serializable {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String restaurant_kindId;
+	
+	/**
+	 * 所有订单
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@OneToMany(mappedBy = "ownerRestaurantData", cascade = { CascadeType.REFRESH,
+			CascadeType.MERGE }, fetch = FetchType.LAZY)
+	private List<OrdersData> ordersDataList = new ArrayList<OrdersData>();
 
 	public String getRestaurantId() {
 		return restaurantId;
@@ -314,5 +322,13 @@ public class RestaurantData implements Serializable {
 
 	public void setCuisineDataList(List<CuisineData> cuisineDataList) {
 		this.cuisineDataList = cuisineDataList;
+	}
+
+	public List<OrdersData> getOrdersDataList() {
+		return ordersDataList;
+	}
+
+	public void setOrdersDataList(List<OrdersData> ordersDataList) {
+		this.ordersDataList = ordersDataList;
 	}
 }

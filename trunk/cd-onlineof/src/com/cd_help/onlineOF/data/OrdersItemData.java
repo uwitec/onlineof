@@ -14,7 +14,6 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
@@ -46,13 +45,9 @@ public class OrdersItemData implements Serializable {
 	@Id
 	@Column(length = 32)
 	private String orders_itemId;
-
-	/**
-	 * FOOD
-	 */
-	@OneToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "foodId", referencedColumnName = "foodId", nullable = false, insertable = false, updatable = false)
-	private FoodData foodData;
+	
+	@Column(name = "foodId", nullable = true, length = 32)
+	private String foodId;
 
 	/**
 	 * NUMBER
@@ -83,19 +78,19 @@ public class OrdersItemData implements Serializable {
 		this.orders_itemId = orders_itemId;
 	}
 
-	public FoodData getFoodData() {
-		return foodData;
-	}
-
-	public void setFoodData(FoodData foodData) {
-		this.foodData = foodData;
-	}
-
 	public Integer getNum() {
 		return num;
 	}
 
 	public void setNum(Integer num) {
 		this.num = num;
+	}
+
+	public String getFoodId() {
+		return foodId;
+	}
+
+	public void setFoodId(String foodId) {
+		this.foodId = foodId;
 	}
 }
