@@ -34,6 +34,9 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("serial")
 public class BaseAction extends ActionSupport{
     
+	public static final String LOGIN_KEY = "session";
+    public static final String LOGIN_PAGE = "global.login";
+    
 	/**
 	 * comment here
 	 * @since cd_help-onlineOF 0.0.0.1
