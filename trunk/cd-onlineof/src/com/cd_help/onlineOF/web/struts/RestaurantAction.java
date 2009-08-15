@@ -121,7 +121,7 @@ public class RestaurantAction extends BaseAction {
 						"%" + this.getRestaurantName() + "%" };
 			}
 			this.pageBean = this.getOnlineOF().getRestaurantManager()
-					.seachRestaurantPage(hqlName, params, conditions, pageBean);
+					.seachRestaurantPage(hqlName, params, conditions, pageBean,this.getSession());
 			log.debug("pageBean.array.size="
 					+ this.getPageBean().getArray().size());
 		} catch (Exception ex) {

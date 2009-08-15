@@ -90,5 +90,4 @@ public interface FoodManager {
 	 */
 	public PageBean seachFoodPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean,UsersSession session)throws Exception;
-	
 }

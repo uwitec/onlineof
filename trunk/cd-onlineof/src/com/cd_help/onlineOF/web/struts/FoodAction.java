@@ -62,7 +62,8 @@ public class FoodAction extends BaseAction {
 	public String getFoodPage() throws Exception {
 		// TODO Auto-generated method stub
 		log.debug("load FoodKind Page...");
-		restaurantVos = this.getOnlineOF().getRestaurantManager().loadARestaurantAll();
+		restaurantVos = this.getOnlineOF().getRestaurantManager()
+				.loadARestaurantAll();
 		String[] params = null;
 		Object[] conditions = null;
 		String hqlName = "";
@@ -70,15 +71,33 @@ public class FoodAction extends BaseAction {
 			pageBean = new PageBean();
 			pageBean.setCurrentPage(page);
 			pageBean.setPagesize(10);
-			if (null == this.restaurantId || "".equals(this.restaurantId)) {
-				hqlName = "getFoodByKindId";
-				params = new String[] { "kindId" };
-				conditions = new Object[] { this.getFoodKindId() };
+			if (null != this.getFoodKindId()
+					&& !"".equals(this.getFoodKindId())) {
+				if (null == this.restaurantId || "".equals(this.restaurantId)) {
+					hqlName = "getFoodByKindId";
+					params = new String[] { "kindId" };
+					conditions = new Object[] { this.getFoodKindId() };
+				} else {
+					hqlName = "getFoodByresIdAndKindId";
+					params = new String[] { "restaurantId", "kindId",
+							"foodName" };
+					conditions = new Object[] {
+							this.getRestaurantId(),
+							this.getFoodKindId(),
+							this.foodName == null ? "%" : "%" + this.foodName
+									+ "%" };
+				}
 			} else {
-				hqlName = "getFoodByresIdAndKindId";
-				params = new String[] { "restaurantId", "kindId", "foodName" };
-				conditions = new Object[] { this.getRestaurantId(),
-						this.getFoodKindId(), this.foodName==null?"%":"%" + this.foodName + "%" };
+				if (null != this.restaurantId || !"".equals(this.restaurantId)) {
+					hqlName = "getFoodByresIdAndFoodName";
+					params = new String[] { "restaurantId", "foodName" };
+					conditions = new Object[] {
+							this.getRestaurantId(),
+							this.foodName == null ? "%" : "%" + this.foodName
+									+ "%" };
+				} else {
+					hqlName = "getFoodAll";
+				}
 			}
 			pageBean = this.getOnlineOF().getFoodManager().seachFoodPage(
 					hqlName, params, conditions, pageBean, this.getSession());
@@ -97,7 +116,8 @@ public class FoodAction extends BaseAction {
 	 */
 	public String editFood() throws Exception {
 		// TODO Auto-generated method stub
-		restaurantVos = this.getOnlineOF().getRestaurantManager().loadARestaurantAll();
+		restaurantVos = this.getOnlineOF().getRestaurantManager()
+				.loadARestaurantAll();
 		if (null != this.getFoodVo() && null != this.getFoodVo().getFoodId()
 				&& this.getFoodVo().getFoodId().length() > 0) {
 			this.foodVo = this.getOnlineOF().getFoodManager().getFoodById(
@@ -156,18 +176,19 @@ public class FoodAction extends BaseAction {
 		}
 		return this.getFoodPage();
 	}
-	
+
 	/**
-	 * 菜信息预览
-	 * comment here
+	 * 菜信息预览 comment here
+	 * 
 	 * @return
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public String foodPreView() throws Exception {
 		// TODO Auto-generated method stub
-		if(null!=foodVo && null!=foodVo.getFoodId()){
-			foodVo =this.getOnlineOF().getFoodManager().getFoodById(foodVo.getFoodId());
+		if (null != foodVo && null != foodVo.getFoodId()) {
+			foodVo = this.getOnlineOF().getFoodManager().getFoodById(
+					foodVo.getFoodId());
 		}
 		return SUCCESS;
 	}
