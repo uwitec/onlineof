@@ -31,6 +31,7 @@ public class RoleVo implements Serializable{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String roleName;
+	
 	/**
 	 * 描述
 	 * @since cd_help-onlineOF 0.0.0.1
