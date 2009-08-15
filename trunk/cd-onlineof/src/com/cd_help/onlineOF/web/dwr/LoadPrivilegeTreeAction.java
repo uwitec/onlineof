@@ -41,16 +41,16 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 	 */
 	public List<PrivilegeVo> getTopPrivilege() throws AppException{
 		log.debug("--->> begin getTopPrivilege");
-		List<PrivilegeVo> topPrivileges = null;
 		try{
+			List<PrivilegeVo> topPrivileges = null;
 			HttpSession httpSession = WebContextFactory.get().getSession();
 			UsersSession session = (UsersSession)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			topPrivileges = this.getOnlineOF().getPrivilegeManager().getTopPrivilege(session);
+			return topPrivileges;
 		}catch(Exception e){
 			log.error(e);
 			throw new AppException("",e.getMessage(),e);
 		}
-		return topPrivileges;
 	}
 	
 	/**
@@ -82,21 +82,16 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 	 */
 	public List<PrivilegeVo> loadPrivilegeTree() throws AppException {
 		 log.debug("--->> being loadPrivilegeTree");
-		 List<PrivilegeVo> privileges = null;
 		 try{
-			 // Session session = this.getSession();
+			 List<PrivilegeVo> privileges = null;
 			 HttpSession httpSession = WebContextFactory.get().getSession();
 			 UsersSession session = (UsersSession)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
-			 System.out.println("用户ID: "+session.getUsersVo().getUsersId());
 			 privileges = this.getOnlineOF().getPrivilegeManager().loadTopModelPrivilege(session);
-			 for(PrivilegeVo pv : privileges){
-				 System.out.print("模块权限: "+pv.getPrivilegeName());
-			 }
+			 return privileges;
 		 }catch(Exception e){
 			 log.error(null,e);
 			 throw new AppException("",e.getMessage(),e);
 		 }
-		 return privileges;
 	 }
 	
 	/**
@@ -171,8 +166,9 @@ public class LoadPrivilegeTreeAction extends BaseAction {
 			UsersSession session = (UsersSession)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
 			return this.getOnlineOF().getPrivilegeManager().loadAllModelPrivilege(session);
 		}catch(Exception e){
-			throw new AppException("",e.getMessage(),e);
+			log.error(e);
+			throw new AppException("000001",e.getMessage(),e);
 		}
 	}
-
+	
 }
