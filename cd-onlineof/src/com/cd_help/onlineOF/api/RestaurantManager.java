@@ -7,6 +7,7 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
@@ -60,7 +61,7 @@ public interface RestaurantManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public PageBean seachRestaurantPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws AppException;
+			Object[] condition, PageBean pageBean,UsersSession session) throws AppException;
 
 	/**
 	 * 根据餐厅ID查询餐厅对象

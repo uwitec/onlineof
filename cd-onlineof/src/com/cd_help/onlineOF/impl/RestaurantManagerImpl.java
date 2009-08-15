@@ -144,7 +144,7 @@ public class RestaurantManagerImpl implements RestaurantManager {
 
 	@Override
 	public PageBean seachRestaurantPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean) throws AppException {
+			Object[] condition, PageBean pageBean,UsersSession session) throws AppException {
 		// TODO Auto-generated method stub
 		PageBean page = null;
 		try {
