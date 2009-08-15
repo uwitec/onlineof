@@ -5,9 +5,14 @@
  */
 package com.cd_help.onlineOF.web.dwr;
 
+import javax.servlet.http.HttpSession;
+
+import org.directwebremoting.WebContextFactory;
 import org.springframework.stereotype.Service;
 
+import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
+import com.cd_help.onlineOF.web.WebConstants;
 import com.cd_help.onlineOF.web.struts.BaseAction;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
@@ -38,7 +43,7 @@ public class UsersManagerDwrAction extends BaseAction{
 			return bool;
 		} catch (Exception e) {
 			log.error(null,e);
-			 throw new AppException("",e.getMessage());
+			 throw new AppException("0000000",e.getMessage());
 		}
 	}
 	
@@ -73,9 +78,15 @@ public class UsersManagerDwrAction extends BaseAction{
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public boolean resetPassword(String usersId,String oldPassword, String newPassword) throws AppException{
+	public boolean resetUsersPassword(String usersId,String oldPassword, String newPassword) throws AppException{
 	    try{
-	    	return this.getOnlineOF().getUsersManager().resetPassword(usersId, oldPassword, newPassword);
+	    	HttpSession httpSession = WebContextFactory.get().getSession();
+			UsersSession userssession = (UsersSession)httpSession.getAttribute(WebConstants.ATTRIBUTE_SESSION);
+	    	if(this.getOnlineOF().checkPrivilege(userssession, "resetUsersPassword")){
+	    	   return this.getOnlineOF().getUsersManager().resetUsersPassword(usersId, oldPassword, newPassword);
+	    	}else{
+	    		throw new AppException("0000000","对不起,您没有权限!");
+	    	}
 	    }catch(Exception e){
 	    	log.error(e);
 			throw new AppException("",e.getMessage(),e);
