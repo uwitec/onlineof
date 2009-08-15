@@ -38,14 +38,14 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "orders")
 @NamedQueries( {
-		@NamedQuery(name = "searchTodayOrders", query = "from OrdersData o where o.status like :status and o.ordersDate > :odate order by o.ordersDate"),
-		@NamedQuery(name = "adminSearchTodayOrders", query = "from OrdersData o where o.status like :status and o.ownerRestaurantData.name like :resName and o.ordersDate > :odate order by o.ordersDate"),
+		@NamedQuery(name = "searchTodayOrders", query = "from OrdersData o where o.memberName like :memName and o.status like :status and o.ordersDate > :odate order by o.ordersDate"),
+		@NamedQuery(name = "adminSearchTodayOrders", query = "from OrdersData o where o.memberName like :memName and o.status like :status and o.ownerRestaurantData.name like :resName and o.ordersDate > :odate order by o.ordersDate"),
 
-		@NamedQuery(name = "searchHistoryOrders", query = "from OrdersData o where o.status like :status and o.ordersDate < :odate order by o.ordersDate"),
-		@NamedQuery(name = "adminSearchHistoryOrders", query = "from OrdersData o where o.status like :status and o.ownerRestaurantData.name like :resName and o.ordersDate < :odate order by o.ordersDate"),
+		@NamedQuery(name = "searchHistoryOrders", query = "from OrdersData o where o.memberName like :memName and o.status like :status and o.ordersDate < :odate order by o.ordersDate"),
+		@NamedQuery(name = "adminSearchHistoryOrders", query = "from OrdersData o where o.memberName like :memName and o.status like :status and o.ownerRestaurantData.name like :resName and o.ordersDate < :odate order by o.ordersDate"),
 
-		@NamedQuery(name = "searchOrdersByTimetamp", query = "from OrdersData o where o.status like :status and o.ordersDate between :start and :end order by o.ordersDate"),
-		@NamedQuery(name = "adminSearchOrdersByTimetamp", query = "from OrdersData o where o.status like :status and o.ownerRestaurantData.name like :resName and o.ordersDate between :start and :end order by o.ordersDate") })
+		@NamedQuery(name = "searchOrdersByTimetamp", query = "from OrdersData o where o.memberName like :memName and o.status like :status and o.ordersDate between :start and :end order by o.ordersDate"),
+		@NamedQuery(name = "adminSearchOrdersByTimetamp", query = "from OrdersData o where o.memberName like :memName and o.status like :status and o.ownerRestaurantData.name like :resName and o.ordersDate between :start and :end order by o.ordersDate") })
 public class OrdersData implements Serializable {
 
 	/**
@@ -131,13 +131,19 @@ public class OrdersData implements Serializable {
 	@OneToMany(mappedBy = "ordersData", cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
 	private List<OrdersItemData> itemData;
 	/**
-	 * 订单用户
+	 * 订单用户Id
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Column(name = "memberId", nullable = true, length = 32)
 	private String memberId;
-	
+	/**
+	 * 订单用户Name
+	 * 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "memberName", nullable = true, length = 32)
+	private String memberName;
 	/**
 	 * 所属餐厅酒店
 	 */
@@ -160,7 +166,7 @@ public class OrdersData implements Serializable {
 	public void setOwnerRestaurantData(RestaurantData ownerRestaurantData) {
 		this.ownerRestaurantData = ownerRestaurantData;
 	}
-    
+
 	public String getMemberId() {
 		return memberId;
 	}
@@ -239,6 +245,14 @@ public class OrdersData implements Serializable {
 
 	public void setContactGender(Integer contactGender) {
 		this.contactGender = contactGender;
+	}
+
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	@Override

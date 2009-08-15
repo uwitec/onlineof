@@ -49,8 +49,8 @@ public class OrdersAction extends BaseAction {
 	private static final long serialVersionUID = 1L;
 
 	public String addOrders() throws AppException {
-		memberId = "member123";
-		restaurantId = "6da2856881b947ec9c06db947988920e";
+		memberId = "3f8b8b9f6d524e1b8280400247577c62";
+		restaurantId = "3ae8e0930fae4f4687a9b7dd6182dd3c";
 		OrdersVo ordersVo = new OrdersVo();
 		ordersVo.setContactGender(1);
 		ordersVo.setContactName("冬瓜");
@@ -65,8 +65,8 @@ public class OrdersAction extends BaseAction {
 					ordersVo,
 					memberId,
 					restaurantId,
-					new String[] { "506a14f4c3394da4b7dae6addb511480",
-							"98ca3cf5070243ea9cbed85b8e9425f9"},
+					new String[] { "0c8159ba1acb4aefb057ecae9b7f7586",
+							"2f665b5ecdb341668e811f361b8f50eb"},
 					new String[] { "5", "8"});
 		} catch (Exception e) {
 			throw new AppException("", "Adding the new order error!");
@@ -81,12 +81,12 @@ public class OrdersAction extends BaseAction {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String delOrders() throws AppException {
+	public String deleteOrders() throws AppException {
 		String[] checkItems = this.getRequest()
 				.getParameterValues("checksItem");
 		for (String str : checkItems) {
 			try {
-				this.getOnlineOF().getOrdersManager().delte(this.getSession(),
+				this.getOnlineOF().getOrdersManager().deleteOrders(this.getSession(),
 						str);
 			} catch (Exception e) {
 				throw new AppException("", "Failure to update more");
@@ -147,7 +147,7 @@ public class OrdersAction extends BaseAction {
 	 */
 	public String searchOrderInfo() throws AppException {
 		try {
-			ordersVo = this.getOnlineOF().getOrdersManager().get(
+			ordersVo = this.getOnlineOF().getOrdersManager().getOrder(
 					this.getSession(), ordersVo.getOrdersId());
 			itemVoList = this.getOnlineOF().getOrdersManager()
 					.searchFoodListByOrderId(this.getSession(),
@@ -195,7 +195,7 @@ public class OrdersAction extends BaseAction {
 				restaurantVos = this.getOnlineOF().getRestaurantManager()
 						.loadAll();
 			} catch (Exception e) {
-				throw new AppException("", "Error");
+				throw new AppException("", "Loading the order of restaurant error！");
 			}
 		}
 		return SUCCESS;

@@ -35,7 +35,7 @@ public interface OrdersManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void delte(UsersSession session, String id) throws AppException;
+	public void deleteOrders(UsersSession session, String id) throws AppException;
 
 	/**
 	 * 更新订单
@@ -56,7 +56,7 @@ public interface OrdersManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public OrdersVo get(UsersSession seesion, String id) throws Exception;
+	public OrdersVo getOrder(UsersSession seesion, String id) throws Exception;
 
 	/**
 	 * 

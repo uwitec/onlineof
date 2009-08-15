@@ -18,7 +18,7 @@
 				searchOrders.do?o=${o}
 			</result>
 		</action>
-		<action name="del" class="ordersAction" method="delOrders">
+		<action name="del" class="ordersAction" method="deleteOrders">
 			<result name="success" type="redirect">
 				searchOrders.do?o=${o}
 			</result>
