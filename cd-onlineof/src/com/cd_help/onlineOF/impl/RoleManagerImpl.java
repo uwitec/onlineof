@@ -15,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cd_help.onlineOF.api.OnlineOF;
 import com.cd_help.onlineOF.api.RoleDataDao;
 import com.cd_help.onlineOF.api.RoleManager;
 import com.cd_help.onlineOF.data.RoleData;
@@ -46,6 +47,10 @@ public class RoleManagerImpl implements RoleManager{
 	@Resource(name = "roleDataDao")
 	private RoleDataDao roleDataDao;
 	
+	@Autowired
+	@Resource(name = "onlineOF")
+	private OnlineOF onlineOF;
+	
 	/**
 	 * @see com.cd_help.onlineOF.api.RoleManager#loadAll(com.cd_help.onlineOF.data.UsersSession)
 	 */
@@ -53,7 +58,7 @@ public class RoleManagerImpl implements RoleManager{
 	public List<RoleVo> loadAllRole(UsersSession session) throws AppException {
 		List<RoleData> roleDatas = null;
 		List<RoleVo> roleVos = null;
-		if(this.checkPrivilege(session)){
+		if(this.onlineOF.checkPrivilege(session,"loadAllRole")){
 			try{
 				roleDatas = roleDataDao.findByNamedQuery("loadAllRole");
 				roleVos = convertDataToVoList(roleDatas);
@@ -66,18 +71,6 @@ public class RoleManagerImpl implements RoleManager{
 		}
 	}
 	
-	/**
-	 * 检查权限
-	 * 
-	 * @param session
-	 * @return
-	 * @throws AppException
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	private boolean checkPrivilege(UsersSession session) throws AppException {
-		return true;
-	}
-
 	public void setRoleDataDao(RoleDataDao roleDataDao) {
 		this.roleDataDao = roleDataDao;
 	}
@@ -89,7 +82,7 @@ public class RoleManagerImpl implements RoleManager{
 	public PageBean searchRolesByPage(UsersSession session,String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean)
 			throws AppException {
-		if(this.checkPrivilege(session)){
+		if(this.onlineOF.checkPrivilege(session,"searchRolesByPage")){
 			PageBean page = null;
 			List<RoleVo> roleVos = new ArrayList<RoleVo>();
 			try{
@@ -113,7 +106,7 @@ public class RoleManagerImpl implements RoleManager{
 	 */
 	@SuppressWarnings("unchecked")
 	public void deleteRole(UsersSession session, String id) throws AppException {
-		if(this.checkPrivilege(session)){
+		if(this.onlineOF.checkPrivilege(session,"deleteRole")){
 			try{
 				RoleData roleData = (RoleData)roleDataDao.get(RoleData.class, id);
 				List<UsersData> usersDatas = roleDataDao.findByNamedQueryAndNamedParam("getUsersByRoleId", "roleId", id);
@@ -135,7 +128,7 @@ public class RoleManagerImpl implements RoleManager{
 	 * @see com.cd_help.onlineOF.api.RoleManager#addRole(com.cd_help.onlineOF.data.UsersSession, com.cd_help.onlineOF.web.vo.RoleVo)
 	 */
 	public void addRole(UsersSession session, RoleVo roleVo) throws AppException{
-		if(this.checkPrivilege(session)){
+		if(this.onlineOF.checkPrivilege(session,"addRole")){
             RoleData roleData = null;
 			try{
 				roleVo.setRoleId(StringUtil.getUUID());
@@ -156,7 +149,7 @@ public class RoleManagerImpl implements RoleManager{
 			throws AppException {
 		RoleData roleData = null;
 		RoleVo roleVo = null;
-		if(this.checkPrivilege(session)){
+		if(this.onlineOF.checkPrivilege(session,"getRoleById")){
 			try{
 				roleData = (RoleData)roleDataDao.get(RoleData.class, roleId);
 				roleVo = this.convertDataToVo(roleData);
@@ -173,7 +166,7 @@ public class RoleManagerImpl implements RoleManager{
 	 * @see com.cd_help.onlineOF.api.RoleManager#updateRole(com.cd_help.onlineOF.data.UsersSession, com.cd_help.onlineOF.web.vo.RoleVo)
 	 */
 	public void updateRole(UsersSession session, RoleVo roleVo) throws AppException {
-		if(this.checkPrivilege(session)){
+		if(this.onlineOF.checkPrivilege(session,"updateRole")){
 			try{
 				RoleData roleData = this.convertVoToData(roleVo);
 				roleDataDao.update(roleData);
@@ -191,7 +184,7 @@ public class RoleManagerImpl implements RoleManager{
 	public void saveRolePrivileges(UsersSession session, String[] privileges,
 			String roleId) throws AppException {
 		try{
-			if(this.checkPrivilege(session)){
+			if(this.onlineOF.checkPrivilege(session,"saveRolePrivileges")){
 			    roleDataDao.saveRolePrivileges(privileges, roleId);
 			}else{
 				throw new AppException("0000000", "权限不够!");
@@ -244,5 +237,13 @@ public class RoleManagerImpl implements RoleManager{
 		RoleData roleData = new RoleData();
 		BeanUtilsHelp.copyProperties(roleData, roleVo);
 		return roleData;
+	}
+
+	public OnlineOF getOnlineOF() {
+		return onlineOF;
+	}
+
+	public void setOnlineOF(OnlineOF onlineOF) {
+		this.onlineOF = onlineOF;
 	}
 }

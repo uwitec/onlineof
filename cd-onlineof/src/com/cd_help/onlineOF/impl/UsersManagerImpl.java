@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cd_help.onlineOF.api.OnlineOF;
 import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.api.UsersManager;
 import com.cd_help.onlineOF.data.RestaurantData;
@@ -27,7 +28,6 @@ import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.ConvertUtils;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
-import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -55,9 +55,13 @@ public class UsersManagerImpl implements UsersManager {
 	@Autowired
 	@Resource(name = "usersDataDao")
 	private UsersDataDao usersDataDao;
-
+	
+	@Autowired
+	@Resource(name = "onlineOF")
+	private OnlineOF onlineOF;
+	
 	public void deleteUsers(UsersSession session, String id) throws AppException {
-		if (this.checkPrivilege(session)) {
+		if (this.onlineOF.checkPrivilege(session,"deleteUsers")) {
 			try {
 				usersDataDao.delete((UsersData)usersDataDao.get(UsersData.class, id));
 			} catch (Exception e) {
@@ -69,7 +73,7 @@ public class UsersManagerImpl implements UsersManager {
 	}
 
 	public UsersVo getUsersById(UsersSession session, String id) throws AppException {
-		if (this.checkPrivilege(session)) {
+		if (this.onlineOF.checkPrivilege(session,"getUsersById")) {
 			try {
 				UsersData usersData = (UsersData)usersDataDao.get(UsersData.class,id);
 				return this.convertDataToVo(usersData);
@@ -82,8 +86,8 @@ public class UsersManagerImpl implements UsersManager {
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<UsersVo> loadAll(UsersSession session) throws AppException {
-		if (this.checkPrivilege(session)) {
+	public List<UsersVo> loadAllUsers(UsersSession session) throws AppException {
+		if (this.onlineOF.checkPrivilege(session,"loadAllUsers")) {
 			try {
 				List<UsersData> usersDatas = usersDataDao.findByNamedQuery("loadAllUsers");
 				return this.convertDataToVoList(usersDatas);
@@ -132,7 +136,7 @@ public class UsersManagerImpl implements UsersManager {
 	 * @see com.cd_help.onlineOF.api.UsersManager#update(com.cd_help.onlineOF.data.UsersSession, com.cd_help.onlineOF.web.vo.UsersVo)
 	 */
 	public void updateUsers(UsersSession session, UsersVo usersVo) throws AppException {
-		if (this.checkPrivilege(session)) {
+		if (this.onlineOF.checkPrivilege(session,"updateUsers")) {
 			try {
 				UsersData usersData = (UsersData)usersDataDao.get(UsersData.class, usersVo.getUsersId());
 				usersData.setUsersname(usersVo.getUsersname());
@@ -154,29 +158,15 @@ public class UsersManagerImpl implements UsersManager {
 		}
 	}
 
-	/**
-	 * 检查权限
-	 * 
-	 * @param session
-	 * @return
-	 * @throws AppException
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	private boolean checkPrivilege(UsersSession session) throws AppException {
-		@SuppressWarnings("unused")
-		List<PrivilegeVo> ownerPrivileges = session.getPrivileges();
-		return true;
-	}
-
 	public void setUsersDataDao(UsersDataDao usersDataDao) {
 		this.usersDataDao = usersDataDao;
 	}
 
 	@SuppressWarnings("unchecked")
-	public PageBean searchByPage(String hqlName, String[] paramName,
+	public PageBean searchUsersByPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, UsersSession session)
 			throws AppException {
-		if(this.checkPrivilege(session)){
+		if(this.onlineOF.checkPrivilege(session,"searchUsersByPage")){
 			PageBean page = null;
 			List<UsersVo> usersVos = new ArrayList<UsersVo>();
 			try{
@@ -211,7 +201,7 @@ public class UsersManagerImpl implements UsersManager {
 	 */
 	public void addUsers(UsersSession session, UsersVo usersVo)
 			throws AppException {
-		if(this.checkPrivilege(session)){
+		if(this.onlineOF.checkPrivilege(session,"addUsers")){
 			try{
 				usersVo.setUsersId(StringUtil.getUUID());
 				UsersData usersData = new UsersData();
@@ -274,7 +264,7 @@ public class UsersManagerImpl implements UsersManager {
 	/**
 	 * @see com.cd_help.onlineOF.api.UsersManager#resetPassword(java.lang.String, java.lang.String, java.lang.String)
 	 */
-	public boolean resetPassword(String usersId, String oldPassword, String newPassword)
+	public boolean resetUsersPassword(String usersId, String oldPassword, String newPassword)
 			throws AppException {
 		try{
 			UsersData usersData = (UsersData)usersDataDao.get(UsersData.class, usersId);
@@ -288,5 +278,13 @@ public class UsersManagerImpl implements UsersManager {
 		}catch(Exception e){
 			throw new AppException("000000","重置密码出错!",e);
 		}
+	}
+
+	public void setOnlineOF(OnlineOF onlineOF) {
+		this.onlineOF = onlineOF;
+	}
+
+	public OnlineOF getOnlineOF() {
+		return onlineOF;
 	}
 }

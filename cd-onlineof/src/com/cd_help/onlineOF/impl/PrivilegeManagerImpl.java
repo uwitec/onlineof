@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.cd_help.onlineOF.api.OnlineOF;
 import com.cd_help.onlineOF.api.PrivilegeDataDao;
 import com.cd_help.onlineOF.api.PrivilegeManager;
 import com.cd_help.onlineOF.data.PrivilegeData;
@@ -52,6 +53,10 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	@Autowired
 	@Resource(name = "privilegeDataDao")
 	private PrivilegeDataDao privilegeDataDao;
+	
+	@Autowired
+	@Resource(name = "onlineOF")
+	private OnlineOF onlineOF;
 
 	public void setPrivilegeDataDao(PrivilegeDataDao privilegeDataDao) {
 		this.privilegeDataDao = privilegeDataDao;
@@ -62,7 +67,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 */
 	public List<PrivilegeVo> loadAllPrivilege(UsersSession session)
 			throws AppException {
-		if (this.checkPrivilege(session)) {
+		if (this.onlineOF.checkPrivilege(session,"loadAllPrivilege")) {
 			try {
 				List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
 				List<PrivilegeData> privilegeDatas = privilegeDataDao
@@ -94,7 +99,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 */
 	public List<PrivilegeVo> loadChildModelPrivilegeByParent(UsersSession session,
 			String parentId) throws AppException {
-		if (this.checkPrivilege(session)) {
 			try {
 				List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
 				String paramNames[] = { "parentId", "roleId" };
@@ -115,9 +119,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 				log.error(e);
 				throw new AppException("0000015", "系统错误,请联系系统管理员!", e);
 			}
-		} else {
-			throw new AppException("0000000", "权限不够!");
-		}
 	}
 
 	/**
@@ -125,7 +126,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 */
 	public List<PrivilegeVo> loadTopModelPrivilege(UsersSession session)
 			throws AppException {
-		if (this.checkPrivilege(session)) {
 			try {
 				List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
 				List<PrivilegeData> privilegeDatas = privilegeDataDao
@@ -144,20 +144,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 				log.error(e);
 				throw new AppException("0000015", "系统错误,请联系系统管理员!", e);
 			}
-		} else {
-			throw new AppException("0000000", "权限不够!");
-		}
-	}
-
-	/**
-	 * 检查权限
-	 * @param session
-	 * @return
-	 * @throws AppException
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	private boolean checkPrivilege(UsersSession session) throws AppException {
-		return true;
 	}
 
 	/**
@@ -165,7 +151,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 */
 	public List<PrivilegeVo> getPrivilegeByRoleId(UsersSession session, String roleId)
 			throws AppException {
-		if (this.checkPrivilege(session)) {
 			try {
 				List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
 				List<PrivilegeData> privilegeDatas = privilegeDataDao
@@ -187,9 +172,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 				log.error(e);
 				throw new AppException("0000015", "系统错误,请联系系统管理员!", e);
 			}
-		} else {
-			throw new AppException("0000000", "权限不够!");
-		}
 	}
 
 	/**
@@ -197,7 +179,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 */
 	public PrivilegeVo getPrivilegeById(UsersSession session, String privilegeId)
 			throws AppException {
-		if (this.checkPrivilege(session)) {
+		if (this.onlineOF.checkPrivilege(session,"getPrivilegeById")) {
 			try {
 				PrivilegeData privilegeData = (PrivilegeData) privilegeDataDao
 						.get(PrivilegeData.class, privilegeId);
@@ -226,7 +208,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 */
 	public PrivilegeVo addPrivilege(UsersSession session, PrivilegeVo privilegeVo)
 			throws AppException {
-		if (this.checkPrivilege(session)) {
+		if (this.onlineOF.checkPrivilege(session,"addPrivilege")) {
 			try {
 				privilegeVo.setPrivilegeId(StringUtil.getUUID());
 				PrivilegeData privilegeData = new PrivilegeData();
@@ -263,7 +245,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 * @see com.cd_help.onlineOF.api.PrivilegeManager#deletePrivilege(com.cd_help.onlineOF.data.UsersSession, java.lang.String)
 	 */
 	public void deletePrivilege(UsersSession session, String id) throws AppException {
-		if (this.checkPrivilege(session)) {
+		if (this.onlineOF.checkPrivilege(session,"deletePrivilege")) {
 			try {
 				PrivilegeData privilegeData = (PrivilegeData) privilegeDataDao
 						.get(PrivilegeData.class, id);
@@ -305,7 +287,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 */
 	public void updatePrivilege(UsersSession session, PrivilegeVo privilegeVo)
 			throws AppException {
-		if (this.checkPrivilege(session)) {
+		if (this.onlineOF.checkPrivilege(session,"updatePrivilege")) {
 			try {
 				PrivilegeData privilegeData = (PrivilegeData) privilegeDataDao
 						.get(PrivilegeData.class, privilegeVo.getPrivilegeId());
@@ -341,7 +323,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 */
 	public List<PrivilegeVo> loadAllModelPrivilege(UsersSession session)
 			throws AppException {
-		if (this.checkPrivilege(session)) {
 			try {
 				List<PrivilegeVo> privilegeVos = null;
 				List<PrivilegeData> privilegeDatas = privilegeDataDao
@@ -362,9 +343,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 				log.error(e);
 				throw new AppException("0000014", "系统错误,请联系系统管理员!", e);
 			}
-		} else {
-			throw new AppException("0000000", "权限不够!");
-		}
 	}
 
 	/**
@@ -372,7 +350,6 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 */
 	public List<PrivilegeVo> getChildPrivilege(UsersSession session, String parentId)
 			throws AppException {
-		if (this.checkPrivilege(session)) {
 			try {
 				List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
 				List<PrivilegeData> privilegeDatas = privilegeDataDao
@@ -390,16 +367,12 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 				log.error(e);
 				throw new AppException("0000015", "系统错误,请联系系统管理员!", e);
 			}
-		} else {
-			throw new AppException("0000000", "权限不够!");
-		}
 	}
 
 	/**
 	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getTopPrivilege()
 	 */
 	public List<PrivilegeVo> getTopPrivilege(UsersSession session) throws AppException {
-		if (this.checkPrivilege(session)) {
 			try {
 				List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
 				List<PrivilegeData> privilegeDatas = privilegeDataDao
@@ -416,8 +389,14 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 				log.error(e);
 				throw new AppException("0000015", "系统错误,请联系系统管理员!", e);
 			}
-		} else {
-			throw new AppException("0000000", "权限不够!");
-		}
 	}
+
+	public OnlineOF getOnlineOF() {
+		return onlineOF;
+	}
+
+	public void setOnlineOF(OnlineOF onlineOF) {
+		this.onlineOF = onlineOF;
+	}
+	
 }
