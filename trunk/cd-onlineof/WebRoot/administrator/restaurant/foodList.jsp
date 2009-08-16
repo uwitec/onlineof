@@ -48,21 +48,23 @@
 	</head>
 
 	<body>
-		<form action="getFoodPageAction.do" name="seachResKind"
-			method="post">
+		<form action="getFoodPageAction.do" name="seachResKind" method="post">
 			<div style="width: 100%; font-size: 10pt;">
 				<span style="white-space: nowrap;"> <span
 					style="white-space: nowrap;">请选择餐厅</span> <!-- 隐藏传递过来的fookKindId -->
-					<input type="hidden" name="foodKindId" value="${foodKindId}" />
-					 <SELECT name="restaurantId">
+					<input type="hidden" name="foodKindId" value="${foodKindId}" /> 
+					<SELECT name="restaurantId">
 						<option value="">
 							所有餐厅
 						</option>
-						<s:iterator value="restaurantVos">
-							<option value="${restaurantId}">
-								${name}
-							</option>
-						</s:iterator>
+						<s:if test="null!=restaurantVos&&restaurantVos.size>0">
+							<s:iterator value="restaurantVos">
+								<option value="${restaurantId}">${name}</option>
+							</s:iterator>
+						</s:if>
+						<s:else>
+							<option value="">暂无餐厅/酒店数据</option>
+						</s:else>
 					</SELECT> <span style="white-space: nowrap;">餐厅菜名称</span> <input type="text"
 						name="foodName" /> <input type="submit" value="搜 索" /> <input
 						type="button" value="新增菜信息" onclick="addFood();" /> <input
@@ -110,7 +112,9 @@
 											value="${foodId}" /> </span>
 								</td>
 								<td>
-									<span style="white-space: nowrap;"><a href="foodPreViewAction.do?foodVo.foodId=${foodId}">${name}</a></span>
+									<span style="white-space: nowrap;"><a
+										href="foodPreViewAction.do?foodVo.foodId=${foodId}">${name}</a>
+									</span>
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property
