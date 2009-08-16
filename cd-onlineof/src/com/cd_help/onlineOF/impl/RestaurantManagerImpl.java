@@ -150,6 +150,7 @@ public class RestaurantManagerImpl implements RestaurantManager {
 		try {
 			page = restaurantDataDao.searchByPage(hqlName, paramName,
 					condition, pageBean);
+			
 			List<RestaurantVo> restaurantVos = null;
 			RestaurantVo restaurantVo = null;
 			RestaurantData restaurantData = null;
@@ -176,7 +177,7 @@ public class RestaurantManagerImpl implements RestaurantManager {
 				page.setArray(restaurantVos);
 			}
 		} catch (Exception e) {
-			throw new AppException("0000014", "加载餐厅分类信息出错!");
+			throw new AppException("0000014", "加载餐厅信息出错!");
 		}
 		return page;
 	}

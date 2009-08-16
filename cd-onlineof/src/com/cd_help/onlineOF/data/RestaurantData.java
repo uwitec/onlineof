@@ -171,7 +171,11 @@ public class RestaurantData implements Serializable {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String restaurant_kindId;
-	
+	/**
+	 * 餐厅信誉
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private int prestige=1;
 	/**
 	 * 所有订单
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -331,4 +335,13 @@ public class RestaurantData implements Serializable {
 	public void setOrdersDataList(List<OrdersData> ordersDataList) {
 		this.ordersDataList = ordersDataList;
 	}
+
+	public int getPrestige() {
+		return prestige;
+	}
+
+	public void setPrestige(int prestige) {
+		this.prestige = prestige;
+	}
+	
 }
