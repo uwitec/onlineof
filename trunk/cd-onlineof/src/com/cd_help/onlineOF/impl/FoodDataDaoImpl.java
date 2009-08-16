@@ -59,6 +59,7 @@ public class FoodDataDaoImpl extends BaseDaoSupport implements FoodDataDao{
 		if(null!=foodData.getRestaurantId()){
 			RestaurantData restaurant = (RestaurantData) super.get(RestaurantData.class, foodData.getRestaurantId());
 			foodVo.setRestaurantId(restaurant.getRestaurantId());
+			foodVo.setRestaurantName(restaurant.getName());
 		}
 		if(null!=foodData.getFood_kindId()){
 			Food_kindData food_kind = (Food_kindData) super.get(Food_kindData.class, foodData.getFood_kindId());

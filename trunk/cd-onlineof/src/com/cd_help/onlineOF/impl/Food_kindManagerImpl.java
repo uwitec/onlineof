@@ -55,8 +55,8 @@ public class Food_kindManagerImpl implements Food_kindManager {
 	public void setRestaurantDataDao(RestaurantDataDao restaurantDataDao) {
 		this.restaurantDataDao = restaurantDataDao;
 	}
-	
-	@Resource(name="foodDataDao")
+
+	@Resource(name = "foodDataDao")
 	private FoodDataDao foodDataDao;
 
 	public void setFoodDataDao(FoodDataDao foodDataDao) {
@@ -143,17 +143,12 @@ public class Food_kindManagerImpl implements Food_kindManager {
 	 */
 	@SuppressWarnings("unchecked")
 	public PageBean seachFoodKindPage(String hqlName, String[] params,
-			Object[] objs, PageBean pageBean, UsersSession session) throws Exception {
+			Object[] objs, PageBean pageBean, UsersSession session)
+			throws Exception {
 		// TODO Auto-generated method stub
 		PageBean page = null;
 		try {
-			if (null != params && params.length > 0) {
-				page = food_kindDao.searchByPage(hqlName, params, objs,
-						pageBean);
-			} else {
-				page = food_kindDao.searchByPage(hqlName, params, objs,
-						pageBean);
-			}
+			page = food_kindDao.searchByPage(hqlName, params, objs, pageBean);
 			if (null != page && null != page.getArray()) {
 				List<Food_kindVo> food_kindVos = new ArrayList<Food_kindVo>();
 				Food_kindData food_kind = null;
@@ -162,11 +157,11 @@ public class Food_kindManagerImpl implements Food_kindManager {
 					food_kind = (Food_kindData) obj;
 					food_kindVo = new Food_kindVo();
 					BeanUtilsHelp.copyProperties(food_kindVo, food_kind);
-					if (food_kind.getRestaurantId() != null) {
+					if (null != food_kind.getRestaurantId()
+							&& !"".equals(food_kind.getRestaurantId())) {
 						RestaurantData rstData = (RestaurantData) restaurantDataDao
 								.get(RestaurantData.class, food_kind
 										.getRestaurantId());
-						food_kindVo.setRestaurantId(rstData.getRestaurantId());
 						food_kindVo.setRestaurantName(rstData.getName());
 					}
 					food_kindVos.add(food_kindVo);
@@ -200,13 +195,12 @@ public class Food_kindManagerImpl implements Food_kindManager {
 	public List<Food_kindVo> getFoodKindByRestaurantId(String restaurantId)
 			throws Exception {
 		// TODO Auto-generated method stub
-		List<Food_kindVo> food_kindVos =null;
-			food_kindVos=food_kindDao
-				.findByNamedQueryAndNamedParam("getFoodkindByRestaurantId",
-						"restaurantId", restaurantId);
-			if(null==food_kindVos){
-				food_kindVos = new ArrayList<Food_kindVo>();
-			}
+		List<Food_kindVo> food_kindVos = null;
+		food_kindVos = food_kindDao.findByNamedQueryAndNamedParam(
+				"getFoodkindByRestaurantId", "restaurantId", restaurantId);
+		if (null == food_kindVos) {
+			food_kindVos = new ArrayList<Food_kindVo>();
+		}
 		return food_kindVos;
 	}
 }

@@ -88,7 +88,7 @@ public class FoodAction extends BaseAction {
 									+ "%" };
 				}
 			} else {
-				if (null != this.restaurantId || !"".equals(this.restaurantId)) {
+				if (null != this.restaurantId && !"".equals(this.restaurantId)) {
 					hqlName = "getFoodByresIdAndFoodName";
 					params = new String[] { "restaurantId", "foodName" };
 					conditions = new Object[] {

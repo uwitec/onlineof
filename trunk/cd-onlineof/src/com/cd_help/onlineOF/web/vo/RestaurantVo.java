@@ -171,6 +171,11 @@ public class RestaurantVo implements Serializable{
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private String resKindId;
+	/**
+	 * 餐厅信誉
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private int prestige;
 
 	public String getRestaurantId() {
 		return restaurantId;
@@ -307,4 +312,13 @@ public class RestaurantVo implements Serializable{
 	public void setResKindId(String resKindId) {
 		this.resKindId = resKindId;
 	}
+
+	public int getPrestige() {
+		return prestige;
+	}
+
+	public void setPrestige(int prestige) {
+		this.prestige = prestige;
+	}
+	
 }
