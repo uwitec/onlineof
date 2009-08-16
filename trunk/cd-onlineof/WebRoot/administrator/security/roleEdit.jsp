@@ -29,6 +29,13 @@
               </td>
            </tr>
            <tr>
+              <td style="text-align:right;">标识</td>
+              <td style="text-align:left;">
+                <input type="text" id="roleVo.path" name="roleVo.path" value="<s:property value='roleVo.path'/>" size=30/>
+              	<font size="+1" color="red">*</font>
+              </td>
+           </tr>
+           <tr>
               <td style="text-align:right;">描述</td>
               <td style="text-align:left;">
                  <span style="white-space: nowrap;"> 
