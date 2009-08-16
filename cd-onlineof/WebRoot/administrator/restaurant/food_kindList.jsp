@@ -51,18 +51,20 @@
 			method="post">
 			<div style="width: 100%; font-size: 10pt;">
 				<span style="white-space: nowrap;"> 
-				<span style="white-space: nowrap;">请选择餐厅</span>
+				<s:if test="session.administrator">
+				<span style="white-space: nowrap;">请选择餐厅/酒店</span>
 				<SELECT name="restaurantId">
-					<option value="">所有餐厅</option>
+					<option value="">所有餐厅/酒店</option>
 					<s:iterator value="restaurantVos">
 						<option value="${restaurantId}">${name}</option>
 					</s:iterator>
 				</SELECT>
-				<span style="white-space: nowrap;">餐厅菜类别名称</span> 
+				</s:if>
+				<span style="white-space: nowrap;">饮食类别名称</span> 
 					 <input type="text" name="foodKindName"  /> 
 					 <input type="submit" value="搜 索" />
-					<input type="button" value="新增菜类别" onclick="addFoodKind();" />
-					<input type="button" value="删除选定菜类别"
+					<input type="button" value="新增饮食类别" onclick="addFoodKind();" />
+					<input type="button" value="删除选定饮食类别"
 						onclick="delSelectedFoodKind();" /> </span>
 			</div>
 			<table class="table" style="width: 100%;">
@@ -74,15 +76,15 @@
 							</span>
 						</th>
 						<th>
-							<span style="white-space: nowrap;">餐厅菜类别名称</span>
+							<span style="white-space: nowrap;">饮食类别名称</span>
 						</th>
 						<th>
-							<span style="white-space: nowrap;">所属餐厅</span>
+							<span style="white-space: nowrap;">所属餐厅/酒店</span>
 						</th>
 						<th>
-							<span style="white-space: nowrap;">餐厅菜类别描述</span>
+							<span style="white-space: nowrap;">饮食类别描述</span>
 						</th>
-						<th>餐厅菜类型操作</th>
+						<th>饮食类型操作</th>
 					</tr>
 				</thead>
 				<tbody>
