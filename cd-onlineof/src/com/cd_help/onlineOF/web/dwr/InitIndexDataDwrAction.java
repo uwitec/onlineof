@@ -8,6 +8,8 @@ package com.cd_help.onlineOF.web.dwr;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.struts.BaseAction;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
@@ -25,6 +27,7 @@ import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @SuppressWarnings("serial")
+@Service("initIndexDataDwrAction")
 public class InitIndexDataDwrAction extends BaseAction{
 	
 	/**
