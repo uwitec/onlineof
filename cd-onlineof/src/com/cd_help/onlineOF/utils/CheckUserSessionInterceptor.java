@@ -7,8 +7,8 @@ package com.cd_help.onlineOF.utils;
 
 import java.util.Map;
 
-import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.web.WebConstants;
+import com.cd_help.onlineOF.web.struts.UsersSession;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.AbstractInterceptor;
 

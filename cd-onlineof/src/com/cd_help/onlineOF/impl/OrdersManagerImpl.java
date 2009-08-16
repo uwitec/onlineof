@@ -25,13 +25,13 @@ import com.cd_help.onlineOF.data.MemberData;
 import com.cd_help.onlineOF.data.OrdersData;
 import com.cd_help.onlineOF.data.OrdersItemData;
 import com.cd_help.onlineOF.data.RestaurantData;
-import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.ConvertUtils;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.PropertiesFinalValue;
 import com.cd_help.onlineOF.utils.StringUtil;
+import com.cd_help.onlineOF.web.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.OrdersItemVo;
 import com.cd_help.onlineOF.web.vo.OrdersVo;
 
@@ -62,7 +62,7 @@ public class OrdersManagerImpl implements OrdersManager {
 	/**
 	 * 添加订单
 	 * 
-	 * @see com.cd_help.onlineOF.api.OrdersManager#create(com.cd_help.onlineOF.data.UsersSession,
+	 * @see com.cd_help.onlineOF.api.OrdersManager#create(com.cd_help.onlineOF.web.struts.UsersSession,
 	 *      com.cd_help.onlineOF.web.vo.OrdersVo, java.lang.String,
 	 *      java.lang.String, java.lang.String[], java.lang.String[])
 	 */

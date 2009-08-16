@@ -18,6 +18,22 @@ package com.cd_help.onlineOF.web;
  */
 public class WebConstants {
 	
+	/**
+	 * 系统管理员
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public final static String ROLE_PATH_ADMINISTRATOR = "onlineof/administrator";
+	
+	/**
+	 * 餐厅/酒店管理员
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public final static String ROLE_PATH_RESTAURANTADMIN = "onlineof/restaurant/admin";
+	
+	/**
+	 * 用户session
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
 	public final static String ATTRIBUTE_SESSION = "session";
 
 }
