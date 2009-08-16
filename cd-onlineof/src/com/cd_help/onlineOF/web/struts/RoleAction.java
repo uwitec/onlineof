@@ -175,6 +175,7 @@ public class RoleAction extends BaseAction{
 			roleVo = this.getOnlineOF().getRoleManager().getRoleById(this.getSession(), roleId);
 		}catch(AppException e){
 			log.error(e);
+			e.printStackTrace();
 			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
 	    return SUCCESS;

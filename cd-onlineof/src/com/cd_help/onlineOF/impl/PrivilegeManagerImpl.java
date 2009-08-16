@@ -67,30 +67,26 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	 */
 	public List<PrivilegeVo> loadAllPrivilege(UsersSession session)
 			throws AppException {
-		if (this.onlineOF.checkPrivilege(session,"loadAllPrivilege")) {
-			try {
-				List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
-				List<PrivilegeData> privilegeDatas = privilegeDataDao
-						.findByNamedQuery("loadAllPrivilege");
-				for (Iterator i = privilegeDatas.iterator(); i.hasNext();) {
-					PrivilegeData pd = (PrivilegeData) i.next();
-					PrivilegeVo pv = new PrivilegeVo();
-					BeanUtilsHelp.copyProperties(pv, pd);
-					if (pd.getParent() != null) {
-						pv.setParentId(pd.getParent().getPrivilegeId());
-						pv.setParentName(pd.getParent().getPrivilegeName());
-					} else {
-						pv.setParentId("-1");
-					}
-					privilegeVos.add(pv);
+		try {
+			List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
+			List<PrivilegeData> privilegeDatas = privilegeDataDao
+					.findByNamedQuery("loadAllPrivilege");
+			for (Iterator i = privilegeDatas.iterator(); i.hasNext();) {
+				PrivilegeData pd = (PrivilegeData) i.next();
+				PrivilegeVo pv = new PrivilegeVo();
+				BeanUtilsHelp.copyProperties(pv, pd);
+				if (pd.getParent() != null) {
+					pv.setParentId(pd.getParent().getPrivilegeId());
+					pv.setParentName(pd.getParent().getPrivilegeName());
+				} else {
+					pv.setParentId("-1");
 				}
-				return privilegeVos;
-			} catch (Exception e) {
-				log.error(e);
-				throw new AppException("0000015", "系统错误,请联系系统管理员!", e);
+				privilegeVos.add(pv);
 			}
-		} else {
-			throw new AppException("0000000", "权限不够!");
+			return privilegeVos;
+		} catch (Exception e) {
+			log.error(e);
+			throw new AppException("0000015", "系统错误,请联系系统管理员!", e);
 		}
 	}
 

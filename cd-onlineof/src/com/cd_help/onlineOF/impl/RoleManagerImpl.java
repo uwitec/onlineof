@@ -143,19 +143,17 @@ public class RoleManagerImpl implements RoleManager{
 	 */
 	public RoleVo getRoleById(UsersSession session, String roleId)
 			throws AppException {
-		RoleData roleData = null;
-		RoleVo roleVo = null;
 		if(this.onlineOF.checkPrivilege(session,"getRoleById")){
 			try{
-				roleData = (RoleData)roleDataDao.get(RoleData.class, roleId);
-				roleVo = this.convertDataToVo(roleData);
+				RoleData roleData = (RoleData)roleDataDao.get(RoleData.class, roleId);
+				RoleVo roleVo = this.convertDataToVo(roleData);
+				return roleVo;
 			}catch(Exception e){
 				throw new AppException("0000014", "系统错误!");
 			}
 		}else{
 			throw new AppException("0000000", "权限不够!");
 		}
-		return roleVo;
 	}
 
 	/**
