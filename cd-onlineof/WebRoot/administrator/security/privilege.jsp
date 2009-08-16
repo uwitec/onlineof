@@ -99,6 +99,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    }
 	    // 添加权限之后  新建节点
 	    function addPrivilegeNode(id,text,parentId){
+	      if(null == parentId || parentId == ""){
+	        TreeDemo.AddNode({
+		       Text:text,
+		       Id:id,
+		       ParentId:-1,
+		       Asyn:false,
+		       Icon:2,
+		       IconOpen:3,
+		       Statu:true,
+		       Click:function(Node){
+	              clickPrivilegeNode(Node.Id);
+	           },
+	           ExpandBefor:function(Node){
+                  blocTreeAction.getChildBlocTree(Node.Id,{callback:loadChild,errorHandler:function(msg,e){alert(e.message);}});
+               }
+		   });
+	      }else{
 	        TreeDemo.AddNode({
 		       Text:text,
 		       Id:id,
@@ -114,10 +131,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                   blocTreeAction.getChildBlocTree(Node.Id,{callback:loadChild,errorHandler:function(msg,e){alert(e.message);}});
                }
 		   });
-		   var parent = TreeDemo.SelectedNode;
+		   var parent = TreeDemo.FindNode(parentId);
 		   TreeDemo.ExpandNode(parent,false);
-		   TreeDemo.FindNode(id).SetSelect(true);
-		   clickPrivilegeNode(id);
+		  }
+		  TreeDemo.FindNode(id).SetSelect(true);
+		  clickPrivilegeNode(id);
 	    }
 	    // 修改权限之后  修改节点
 	    function updatePrivilegeNode(id,text){
