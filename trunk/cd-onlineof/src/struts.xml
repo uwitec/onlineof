@@ -77,4 +77,5 @@
 	<include file="struts-security.xml" />
 	<include file="struts-orders.xml"></include>
 	<include file="struts-restaurant.xml" />
+	<include file="struts-person.xml" />
 </struts>
