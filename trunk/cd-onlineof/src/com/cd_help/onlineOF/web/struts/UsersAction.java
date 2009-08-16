@@ -76,49 +76,52 @@ public class UsersAction extends BaseAction {
 			}
 			// 加载所有餐厅
 			loadAllRestaurant();
-			this.pb = this.getOnlineOF().getUsersManager().searchUsersByPage(hql,
-					params, conditions, this.pb, this.getSession());
+			this.pb = this.getOnlineOF().getUsersManager().searchUsersByPage(
+					hql, params, conditions, this.pb, this.getSession());
 		} catch (AppException e) {
 			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage(),e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
 		}
 		return SUCCESS;
 	}
-	
+
 	/**
 	 * 跳转到添加用户页面
 	 * @return
 	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String forwardAddUsers() throws AppException{
-		try{
+	public String forwardAddUsers() throws AppException {
+		try {
 			// 加载所有餐厅
-			loadAllRestaurant(); 
+			loadAllRestaurant();
 			// 加载所有角色
-			roleVos = this.getOnlineOF().getRoleManager().loadAllRole(this.getSession());
-		}catch(AppException e){
+			roleVos = this.getOnlineOF().getRoleManager().loadAllRole(
+					this.getSession());
+		} catch (AppException e) {
 			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage(),e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
 		}
 		return SUCCESS;
 	}
-	
+
 	/**
 	 * 添加用户
 	 * @return
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String addUsers() throws AppException{
-		try{
+	public String addUsers() throws AppException {
+		try {
 			usersVo.setBirthday(ConvertUtils.toDate2(usersVo.getBirthdayStr()));
-			usersVo.setPassword(StringUtil.encodePassword(usersVo.getPassword(), "MD5"));
-			this.getOnlineOF().getUsersManager().addUsers(this.getSession(), usersVo);
+			usersVo.setPassword(StringUtil.encodePassword(
+					usersVo.getPassword(), "MD5"));
+			this.getOnlineOF().getUsersManager().addUsers(this.getSession(),
+					usersVo);
 			this.searchUsersByPage();
-		}catch(AppException e){
+		} catch (AppException e) {
 			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage(),e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
 		}
 		return SUCCESS;
 	}
@@ -133,28 +136,29 @@ public class UsersAction extends BaseAction {
 	public String deleteUsers() throws AppException {
 		log.debug("--->> begin deleteUsers");
 		try {
-			if(null != this.checksItem){
-				for(int i=0; i<this.checksItem.length; i++){
+			if (null != this.checksItem) {
+				for (int i = 0; i < this.checksItem.length; i++) {
 					log.debug(this.checksItem[i]);
-					this.getOnlineOF().getUsersManager().deleteUsers(this.getSession(),
-							this.checksItem[i]);
+					this.getOnlineOF().getUsersManager().deleteUsers(
+							this.getSession(), this.checksItem[i]);
 				}
 			}
 			this.searchUsersByPage();
 		} catch (AppException e) {
 			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage(),e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
 		}
 		return SUCCESS;
 	}
-	
-	private void loadAllRestaurant() throws AppException{
+
+	private void loadAllRestaurant() throws AppException {
 		// 加载所有餐厅
-		try{
-		   restaurantVos = this.getOnlineOF().getRestaurantManager().loadARestaurantAll();
-		}catch(AppException e){
+		try {
+			restaurantVos = this.getOnlineOF().getRestaurantManager()
+					.loadARestaurantAll();
+		} catch (AppException e) {
 			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage(),e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
 		}
 	}
 
@@ -170,43 +174,79 @@ public class UsersAction extends BaseAction {
 			usersVo = this.getOnlineOF().getUsersManager().getUsersById(
 					this.getSession(), usersId);
 			// 加载所有餐厅
-			loadAllRestaurant(); 
+			loadAllRestaurant();
 			// 加载所有角色
-			roleVos = this.getOnlineOF().getRoleManager().loadAllRole(this.getSession());
+			roleVos = this.getOnlineOF().getRoleManager().loadAllRole(
+					this.getSession());
 			return SUCCESS;
 		} catch (AppException e) {
 			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage(),e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
 		}
 	}
-	
+
 	/**
 	 * 更新用户
 	 * @return
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String updateUsers() throws AppException{
+	public String updateUsers() throws AppException {
 		log.debug("--->> begin updateUsers");
-		try{
-			this.getOnlineOF().getUsersManager().updateUsers(this.getSession(), usersVo);
+		try {
+			this.getOnlineOF().getUsersManager().updateUsers(this.getSession(),
+					usersVo);
 			this.searchUsersByPage();
-		}catch(AppException e){
+		} catch (AppException e) {
 			log.error(e);
-			throw new AppException(e.getError_code(),e.getMessage(),e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
 		}
 		return SUCCESS;
 	}
+
+	/**
+	 * 获取个人资料
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String getSelfInfo() throws AppException {
+		try {
+			usersVo = this.getOnlineOF().getUsersManager().getUsersById(
+					this.getSession(), this.getSession().getUsersId());
+			return SUCCESS;
+		} catch (AppException e) {
+			log.error(e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
+		}
+	}
 	
+	/**
+	 * 修改个人资料
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String updateUsersInfo() throws AppException {
+		try {
+			this.getOnlineOF().getUsersManager().updateUsers(this.getSession(),
+					usersVo);
+			return SUCCESS;
+		} catch (AppException e) {
+			log.error(e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
+		}
+	}
+
 	/**
 	 * 跳转到重置密码页面 
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String forwardPasswordSet(){
+	public String forwardPasswordSet() {
 		return SUCCESS;
 	}
-	
+
 	@Autowired
 	@Resource(name = "pageBean")
 	public void setPb(PageBean pb) {
@@ -256,7 +296,7 @@ public class UsersAction extends BaseAction {
 	public void setRestaurantId(String restaurantId) {
 		this.restaurantId = restaurantId;
 	}
-    
+
 	public String[] getChecksItem() {
 		return checksItem;
 	}
