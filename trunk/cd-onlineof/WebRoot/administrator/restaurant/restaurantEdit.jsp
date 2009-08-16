@@ -93,7 +93,7 @@
 						</td>
 						<td style="text-align: left;">
 							<span style="white-space: nowrap;"> <select
-									name="restaurantVo.resKindId">
+									name="restaurantVo.resKindId" required="string">
 									<!-- 绑定Action里面的数组 -->
 									<s:if test="restaurant_kindVos!=null">
 									<option value="">--请选择--</option>
@@ -107,7 +107,7 @@
 									<s:else>
 										<option value="">暂无数据</option>										
 									</s:else>
-								</select> </span>
+								</select> <font size="+1" color="red">*</font></span>
 						</td>
 						<td align="right">
 							<span style="white-space: nowrap;">餐厅联系人QQ</span>
