@@ -56,6 +56,13 @@ public class RoleData implements Serializable{
 	private String roleName;
 	
 	/**
+	 * 标识
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "path", nullable = true, length = 200)
+	private String path;
+	
+	/**
 	 * 描述
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
@@ -100,5 +107,13 @@ public class RoleData implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 }

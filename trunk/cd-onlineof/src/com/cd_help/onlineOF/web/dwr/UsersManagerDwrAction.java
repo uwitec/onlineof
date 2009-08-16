@@ -10,10 +10,10 @@ import javax.servlet.http.HttpSession;
 import org.directwebremoting.WebContextFactory;
 import org.springframework.stereotype.Service;
 
-import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.WebConstants;
 import com.cd_help.onlineOF.web.struts.BaseAction;
+import com.cd_help.onlineOF.web.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**

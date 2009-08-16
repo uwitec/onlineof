@@ -16,7 +16,6 @@ import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cd_help.onlineOF.api.OnlineOF;
-import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.web.WebConstants;
 import com.opensymphony.xwork2.ActionSupport;
 

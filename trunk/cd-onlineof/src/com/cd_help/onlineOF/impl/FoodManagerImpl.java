@@ -22,10 +22,10 @@ import com.cd_help.onlineOF.api.RestaurantDataDao;
 import com.cd_help.onlineOF.data.FoodData;
 import com.cd_help.onlineOF.data.Food_kindData;
 import com.cd_help.onlineOF.data.RestaurantData;
-import com.cd_help.onlineOF.data.UsersSession;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.web.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.FoodVo;
 
 /**
@@ -150,7 +150,7 @@ public class FoodManagerImpl implements FoodManager{
 
 	/**
 	 * 获取菜的分页信息
-	 * @see com.cd_help.onlineOF.api.FoodManager#seachFoodPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.data.UsersSession)
+	 * @see com.cd_help.onlineOF.api.FoodManager#seachFoodPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.web.struts.UsersSession)
 	 */
 	public PageBean seachFoodPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, UsersSession session)

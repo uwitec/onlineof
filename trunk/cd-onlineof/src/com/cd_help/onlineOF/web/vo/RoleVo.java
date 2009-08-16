@@ -33,6 +33,12 @@ public class RoleVo implements Serializable{
 	private String roleName;
 	
 	/**
+	 * 标识
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private String path;
+	
+	/**
 	 * 描述
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
@@ -50,10 +56,11 @@ public class RoleVo implements Serializable{
 	 * @param roleName
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public RoleVo(String roleId,String roleName,String description){
+	public RoleVo(String roleId,String roleName,String description, String path){
 		this.roleId = roleId;
 		this.roleName = roleName;
 		this.description = description;
+		this.path = path;
 	}
 
 	public String getRoleId() {
@@ -78,5 +85,13 @@ public class RoleVo implements Serializable{
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getPath() {
+		return path;
+	}
+
+	public void setPath(String path) {
+		this.path = path;
 	}
 }

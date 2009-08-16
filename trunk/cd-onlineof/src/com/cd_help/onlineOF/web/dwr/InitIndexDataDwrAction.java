@@ -36,7 +36,7 @@ public class InitIndexDataDwrAction extends BaseAction{
 	public List<RestaurantVo> getRestaurantDataByCredibility() throws AppException{
 		List<RestaurantVo> restaurantVos = new ArrayList<RestaurantVo>();
 		try{
-			restaurantVos = this.getOnlineOF().getRestaurantManager().loadAll();
+			restaurantVos = this.getOnlineOF().getRestaurantManager().loadARestaurantAll();
 		}catch(AppException e){
 			throw new AppException("000000",e.getMessage(),e);
 		}

@@ -17,13 +17,16 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.PrivilegeDataDao;
+import com.cd_help.onlineOF.api.RoleDataDao;
 import com.cd_help.onlineOF.api.SessionManager;
 import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.data.PrivilegeData;
-import com.cd_help.onlineOF.data.UsersSession;
+import com.cd_help.onlineOF.data.RoleData;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
+import com.cd_help.onlineOF.web.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
+import com.cd_help.onlineOF.web.vo.RoleVo;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -56,6 +59,10 @@ public class SessionManagerImpl implements SessionManager{
 	@Autowired
 	@Resource(name = "privilegeDataDao")
 	private PrivilegeDataDao privilegeDataDao;
+	
+	@Autowired
+	@Resource(name = "roleDataDao")
+	private RoleDataDao roleDataDao;
 
 	/**
 	 * @see com.cd_help.onlineOF.api.SessionManager#createSession(com.cd_help.onlineOF.web.vo.UsersVo)
@@ -68,6 +75,9 @@ public class SessionManagerImpl implements SessionManager{
 		try{
 			List<PrivilegeData> privileges = privilegeDataDao.findByNamedQueryAndNamedParam("getPrivilegeByRoleId", "roleId", usersVo.getRoleId());
 			List<PrivilegeVo> privilegeVos = new ArrayList<PrivilegeVo>();
+			RoleData roleData = (RoleData)roleDataDao.get(RoleData.class, usersVo.getRoleId());
+			RoleVo userRole = new RoleVo();
+			BeanUtilsHelp.copyProperties(userRole, roleData);
 			for(PrivilegeData p : privileges){
 				PrivilegeVo pv = new PrivilegeVo();
 				BeanUtilsHelp.copyProperties(pv,p);
@@ -79,7 +89,7 @@ public class SessionManagerImpl implements SessionManager{
 				}
 				privilegeVos.add(pv);
 			}
-		    session = new UsersSession(usersVo,privilegeVos);
+		    session = new UsersSession(usersVo, privilegeVos, usersVo.getRoleId(), userRole.getPath());
 		}catch(Exception e){
 			log.error(e);
 			throw new AppException("","系统错误!");
@@ -89,6 +99,10 @@ public class SessionManagerImpl implements SessionManager{
 
 	public void setUsersDataDao(UsersDataDao usersDataDao) {
 		this.usersDataDao = usersDataDao;
+	}
+
+	public void setRoleDataDao(RoleDataDao roleDataDao) {
+		this.roleDataDao = roleDataDao;
 	}
 
 	public void setPrivilegeDataDao(PrivilegeDataDao privilegeDataDao) {
