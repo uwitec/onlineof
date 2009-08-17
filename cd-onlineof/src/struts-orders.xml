@@ -7,7 +7,7 @@
 		<action name="searchOrders" class="ordersAction" method="searchOrders">
 			<result name="success">/administrator/order/ordersManager.jsp</result>
 		</action>
-		<action name="getInfo" class="ordersAction" method="searchOrderInfo">
+		<action name="getOrderInfo" class="ordersAction" method="getOrderInfo">
 			<result name="success">/administrator/order/ordersEdit.jsp</result>
 		</action>
 		<action name="update" class="ordersAction" method="updateOrders">

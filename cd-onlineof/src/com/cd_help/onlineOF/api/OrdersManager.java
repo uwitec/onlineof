@@ -45,7 +45,7 @@ public interface OrdersManager {
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void update(UsersSession seesion, OrdersVo ordersVo)
+	public void updateOrders(UsersSession session, OrdersVo ordersVo)
 			throws Exception;
 
 	/**
@@ -67,7 +67,7 @@ public interface OrdersManager {
 	 * @throws Exception
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public List<OrdersItemVo> searchFoodListByOrderId(UsersSession seesion,
+	public List<OrdersItemVo> loadAllFoods(UsersSession seesion,
 			String ordersId) throws Exception;
 
 	/**
@@ -77,7 +77,7 @@ public interface OrdersManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void create(UsersSession session, OrdersVo ordersVo,
+	public void addOrder(UsersSession session, OrdersVo ordersVo,
 			String memberId, String restaurantId, String[] foodIds,
 			String[] nums) throws Exception;
 

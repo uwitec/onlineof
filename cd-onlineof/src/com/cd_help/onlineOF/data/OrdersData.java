@@ -68,7 +68,7 @@ public class OrdersData implements Serializable {
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "orders_code", nullable = true, length = 15)
+	@Column(name = "orders_code", nullable = true, length = 24)
 	private String ordersCode;
 
 	/**

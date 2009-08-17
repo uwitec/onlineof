@@ -15,62 +15,95 @@ import java.util.Date;
  * 日期转换类
  * <p/>
  * <b>Creation Time:</b> Jul 3, 2009
+ * 
  * @author TanDong
  * @version 0.0.0.1
- *
+ * 
  * @since cd_help-onlineOF 0.0.0.1
  */
 public class ConvertUtils {
-	
+
 	/**
 	 * 转换一
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public static SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd hh:mm");
+	public static SimpleDateFormat format1 = new SimpleDateFormat(
+			"yyyy-MM-dd hh:mm");
 	/**
 	 * 转换二
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public static SimpleDateFormat format2 = new SimpleDateFormat("yyyyMMdd");
 	/**
-	 * 转换二
+	 * 转换三
+	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public static SimpleDateFormat format3 = new SimpleDateFormat("yyyy-MM-dd");
+	/**
+	 * 转换四
+	 * 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public static SimpleDateFormat format4 = new SimpleDateFormat("yyyyMMddHHmm");
 
 	/**
 	 * 将Date转换为String yyyy-MM-dd hh:mm
+	 * 
 	 * @param date
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public static String toString1(Date date) {
-		if(date == null) return "";
+		if (date == null)
+			return "";
 		return format1.format(date);
 	}
+
 	/**
 	 * 将Date转换为String yyyyMMdd
+	 * 
 	 * @param date
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public static String toString2(Date date) {
-		if(date == null) return "";
+		if (date == null)
+			return "";
 		return format2.format(date);
 	}
+
 	/**
 	 * 将Date转换为String yyyy-MM-dd
+	 * 
 	 * @param date
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public static String toString3(Date date) {
-		if(date == null) return "";
+		if (date == null)
+			return "";
 		return format3.format(date);
 	}
 
 	/**
+	 * 将Date转换为String yyyyMMddHHmmss
+	 * 
+	 * @param date
+	 * @return
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public static String toString4(Date date) {
+		if (date == null)
+			return "";
+		return format4.format(date);
+	}
+
+	/**
 	 * 将String转换为Date yyyy-MM-dd hh:mm
+	 * 
 	 * @param strDate
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -86,8 +119,10 @@ public class ConvertUtils {
 			}
 		}
 	}
+
 	/**
 	 * 将String转换为Date yyyyMMdd
+	 * 
 	 * @param strDate
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -103,8 +138,10 @@ public class ConvertUtils {
 			}
 		}
 	}
+
 	/**
 	 * 将String转换为Date yyyy-MM-dd
+	 * 
 	 * @param strDate
 	 * @return
 	 * @since cd_help-onlineOF 0.0.0.1
