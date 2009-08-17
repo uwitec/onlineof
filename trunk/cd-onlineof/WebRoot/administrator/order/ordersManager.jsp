@@ -153,8 +153,7 @@
 									<input type="checkbox" id="checksItem" name="checksItem"
 										value="<s:property value='ordersId'/>"
 										onclick="checkedJudge(this)" />
-									<span style="white-space: nowrap;"><a href="getInfo.do?ordersVo.ordersId=${ordersId}"><s:property
-											value="ordersCode" /></a></span>
+									<span style="white-space: nowrap;"><a href="getOrderInfo.do?ordersVo.ordersId=${ordersId}">${ordersCode}</a></span>
 								</td>
 								<td>
 									<span style="white-space: nowrap;"><s:property

@@ -55,19 +55,18 @@ public class OrdersAction extends BaseAction {
 		ordersVo.setContactGender(1);
 		ordersVo.setContactName("冬瓜");
 		ordersVo.setContactPhone("7788120");
-		ordersVo.setOrdersCode("5432452453");
 		ordersVo.setRemark("快餐送到楼下， 到后给我电话");
 		ordersVo.setRequestAddress("西苑露12号5楼333室");
 		ordersVo.setStatus(PropertiesFinalValue.ORDER_WAIT);
 		try {
-			this.getOnlineOF().getOrdersManager().create(
+			this.getOnlineOF().getOrdersManager().addOrder(
 					this.getSession(),
 					ordersVo,
 					memberId,
 					restaurantId,
 					new String[] { "0c8159ba1acb4aefb057ecae9b7f7586",
-							"2f665b5ecdb341668e811f361b8f50eb"},
-					new String[] { "5", "8"});
+							"2f665b5ecdb341668e811f361b8f50eb" },
+					new String[] { "5", "8" });
 		} catch (Exception e) {
 			throw new AppException("", "Adding the new order error!");
 		}
@@ -86,8 +85,8 @@ public class OrdersAction extends BaseAction {
 				.getParameterValues("checksItem");
 		for (String str : checkItems) {
 			try {
-				this.getOnlineOF().getOrdersManager().deleteOrders(this.getSession(),
-						str);
+				this.getOnlineOF().getOrdersManager().deleteOrders(
+						this.getSession(), str);
 			} catch (Exception e) {
 				throw new AppException("", "Failure to update more");
 			}
@@ -109,8 +108,8 @@ public class OrdersAction extends BaseAction {
 			ordersVo.setOrdersId(str);
 			ordersVo.setStatus(this.getRequest().getParameter("status"));
 			try {
-				this.getOnlineOF().getOrdersManager().update(this.getSession(),
-						ordersVo);
+				this.getOnlineOF().getOrdersManager().updateOrders(
+						this.getSession(), ordersVo);
 			} catch (Exception e) {
 				throw new AppException("", "Failure to update more");
 			}
@@ -128,8 +127,8 @@ public class OrdersAction extends BaseAction {
 	 */
 	public String updateOrders() throws AppException {
 		try {
-			this.getOnlineOF().getOrdersManager().update(this.getSession(),
-					ordersVo);
+			this.getOnlineOF().getOrdersManager().updateOrders(
+					this.getSession(), ordersVo);
 		} catch (Exception e) {
 			throw new AppException("", "Updating the order error!");
 		}
@@ -145,13 +144,12 @@ public class OrdersAction extends BaseAction {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String searchOrderInfo() throws AppException {
+	public String getOrderInfo() throws AppException {
 		try {
 			ordersVo = this.getOnlineOF().getOrdersManager().getOrder(
 					this.getSession(), ordersVo.getOrdersId());
-			itemVoList = this.getOnlineOF().getOrdersManager()
-					.searchFoodListByOrderId(this.getSession(),
-							ordersVo.getOrdersId());
+			itemVoList = this.getOnlineOF().getOrdersManager().loadAllFoods(
+					this.getSession(), ordersVo.getOrdersId());
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw new AppException("", "Loading the order deatil info error!");
@@ -195,7 +193,8 @@ public class OrdersAction extends BaseAction {
 				restaurantVos = this.getOnlineOF().getRestaurantManager()
 						.loadARestaurantAll();
 			} catch (Exception e) {
-				throw new AppException("", "Loading the order of restaurant error！");
+				throw new AppException("",
+						"Loading the order of restaurant error！");
 			}
 		}
 		return SUCCESS;

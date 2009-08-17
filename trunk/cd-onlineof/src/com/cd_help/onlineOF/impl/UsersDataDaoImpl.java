@@ -35,7 +35,6 @@ public class UsersDataDaoImpl extends BaseDaoSupport implements UsersDataDao{
 		List<UsersData> usersList = this.findByNamedQueryAndNamedParam("getUsersByName", "usersname",usersname);
 		if(usersList.size() > 0){
 			UsersData usersdata = usersList.get(0);
-			System.out.println("---------"+StringUtil.encodePassword(password, "MD5"));
 			if(usersdata.getPassword().equals(StringUtil.encodePassword(password, "MD5"))){
 			   return usersdata;
 			}else{

@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Random;
 
 import javax.annotation.Resource;
 
@@ -66,7 +67,7 @@ public class OrdersManagerImpl implements OrdersManager {
 	 *      com.cd_help.onlineOF.web.vo.OrdersVo, java.lang.String,
 	 *      java.lang.String, java.lang.String[], java.lang.String[])
 	 */
-	public void create(UsersSession session, OrdersVo ordersVo,
+	public void addOrder(UsersSession session, OrdersVo ordersVo,
 			String memberId, String restaurantId, String[] foodIds,
 			String[] nums) throws AppException {
 		List<OrdersItemData> oitemList = new ArrayList<OrdersItemData>();
@@ -81,6 +82,8 @@ public class OrdersManagerImpl implements OrdersManager {
 			oitemList.add(ordersItemData);
 		}
 		BeanUtilsHelp.copyProperties(ordersData, ordersVo);
+		ordersData.setOrdersCode(ConvertUtils.toString4(new Date()) + ""
+				+ new Random().nextInt());
 		ordersData.setOrdersDate(new Date());
 		ordersData.setItemData(oitemList);
 		ordersData.setOrdersId(StringUtil.getUUID());
@@ -105,24 +108,23 @@ public class OrdersManagerImpl implements OrdersManager {
 	 * 
 	 * @see com.cd_help.onlineOF.api.OrdersManager#delte(java.lang.String)
 	 */
-	public void deleteOrders(UsersSession session, String id) throws AppException {
-		if (!this.onlineOF.checkPrivilege(session, "deleteOrders")){
-			throw new AppException("","权限不够");
+	public void deleteOrders(UsersSession session, String id)
+			throws AppException {
+		if (!this.onlineOF.checkPrivilege(session, "deleteOrders")) {
+			throw new AppException("", "权限不够");
 		}
 		OrdersData ordersData = null;
-		if (checkPrivilege(session)) {
-			try {
-				ordersData = (OrdersData) this.ordersDataDao.get(
-						OrdersData.class, id);
-				for (Iterator<?> iterator = ordersData.getItemData().iterator(); iterator
-						.hasNext();) {
-					OrdersItemData oitemData = (OrdersItemData) iterator.next();
-					this.ordersDataDao.delete(oitemData);
-				}
-				this.ordersDataDao.delete(ordersData);
-			} catch (Exception e) {
-				throw new AppException("", "系统错误");
+		try {
+			ordersData = (OrdersData) this.ordersDataDao.get(OrdersData.class,
+					id);
+			for (Iterator<?> iterator = ordersData.getItemData().iterator(); iterator
+					.hasNext();) {
+				OrdersItemData oitemData = (OrdersItemData) iterator.next();
+				this.ordersDataDao.delete(oitemData);
 			}
+			this.ordersDataDao.delete(ordersData);
+		} catch (Exception e) {
+			throw new AppException("", "系统错误");
 		}
 	}
 
@@ -131,8 +133,11 @@ public class OrdersManagerImpl implements OrdersManager {
 	 * 
 	 * @see com.cd_help.onlineOF.api.OrdersManager#update(com.cd_help.onlineOF.web.vo.OrdersVo)
 	 */
-	public void update(UsersSession seesion, OrdersVo ordersVo)
+	public void updateOrders(UsersSession session, OrdersVo ordersVo)
 			throws AppException {
+		if (!this.onlineOF.checkPrivilege(session, "updateOrders")) {
+			throw new AppException("", "权限不够");
+		}
 		OrdersData ordersData;
 		try {
 			ordersData = (OrdersData) ordersDataDao.get(OrdersData.class,
@@ -155,7 +160,8 @@ public class OrdersManagerImpl implements OrdersManager {
 	 * 
 	 * @see com.cd_help.onlineOF.api.OrdersManager#get(java.lang.String)
 	 */
-	public OrdersVo getOrder(UsersSession seesion, String id) throws AppException {
+	public OrdersVo getOrder(UsersSession seesion, String id)
+			throws AppException {
 		OrdersData ordersData = null;
 		try {
 			ordersData = (OrdersData) ordersDataDao.get(OrdersData.class, id);
@@ -172,8 +178,8 @@ public class OrdersManagerImpl implements OrdersManager {
 	 * @see com.cd_help.onlineOF.api.OrdersManager#searchFoodListByOrderId(java.lang.String)
 	 */
 	@Override
-	public List<OrdersItemVo> searchFoodListByOrderId(UsersSession seesion,
-			String ordersId) throws Exception {
+	public List<OrdersItemVo> loadAllFoods(UsersSession seesion, String ordersId)
+			throws Exception {
 		OrdersData ordersData = null;
 		try {
 			ordersData = (OrdersData) ordersDataDao.get(OrdersData.class,
@@ -371,21 +377,6 @@ public class OrdersManagerImpl implements OrdersManager {
 			e.printStackTrace();
 			throw new AppException("0000000", "系统错误", e);
 		}
-	}
-
-	/**
-	 * 检查权限
-	 * 
-	 * @param session
-	 * @return
-	 * @throws AppAppAppException
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	private boolean checkPrivilege(UsersSession session) throws AppException {
-		if (null == session.getUsersVo()) {
-			return false;
-		}
-		return true;
 	}
 
 	public void setOnlineOF(OnlineOF onlineOF) {
