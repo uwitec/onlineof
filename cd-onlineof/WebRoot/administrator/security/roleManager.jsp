@@ -51,6 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            <tr>
                <th><input type="checkbox" id="checkAll" name="checkAll" onclick="checkedAll()"/></th>
 	           <th><span style="white-space: nowrap;">角色名</span></th>
+	           <th><span style="white-space: nowrap;">标识</span></th>
 	           <th><span style="white-space: nowrap;">描述</span></th>
 	           <th><span style="white-space: nowrap;">操作</span></th>
            </tr>
@@ -61,6 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	           <tr>
 	             <td><input type="checkbox" id="checksItem" name="checksItem" value="<s:property value='roleId'/>"/></td>
 	           	 <td><span style="white-space: nowrap;"><s:property value="roleName"/></span></td>
+	           	 <td><span style="white-space: nowrap;"><s:property value="path"/></span></td>
 	             <td><span style="white-space: nowrap;"><s:property value="description"/></span></td>
 	             <td><a href="editRole.do?roleId=<s:property value='roleId'/>">编辑</a>/<a href="javascript:forwardRolePrivilege('<s:property value='roleId'/>');">权限设置</a></td>
 	           </tr>

@@ -36,8 +36,11 @@
 <body style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;">
      <table style="width:100%;height:100%;padding:0px;">
         <tr>
-          <td style="width:100%;height:10%;background:#E6EAE9;" colspan="2">
+          <td style="width:100%;height:10%;background:#E6EAE9;text-align:left;" colspan="2">
+            <strong style="font-size:20pt;">多滋味后台管理系统</strong>
+            <!--  
             <embed src="administrator/image/towp.swf" style="width:100%;height:100%;RIGHT: 10px; "> </embed>
+            -->
           </td>
         </tr> 
         <tr>
