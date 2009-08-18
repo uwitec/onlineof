@@ -177,7 +177,8 @@ public class RestaurantManagerImpl implements RestaurantManager {
 				page.setArray(restaurantVos);
 			}
 		} catch (Exception e) {
-			throw new AppException("0000014", "加载餐厅信息出错!");
+			e.printStackTrace();
+			throw new AppException("0000014", "加载餐厅分类信息出错!");
 		}
 		return page;
 	}
