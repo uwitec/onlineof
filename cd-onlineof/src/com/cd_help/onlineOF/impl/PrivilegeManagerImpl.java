@@ -245,27 +245,31 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 				for(RoleData rd : roleDatas){
 					rd.getPrivilegeList().remove(privilegeData);
 				}
-				
-				String parentId = privilegeData.getParent().getPrivilegeId();
-				privilegeDataDao.delete(privilegeData);
-				PrivilegeData parentData = (PrivilegeData) privilegeDataDao
-						.get(PrivilegeData.class, parentId);
-				List<PrivilegeData> childPrivileges = privilegeDataDao
-						.findByNamedQueryAndNamedParam("getChildPrivilege",
-								"parentId", parentId);
-				if (childPrivileges.size() == 0) {
-					parentData.setHasChild(0);
-					parentData.setHasModelChild(0);
-				} else {
-					List<PrivilegeData> privileges = privilegeDataDao
-							.findByNamedQueryAndNamedParam(
-									"getChildModelPrivilege", "parentId",
-									parentId);
-					if (privileges.size() == 0) {
+				if(null != privilegeData.getParent()){
+					String parentId = privilegeData.getParent().getPrivilegeId();
+					privilegeDataDao.delete(privilegeData);
+					PrivilegeData parentData = (PrivilegeData) privilegeDataDao
+							.get(PrivilegeData.class, parentId);
+					List<PrivilegeData> childPrivileges = privilegeDataDao
+							.findByNamedQueryAndNamedParam("getChildPrivilege",
+									"parentId", parentId);
+					if (childPrivileges.size() == 0) {
+						parentData.setHasChild(0);
 						parentData.setHasModelChild(0);
+					} else {
+						List<PrivilegeData> privileges = privilegeDataDao
+								.findByNamedQueryAndNamedParam(
+										"getChildModelPrivilege", "parentId",
+										parentId);
+						if (privileges.size() == 0) {
+							parentData.setHasModelChild(0);
+						}
 					}
+				}else{
+					privilegeDataDao.delete(privilegeData);
 				}
 			} catch (Exception e) {
+				e.printStackTrace();
 				log.error(e);
 				throw new AppException("0000014", "删除失败!", e);
 			}
@@ -302,6 +306,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 				}
 				privilegeDataDao.update(privilegeData);
 			} catch (Exception e) {
+				e.printStackTrace();
 				log.error(e);
 				throw new AppException("0000014", "修改失败!", e);
 			}
