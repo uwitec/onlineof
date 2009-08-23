@@ -292,7 +292,7 @@ window.attachEvent("onload", correctPNG);
           <td width="87" style="padding-top:7px;FONT-WEIGHT: bold;font-size:14px;color:#000000" align="center" valign="middle" background="images/index/gg-08.jpg">招牌菜推荐</td>
           <td width="620" style="padding-top:7px;padding-right:7px;font-size:12px;color:#958559" align="right" background="images/index/gg-08.jpg">
              <s:iterator value="restaurantKinds">
-               <a href="" target="restaurantView">
+               <a href="getFoodByRestaurantKind.do?restaurantKindId=<s:property value='restaurant_kind_Id'/>" target="restaurantView">
                  <s:property value="name"/>
                </a>
              </s:iterator>
@@ -303,7 +303,7 @@ window.attachEvent("onload", correctPNG);
         <tr>
           <td align="center" valign="middle">
             <!-- 饮食展示 -->
-            <iframe width="100%" height="344" frameborder="0" scrolling="no" id="restaurantView" name="restaurantView" src="getFoodByPage.do"></iframe>
+            <iframe width="100%" height="344" frameborder="0" scrolling="no" id="restaurantView" name="restaurantView" src="getSignFoods.do"></iframe>
           </td>
         </tr>
       </table></td>
