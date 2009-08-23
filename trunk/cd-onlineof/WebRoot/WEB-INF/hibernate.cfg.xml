@@ -25,7 +25,6 @@
 		<mapping class="com.cd_help.onlineOF.data.RestaurantData"/>
 		<mapping class="com.cd_help.onlineOF.data.Restaurant_kindData"/>
 		<mapping class="com.cd_help.onlineOF.data.CredibilityData"/>
-		<mapping class="com.cd_help.onlineOF.data.CuisineData"/>
 		<mapping class="com.cd_help.onlineOF.data.UsersData"/>
 		<mapping class="com.cd_help.onlineOF.data.RoleData"/>
 		<mapping class="com.cd_help.onlineOF.data.PrivilegeData"/>

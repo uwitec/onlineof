@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <head>
 <base href="<%=basePath%>">
 <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
-<title>多滋�味</title>
+<title>多滋味</title>
 <link href="images/index/css.css" rel="stylesheet" type="text/css" />
 <link href="common/css/common.css" rel="stylesheet" type="text/css" />
 <style type="text/css">
@@ -152,22 +152,22 @@ function correctPNG()
 window.attachEvent("onload", correctPNG);
 </script>
 <SCRIPT language=JavaScript type=text/JavaScript>
-<!--
-var hn=new Array();
-function  secBoard1(n)
-{
-for(i=0;i<mainTable1.tBodies.length;i++)
-mainTable1.tBodies[i].style.display="none";
-mainTable1.tBodies[n].style.display="block";
-for(i=0;i<3;i++)
-document.getElementById("dg["+i+"]").className="dg2";
-document.getElementById("dg["+n+"]").className="dg1";
-}
-//-->
+	<!--
+	var hn=new Array();
+	function  secBoard1(n)
+	{
+		for(i=0;i<mainTable1.tBodies.length;i++)
+		mainTable1.tBodies[i].style.display="none";
+		mainTable1.tBodies[n].style.display="block";
+		for(i=0;i<3;i++)
+		document.getElementById("dg["+i+"]").className="dg2";
+		document.getElementById("dg["+n+"]").className="dg1";
+	}
+	//-->
 </SCRIPT>
 </head>
 
-<body>
+<body style="margin-top:0px;margin-bottom:0px;margin-left:0px;margin-right:0px;">
 <table width="1002" height="3" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td bgcolor="#6F1B2A"></td>
@@ -177,7 +177,7 @@ document.getElementById("dg["+n+"]").className="dg1";
   <tr>
     <td valign="top" background="images/index/dzw-01.jpg"><table width="100%" height="48" border="0" cellpadding="0" cellspacing="0">
       <tr>
-        <td width="169" rowspan="3" align="center" valign="middle"><img src="images/logo.png" width="164" height="43" /></td>
+        <td width="169" rowspan="3" align="center" valign="middle"><img src="images/index/logo.png" width="164" height="43" /></td>
         <td width="19" rowspan="3">&nbsp;</td>
         <td height="10" colspan="20"></td>
       </tr>
@@ -261,7 +261,7 @@ document.getElementById("dg["+n+"]").className="dg1";
         <td width="365" valign="top">
 		<table width="100%" height="255" border="0" cellpadding="0" cellspacing="0" style="border:solid 1px #f0f0f0;">
           <tr>
-            <td align="center" valign="middle">主图片位�?/td>
+            <td align="center" valign="middle">主图片位</td>
           </tr>
         </table></td>
         <td width="6"></td>
@@ -289,7 +289,7 @@ document.getElementById("dg["+n+"]").className="dg1";
         </tr>
         <tr>
           <td width="43" height="32" background="images/index/gg-09.jpg"></td>
-          <td width="87" style="padding-top:7px;FONT-WEIGHT: bold;font-size:14px;color:#000000" align="center" valign="middle" background="images/index/gg-08.jpg">招牌菜推</td>
+          <td width="87" style="padding-top:7px;FONT-WEIGHT: bold;font-size:14px;color:#000000" align="center" valign="middle" background="images/index/gg-08.jpg">招牌菜推荐</td>
           <td width="620" style="padding-top:7px;padding-right:7px;font-size:12px;color:#958559" align="right" background="images/index/gg-08.jpg">
              <s:iterator value="restaurantKinds">
                <a href="" target="restaurantView">
@@ -302,7 +302,8 @@ document.getElementById("dg["+n+"]").className="dg1";
       <table width="100%" height="344" border="0" cellpadding="0" cellspacing="0" style="border:solid 1px #cccccc; border-top:none;">
         <tr>
           <td align="center" valign="middle">
-            <iframe style="width:100%;height:100%;" frameborder="0" id="restaurantView" name="restaurantView" src="getFoodPage.do"></iframe>
+            <!-- 饮食展示 -->
+            <iframe width="100%" height="344" frameborder="0" scrolling="no" id="restaurantView" name="restaurantView" src="getFoodByPage.do"></iframe>
           </td>
         </tr>
       </table></td>
@@ -320,7 +321,7 @@ document.getElementById("dg["+n+"]").className="dg1";
 	        <s:iterator value="restaurants">
 		      <tr>
 		        <td><s:property value="name"/></td>
-		        <td><s:property value="name"/></td>
+		        <td><s:property value="prestige"/></td>
 		      </tr>
 		    </s:iterator>
 	    </tbody>
@@ -446,7 +447,7 @@ document.getElementById("dg["+n+"]").className="dg1";
       <tr>
         <td valign="top"><table width="100%" height="237" border="0" cellpadding="0" cellspacing="0" style="border:solid 1px #efefef;">
           <tr>
-            <td height="30" align="left" valign="middle" style="padding-left:7px;FONT-WEIGHT: bold;font-size:14px;color:#d6bf9d">武陵吃文�?/td>
+            <td height="30" align="left" valign="middle" style="padding-left:7px;FONT-WEIGHT: bold;font-size:14px;color:#d6bf9d">武陵吃文</td>
           </tr>
           <tr>
             <td height="207" valign="top">&nbsp;</td>
