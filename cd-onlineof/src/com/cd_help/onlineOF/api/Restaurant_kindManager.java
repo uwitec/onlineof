@@ -7,6 +7,7 @@ package com.cd_help.onlineOF.api;
 
 import java.util.List;
 
+import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
@@ -24,16 +25,16 @@ import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
  */
 public interface Restaurant_kindManager {
 	/*添加餐厅分类信息*/
-	public void addRestaurantKind(Restaurant_kindVo restaurantTypeVo)throws Exception;
+	public void addRestaurantKind(Restaurant_kindVo restaurantTypeVo)throws AppException;
 	/*删除餐厅分类信息*/
-	public void delRestaurantKind(String id)throws Exception;
+	public void delRestaurantKind(String id)throws AppException;
 	/*修改餐厅分类信息*/
-	public void updRestaurantKind(Restaurant_kindVo restaurantTypeVo)throws Exception;
+	public void updRestaurantKind(Restaurant_kindVo restaurantTypeVo)throws AppException;
 	/*根据ID返回餐厅分类信息*/
-	public Restaurant_kindVo getRestaurantKindById(String id)throws Exception;
+	public Restaurant_kindVo getRestaurantKindById(String id)throws AppException;
 	/*返回集合餐厅分类信息的集合*/
-	public List<Restaurant_kindVo> getRestaurantKindAll()throws Exception;
+	public List<Restaurant_kindVo> getRestaurantKindAll()throws AppException;
 	/*查询分页信息*/
-	public PageBean seachRestaurantKindPage(String qhl,String[] params,Object[] objs,PageBean pageBean,UsersSession session)throws Exception;
+	public PageBean seachRestaurantKindPage(String qhl,String[] params,Object[] objs,PageBean pageBean,UsersSession session)throws AppException;
 	
 }
