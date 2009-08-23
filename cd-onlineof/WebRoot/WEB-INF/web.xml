@@ -80,7 +80,7 @@
     <!-- 响应图片的Servlet -->
     <servlet>
     	<servlet-name>imageServlet</servlet-name>
-    	<servlet-class>com.cd_help.onlineOF.web.servlet.ImageServlet</servlet-class>
+    	<servlet-class>com.cd_help.onlineOF.web.common.ImageServlet</servlet-class>
     </servlet>
 	<servlet-mapping>
 		<servlet-name>imageServlet</servlet-name>
