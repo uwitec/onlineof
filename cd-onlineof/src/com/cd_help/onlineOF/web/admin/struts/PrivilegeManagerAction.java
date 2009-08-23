@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.web.BaseAction;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 
 /**
@@ -29,9 +30,9 @@ import com.cd_help.onlineOF.web.vo.PrivilegeVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @SuppressWarnings("serial")
-@Service("privilegeAction")
+@Service("privilegeManagerAction")
 @Scope("prototype")
-public class PrivilegeAction extends BaseAction{
+public class PrivilegeManagerAction extends BaseAction{
 	
 	private List<PrivilegeVo> privilegeVos;  // 所有权限
 	private PageBean pb; // 分页

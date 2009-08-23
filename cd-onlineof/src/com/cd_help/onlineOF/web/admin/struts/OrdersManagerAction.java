@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.PropertiesFinalValue;
+import com.cd_help.onlineOF.web.BaseAction;
 import com.cd_help.onlineOF.web.vo.OrdersItemVo;
 import com.cd_help.onlineOF.web.vo.OrdersVo;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
@@ -29,9 +30,9 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
  * 
  * @since cd_help-onlineOF 0.0.0.1
  */
-@Service("ordersAction")
+@Service("ordersManagerAction")
 @Scope("prototype")
-public class OrdersAction extends BaseAction {
+public class OrdersManagerAction extends BaseAction {
 	private PageBean pb = new PageBean();
 	private OrdersVo ordersVo = new OrdersVo();
 	private List<RestaurantVo> restaurantVos;

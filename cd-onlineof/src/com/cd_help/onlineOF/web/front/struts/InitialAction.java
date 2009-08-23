@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
-import com.cd_help.onlineOF.web.admin.struts.BaseAction;
+import com.cd_help.onlineOF.web.BaseAction;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
 

@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
+import com.cd_help.onlineOF.web.BaseAction;
 import com.cd_help.onlineOF.web.vo.FoodVo;
 import com.cd_help.onlineOF.web.vo.Food_kindVo;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
@@ -26,9 +27,9 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @SuppressWarnings("serial")
-@Service("foodAction")
+@Service("foodManagerAction")
 @Scope("prototype")
-public class FoodAction extends BaseAction {
+public class FoodManagerAction extends BaseAction {
 	/* 分页Bean */
 	private PageBean pageBean = null;
 	/* 餐厅ID */

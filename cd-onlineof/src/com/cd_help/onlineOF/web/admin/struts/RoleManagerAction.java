@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.web.BaseAction;
 import com.cd_help.onlineOF.web.vo.RoleVo;
 
 /**
@@ -27,9 +28,9 @@ import com.cd_help.onlineOF.web.vo.RoleVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @SuppressWarnings("serial")
-@Service("roleAction")
+@Service("roleManagerAction")
 @Scope("prototype")
-public class RoleAction extends BaseAction{
+public class RoleManagerAction extends BaseAction{
 	
 	private RoleVo roleVo;
 	private PageBean pb; // 分页

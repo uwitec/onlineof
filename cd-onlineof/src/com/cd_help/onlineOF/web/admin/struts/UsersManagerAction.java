@@ -18,6 +18,7 @@ import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.ConvertUtils;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
+import com.cd_help.onlineOF.web.BaseAction;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 import com.cd_help.onlineOF.web.vo.RoleVo;
 import com.cd_help.onlineOF.web.vo.UsersVo;
@@ -34,9 +35,9 @@ import com.cd_help.onlineOF.web.vo.UsersVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @SuppressWarnings("serial")
-@Service("usersAction")
+@Service("usersManagerAction")
 @Scope("prototype")
-public class UsersAction extends BaseAction {
+public class UsersManagerAction extends BaseAction {
 
 	private String usersId;
 	private UsersVo usersVo = new UsersVo(); // 用户

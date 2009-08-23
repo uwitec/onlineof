@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
+import com.cd_help.onlineOF.web.BaseAction;
 import com.cd_help.onlineOF.web.vo.Food_kindVo;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
@@ -21,10 +22,10 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @SuppressWarnings("serial")
-@Service("food_KindAction")
+@Service("food_KindManagerAction")
 @Scope("prototype")
 // 配置Action的实例根据作用域来
-public class Food_KindAction extends BaseAction {
+public class Food_KindManagerAction extends BaseAction {
 	/* 餐厅菜分类值对象 */
 	private Food_kindVo food_kindVo = null;
 	/* 餐厅菜分类值对象集合 */
