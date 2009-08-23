@@ -82,4 +82,12 @@ public interface RestaurantManager {
 	 */
 	public void updateRestaurant(RestaurantVo restaurantVo)throws AppException;
 	
+	/**
+	 * 根据类别获取人气最旺的餐厅
+	 * @param kindId
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public RestaurantVo getTopRestaurantByKind(String kindId) throws AppException;
 }
