@@ -52,7 +52,7 @@ public class RestaurantVo implements Serializable{
 			String openTime, String closeTime, String createName,
 			String contactName, String contactPhone, String QQ,
 			String mobilePhone, Integer contactGender, Integer status,
-			String introduction, String email, Blob img) {
+			String introduction, String email, Blob img, long prestige) {
 		this.restaurantId = restaurantId;
 		this.name = name;
 		this.closeTime = closeTime;
@@ -67,6 +67,7 @@ public class RestaurantVo implements Serializable{
 		this.mobilePhone = mobilePhone;
 		this.status = status;
 		this.contactGender = contactGender;
+		this.prestige = prestige;
 	}
 
 	/**
@@ -175,7 +176,7 @@ public class RestaurantVo implements Serializable{
 	 * 餐厅信誉
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private int prestige;
+	private long prestige;
 
 	public String getRestaurantId() {
 		return restaurantId;
@@ -313,11 +314,11 @@ public class RestaurantVo implements Serializable{
 		this.resKindId = resKindId;
 	}
 
-	public int getPrestige() {
+	public long getPrestige() {
 		return prestige;
 	}
 
-	public void setPrestige(int prestige) {
+	public void setPrestige(long prestige) {
 		this.prestige = prestige;
 	}
 	

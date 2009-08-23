@@ -5,6 +5,7 @@
  */
 package com.cd_help.onlineOF.web.front.struts;
 
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
@@ -53,12 +54,14 @@ public class FoodAction extends BaseAction{
 		pageBean.setPagesize(10);
 		if (null != this.getRestaurantId()
 				&& !"".equals(this.getRestaurantId())) {
+			log.debug("HQLNAME: getFoodByRestaurantId");
 			hqlName = "getFoodByRestaurantId";
 			params = new String[] { "restaurantId"};
 			conditions = new Object[] {
 					this.getRestaurantId()};
 		}else {
-		   hqlName = "getFoodAll";
+			log.debug("HQLNAME: getFoodAll");
+		    hqlName = "getFoodAll";
 		}
 		pageBean = this.getOnlineOF().getFoodManager().seachFoodPage(
 				hqlName, params, conditions, pageBean, this.getSession());
