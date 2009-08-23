@@ -1,4 +1,4 @@
-package com.cd_help.onlineOF.web.admin.servlet;
+package com.cd_help.onlineOF.web.common;
 
 import java.io.IOException;
 import java.io.InputStream;

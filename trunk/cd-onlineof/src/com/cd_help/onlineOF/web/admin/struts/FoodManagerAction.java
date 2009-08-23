@@ -104,24 +104,6 @@ public class FoodManagerAction extends BaseAction {
 	}
 	
 	/**
-	 * 根据餐厅分页获取饮食
-	 * @return
-	 * @throws AppException
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	public String getFoodPageByRestaurantId() throws AppException{
-		log.debug("--->> begin getFoodPageByRestaurantId");
-		pageBean = new PageBean();
-		pageBean.setCurrentPage(page);
-		pageBean.setPagesize(10);
-		String hqlName = "getFoodByRestaurantId";
-		String[] params = new String[] { "restaurantId"};
-		Object[] conditions = new Object[] {this.getRestaurantId()};
-		this.getOnlineOF().getFoodManager().seachFoodPage(hqlName, params, conditions, pageBean, this.getSession());
-		return SUCCESS;
-	}
-
-	/**
 	 * 编辑菜信息 comment here
 	 * 
 	 * @return
