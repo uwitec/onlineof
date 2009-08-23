@@ -37,7 +37,9 @@ import javax.persistence.Table;
 		@NamedQuery(name = "loadAllRestaurant", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img,r.prestige) from RestaurantData r"),
 		@NamedQuery(name = "getRestaurantById", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img,r.prestige) from RestaurantData r where r.restaurantId = :restaurantId"),
 		@NamedQuery(name = "getRestaurantAllPage", query = "from RestaurantData"),
-		@NamedQuery(name = "getRestaurantByKindName", query = "from RestaurantData r where r.restaurant_kindId = :rkindId and r.name like :rname") 
+		@NamedQuery(name = "getRestaurantByKindName", query = "from RestaurantData r where r.restaurant_kindId = :rkindId and r.name like :rname"),
+		//根据餐厅类别,人气获取餐厅
+		@NamedQuery(name = "getTopRestaurantByKindId", query = "from RestaurantData r where r.restaurant_kindId = :rkindId order by r.prestige DESC") 
 		})
 public class RestaurantData implements Serializable {
 

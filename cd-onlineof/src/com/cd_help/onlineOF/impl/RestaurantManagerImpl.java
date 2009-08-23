@@ -37,6 +37,7 @@ import com.cd_help.onlineOF.web.vo.RestaurantVo;
  * 
  * @since cd_help-onlineOF 0.0.0.1
  */
+@SuppressWarnings("unchecked")
 @Service("restaurantManager")
 @Transactional(propagation = Propagation.REQUIRED)
 public class RestaurantManagerImpl implements RestaurantManager {
@@ -202,7 +203,6 @@ public class RestaurantManagerImpl implements RestaurantManager {
 		}
 	}
 
-	@Override
 	public void updateRestaurant(RestaurantVo restaurantVo) throws AppException {
 		try {
 			RestaurantData restaurantData = (RestaurantData) restaurantDataDao
@@ -215,6 +215,28 @@ public class RestaurantManagerImpl implements RestaurantManager {
 			restaurantDataDao.update(restaurantData);
 		} catch (Exception e) {
 			throw new AppException("", e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.RestaurantManager#getTopRestaurantByKind(java.lang.String)
+	 */
+	public RestaurantVo getTopRestaurantByKind(String kindId)
+			throws AppException {
+	    RestaurantVo restaurantVo = new RestaurantVo();
+		List<RestaurantData> restaurantDatas = new ArrayList<RestaurantData>();
+		try{
+			restaurantDatas = restaurantDataDao.findByNamedQueryAndNamedParam("getTopRestaurantByKindId", "rkindId", kindId);
+		    if(restaurantDatas.size() <= 0){
+		    	return null;
+		    }else{
+		    	RestaurantData rd = (RestaurantData)restaurantDatas.get(0);
+		    	BeanUtilsHelp.copyProperties(restaurantVo, rd);
+		    	return restaurantVo;
+		    }
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new AppException("00000300","数据错误!",e);
 		}
 	}
 

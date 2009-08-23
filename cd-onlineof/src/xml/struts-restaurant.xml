@@ -5,11 +5,19 @@
 <struts>
 	<!-- 餐厅管理 -->
 	<package name="restaurantView" extends="common-default">
-		<!-- 分页获取饮食 -->
-		<action name="getFoodByPage" class="foodAction" method="getFoodByPage">
+		<!-- 获取招牌饮食 -->
+		<action name="getSignFoods" class="foodAction" method="getSignFoods">
 			<result name="success">
 				/restaurant/foodViewByRestaurant.jsp
 			</result>
 		</action>
+		
+		<!-- 根据餐厅类别获取餐厅下的招牌饮食 -->
+		<action name="getFoodByRestaurantKind" class="foodAction" method="getFoodByRestaurantKind">
+			<result name="success">
+				/restaurant/foodViewByRestaurant.jsp
+			</result>
+		</action>
+		
 	</package>
 </struts>

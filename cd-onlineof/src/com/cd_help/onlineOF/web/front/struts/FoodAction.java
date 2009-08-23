@@ -6,12 +6,17 @@
 package com.cd_help.onlineOF.web.front.struts;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.BaseAction;
+import com.cd_help.onlineOF.web.vo.FoodVo;
+import com.cd_help.onlineOF.web.vo.RestaurantVo;
 
 /**
  * <b><code></code></b>
@@ -33,10 +38,18 @@ public class FoodAction extends BaseAction{
 	private PageBean pageBean = null;
 	/* 餐厅ID */
 	private String restaurantId;
+	/* 餐厅类别ID */
+	private String restaurantKindId;
 	/* 类别ID */
 	private String foodKindId;
 	/* 当前页 */
 	private int page = 1;
+	
+	/**
+	 * 饮食
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private List<FoodVo> foodVos = new ArrayList<FoodVo>();
 	
 	/**
 	 * 分页获取饮食
@@ -44,27 +57,25 @@ public class FoodAction extends BaseAction{
 	 * @throws AppException 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public String getFoodByPage() throws AppException{
+	public String getSignFoods() throws AppException{
 		log.debug("--->> begin getFoodByPage");
-		String[] params = null;
-		Object[] conditions = null;
-		String hqlName = "";
-		pageBean = new PageBean();
-		pageBean.setCurrentPage(page);
-		pageBean.setPagesize(10);
-		if (null != this.getRestaurantId()
-				&& !"".equals(this.getRestaurantId())) {
-			log.debug("HQLNAME: getFoodByRestaurantId");
-			hqlName = "getFoodByRestaurantId";
-			params = new String[] { "restaurantId"};
-			conditions = new Object[] {
-					this.getRestaurantId()};
-		}else {
-			log.debug("HQLNAME: getFoodAll");
-		    hqlName = "getFoodAll";
+		foodVos = this.getOnlineOF().getFoodManager().getSignFoods();
+		return SUCCESS;
+	}
+	
+	/**
+	 * 获取某个餐厅类别下的招牌菜信息
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String getFoodByRestaurantKind() throws AppException {
+		RestaurantVo rv = this.getOnlineOF().getRestaurantManager().getTopRestaurantByKind(restaurantKindId);
+		if(null != rv){
+			foodVos = this.getOnlineOF().getFoodManager().getSignFoodsByRestaurantId(rv.getRestaurantId());
+		}else{
+			foodVos = null;
 		}
-		pageBean = this.getOnlineOF().getFoodManager().seachFoodPage(
-				hqlName, params, conditions, pageBean, this.getSession());
 		return SUCCESS;
 	}
 
@@ -90,5 +101,29 @@ public class FoodAction extends BaseAction{
 
 	public void setFoodKindId(String foodKindId) {
 		this.foodKindId = foodKindId;
+	}
+
+	public List<FoodVo> getFoodVos() {
+		return foodVos;
+	}
+
+	public void setFoodVos(List<FoodVo> foodVos) {
+		this.foodVos = foodVos;
+	}
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public String getRestaurantKindId() {
+		return restaurantKindId;
+	}
+
+	public void setRestaurantKindId(String restaurantKindId) {
+		this.restaurantKindId = restaurantKindId;
 	}
 }

@@ -6,6 +6,7 @@
 package com.cd_help.onlineOF.impl;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -39,6 +40,7 @@ import com.cd_help.onlineOF.web.vo.FoodVo;
  *
  * @since cd_help-onlineOF 0.0.0.1
  */
+@SuppressWarnings("unchecked")
 @Service("foodManager")
 @Transactional(propagation=Propagation.REQUIRED)
 public class FoodManagerImpl implements FoodManager{
@@ -183,5 +185,46 @@ public class FoodManagerImpl implements FoodManager{
 			throw new AppException("00000300","系统错误,请联系系统管理员",e);
 		}
 		return page;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.FoodManager#getSignFoodsByRestaurantId(java.lang.String)
+	 */
+	public List<FoodVo> getSignFoodsByRestaurantId(String restaurantId)
+			throws AppException {
+		List<FoodVo> foodVos = new ArrayList<FoodVo>();
+		try{
+		    List<FoodData> fooddatas = foodDataDao.findByNamedQueryAndNamedParam("getFoodByRestaurantId", "restaurantId", restaurantId);
+		    for(Iterator i = fooddatas.iterator(); i.hasNext(); ){
+		    	FoodData fd = (FoodData)i.next();
+		    	FoodVo fv = new FoodVo();
+		    	BeanUtilsHelp.copyProperties(fv, fd);
+		    	foodVos.add(fv);
+		    }
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new AppException("00000300","系统错误,请联系系统管理员",e);
+		}
+		return foodVos;
+	}
+
+	/**
+	 * @see com.cd_help.onlineOF.api.FoodManager#getSignFoods()
+	 */
+	public List<FoodVo> getSignFoods() throws AppException {
+		List<FoodVo> foodVos = new ArrayList<FoodVo>();
+		try{
+		    List<FoodData> fooddatas = foodDataDao.findByNamedQuery("getSignFoods");
+		    for(Iterator i = fooddatas.iterator(); i.hasNext(); ){
+		    	FoodData fd = (FoodData)i.next();
+		    	FoodVo fv = new FoodVo();
+		    	BeanUtilsHelp.copyProperties(fv, fd);
+		    	foodVos.add(fv);
+		    }
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new AppException("00000300","系统错误,请联系系统管理员",e);
+		}
+		return foodVos;
 	}
 }

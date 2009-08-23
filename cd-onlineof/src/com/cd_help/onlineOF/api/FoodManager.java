@@ -91,4 +91,21 @@ public interface FoodManager {
 	public PageBean seachFoodPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean,UsersSession session)throws AppException;
 	
+	/**
+	 * 根据餐厅ID获取招牌饮食
+	 * @param restaurantId
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<FoodVo> getSignFoodsByRestaurantId(String restaurantId) throws AppException;
+	
+	/**
+	 * 获取招牌饮食
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public List<FoodVo> getSignFoods() throws AppException;
+	
 }

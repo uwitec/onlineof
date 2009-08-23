@@ -34,10 +34,12 @@ import javax.persistence.Table;
 		@NamedQuery(name = "loadAllFood", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.introduction,f.img,f.isSigns) from FoodData f"),
 		/* 根据餐厅和类别获取饮食信息 */
 		@NamedQuery(name="getFoodAll",query="from FoodData"),
+		/* 获取招牌饮食信息 */
+		@NamedQuery(name="getSignFoods",query="from FoodData f where f.isSigns=1"),
 		@NamedQuery(name="getFoodByKindId",query="from FoodData f where f.food_kindId=:kindId"),
 		@NamedQuery(name="getFoodByresIdAndKindId",query="from FoodData f where f.restaurantId = :restaurantId and f.food_kindId = :kindId and f.name like :foodName"),
 		@NamedQuery(name="getFoodByresIdAndFoodName",query="from FoodData f where f.restaurantId = :restaurantId and f.name like :foodName"),
-		@NamedQuery(name="getFoodByRestaurantId",query="from FoodData f where f.restaurantId = :restaurantId")
+		@NamedQuery(name="getFoodByRestaurantId",query="from FoodData f where f.restaurantId = :restaurantId and f.isSigns=1")
 		})
 public class FoodData implements Serializable {
 
