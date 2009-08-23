@@ -20,6 +20,7 @@ import org.springframework.stereotype.Service;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
+import com.cd_help.onlineOF.web.BaseAction;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
 
@@ -33,16 +34,16 @@ import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @SuppressWarnings("serial")
-@Service("restaurantAction")
+@Service("restaurantManagerAction")
 @Scope("prototype")
-public class RestaurantAction extends BaseAction {
+public class RestaurantManagerAction extends BaseAction {
 
 	/**
 	 * comment here
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	protected static Log log = LogFactory.getLog(RestaurantAction.class);
+	protected static Log log = LogFactory.getLog(RestaurantManagerAction.class);
 
 	private PageBean pageBean = new PageBean();
 

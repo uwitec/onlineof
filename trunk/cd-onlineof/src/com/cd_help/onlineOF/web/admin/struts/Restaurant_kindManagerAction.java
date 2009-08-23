@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
+import com.cd_help.onlineOF.web.BaseAction;
 import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
 
 /**
@@ -21,9 +22,9 @@ import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
  * @since cd_help-onlineOF 0.0.0.1
  */
 @SuppressWarnings("serial")
-@Service("restaurantKindAction")
+@Service("restaurantKindManagerAction")
 @Scope("prototype")
-public class Restaurant_kindAction extends BaseAction {
+public class Restaurant_kindManagerAction extends BaseAction {
 
 
 	private PageBean pageBean = new PageBean();

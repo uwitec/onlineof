@@ -5,38 +5,38 @@
 <struts>
     <!-- 系统用户管理 -->
 	<package name="usersManager" extends="interceptor-default">
-		<action name="searchUsersByPage" class="usersAction" method="searchUsersByPage">
+		<action name="searchUsersByPage" class="usersManagerAction" method="searchUsersByPage">
 		     <result name="success">
                 /administrator/security/usersManager.jsp
              </result>
 	     </action>
-	     <action name="forwardAddUsers" class="usersAction" method="forwardAddUsers">
+	     <action name="forwardAddUsers" class="usersManagerAction" method="forwardAddUsers">
 		     <result name="success">
                 /administrator/security/usersAdd.jsp
              </result>
 	     </action>
-	     <action name="addUsers" class="usersAction" method="addUsers">
+	     <action name="addUsers" class="usersManagerAction" method="addUsers">
 		     <result name="success">
                 /administrator/security/usersManager.jsp
              </result>
 	     </action>
-	     <action name="deleteUsers" class="usersAction" method="deleteUsers">
+	     <action name="deleteUsers" class="usersManagerAction" method="deleteUsers">
 		     <result name="success">
                 /administrator/security/usersManager.jsp
              </result>
 	     </action>
-	     <action name="editUsres" class="usersAction" method="editUsres">
+	     <action name="editUsres" class="usersManagerAction" method="editUsres">
 		     <result name="success">
                 /administrator/security/usersEdit.jsp
              </result>
              <result name="error">/administrator/error.jsp</result> 
 	     </action>
-	     <action name="updateUsers" class="usersAction" method="updateUsers">
+	     <action name="updateUsers" class="usersManagerAction" method="updateUsers">
 		     <result name="success">
                 /administrator/security/usersManager.jsp
              </result>
 	     </action>
-	     <action name="forwardPasswordSet" class="usersAction" method="forwardPasswordSet">
+	     <action name="forwardPasswordSet" class="usersManagerAction" method="forwardPasswordSet">
 		     <result name="success">
                 /administrator/security/passwordSet.jsp
              </result>
@@ -45,42 +45,42 @@
 	
 	<!-- 角色管理 -->
 	<package name="roleManager" extends="interceptor-default">
-		<action name="searchRolesByPage" class="roleAction" method="searchRolesByPage">
+		<action name="searchRolesByPage" class="roleManagerAction" method="searchRolesByPage">
 		     <result name="success">
                 /administrator/security/roleManager.jsp
              </result>
 	     </action>
-	     <action name="deleteRole" class="roleAction" method="deleteRole">
+	     <action name="deleteRole" class="roleManagerAction" method="deleteRole">
 		     <result name="success">
                 /administrator/security/roleManager.jsp
              </result>
 	     </action>
-	     <action name="forwardAddNewRole" class="roleAction" method="forwardAddNewRole">
+	     <action name="forwardAddNewRole" class="roleManagerAction" method="forwardAddNewRole">
 		     <result name="success">
                 /administrator/security/roleEdit.jsp
              </result>
 	     </action>
-	     <action name="editRole" class="roleAction" method="editRole">
+	     <action name="editRole" class="roleManagerAction" method="editRole">
 		     <result name="success">
                 /administrator/security/roleEdit.jsp
              </result>
 	     </action>
-	     <action name="addRole" class="roleAction" method="addRole">
+	     <action name="addRole" class="roleManagerAction" method="addRole">
 		     <result name="success">
                 /administrator/security/roleManager.jsp
              </result>
 	     </action>
-	     <action name="updateRole" class="roleAction" method="updateRole">
+	     <action name="updateRole" class="roleManagerAction" method="updateRole">
 		     <result name="success">
                 /administrator/security/roleManager.jsp
              </result>
 	     </action>
-	     <action name="setRolePrivilege" class="roleAction" method="setRolePrivilege">
+	     <action name="setRolePrivilege" class="roleManagerAction" method="setRolePrivilege">
 		     <result name="success">
                 /administrator/security/rolePrivilegeSet.jsp
              </result>
 	     </action>
-	     <action name="saveRolePrivilege" class="roleAction" method="saveRolePrivilege">
+	     <action name="saveRolePrivilege" class="roleManagerAction" method="saveRolePrivilege">
 		     <result name="success">
                 /administrator/security/rolePrivilegeSet.jsp
              </result>
@@ -89,42 +89,42 @@
 	
 	<!-- 权限管理 -->
 	<package name="privilegeManager" extends="interceptor-default">
-		<action name="privilegeManager" class="privilegeAction" method="doPrivilegeManager">
+		<action name="privilegeManager" class="privilegeManagerAction" method="doPrivilegeManager">
 		     <result name="success">
                 /administrator/security/privilege.jsp
              </result>
 	    </action>
-	    <action name="editPrivilege" class="privilegeAction" method="editPrivilege">
+	    <action name="editPrivilege" class="privilegeManagerAction" method="editPrivilege">
 		     <result name="success">
                 /administrator/security/privilegeEdit.jsp
              </result>
 	    </action>
-	    <action name="updatePrivilege" class="privilegeAction" method="updatePrivilege">
+	    <action name="updatePrivilege" class="privilegeManagerAction" method="updatePrivilege">
 		     <result name="success">
                 /administrator/security/privilegeEdit.jsp
              </result>
 	    </action>
-	    <action name="forwardAddNewPrivilege" class="privilegeAction" method="forwardAddNewPrivilege">
+	    <action name="forwardAddNewPrivilege" class="privilegeManagerAction" method="forwardAddNewPrivilege">
 		     <result name="success">
                 /administrator/security/privilegeEdit.jsp
              </result>
 	    </action>
-	    <action name="addPrivilege" class="privilegeAction" method="addPrivilege">
+	    <action name="addPrivilege" class="privilegeManagerAction" method="addPrivilege">
 		     <result name="success">
                 /administrator/security/privilegeEdit.jsp
              </result>
 	    </action>
-	    <action name="deletePrivilegeById" class="privilegeAction" method="deletePrivilegeById">
+	    <action name="deletePrivilegeById" class="privilegeManagerAction" method="deletePrivilegeById">
 		     <result name="success">
                 /administrator/security/privilegeEdit.jsp
              </result>
 	    </action>
-	    <action name="getPrivilegeInfo" class="privilegeAction" method="getPrivilegeInfo">
+	    <action name="getPrivilegeInfo" class="privilegeManagerAction" method="getPrivilegeInfo">
 		     <result name="success">
                 /administrator/security/privilegeEdit.jsp
              </result>
 	    </action>
-	    <action name="selectParentPrivilege" class="privilegeAction" method="selectParentPrivilege">
+	    <action name="selectParentPrivilege" class="privilegeManagerAction" method="selectParentPrivilege">
 		     <result name="success">
                 /administrator/security/privilegeTree.jsp
              </result>

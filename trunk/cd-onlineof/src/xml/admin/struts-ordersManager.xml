@@ -4,26 +4,26 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<package name="orders" extends="interceptor-default">
-		<action name="searchOrders" class="ordersAction" method="searchOrders">
+		<action name="searchOrders" class="ordersManagerAction" method="searchOrders">
 			<result name="success">/administrator/order/ordersManager.jsp</result>
 		</action>
-		<action name="getOrderInfo" class="ordersAction" method="getOrderInfo">
+		<action name="getOrderInfo" class="ordersManagerAction" method="getOrderInfo">
 			<result name="success">/administrator/order/ordersEdit.jsp</result>
 		</action>
-		<action name="update" class="ordersAction" method="updateOrders">
+		<action name="update" class="ordersManagerAction" method="updateOrders">
 			<result name="success">/administrator/order/ordersEdit.jsp</result>
 		</action>
-		<action name="updateMany" class="ordersAction" method="updateManyOrders">
+		<action name="updateMany" class="ordersManagerAction" method="updateManyOrders">
 			<result name="success" type="redirect">
 				searchOrders.do?o=${o}
 			</result>
 		</action>
-		<action name="del" class="ordersAction" method="deleteOrders">
+		<action name="del" class="ordersManagerAction" method="deleteOrders">
 			<result name="success" type="redirect">
 				searchOrders.do?o=${o}
 			</result>
 		</action>
-		<action name="add" class="ordersAction" method="addOrders">
+		<action name="add" class="ordersManagerAction" method="addOrders">
 			<result name="success" type="redirect">
 				searchOrders.do?o=${o}
 			</result>

@@ -5,12 +5,12 @@
 <struts>
 	<!-- 个人管理管理 -->
 	<package name="personManager" extends="interceptor-default">
-	    <action name="getSelfInfo" class="usersAction" method="getSelfInfo">
+	    <action name="getSelfInfo" class="usersManagerAction" method="getSelfInfo">
 		     <result name="success">
                 /administrator/person/usersInfo.jsp
              </result>
 	    </action>
-	    <action name="updateUsersInfo" class="usersAction" method="updateUsersInfo">
+	    <action name="updateUsersInfo" class="usersManagerAction" method="updateUsersInfo">
 		     <result name="success">
                 /administrator/person/usersInfo.jsp
              </result>
