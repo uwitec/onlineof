@@ -34,8 +34,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "restaurant")
 @NamedQueries( {
-		@NamedQuery(name = "loadAllRestaurant", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img) from RestaurantData r"),
-		@NamedQuery(name = "getRestaurantById", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img) from RestaurantData r where r.restaurantId = :restaurantId"),
+		@NamedQuery(name = "loadAllRestaurant", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img,r.prestige) from RestaurantData r"),
+		@NamedQuery(name = "getRestaurantById", query = "select new com.cd_help.onlineOF.web.vo.RestaurantVo(r.restaurantId,r.name,r.address,r.openTime,r.closeTime,r.createName,r.contactName,r.contactPhone,r.QQ,r.mobilePhone,r.contactGender,r.status,r.introduction,r.email,r.img,r.prestige) from RestaurantData r where r.restaurantId = :restaurantId"),
 		@NamedQuery(name = "getRestaurantAllPage", query = "from RestaurantData"),
 		@NamedQuery(name = "getRestaurantByKindName", query = "from RestaurantData r where r.restaurant_kindId = :rkindId and r.name like :rname") 
 		})
@@ -58,15 +58,6 @@ public class RestaurantData implements Serializable {
 	@JoinColumn(name = "credibilityId", referencedColumnName = "credibilityId", nullable = true, insertable = false, updatable = false)
 	private CredibilityData credibilityData;
 
-	/**
-	 * 拥有菜系
-	 * 
-	 * @since cd_help-onlineOF 0.0.0.1
-	 */
-	@OneToMany(mappedBy = "restaurant", cascade = { CascadeType.REFRESH,
-			CascadeType.MERGE }, fetch = FetchType.LAZY)
-	private List<CuisineData> cuisineDataList = new ArrayList<CuisineData>();
-	
 	/**
 	 * 餐厅名称
 	 * 
@@ -172,10 +163,11 @@ public class RestaurantData implements Serializable {
 	 */
 	private String restaurant_kindId;
 	/**
-	 * 餐厅信誉
+	 * 餐厅人气
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	private int prestige=1;
+	@Column(name = "prestige", nullable = true)
+	private long prestige=1;
 	/**
 	 * 所有订单
 	 * @since cd_help-onlineOF 0.0.0.1
@@ -320,14 +312,6 @@ public class RestaurantData implements Serializable {
 		this.contactName = contactName;
 	}
 
-	public List<CuisineData> getCuisineDataList() {
-		return cuisineDataList;
-	}
-
-	public void setCuisineDataList(List<CuisineData> cuisineDataList) {
-		this.cuisineDataList = cuisineDataList;
-	}
-
 	public List<OrdersData> getOrdersDataList() {
 		return ordersDataList;
 	}
@@ -336,11 +320,11 @@ public class RestaurantData implements Serializable {
 		this.ordersDataList = ordersDataList;
 	}
 
-	public int getPrestige() {
+	public long getPrestige() {
 		return prestige;
 	}
 
-	public void setPrestige(int prestige) {
+	public void setPrestige(long prestige) {
 		this.prestige = prestige;
 	}
 	

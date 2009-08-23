@@ -6,8 +6,7 @@
 	<!-- 餐厅管理 -->
 	<package name="restaurantView" extends="common-default">
 		<!-- 分页获取饮食 -->
-		<action name="getFoodByPage" class="foodAction"
-			method="getFoodByPage">
+		<action name="getFoodByPage" class="foodAction" method="getFoodByPage">
 			<result name="success">
 				/restaurant/foodViewByRestaurant.jsp
 			</result>
