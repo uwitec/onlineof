@@ -21,7 +21,7 @@ import com.cd_help.onlineOF.api.Restaurant_kindManager;
 import com.cd_help.onlineOF.data.Restaurant_kindData;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
-import com.cd_help.onlineOF.web.struts.UsersSession;
+import com.cd_help.onlineOF.web.admin.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
 
 /**
@@ -193,7 +193,7 @@ public class Restaurant_kindManagerImpl implements Restaurant_kindManager {
 	 * 
 	 * @see com.cd_help.onlineOF.api.Restaurant_kindManager#getRestaurantKindPage(java.lang.String,
 	 *      java.lang.String[], java.lang.Object[],
-	 *      com.cd_help.onlineOF.web.struts.UsersSession)
+	 *      com.cd_help.onlineOF.web.admin.struts.UsersSession)
 	 */
 	public PageBean seachRestaurantKindPage(String qhl, String[] params,
 			Object[] objs, PageBean pageBean, UsersSession session)

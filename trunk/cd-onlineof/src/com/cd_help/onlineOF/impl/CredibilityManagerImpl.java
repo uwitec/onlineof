@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.api.CredibilityManager;
 import com.cd_help.onlineOF.utils.AppException;
-import com.cd_help.onlineOF.web.struts.UsersSession;
+import com.cd_help.onlineOF.web.admin.struts.UsersSession;
 
 /**
  * <b><code></code></b>

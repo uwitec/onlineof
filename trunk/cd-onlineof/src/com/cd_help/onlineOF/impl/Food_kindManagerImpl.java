@@ -25,7 +25,7 @@ import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
-import com.cd_help.onlineOF.web.struts.UsersSession;
+import com.cd_help.onlineOF.web.admin.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.Food_kindVo;
 
 /**
@@ -139,7 +139,7 @@ public class Food_kindManagerImpl implements Food_kindManager {
 	 * @see com.cd_help.onlineOF.api.Food_kindManager#seachFoodKindPage(java.lang.String,
 	 *      java.lang.String[], java.lang.Object[],
 	 *      com.cd_help.onlineOF.utils.PageBean,
-	 *      com.cd_help.onlineOF.web.struts.UsersSession)
+	 *      com.cd_help.onlineOF.web.admin.struts.UsersSession)
 	 */
 	@SuppressWarnings("unchecked")
 	public PageBean seachFoodKindPage(String hqlName, String[] params,

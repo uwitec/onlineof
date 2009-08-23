@@ -25,7 +25,7 @@ import com.cd_help.onlineOF.data.RoleData;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.StringUtil;
-import com.cd_help.onlineOF.web.struts.UsersSession;
+import com.cd_help.onlineOF.web.admin.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 
 /**
@@ -63,7 +63,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadAll(com.cd_help.onlineOF.web.struts.UsersSession)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadAll(com.cd_help.onlineOF.web.admin.struts.UsersSession)
 	 */
 	public List<PrivilegeVo> loadAllPrivilege(UsersSession session)
 			throws AppException {
@@ -91,7 +91,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadChildModelPrivilegeByParent(com.cd_help.onlineOF.web.struts.UsersSession, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadChildModelPrivilegeByParent(com.cd_help.onlineOF.web.admin.struts.UsersSession, java.lang.String)
 	 */
 	public List<PrivilegeVo> loadChildModelPrivilegeByParent(UsersSession session,
 			String parentId) throws AppException {
@@ -118,7 +118,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadTopModelPrivilege(com.cd_help.onlineOF.web.struts.UsersSession)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadTopModelPrivilege(com.cd_help.onlineOF.web.admin.struts.UsersSession)
 	 */
 	public List<PrivilegeVo> loadTopModelPrivilege(UsersSession session)
 			throws AppException {
@@ -143,7 +143,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getPrivilegeByRoleId(com.cd_help.onlineOF.web.struts.UsersSession, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getPrivilegeByRoleId(com.cd_help.onlineOF.web.admin.struts.UsersSession, java.lang.String)
 	 */
 	public List<PrivilegeVo> getPrivilegeByRoleId(UsersSession session, String roleId)
 			throws AppException {
@@ -171,7 +171,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getPrivilegeById(com.cd_help.onlineOF.web.struts.UsersSession, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#getPrivilegeById(com.cd_help.onlineOF.web.admin.struts.UsersSession, java.lang.String)
 	 */
 	public PrivilegeVo getPrivilegeById(UsersSession session, String privilegeId)
 			throws AppException {
@@ -196,7 +196,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#addPrivilege(com.cd_help.onlineOF.web.struts.UsersSession, com.cd_help.onlineOF.web.vo.PrivilegeVo)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#addPrivilege(com.cd_help.onlineOF.web.admin.struts.UsersSession, com.cd_help.onlineOF.web.vo.PrivilegeVo)
 	 */
 	public PrivilegeVo addPrivilege(UsersSession session, PrivilegeVo privilegeVo)
 			throws AppException {
@@ -234,7 +234,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#deletePrivilege(com.cd_help.onlineOF.web.struts.UsersSession, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#deletePrivilege(com.cd_help.onlineOF.web.admin.struts.UsersSession, java.lang.String)
 	 */
 	public void deletePrivilege(UsersSession session, String id) throws AppException {
 		if (this.onlineOF.checkPrivilege(session,"deletePrivilege")) {
@@ -279,7 +279,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#updatePrivilege(com.cd_help.onlineOF.web.struts.UsersSession, com.cd_help.onlineOF.web.vo.PrivilegeVo)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#updatePrivilege(com.cd_help.onlineOF.web.admin.struts.UsersSession, com.cd_help.onlineOF.web.vo.PrivilegeVo)
 	 */
 	public void updatePrivilege(UsersSession session, PrivilegeVo privilegeVo)
 			throws AppException {
@@ -316,7 +316,7 @@ public class PrivilegeManagerImpl implements PrivilegeManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadAllModelPrivilege(com.cd_help.onlineOF.web.struts.UsersSession)
+	 * @see com.cd_help.onlineOF.api.PrivilegeManager#loadAllModelPrivilege(com.cd_help.onlineOF.web.admin.struts.UsersSession)
 	 */
 	public List<PrivilegeVo> loadAllModelPrivilege(UsersSession session)
 			throws AppException {

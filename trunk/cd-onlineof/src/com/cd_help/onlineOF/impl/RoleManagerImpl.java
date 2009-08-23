@@ -24,7 +24,7 @@ import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
-import com.cd_help.onlineOF.web.struts.UsersSession;
+import com.cd_help.onlineOF.web.admin.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.RoleVo;
 
 /**
@@ -52,7 +52,7 @@ public class RoleManagerImpl implements RoleManager{
 	private OnlineOF onlineOF;
 	
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#loadAll(com.cd_help.onlineOF.web.struts.UsersSession)
+	 * @see com.cd_help.onlineOF.api.RoleManager#loadAll(com.cd_help.onlineOF.web.admin.struts.UsersSession)
 	 */
 	@SuppressWarnings("unchecked")
 	public List<RoleVo> loadAllRole(UsersSession session) throws AppException {
@@ -72,7 +72,7 @@ public class RoleManagerImpl implements RoleManager{
 	}
 	
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#searchByPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.web.struts.UsersSession)
+	 * @see com.cd_help.onlineOF.api.RoleManager#searchByPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.web.admin.struts.UsersSession)
 	 */
 	@SuppressWarnings("unchecked")
 	public PageBean searchRolesByPage(UsersSession session,String hqlName, String[] paramName,
@@ -98,7 +98,7 @@ public class RoleManagerImpl implements RoleManager{
 	}
 	
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#delete(com.cd_help.onlineOF.web.struts.UsersSession, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.RoleManager#delete(com.cd_help.onlineOF.web.admin.struts.UsersSession, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	public void deleteRole(UsersSession session, String id) throws AppException {
@@ -121,7 +121,7 @@ public class RoleManagerImpl implements RoleManager{
 	}
 	
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#addRole(com.cd_help.onlineOF.web.struts.UsersSession, com.cd_help.onlineOF.web.vo.RoleVo)
+	 * @see com.cd_help.onlineOF.api.RoleManager#addRole(com.cd_help.onlineOF.web.admin.struts.UsersSession, com.cd_help.onlineOF.web.vo.RoleVo)
 	 */
 	public void addRole(UsersSession session, RoleVo roleVo) throws AppException{
 		if(this.onlineOF.checkPrivilege(session,"addRole")){
@@ -139,7 +139,7 @@ public class RoleManagerImpl implements RoleManager{
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#getRoleById(com.cd_help.onlineOF.web.struts.UsersSession, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.RoleManager#getRoleById(com.cd_help.onlineOF.web.admin.struts.UsersSession, java.lang.String)
 	 */
 	public RoleVo getRoleById(UsersSession session, String roleId)
 			throws AppException {
@@ -157,7 +157,7 @@ public class RoleManagerImpl implements RoleManager{
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#updateRole(com.cd_help.onlineOF.web.struts.UsersSession, com.cd_help.onlineOF.web.vo.RoleVo)
+	 * @see com.cd_help.onlineOF.api.RoleManager#updateRole(com.cd_help.onlineOF.web.admin.struts.UsersSession, com.cd_help.onlineOF.web.vo.RoleVo)
 	 */
 	public void updateRole(UsersSession session, RoleVo roleVo) throws AppException {
 		if(this.onlineOF.checkPrivilege(session,"updateRole")){
@@ -173,7 +173,7 @@ public class RoleManagerImpl implements RoleManager{
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.RoleManager#saveRolePrivileges(com.cd_help.onlineOF.web.struts.UsersSession, java.lang.String, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.RoleManager#saveRolePrivileges(com.cd_help.onlineOF.web.admin.struts.UsersSession, java.lang.String, java.lang.String)
 	 */
 	public void saveRolePrivileges(UsersSession session, String[] privileges,
 			String roleId) throws AppException {

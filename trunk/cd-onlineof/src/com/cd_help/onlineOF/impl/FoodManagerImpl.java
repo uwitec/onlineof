@@ -25,7 +25,7 @@ import com.cd_help.onlineOF.data.RestaurantData;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
-import com.cd_help.onlineOF.web.struts.UsersSession;
+import com.cd_help.onlineOF.web.admin.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.FoodVo;
 
 /**
@@ -150,33 +150,37 @@ public class FoodManagerImpl implements FoodManager{
 
 	/**
 	 * 获取菜的分页信息
-	 * @see com.cd_help.onlineOF.api.FoodManager#seachFoodPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.web.struts.UsersSession)
+	 * @see com.cd_help.onlineOF.api.FoodManager#seachFoodPage(java.lang.String, java.lang.String[], java.lang.Object[], com.cd_help.onlineOF.utils.PageBean, com.cd_help.onlineOF.web.admin.struts.UsersSession)
 	 */
 	public PageBean seachFoodPage(String hqlName, String[] paramName,
 			Object[] condition, PageBean pageBean, UsersSession session)
-			throws Exception {
-		// TODO Auto-generated method stub
+			throws AppException {
 		PageBean page = null;
-		page = foodDataDao.searchByPage(hqlName, paramName, condition, pageBean);
-		if(null!=page && null!=page.getArray()){
-			List<FoodVo> foodVos = new ArrayList<FoodVo>();
-			FoodVo foodVo = null;
-			FoodData food = null;
-			for(Object obj:page.getArray()){
-				foodVo = new FoodVo();
-				food = (FoodData)obj;
-				BeanUtilsHelp.copyProperties(foodVo, food);
-				if(food.getFood_kindId()!=null){
-					Food_kindData food_kindData = (Food_kindData) food_kindDao.get(Food_kindData.class, food.getFood_kindId());
-					foodVo.setFood_kindId(food_kindData.getFood_kind_Id());
-					foodVo.setFood_kind_Name(food_kindData.getName());
-					RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(RestaurantData.class, food_kindData.getRestaurantId());
-					foodVo.setRestaurantId(restaurantData.getRestaurantId());
-					foodVo.setRestaurantName(restaurantData.getName());
+		try{
+			page = foodDataDao.searchByPage(hqlName, paramName, condition, pageBean);
+			if(null!=page && null!=page.getArray()){
+				List<FoodVo> foodVos = new ArrayList<FoodVo>();
+				FoodVo foodVo = null;
+				FoodData food = null;
+				for(Object obj:page.getArray()){
+					foodVo = new FoodVo();
+					food = (FoodData)obj;
+					BeanUtilsHelp.copyProperties(foodVo, food);
+					if(food.getFood_kindId()!=null){
+						Food_kindData food_kindData = (Food_kindData) food_kindDao.get(Food_kindData.class, food.getFood_kindId());
+						foodVo.setFood_kindId(food_kindData.getFood_kind_Id());
+						foodVo.setFood_kind_Name(food_kindData.getName());
+						RestaurantData restaurantData = (RestaurantData) restaurantDataDao.get(RestaurantData.class, food_kindData.getRestaurantId());
+						foodVo.setRestaurantId(restaurantData.getRestaurantId());
+						foodVo.setRestaurantName(restaurantData.getName());
+					}
+					foodVos.add(foodVo);
 				}
-				foodVos.add(foodVo);
+				page.setArray(foodVos);
 			}
-			page.setArray(foodVos);
+		}catch(Exception e){
+			e.printStackTrace();
+			throw new AppException("00000300","系统错误,请联系系统管理员",e);
 		}
 		return page;
 	}
