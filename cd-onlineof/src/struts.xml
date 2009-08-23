@@ -24,7 +24,7 @@
 	-->
 	<constant name="struts.devMode" value="true" />
 	<!-- 指定由spring负责Action对象的创建及管理 -->
-	<constant name="struts.objectFactory" value="spring" />
+	<constant name="struts.objectFactory" value="spring"/>
 	<constant name="struts.date.format" value="yyyy-MM-dd" />
 	<!-- 公共包 -->
 	<package name="common-json" extends="json-default"></package>
@@ -42,6 +42,16 @@
 				/administrator/login.jsp
 			</result>
 		</action>
+		
+		<action name="index" class="initialAction" method="initialData">
+			<result name="success">
+				/index.jsp
+			</result>
+			<result name="error">
+				/init.jsp
+			</result>
+		</action>
+		
 	</package>
 	
     <!-- 拦截器 -->
@@ -73,9 +83,13 @@
 		</global-exception-mappings>
 	</package>
 
-	<!-- 导入 -->
-	<include file="struts-security.xml" />
-	<include file="struts-orders.xml"></include>
-	<include file="struts-restaurant.xml" />
-	<include file="struts-person.xml" />
+	<!-- 后台管理 -->
+	<include file="xml/admin/struts-securityManager.xml" />
+	<include file="xml/admin/struts-ordersManager.xml"></include>
+	<include file="xml/admin/struts-restaurantManager.xml" />
+	<include file="xml/admin/struts-personManager.xml" />
+	
+	<!-- 前台展示 -->
+	<include file="xml/struts-restaurant.xml" />
+	
 </struts>

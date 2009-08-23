@@ -27,7 +27,7 @@ import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.ConvertUtils;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.utils.StringUtil;
-import com.cd_help.onlineOF.web.struts.UsersSession;
+import com.cd_help.onlineOF.web.admin.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
 /**
@@ -133,7 +133,7 @@ public class UsersManagerImpl implements UsersManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.UsersManager#update(com.cd_help.onlineOF.web.struts.UsersSession, com.cd_help.onlineOF.web.vo.UsersVo)
+	 * @see com.cd_help.onlineOF.api.UsersManager#update(com.cd_help.onlineOF.web.admin.struts.UsersSession, com.cd_help.onlineOF.web.vo.UsersVo)
 	 */
 	public void updateUsers(UsersSession session, UsersVo usersVo) throws AppException {
 		if (this.onlineOF.checkPrivilege(session,"updateUsers")) {
@@ -197,7 +197,7 @@ public class UsersManagerImpl implements UsersManager {
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.UsersManager#addUsers(com.cd_help.onlineOF.web.struts.UsersSession, com.cd_help.onlineOF.data.UsersData)
+	 * @see com.cd_help.onlineOF.api.UsersManager#addUsers(com.cd_help.onlineOF.web.admin.struts.UsersSession, com.cd_help.onlineOF.data.UsersData)
 	 */
 	public void addUsers(UsersSession session, UsersVo usersVo)
 			throws AppException {

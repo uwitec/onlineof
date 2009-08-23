@@ -9,7 +9,7 @@ import java.util.List;
 
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
-import com.cd_help.onlineOF.web.struts.UsersSession;
+import com.cd_help.onlineOF.web.admin.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.FoodVo;
 
 /**
@@ -31,7 +31,7 @@ public interface FoodManager {
      * @throws AppException
      * @since cd_help-onlineOF 0.0.0.1
      */
-    public List<FoodVo> loadFoodAll() throws Exception;
+    public List<FoodVo> loadFoodAll() throws AppException;
 	
 	/**
 	 * 根据ID获取
@@ -40,7 +40,7 @@ public interface FoodManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public FoodVo getFoodById(String id) throws Exception;
+	public FoodVo getFoodById(String id) throws AppException;
 	
 	/**
 	 * 保存
@@ -49,7 +49,7 @@ public interface FoodManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public FoodVo saveFood(FoodVo foodVo) throws Exception;
+	public FoodVo saveFood(FoodVo foodVo) throws AppException;
 	
 	/**
 	 * 判断是否存在
@@ -58,7 +58,7 @@ public interface FoodManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public boolean existFood(String id) throws Exception;
+	public boolean existFood(String id) throws AppException;
 	
 	/**
 	 * 删除
@@ -66,7 +66,7 @@ public interface FoodManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void deleteFood(String id) throws Exception;
+	public void deleteFood(String id) throws AppException;
 	
 	/**
 	 * 修改
@@ -74,7 +74,7 @@ public interface FoodManager {
 	 * @throws AppException
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	public void updateFood(FoodVo foodVo) throws Exception;
+	public void updateFood(FoodVo foodVo) throws AppException;
 	
 	/**
 	 * 查询菜分页信息
@@ -89,5 +89,6 @@ public interface FoodManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public PageBean seachFoodPage(String hqlName, String[] paramName,
-			Object[] condition, PageBean pageBean,UsersSession session)throws Exception;
+			Object[] condition, PageBean pageBean,UsersSession session)throws AppException;
+	
 }

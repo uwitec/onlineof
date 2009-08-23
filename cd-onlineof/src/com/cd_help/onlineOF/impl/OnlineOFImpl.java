@@ -32,7 +32,7 @@ import com.cd_help.onlineOF.api.UsersDataDao;
 import com.cd_help.onlineOF.api.UsersManager;
 import com.cd_help.onlineOF.data.PrivilegeData;
 import com.cd_help.onlineOF.utils.AppException;
-import com.cd_help.onlineOF.web.struts.UsersSession;
+import com.cd_help.onlineOF.web.admin.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 import com.cd_help.onlineOF.web.vo.UsersVo;
 
@@ -260,7 +260,7 @@ public class OnlineOFImpl implements OnlineOF{
 	}
 
 	/**
-	 * @see com.cd_help.onlineOF.api.OnlineOF#checkPrivilege(com.cd_help.onlineOF.web.struts.UsersSession, java.lang.String)
+	 * @see com.cd_help.onlineOF.api.OnlineOF#checkPrivilege(com.cd_help.onlineOF.web.admin.struts.UsersSession, java.lang.String)
 	 */
 	@SuppressWarnings("unchecked")
 	public boolean checkPrivilege(UsersSession userssession, String methodName)

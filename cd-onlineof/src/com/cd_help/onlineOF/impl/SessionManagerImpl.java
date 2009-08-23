@@ -24,7 +24,7 @@ import com.cd_help.onlineOF.data.PrivilegeData;
 import com.cd_help.onlineOF.data.RoleData;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
-import com.cd_help.onlineOF.web.struts.UsersSession;
+import com.cd_help.onlineOF.web.admin.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.PrivilegeVo;
 import com.cd_help.onlineOF.web.vo.RoleVo;
 import com.cd_help.onlineOF.web.vo.UsersVo;
