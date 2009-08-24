@@ -326,6 +326,9 @@ public class OrdersManagerImpl implements OrdersManager {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	private PageBean getOrdersVoPageBean(PageBean pageBean) throws AppException {
+		if (pageBean.getArray() == null || pageBean.getArray().size() == 0) {
+			return pageBean;
+		}
 		List<OrdersVo> ordersList = new ArrayList<OrdersVo>();
 		OrdersData orderData = null;
 		for (Iterator<?> iterator = pageBean.getArray().iterator(); iterator
