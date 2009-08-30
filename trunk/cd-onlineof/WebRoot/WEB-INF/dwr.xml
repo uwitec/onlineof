@@ -33,15 +33,6 @@
 			<param name="food_kindVo" value="food_kind_Id,name"></param>
 		</convert>
 		
-		<!-- 获取首页数据 -->
-		<create creator="spring" javascript="InitIndexDataDwrAction"> 
-            <param name="beanName" value="initIndexDataDwrAction" />
-            <include method="getRestaurantDataByCredibility" />
-        </create>
-        <convert converter="bean" match="com.cd_help.onlineOF.web.vo.RestaurantVo">
-			<param name="restaurantVo" value="restaurantId,name"></param>
-		</convert>
-		
 		<!-- 异常处理 -->
 		<convert match="com.cd_help.onlineOF.utils.AppException" converter="exception"> 
 		  <param name='include' value='message'/> 
