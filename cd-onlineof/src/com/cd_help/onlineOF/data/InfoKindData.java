@@ -14,6 +14,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -31,6 +33,8 @@ import javax.persistence.Table;
 @SuppressWarnings("serial")
 @Entity
 @Table(name="infokind")
+@NamedQueries( { 
+	@NamedQuery(name = "loadAllInfoKind", query = "from InfoKindData"),})
 public class InfoKindData implements Serializable {
 
 	

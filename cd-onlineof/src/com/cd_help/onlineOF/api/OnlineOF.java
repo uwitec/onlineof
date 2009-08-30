@@ -31,6 +31,14 @@ public interface OnlineOF {
 	public UsersManager getUsersManager() throws AppException;
 	
 	/**
+	 * 信息分类管理
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public InfoKindManager getInfoKindManager() throws AppException;
+	
+	/**
 	 * 订单管理
 	 * @return
 	 * @throws AppException
