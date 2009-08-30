@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.PageBean;
 import com.cd_help.onlineOF.web.BaseAction;
+import com.cd_help.onlineOF.web.vo.InfoKindVo;
 import com.cd_help.onlineOF.web.vo.InfoVo;
 
 /**
@@ -42,7 +43,8 @@ public class InfoManagerAction extends BaseAction {
 	private PageBean pb; // 分页
 	private int page = 1;
 	private String title; // 信息标题
-	private List<InfoVo> infoVos = new ArrayList<InfoVo>();
+	private List<InfoVo> infoVos = new ArrayList<InfoVo>(); // 信息
+	private List<InfoKindVo> infoKindVos = new ArrayList<InfoKindVo>(); // 信息分类
 
 	/**
 	 * 分页获取信息列表
@@ -69,7 +71,48 @@ public class InfoManagerAction extends BaseAction {
 		}
 		return SUCCESS;
 	}
+	
+	/**
+	 * 跳转到发布信息页面
+	 * @return
+	 * @throws AppException 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String forwardCreateInfo() throws AppException{
+		// 加载信息分类
+		loadAllInfoKind();
+		return SUCCESS;
+	}
+	
+	/**
+	 * 发布信息
+	 * @return
+	 * @throws AppException 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String createInfo() throws AppException{
+		try{
+			this.getOnlineOF().getInfoManager().createInfo(this.getSession(), infoVo);
+		}catch(AppException e){
+			throw new AppException(e.getError_code(), e.getMessage(), e);
+		}
+		return SUCCESS;
+	}
 
+	/**
+	 * 加载所有信息分类
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	private void loadAllInfoKind() throws AppException {
+		try {
+			infoKindVos = this.getOnlineOF().getInfoKindManager().loadAllInfoKind(this.getSession());
+		} catch (AppException e) {
+			log.error(e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
+		}
+	}
+	
 	public String getInfoId() {
 		return infoId;
 	}
@@ -117,5 +160,12 @@ public class InfoManagerAction extends BaseAction {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
+
+	public List<InfoKindVo> getInfoKindVos() {
+		return infoKindVos;
+	}
+
+	public void setInfoKindVos(List<InfoKindVo> infoKindVos) {
+		this.infoKindVos = infoKindVos;
+	}
 }

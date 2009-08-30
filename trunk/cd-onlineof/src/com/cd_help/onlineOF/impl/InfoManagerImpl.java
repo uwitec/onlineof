@@ -18,7 +18,9 @@ import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.api.InfoDataDao;
 import com.cd_help.onlineOF.api.InfoManager;
+import com.cd_help.onlineOF.api.OnlineOF;
 import com.cd_help.onlineOF.data.InfoData;
+import com.cd_help.onlineOF.data.InfoKindData;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
@@ -50,14 +52,50 @@ public class InfoManagerImpl implements InfoManager{
 	@Autowired
 	@Resource(name = "infoDataDao")
 	private InfoDataDao infoDataDao;
+	
+	@Autowired
+	@Resource(name = "onlineOF")
+	private OnlineOF onlineOF;
 
+	/**
+	 * @see com.cd_help.onlineOF.api.InfoManager#createInfo(com.cd_help.onlineOF.web.admin.struts.UsersSession, com.cd_help.onlineOF.web.vo.InfoVo)
+	 */
 	public InfoVo createInfo(UsersSession session, InfoVo infoVo)
 			throws AppException {
-		return null;
+		if (this.onlineOF.checkPrivilege(session,"createInfo")) {
+			try{
+				InfoData infoData = new InfoData();
+				BeanUtilsHelp.copyProperties(infoData, infoVo);
+				if(null != infoVo.getInfoKindId() && infoVo.getInfoKindId().length() > 0){
+					InfoKindData infoKindData = (InfoKindData)infoDataDao.get(InfoKindData.class, infoVo.getInfoKindId());
+					if(null != infoKindData){
+						infoData.setInfokind(infoKindData);
+					}
+				}
+				infoDataDao.save(infoData);
+				infoVo.setInfoId(infoData.getInfoId());
+				return infoVo;
+			}catch(Exception e){
+				throw new AppException("00000400", "发布信息失败!", e);
+			}
+		}else{
+			throw new AppException("00000400", "对不起！您没有足够权限。");
+		}
 	}
 
+	/**
+	 * @see com.cd_help.onlineOF.api.InfoManager#deleteInfo(com.cd_help.onlineOF.web.admin.struts.UsersSession, java.lang.String)
+	 */
 	public void deleteInfo(UsersSession session, String id) throws AppException {
-		
+		if (this.onlineOF.checkPrivilege(session,"createInfo")) {
+			try{
+				infoDataDao.delete((InfoData)infoDataDao.get(InfoData.class, id));
+			}catch(Exception e){
+				throw new AppException("00000400", "删除信息失败!", e);
+			}
+		}else{
+			throw new AppException("00000400", "对不起！您没有足够权限。");
+		}
 	}
 
 	/**
@@ -77,12 +115,22 @@ public class InfoManagerImpl implements InfoManager{
 		}
 	}
 
+	/**
+	 * @see com.cd_help.onlineOF.api.InfoManager#updateInfo(com.cd_help.onlineOF.web.admin.struts.UsersSession, com.cd_help.onlineOF.web.vo.InfoVo)
+	 */
 	public void updateInfo(UsersSession session, InfoVo infoVo)
 			throws AppException {
-	}
-
-	public void setInfoDataDao(InfoDataDao infoDataDao) {
-		this.infoDataDao = infoDataDao;
+		if (this.onlineOF.checkPrivilege(session,"createInfo")) {
+			try{
+				InfoData infoData = (InfoData)infoDataDao.get(InfoData.class, infoVo.getInfoId());
+				BeanUtilsHelp.copyProperties(infoData, infoVo);
+				infoDataDao.update(infoData);
+			}catch(Exception e){
+				throw new AppException("00000400", "修改信息失败!", e);
+			}
+		}else{
+			throw new AppException("00000400", "对不起！您没有足够权限。");
+		}
 	}
 
 	/**
@@ -120,4 +168,13 @@ public class InfoManagerImpl implements InfoManager{
 		}
 		return infoVo;
 	}
+
+	public void setInfoDataDao(InfoDataDao infoDataDao) {
+		this.infoDataDao = infoDataDao;
+	}
+	
+	public void setOnlineOF(OnlineOF onlineOF) {
+		this.onlineOF = onlineOF;
+	}
+	
 }

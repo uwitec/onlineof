@@ -20,6 +20,7 @@ import com.cd_help.onlineOF.api.CredibilityManager;
 import com.cd_help.onlineOF.api.CuisineManager;
 import com.cd_help.onlineOF.api.FoodManager;
 import com.cd_help.onlineOF.api.Food_kindManager;
+import com.cd_help.onlineOF.api.InfoKindManager;
 import com.cd_help.onlineOF.api.InfoManager;
 import com.cd_help.onlineOF.api.OnlineOF;
 import com.cd_help.onlineOF.api.OrdersManager;
@@ -119,6 +120,15 @@ public class OnlineOFImpl implements OnlineOF{
 	@Autowired
 	@Resource(name = "cuisineManager")
 	private CuisineManager cuisineManager = null;
+	
+	/**
+	 * 信息分类管理
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Autowired
+	@Resource(name = "infoKindManager")
+	private InfoKindManager infoKindManager = null;
+	
 	
 	/**
 	 * 信誉管理
@@ -266,6 +276,14 @@ public class OnlineOFImpl implements OnlineOF{
 
 	public void setPrivilegeDataDao(PrivilegeDataDao privilegeDataDao) {
 		this.privilegeDataDao = privilegeDataDao;
+	}
+
+	public InfoKindManager getInfoKindManager() {
+		return infoKindManager;
+	}
+
+	public void setInfoKindManager(InfoKindManager infoKindManager) {
+		this.infoKindManager = infoKindManager;
 	}
 
 	/**
