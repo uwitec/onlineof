@@ -6,6 +6,7 @@
 package com.cd_help.onlineOF.data;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,7 +15,11 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * <b><code></code></b>
@@ -30,6 +35,9 @@ import javax.persistence.Table;
 @Entity
 @Table(name="info")
 @SuppressWarnings("serial")
+@NamedQueries( { 
+	@NamedQuery(name = "getNewInfo", query = "from InfoData i order by i.createTime"),
+	@NamedQuery(name = "searchInfosByPage", query = "from InfoData i where i.title like :title"),})
 public class InfoData implements Serializable {
 	
 	/**
@@ -61,6 +69,33 @@ public class InfoData implements Serializable {
 	@ManyToOne(cascade = CascadeType.REFRESH, optional = true, fetch = FetchType.LAZY)
 	@JoinColumn(name = "infokindId")
 	private InfoKindData infokind;
+	
+	/**
+	 * 发布者
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "createUser", nullable = true, length = 20)
+	private String createUser;
+	
+	/**
+	 * 发布时间
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Temporal(TemporalType.DATE)
+	private Date createTime;
+	
+	/**
+	 * 修改者
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Column(name = "modifyUser", nullable = true, length = 20)
+	private String modifyUser;
+	/**
+	 * 修改时间
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Temporal(TemporalType.DATE)
+	private Date modifyTime;
 
 	public String getInfoId() {
 		return infoId;
@@ -92,5 +127,37 @@ public class InfoData implements Serializable {
 
 	public void setInfokind(InfoKindData infokind) {
 		this.infokind = infokind;
+	}
+
+	public String getCreateUser() {
+		return createUser;
+	}
+
+	public void setCreateUser(String createUser) {
+		this.createUser = createUser;
+	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public String getModifyUser() {
+		return modifyUser;
+	}
+
+	public void setModifyUser(String modifyUser) {
+		this.modifyUser = modifyUser;
+	}
+
+	public Date getModifyTime() {
+		return modifyTime;
+	}
+
+	public void setModifyTime(Date modifyTime) {
+		this.modifyTime = modifyTime;
 	}
 }

@@ -20,6 +20,7 @@ import com.cd_help.onlineOF.api.CredibilityManager;
 import com.cd_help.onlineOF.api.CuisineManager;
 import com.cd_help.onlineOF.api.FoodManager;
 import com.cd_help.onlineOF.api.Food_kindManager;
+import com.cd_help.onlineOF.api.InfoManager;
 import com.cd_help.onlineOF.api.OnlineOF;
 import com.cd_help.onlineOF.api.OrdersManager;
 import com.cd_help.onlineOF.api.PrivilegeDataDao;
@@ -86,6 +87,14 @@ public class OnlineOFImpl implements OnlineOF{
 	@Autowired
 	@Resource(name = "restaurant_kindManager")
 	private Restaurant_kindManager restaurant_kindManager = null;
+	
+	/**
+	 * 信息管理
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	@Autowired
+	@Resource(name = "infoManager")
+	private InfoManager infoManager = null;
 
 	/**
 	 * 饮食管理
@@ -129,7 +138,7 @@ public class OnlineOFImpl implements OnlineOF{
 	private SessionManager sessionManager = null;
 	
 	/**
-	 * 信誉管理
+	 * 权限管理
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	@Autowired
@@ -193,6 +202,14 @@ public class OnlineOFImpl implements OnlineOF{
 
 	public void setFoodManager(FoodManager foodManager) {
 		this.foodManager = foodManager;
+	}
+	
+	public InfoManager getInfoManager() {
+		return infoManager;
+	}
+
+	public void setInfoManager(InfoManager infoManager) {
+		this.infoManager = infoManager;
 	}
 
 	public Food_kindManager getFood_kindManager() {
