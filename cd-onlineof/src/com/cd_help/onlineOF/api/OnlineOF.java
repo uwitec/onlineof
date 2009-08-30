@@ -87,6 +87,14 @@ public interface OnlineOF {
 	public CredibilityManager getCredibilityManager() throws AppException;
 	
 	/**
+	 * 信息管理
+	 * @return
+	 * @throws AppException
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public InfoManager getInfoManager() throws AppException;
+	
+	/**
 	 * 角色管理
 	 * @return
 	 * @throws AppException

@@ -88,6 +88,7 @@
 	<include file="xml/admin/struts-ordersManager.xml"></include>
 	<include file="xml/admin/struts-restaurantManager.xml" />
 	<include file="xml/admin/struts-personManager.xml" />
+	<include file="xml/admin/struts-infoManager.xml" />
 	
 	<!-- 前台展示 -->
 	<include file="xml/struts-restaurant.xml" />
