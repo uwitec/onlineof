@@ -38,7 +38,7 @@
 			<result name="success">
 				/administrator/administrator.jsp
 			</result>
-			<result name="error">
+			<result name="error" type="redirect">
 				/administrator/login.jsp
 			</result>
 		</action>

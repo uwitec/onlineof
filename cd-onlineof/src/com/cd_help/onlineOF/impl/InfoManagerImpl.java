@@ -6,6 +6,7 @@
 package com.cd_help.onlineOF.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -15,6 +16,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cd_help.onlineOF.api.InfoDataDao;
 import com.cd_help.onlineOF.api.InfoManager;
@@ -24,6 +26,7 @@ import com.cd_help.onlineOF.data.InfoKindData;
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.utils.BeanUtilsHelp;
 import com.cd_help.onlineOF.utils.PageBean;
+import com.cd_help.onlineOF.utils.StringUtil;
 import com.cd_help.onlineOF.web.admin.struts.UsersSession;
 import com.cd_help.onlineOF.web.vo.InfoVo;
 
@@ -40,6 +43,7 @@ import com.cd_help.onlineOF.web.vo.InfoVo;
  */
 @Service("infoManager")
 @SuppressWarnings("unchecked")
+@Transactional
 public class InfoManagerImpl implements InfoManager{
 	
 	/**
@@ -64,8 +68,11 @@ public class InfoManagerImpl implements InfoManager{
 			throws AppException {
 		if (this.onlineOF.checkPrivilege(session,"createInfo")) {
 			try{
+				infoVo.setInfoId(StringUtil.getUUID());
 				InfoData infoData = new InfoData();
 				BeanUtilsHelp.copyProperties(infoData, infoVo);
+				infoData.setCreateTime(new Date(System.currentTimeMillis()));
+				infoData.setCreateUser(session.getUsersName());
 				if(null != infoVo.getInfoKindId() && infoVo.getInfoKindId().length() > 0){
 					InfoKindData infoKindData = (InfoKindData)infoDataDao.get(InfoKindData.class, infoVo.getInfoKindId());
 					if(null != infoKindData){
@@ -76,6 +83,8 @@ public class InfoManagerImpl implements InfoManager{
 				infoVo.setInfoId(infoData.getInfoId());
 				return infoVo;
 			}catch(Exception e){
+				e.printStackTrace();
+				log.error(e);
 				throw new AppException("00000400", "发布信息失败!", e);
 			}
 		}else{
@@ -91,6 +100,7 @@ public class InfoManagerImpl implements InfoManager{
 			try{
 				infoDataDao.delete((InfoData)infoDataDao.get(InfoData.class, id));
 			}catch(Exception e){
+				log.error(e);
 				throw new AppException("00000400", "删除信息失败!", e);
 			}
 		}else{
@@ -111,6 +121,7 @@ public class InfoManagerImpl implements InfoManager{
 			}
 			return infoVos;
 		}catch(Exception e){
+			log.error(e);
 			throw new AppException("00000400","系统错误,请联系系统管理员!",e);
 		}
 	}
@@ -124,8 +135,11 @@ public class InfoManagerImpl implements InfoManager{
 			try{
 				InfoData infoData = (InfoData)infoDataDao.get(InfoData.class, infoVo.getInfoId());
 				BeanUtilsHelp.copyProperties(infoData, infoVo);
+				infoData.setModifyTime(new Date(System.currentTimeMillis()));
+				infoData.setModifyUser(session.getUsersName());
 				infoDataDao.update(infoData);
 			}catch(Exception e){
+				log.error(e);
 				throw new AppException("00000400", "修改信息失败!", e);
 			}
 		}else{
@@ -148,6 +162,7 @@ public class InfoManagerImpl implements InfoManager{
 			page.setArray(infoVos);
 			return page;
 		}catch(Exception e){
+			log.error(e);
 			throw new AppException("0000014", "加载信息出错!",e);
 		}
 	}
