@@ -38,13 +38,12 @@ public class InfoManagerAction extends BaseAction {
 
 	private String infoId;
 	private InfoVo infoVo = new InfoVo(); // 用户
-	@Autowired
-	@Resource(name = "pageBean")
-	private PageBean pb; // 分页
+	private PageBean pageBean; // 分页
 	private int page = 1;
 	private String title; // 信息标题
 	private List<InfoVo> infoVos = new ArrayList<InfoVo>(); // 信息
-	private List<InfoKindVo> infoKindVos = new ArrayList<InfoKindVo>(); // 信息分类
+	private List<InfoKindVo> infoKinds = new ArrayList<InfoKindVo>(); // 信息分类
+	private String msg;
 
 	/**
 	 * 分页获取信息列表
@@ -53,23 +52,25 @@ public class InfoManagerAction extends BaseAction {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public String searchInfosByPage() throws AppException {
+		log.debug("--->> begin searchInfosByPage");
 		String hqlName= "searchInfosByPage";
 		String params[] = null;
 		Object conditions[] = null;
 		try{
-			this.pb.setCurrentPage(page);
-			this.pb.setPagesize(10);
+			this.pageBean.setCurrentPage(page);
+			this.pageBean.setPagesize(10);
 			log.debug("--->> search by title: " + title);
 			params = new String[] { "title"};
 			conditions = new Object[] {
 					null == this.title ? "%" : "%" + this.title + "%"};
 			
-			this.getOnlineOF().getInfoManager().searchInfosByPage(hqlName,
-					params, conditions, pb, this.getSession());
+			this.pageBean = this.getOnlineOF().getInfoManager().searchInfosByPage(hqlName,
+					params, conditions, this.pageBean, this.getSession());
+			return SUCCESS;
 		}catch(AppException e){
+			log.error(e);
 			throw new AppException(e.getError_code(),e.getMessage(),e);
 		}
-		return SUCCESS;
 	}
 	
 	/**
@@ -79,8 +80,14 @@ public class InfoManagerAction extends BaseAction {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public String forwardCreateInfo() throws AppException{
-		// 加载信息分类
-		loadAllInfoKind();
+		log.debug("--->> begin forwardCreateInfo");
+		try{
+			// 加载信息分类
+			loadAllInfoKind();
+		}catch(AppException e){
+			log.error(e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
+		}
 		return SUCCESS;
 	}
 	
@@ -91,9 +98,13 @@ public class InfoManagerAction extends BaseAction {
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
 	public String createInfo() throws AppException{
+		log.debug("--->> begin createInfo");
 		try{
-			this.getOnlineOF().getInfoManager().createInfo(this.getSession(), infoVo);
+			this.infoVo = this.getOnlineOF().getInfoManager().createInfo(this.getSession(), infoVo);
+			this.loadAllInfoKind();
+			this.msg = "createInfoSuccess";
 		}catch(AppException e){
+			log.error(e);
 			throw new AppException(e.getError_code(), e.getMessage(), e);
 		}
 		return SUCCESS;
@@ -106,7 +117,10 @@ public class InfoManagerAction extends BaseAction {
 	 */
 	private void loadAllInfoKind() throws AppException {
 		try {
-			infoKindVos = this.getOnlineOF().getInfoKindManager().loadAllInfoKind(this.getSession());
+			this.infoKinds = this.getOnlineOF().getInfoKindManager().loadAllInfoKind(this.getSession());
+			for(InfoKindVo vo : infoKinds){
+				log.debug("--->> "+vo.getName());
+			}
 		} catch (AppException e) {
 			log.error(e);
 			throw new AppException(e.getError_code(), e.getMessage(), e);
@@ -129,12 +143,14 @@ public class InfoManagerAction extends BaseAction {
 		this.infoVo = infoVo;
 	}
 
-	public PageBean getPb() {
-		return pb;
+	public PageBean getPageBean() {
+		return pageBean;
 	}
 
-	public void setPb(PageBean pb) {
-		this.pb = pb;
+	@Autowired
+	@Resource(name = "pageBean")
+	public void setPageBean(PageBean pageBean) {
+		this.pageBean = pageBean;
 	}
 
 	public int getPage() {
@@ -161,11 +177,20 @@ public class InfoManagerAction extends BaseAction {
 		this.title = title;
 	}
 
-	public List<InfoKindVo> getInfoKindVos() {
-		return infoKindVos;
+	public List<InfoKindVo> getInfoKinds() {
+		return infoKinds;
 	}
 
-	public void setInfoKindVos(List<InfoKindVo> infoKindVos) {
-		this.infoKindVos = infoKindVos;
+	public void setInfoKinds(List<InfoKindVo> infoKinds) {
+		this.infoKinds = infoKinds;
 	}
+
+	public String getMsg() {
+		return msg;
+	}
+
+	public void setMsg(String msg) {
+		this.msg = msg;
+	}
+    
 }
