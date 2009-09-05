@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<web-app version="2.5" 
-	xmlns="http://java.sun.com/xml/ns/javaee" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
-	
+
 	<welcome-file-list>
-	  <welcome-file>init.jsp</welcome-file>
+		<welcome-file>init.jsp</welcome-file>
 	</welcome-file-list>
-	
+
 	<filter>
 		<filter-name>hibernateFilter</filter-name>
-		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<filter-class>
+			org.springframework.orm.hibernate3.support.OpenSessionInViewFilter
+		</filter-class>
 	</filter>
 	<filter-mapping>
 		<filter-name>hibernateFilter</filter-name>
 		<url-pattern>*.do</url-pattern>
 	</filter-mapping>
-	
-    <!-- Log4j 使用的配置方式 -->
+
+	<!-- Log4j 使用的配置方式 -->
 	<context-param>
 		<param-name>webAppRootKey</param-name>
 		<param-value>mis.root</param-value>
@@ -32,23 +33,21 @@
 			org.springframework.web.util.Log4jConfigListener
 		</listener-class>
 	</listener>
-	
-    <!-- Spring2.x 的配置方式 -->
-    <context-param>
+
+	<!-- Spring2.x 的配置方式 -->
+	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>
-			/WEB-INF/onlineOF-config.xml
-		</param-value>
+		<param-value>/WEB-INF/onlineOF-config.xml</param-value>
 	</context-param>
 	<listener>
 		<listener-class>
 			org.springframework.web.context.ContextLoaderListener
 		</listener-class>
 	</listener>
-	
-	
+
+
 	<!-- struts 2.0 配置方式 -->
-    <filter>
+	<filter>
 		<filter-name>struts2</filter-name>
 		<filter-class>
 			org.apache.struts2.dispatcher.FilterDispatcher
@@ -58,95 +57,107 @@
 		<filter-name>struts2</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	
+
 	<!-- DWR配置 -->
 	<servlet>
-        <servlet-name>dwr-invoker</servlet-name>
-        <servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
-        <!--  servlet-class>
-        org.directwebremoting.servlet.DwrServlet
-        uk.ltd.getahead.dwr.DWRServlet
-        </servlet-class -->
-        <init-param>
-            <param-name>debug</param-name>
-            <param-value>false</param-value>
-        </init-param>
-    </servlet>
-    
-    <servlet-mapping>
-        <servlet-name>dwr-invoker</servlet-name>
-        <url-pattern>/dwr/*</url-pattern>
-    </servlet-mapping>
-    <!-- 响应图片的Servlet -->
-    <servlet>
-    	<servlet-name>imageServlet</servlet-name>
-    	<servlet-class>com.cd_help.onlineOF.web.common.ImageServlet</servlet-class>
-    </servlet>
+		<servlet-name>dwr-invoker</servlet-name>
+		<servlet-class>uk.ltd.getahead.dwr.DWRServlet</servlet-class>
+		<!--  servlet-class>
+			org.directwebremoting.servlet.DwrServlet
+			uk.ltd.getahead.dwr.DWRServlet
+			</servlet-class -->
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>false</param-value>
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dwr-invoker</servlet-name>
+		<url-pattern>/dwr/*</url-pattern>
+	</servlet-mapping>
+	<!-- 响应图片的Servlet -->
+	<servlet>
+		<servlet-name>imageServlet</servlet-name>
+		<servlet-class>
+			com.cd_help.onlineOF.web.common.ImageServlet
+		</servlet-class>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>imageServlet</servlet-name>
 		<url-pattern>/image</url-pattern>
 	</servlet-mapping>
 	<!-- 配置FCKedit -->
 	<servlet>
-	    <servlet-name>Connector</servlet-name>
-	    <servlet-class>com.cd_help.onlineOF.FCKeditor.connector.ConnectorServlet</servlet-class>
-	    <init-param>
-	      <param-name>baseDir</param-name>
-	      <param-value>/UserFiles/</param-value>
-	    </init-param>
-	    <init-param>
-	      <param-name>debug</param-name>
-	      <param-value>true</param-value>
-	    </init-param>
-	    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet>
-    <servlet-name>SimpleUploader</servlet-name>
-    <servlet-class>com.cd_help.onlineOF.FCKeditor.uploader.SimpleUploaderServlet</servlet-class>
-    <init-param>
-      <param-name>baseDir</param-name>
-      <param-value>/UserFiles/</param-value>
-    </init-param>
-    <init-param>
-      <param-name>debug</param-name>
-      <param-value>true</param-value>
-    </init-param>
-    <init-param>
-      <param-name>enabled</param-name>
-      <param-value>true</param-value>
-    </init-param>
-    <init-param>
-      <param-name>AllowedExtensionsFile</param-name>
-      <param-value>""</param-value>
-    </init-param>
-    <init-param>
-      <param-name>DeniedExtensionsFile</param-name>
-      <param-value>php|php3|php5|phtml|asp|aspx|ascx|jsp|cfm|cfc|pl|bat|exe|dll|reg|cgi</param-value>
-    </init-param>
-    <init-param>
-      <param-name>AllowedExtensionsImage</param-name>
-      <param-value>jpg|gif|jpeg|png|bmp</param-value>
-    </init-param>
-    <init-param>
-      <param-name>DeniedExtensionsImage</param-name>
-      <param-value>""</param-value>
-    </init-param>
-    <init-param>
-      <param-name>AllowedExtensionsFlash</param-name>
-      <param-value>swf|fla</param-value>
-    </init-param>
-    <init-param>
-      <param-name>DeniedExtensionsFlash</param-name>
-      <param-value>""</param-value>
-    </init-param>
-    <load-on-startup>1</load-on-startup>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>Connector</servlet-name>
-    <url-pattern>/FCKeditor/editor/filemanager/browser/default/connectors/jsp/connector</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
-    <servlet-name>SimpleUploader</servlet-name>
-    <url-pattern>/FCKeditor/editor/filemanager/upload/simpleuploader</url-pattern>
-  </servlet-mapping>
+		<servlet-name>Connector</servlet-name>
+		<servlet-class>
+			com.cd_help.onlineOF.FCKeditor.connector.ConnectorServlet
+		</servlet-class>
+		<init-param>
+			<param-name>baseDir</param-name>
+			<param-value>/UserFiles/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>SimpleUploader</servlet-name>
+		<servlet-class>
+			com.cd_help.onlineOF.FCKeditor.uploader.SimpleUploaderServlet
+		</servlet-class>
+		<init-param>
+			<param-name>baseDir</param-name>
+			<param-value>/UserFiles/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>debug</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>enabled</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>AllowedExtensionsFile</param-name>
+			<param-value>""</param-value>
+		</init-param>
+		<init-param>
+			<param-name>DeniedExtensionsFile</param-name>
+			<param-value>
+				php|php3|php5|phtml|asp|aspx|ascx|jsp|cfm|cfc|pl|bat|exe|dll|reg|cgi
+			</param-value>
+		</init-param>
+		<init-param>
+			<param-name>AllowedExtensionsImage</param-name>
+			<param-value>jpg|gif|jpeg|png|bmp</param-value>
+		</init-param>
+		<init-param>
+			<param-name>DeniedExtensionsImage</param-name>
+			<param-value>""</param-value>
+		</init-param>
+		<init-param>
+			<param-name>AllowedExtensionsFlash</param-name>
+			<param-value>swf|fla</param-value>
+		</init-param>
+		<init-param>
+			<param-name>DeniedExtensionsFlash</param-name>
+			<param-value>""</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>Connector</servlet-name>
+		<url-pattern>
+			/FCKeditor/editor/filemanager/browser/default/connectors/jsp/connector
+		</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SimpleUploader</servlet-name>
+		<url-pattern>
+			/FCKeditor/editor/filemanager/upload/simpleuploader
+		</url-pattern>
+	</servlet-mapping>
 </web-app>
