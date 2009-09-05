@@ -195,11 +195,17 @@ public class FoodManagerImpl implements FoodManager{
 		List<FoodVo> foodVos = new ArrayList<FoodVo>();
 		try{
 		    List<FoodData> fooddatas = foodDataDao.findByNamedQueryAndNamedParam("getFoodByRestaurantId", "restaurantId", restaurantId);
+		    int count = 0;
 		    for(Iterator i = fooddatas.iterator(); i.hasNext(); ){
-		    	FoodData fd = (FoodData)i.next();
-		    	FoodVo fv = new FoodVo();
-		    	BeanUtilsHelp.copyProperties(fv, fd);
-		    	foodVos.add(fv);
+		    	count++;
+		    	if(count == 11){
+		    		break;
+		    	}else{
+		    		FoodData fd = (FoodData)i.next();
+			    	FoodVo fv = new FoodVo();
+			    	BeanUtilsHelp.copyProperties(fv, fd);
+			    	foodVos.add(fv);
+		    	}
 		    }
 		}catch(Exception e){
 			e.printStackTrace();
@@ -215,11 +221,17 @@ public class FoodManagerImpl implements FoodManager{
 		List<FoodVo> foodVos = new ArrayList<FoodVo>();
 		try{
 		    List<FoodData> fooddatas = foodDataDao.findByNamedQuery("getSignFoods");
+		    int count = 0;
 		    for(Iterator i = fooddatas.iterator(); i.hasNext(); ){
-		    	FoodData fd = (FoodData)i.next();
-		    	FoodVo fv = new FoodVo();
-		    	BeanUtilsHelp.copyProperties(fv, fd);
-		    	foodVos.add(fv);
+		    	count++;
+		    	if(count == 11){
+		    		break;
+		    	}else{
+			    	FoodData fd = (FoodData)i.next();
+			    	FoodVo fv = new FoodVo();
+			    	BeanUtilsHelp.copyProperties(fv, fd);
+			    	foodVos.add(fv);
+		    	}
 		    }
 		}catch(Exception e){
 			e.printStackTrace();
