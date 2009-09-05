@@ -14,14 +14,28 @@
 		<!-- 跳转到发布信息页面 -->
 		<action name="forwardCreateInfo" class="infoManagerAction" method="forwardCreateInfo">
 			<result name="success">
-			   /administrator/info/createInfo.jsp
+			   /administrator/info/infoEdit.jsp
 			</result>
 		</action>
 		
 		<!-- 发布信息 -->
 		<action name="createInfo" class="infoManagerAction" method="createInfo">
 			<result name="success">
-			   /administrator/info/createInfo.jsp
+			   /administrator/info/infoEdit.jsp
+			</result>
+		</action>
+		
+		<!-- 跳转到编辑信息页面 -->
+		<action name="forwardEditInfo" class="infoManagerAction" method="forwardEditInfo">
+			<result name="success">
+			   /administrator/info/infoEdit.jsp
+			</result>
+		</action>
+		
+		<!-- 修改信息 -->
+		<action name="updateInfo" class="infoManagerAction" method="updateInfo">
+			<result name="success">
+			   /administrator/info/infoEdit.jsp
 			</result>
 		</action>
 		

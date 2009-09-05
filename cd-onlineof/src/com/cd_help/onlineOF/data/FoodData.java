@@ -31,15 +31,16 @@ import javax.persistence.Table;
 @Table(name = "food")
 @NamedQueries( {
 		/* 获取所有饮食信息 */
-		@NamedQuery(name = "loadAllFood", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.introduction,f.img,f.isSigns) from FoodData f"),
+		@NamedQuery(name = "loadAllFood", query = "select new com.cd_help.onlineOF.web.vo.FoodVo(f.foodId,f.name,f.price,f.introduction,f.img,f.isSig) from FoodData f"),
 		/* 根据餐厅和类别获取饮食信息 */
 		@NamedQuery(name="getFoodAll",query="from FoodData"),
 		/* 获取招牌饮食信息 */
-		@NamedQuery(name="getSignFoods",query="from FoodData f where f.isSigns=1"),
+		@NamedQuery(name="getSignFoods",query="from FoodData f where f.isSig=1"),
 		@NamedQuery(name="getFoodByKindId",query="from FoodData f where f.food_kindId=:kindId"),
 		@NamedQuery(name="getFoodByresIdAndKindId",query="from FoodData f where f.restaurantId = :restaurantId and f.food_kindId = :kindId and f.name like :foodName"),
 		@NamedQuery(name="getFoodByresIdAndFoodName",query="from FoodData f where f.restaurantId = :restaurantId and f.name like :foodName"),
-		@NamedQuery(name="getFoodByRestaurantId",query="from FoodData f where f.restaurantId = :restaurantId and f.isSigns=1")
+		// 首页获取招牌菜
+		@NamedQuery(name="getFoodByRestaurantId",query="from FoodData f where f.restaurantId=:restaurantId and f.isSig=1")
 		})
 public class FoodData implements Serializable {
 
@@ -90,8 +91,8 @@ public class FoodData implements Serializable {
 	 * 
 	 * @since cd_help-onlineOF 0.0.0.1
 	 */
-	@Column(name = "isSigns", nullable = true, length = 15)
-	private Integer isSigns = 0;
+	@Column(name = "isSig", nullable = true, length = 15)
+	private Integer isSig = 0;
 
 	/**
 	 * 类别ID
@@ -145,13 +146,13 @@ public class FoodData implements Serializable {
 	public void setImg(Blob img) {
 		this.img = img;
 	}
-
-	public Integer getIsSigns() {
-		return isSigns;
+    
+	public Integer getIsSig() {
+		return isSig;
 	}
 
-	public void setIsSigns(Integer isSigns) {
-		this.isSigns = isSigns;
+	public void setIsSig(Integer isSig) {
+		this.isSig = isSig;
 	}
 
 	public String getFood_kindId() {

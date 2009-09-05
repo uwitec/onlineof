@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.cd_help.onlineOF.utils.AppException;
 import com.cd_help.onlineOF.web.BaseAction;
+import com.cd_help.onlineOF.web.vo.InfoVo;
 import com.cd_help.onlineOF.web.vo.RestaurantVo;
 import com.cd_help.onlineOF.web.vo.Restaurant_kindVo;
 
@@ -43,6 +44,12 @@ public class InitialAction extends BaseAction{
      * @since cd_help-onlineOF 0.0.0.1
      */
     private List<Restaurant_kindVo> restaurantKinds = new ArrayList<Restaurant_kindVo>();
+    
+    /**
+     * 优惠信息
+     * @since cd_help-onlineOF 0.0.0.1
+     */
+    private List<InfoVo> offersInfos = new ArrayList<InfoVo>();
 	
 	/**
 	 * 初始化首页数据
@@ -53,6 +60,7 @@ public class InitialAction extends BaseAction{
 	public String initialData() throws AppException{
 		restaurants = this.getOnlineOF().getRestaurantManager().loadARestaurantAll();
 		restaurantKinds = this.getOnlineOF().getRestaurant_kindManager().getRestaurantKindAll();
+		offersInfos = this.getOnlineOF().getInfoManager().getNewInfo(this.getSession());
 		return SUCCESS;
 	}
 
@@ -70,5 +78,13 @@ public class InitialAction extends BaseAction{
 
 	public void setRestaurantKinds(List<Restaurant_kindVo> restaurantKinds) {
 		this.restaurantKinds = restaurantKinds;
+	}
+
+	public List<InfoVo> getOffersInfos() {
+		return offersInfos;
+	}
+
+	public void setOffersInfos(List<InfoVo> offersInfos) {
+		this.offersInfos = offersInfos;
 	}
 }

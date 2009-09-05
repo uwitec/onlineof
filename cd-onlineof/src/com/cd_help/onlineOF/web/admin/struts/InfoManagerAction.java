@@ -44,6 +44,7 @@ public class InfoManagerAction extends BaseAction {
 	private List<InfoVo> infoVos = new ArrayList<InfoVo>(); // 信息
 	private List<InfoKindVo> infoKinds = new ArrayList<InfoKindVo>(); // 信息分类
 	private String msg;
+	private String action;
 
 	/**
 	 * 分页获取信息列表
@@ -84,6 +85,45 @@ public class InfoManagerAction extends BaseAction {
 		try{
 			// 加载信息分类
 			loadAllInfoKind();
+			this.action = "createInfo.do";
+		}catch(AppException e){
+			log.error(e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 跳转到编辑信息页面
+	 * @return
+	 * @throws AppException 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String forwardEditInfo() throws AppException{
+		log.debug("--->> begin forwardEditInfo");
+		try{
+			// 加载信息分类
+			loadAllInfoKind();
+			this.action = "editInfo.do";
+		}catch(AppException e){
+			log.error(e);
+			throw new AppException(e.getError_code(), e.getMessage(), e);
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 编辑信息
+	 * @return
+	 * @throws AppException 
+	 * @since cd_help-onlineOF 0.0.0.1
+	 */
+	public String editInfo() throws AppException{
+		log.debug("--->> begin editInfo");
+		try{
+			this.getOnlineOF().getInfoManager().updateInfo(this.getSession(), infoVo);
+			this.loadAllInfoKind();
+			this.msg = "editInfoSuccess";
 		}catch(AppException e){
 			log.error(e);
 			throw new AppException(e.getError_code(), e.getMessage(), e);
@@ -191,6 +231,14 @@ public class InfoManagerAction extends BaseAction {
 
 	public void setMsg(String msg) {
 		this.msg = msg;
+	}
+
+	public String getAction() {
+		return action;
+	}
+
+	public void setAction(String action) {
+		this.action = action;
 	}
     
 }

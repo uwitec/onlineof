@@ -116,8 +116,14 @@ public class InfoManagerImpl implements InfoManager{
 		try{
 			List<InfoData> dataList = infoDataDao.findByNamedQuery("getNewInfo");
 			List<InfoVo> infoVos = new ArrayList<InfoVo>();
+			int count = 0;
 			for(Iterator i = dataList.iterator(); i.hasNext(); ){
-				infoVos.add(convertDataToVo((InfoData)i.next()));
+				count++;
+		    	if(count == 11){
+		    		break;
+		    	}else{
+		    	    infoVos.add(convertDataToVo((InfoData)i.next()));
+		    	}
 			}
 			return infoVos;
 		}catch(Exception e){
