@@ -273,7 +273,19 @@ window.attachEvent("onload", correctPNG);
             <td width="49" align="center" valign="top" background="images/index/gg-06.jpg" bgcolor="#fbfbfb">&nbsp;</td>
           </tr>
           <tr>
-            <td height="206" colspan="3" align="left" valign="top" bgcolor="#fbfbfb" style="border:solid 1px #f0f0f0; border-top:none;">信息</td>
+            <td height="206" colspan="3" align="left" valign="top" bgcolor="#fbfbfb" style="border:solid 1px #f0f0f0; border-top:none;">
+              <s:if test="offersInfos.size != 0"> 
+               <s:iterator value="offersInfos">
+                   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	               <a href="#">
+	                 <s:property value="content"/>
+	               </a><br/>
+	           </s:iterator>
+	          </s:if>
+	          <s:else>
+	             <span style="white-space: nowrap;"><font style="color:red;">暂无优惠信息</font></span>
+	          </s:else>
+            </td>
           </tr>
         </table></td>
       </tr>
