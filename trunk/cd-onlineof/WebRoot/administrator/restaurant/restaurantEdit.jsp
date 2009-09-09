@@ -115,7 +115,7 @@
 						<td style="text-align: left;">
 							<span style="white-space: nowrap;"> <input type="text"
 									name="restaurantVo.QQ" size="30" value="${restaurantVo.QQ}"
-									required="string" /> </span>
+									required="string" /><font size="+1" color="red">*</font> </span>
 						</td>
 					</tr>
 					<tr>
@@ -125,7 +125,7 @@
 						<td style="text-align: left;" colspan="3">
 							<span style="white-space: nowrap;"> <input type="text"
 									name="restaurantVo.contactName" size=30
-									value="${restaurantVo.contactName}" required="string" /> </span>
+									value="${restaurantVo.contactName}" required="string" /> <font size="+1" color="red">*</font></span>
 						</td>
 					</tr>
 					<tr>
@@ -153,7 +153,7 @@
 						<td colspan="3" style="text-align: left;">
 							<span style="white-space: nowrap;"> <input type="text"
 									name="restaurantVo.email" size=30 value="${restaurantVo.email}"
-									required="email" /> </span>
+									required="email" /><font size="+1" color="red">*</font> </span>
 						</td>
 					</tr>
 					<tr>

@@ -115,7 +115,8 @@
 						</td>
 						<td style="text-align: left;">
 							<span style="white-space: nowrap;"><select
-									style="width: 150px" id="selKindId" name="foodVo.food_kindId">
+									style="width: 150px" id="selKindId" name="foodVo.food_kindId" disabled="disabled">
+									<option value="">--请先选择餐厅--</option>
 								</select>
 							</span>
 						</td>

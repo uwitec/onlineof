@@ -53,7 +53,8 @@
 			method="post">
 			<div style="width: 100%; font-size: 10pt;">
 				<span style="white-space: nowrap;"> <span
-					style="white-space: nowrap;">餐厅分类名称</span> <select name="kindId">
+					style="white-space: nowrap;">餐厅分类名称</span> 
+					<select name="kindId">
 						<option value="">
 							所有类型
 						</option>
@@ -65,9 +66,11 @@
 						</s:iterator>
 					</select> 餐厅名称:<input type="text" name="restaurantName"
 						value="${restaurantName}" /> <input type="submit" value="搜 索" />
+					<s:if test="session.administrator">
 					<input type="button" value="新增餐厅" onclick="addRestaurantKind();" />
 					<input type="button" value="删除选定餐厅"
 						onclick="delSelectedRestaurantKind();" /> </span>
+					</s:if>
 			</div>
 			<table class="table" style="width: 100%;">
 				<thead>
