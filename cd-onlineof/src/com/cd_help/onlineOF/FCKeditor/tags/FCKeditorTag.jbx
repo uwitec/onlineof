@@ -1,0 +1,48 @@
+[PropertyInfo]
+autoDetectLanguage,String,false,false, , ,true,<default>
+baseHref,String,false,false, , ,true,<default>
+basePath,String,false,false, , ,true,<default>
+contentLangDirection,String,false,false, , ,true,<default>
+customConfigurationsPath,String,false,false, , ,true,<default>
+debug,String,false,false, , ,true,<default>
+defaultLanguage,String,false,false, , ,true,<default>
+editorAreaCSS,String,false,false, , ,true,<default>
+enableSourceXHTML,String,false,false, , ,true,<default>
+enableXHTML,String,false,false, , ,true,<default>
+fcked,com.fredck.FCKeditor.FCKeditor,false,false, , ,false,<default>
+fillEmptyBlocks,String,false,false, , ,true,<default>
+flashBrowserURL,String,false,false, , ,true,<default>
+flashUploadURL,String,false,false, , ,true,<default>
+fontColors,String,false,false, , ,true,<default>
+fontFormats,String,false,false, , ,true,<default>
+fontNames,String,false,false, , ,true,<default>
+fontSizes,String,false,false, , ,true,<default>
+forcePasteAsPlainText,String,false,false, , ,true,<default>
+forceSimpleAmpersand,String,false,false, , ,true,<default>
+formatIndentator,String,false,false, , ,true,<default>
+formatOutput,String,false,false, , ,true,<default>
+formatSource,String,false,false, , ,true,<default>
+fullPage,String,false,false, , ,true,<default>
+geckoUseSPAN,String,false,false, , ,true,<default>
+height,String,false,false, , ,true,<default>
+id,String,false,false, , ,true,<default>
+imageBrowserURL,String,false,false, , ,true,<default>
+imageUploadURL,String,false,false, , ,true,<default>
+linkBrowserURL,String,false,false, , ,true,<default>
+linkUploadURL,String,false,false, , ,true,<default>
+pluginsPath,String,false,false, , ,true,<default>
+skinPath,String,false,false, , ,true,<default>
+startupFocus,String,false,false, , ,true,<default>
+stylesXmlPath,String,false,false, , ,true,<default>
+tabSpaces,String,false,false, , ,true,<default>
+toolbarCanCollapse,String,false,false, , ,true,<default>
+toolbarSet,String,false,false, , ,true,<default>
+toolbarStartExpanded,String,false,false, , ,true,<default>
+useBROnCarriageReturn,String,false,false, , ,true,<default>
+value,String,false,false, , ,false,<default>
+width,String,false,false, , ,true,<default>
+[IconNames]
+
+
+
+
