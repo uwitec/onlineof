@@ -22,7 +22,7 @@
 	<!-- Log4j 使用的配置方式 -->
 	<context-param>
 		<param-name>webAppRootKey</param-name>
-		<param-value>mis.root</param-value>
+		<param-value>onlineOF.root</param-value>
 	</context-param>
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>
