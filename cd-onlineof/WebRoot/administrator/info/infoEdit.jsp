@@ -14,7 +14,7 @@
 		<title>信息发布</title>
 		<link type="text/css" rel="stylesheet" href="common/css/common.css" />
 		<script type="text/javascript" src="common/js/common.js"></script>
-		<script type="text/javascript" src="fckeditor/fckeditor.js"></script>
+		<script type="text/javascript" src="FCKeditor/fckeditor.js"></script>
 		<link href="administrator/css/table.css" rel="stylesheet"
 			type="text/css" />
 		<script language="javascript">
@@ -27,8 +27,8 @@
        function create(){
           var title = document.getElementById("title").value;
           var kind = document.getElementById("infoKindId").value;
-          var content = document.getElementById("infoVo.content").value;
-          alert("content="+oFCKeditor.GetXHTML(true));
+          var content = document.getElementById("content").value;
+          alert("content="+fck.GetXHTML(true));
           if(title.length <= 0){
              alert("请填写标题!");
           }else if(kind.length <= 0){
@@ -108,17 +108,17 @@
 							<font size="+1" color="red">*</font>
 						</td>
 						<td style="text-align: left;">
-							<textarea name="infoVo.content" id="infoVo.content"
+							<textarea name="infoVo.content" id="content"
 								style="width: 100%; height: 270px;" >${infoVo.content}</textarea>
 							<script type="text/javascript">
-								var oFCKeditor = new FCKeditor('infoVo.content') ;
-								oFCKeditor.BasePath = '/onlineOF/fckeditor/' ;
-								oFCKeditor.ToolbarSet = 'Default' ;
-								oFCKeditor.Width = '100%' ;
-								oFCKeditor.Height = '400' ;
-								oFCKeditor.Value = '' ;
-								oFCKeditor.ReplaceTextarea(); 
-								// oFCKeditor.Create() ;
+								var fck = new FCKeditor('content') ;
+								fck.BasePath = '/FCKeditor/' ;
+								fck.ToolbarSet = 'Default' ;
+								fck.Width = '100%' ;
+								fck.Height = '400' ;
+								fck.Value = '' ;
+								fck.ReplaceTextarea(); 
+								fck.Create() ;
 								</script> 
 						</td>
 					</tr>
