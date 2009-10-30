@@ -38,7 +38,8 @@ import javax.persistence.TemporalType;
 @NamedQueries( { 
 	//获取最新发布信息
 	@NamedQuery(name = "getNewInfo", query = "from InfoData i order by i.createTime"),
-	@NamedQuery(name = "searchInfosByPage", query = "from InfoData i where i.title like :title"),})
+	@NamedQuery(name = "searchInfosByPage", query = "from InfoData i where i.title like :title")
+})
 public class InfoData implements Serializable {
 	
 	/**
