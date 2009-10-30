@@ -34,7 +34,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name="infokind")
 @NamedQueries( { 
-	@NamedQuery(name = "loadAllInfoKind", query = "from InfoKindData"),})
+	@NamedQuery(name = "loadAllInfoKind", query = "from InfoKindData")
+})
 public class InfoKindData implements Serializable {
 
 	
